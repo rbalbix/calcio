@@ -54,17 +54,19 @@ export const Team = styled.View`
   align-items: center;
 `;
 
-export const PositionText = styled.Text`
+export const PositionText = styled.Text.attrs({
+  textJustify: 'center',
+})`
   font-size: 14px;
   font-weight: bold;
   color: #999;
-  padding-right: 5px;
   min-width: 20px;
 `;
 
 export const TeamShield = styled.Image`
   width: 20px;
   height: 20px;
+  margin: 0 5px;
 `;
 
 export const TeamText = styled.Text`
@@ -132,7 +134,7 @@ export const MatchTeamText = styled.Text`
   font-size: 18px;
   font-weight: bold;
   color: #717171;
-  padding-left: 10px;
+  /* padding-left: 10px; */
 `;
 
 export const MatchTeamShield = styled.Image`
