@@ -1,16 +1,16 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-require("dotenv").config({
-  path: process.env.NODE_ENV === "test" ? ".env.test" : ".env",
+require('dotenv').config({
+  path: process.env.NODE_ENV === 'test' ? '.env.test' : '.env',
 });
 
 module.exports = {
   connect: () => {
     mongoose.Promise = global.Promise;
 
-    if (process.env.NODE_ENV == "production") {
+    if (process.env.NODE_ENV == 'production') {
       mongoose.connect(
-        "mongodb+srv://calcio:calcio@cluster0-kj5ow.mongodb.net/calcio?retryWrites=true&w=majority",
+        'mongodb+srv://calcio:calcio@cluster0-kj5ow.mongodb.net/calcio?retryWrites=true&w=majority',
         {
           useNewUrlParser: true,
           useFindAndModify: false,
@@ -18,7 +18,7 @@ module.exports = {
           useUnifiedTopology: true,
         },
         (err, dbref) => {
-          if (!err) console.log("Connected");
+          if (!err) console.log('Connected');
           else console.log(err);
         }
       );
@@ -32,8 +32,11 @@ module.exports = {
           useUnifiedTopology: true,
         },
         (err, dbref) => {
-          if (!err) console.log("Connected");
-          else console.log(err);
+          if (!err) {
+            if (process.env.NODE_ENV !== 'test') {
+              console.log('Connected');
+            }
+          } else console.log(err);
         }
       );
     }

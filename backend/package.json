@@ -8,6 +8,13 @@
     "start": "node src/server.js",
     "test": "cross-env NODE_ENV=test jest --watch --detectOpenHandles"
   },
+  "dependencies": {
+    "celebrate": "^12.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.9"
+  },
   "devDependencies": {
     "@types/jest": "^25.2.1",
     "cross-env": "^7.0.2",
@@ -19,12 +26,5 @@
     "eslint-plugin-standard": "^4.0.1",
     "jest": "^25.3.0",
     "supertest": "^4.0.2"
-  },
-  "dependencies": {
-    "celebrate": "^12.1.0",
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "mongoose": "^5.9.9"
   }
 }
