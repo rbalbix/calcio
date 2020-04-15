@@ -2,15 +2,15 @@ const routes = require('express').Router();
 // Add validation with Celebrate
 const { celebrate, Segments, Joi } = require('celebrate');
 
+const { RankController } = require('./app/controllers');
+
 /**
  *
- * HOW ORGANIZE VARIOUS ROUTES
+ * HOW ORGANIZE VARIOUS ROUTES ???
  *
  */
 
-routes.get('/rank/top', (req, res) => {
-  res.json([{ id: 1 }, { id: 2 }]);
-});
+routes.get('/rank/top', RankController.index);
 
 /**
  *

@@ -3,6 +3,9 @@ const request = require('supertest');
 
 const mongoTest = require('../../src/database');
 
+// const Rank = require('../../src/app/models/Rank');
+const { Rank } = require('../../src/app/models');
+
 describe('Rank', () => {
   beforeAll(async (done) => {
     mongoTest.connect();
@@ -25,18 +28,30 @@ describe('Rank', () => {
   });
 
   it('should get the top teams of ranking', async () => {
-    // Populate the rank
-    // SAMP, MIL, JUV, INTER
+    await Rank.create([
+      { team: 'SAMPDORIA', points: 30, wons: 10, goalDifference: 20 },
+      { team: 'INTERNAZIONALE', points: 15, wons: 10, goalDifference: 20 },
+      { team: 'FIORENTINA', points: 10, wons: 10, goalDifference: 20 },
+      { team: 'MILAN', points: 20, wons: 10, goalDifference: 20 },
+      { team: 'JUVENTUS', points: 5, wons: 10, goalDifference: 20 },
+      { team: 'NAPOLI', points: 9, wons: 10, goalDifference: 20 },
+      { team: 'SUASSUOLO', points: 8, wons: 10, goalDifference: 20 },
+      { team: 'PARMA', points: 7, wons: 10, goalDifference: 20 },
+      { team: 'PALERMO', points: 6, wons: 10, goalDifference: 20 },
+      { team: 'ROMA', points: 4, wons: 10, goalDifference: 20 },
+    ]);
 
     const response = await request(app).get('/rank/top');
 
-    console.log(response.body);
     expect(response.status).toBe(200);
     expect(response.body).toEqual(
       expect.arrayContaining([
         expect.objectContaining({ team: 'SAMPDORIA' }),
         expect.objectContaining({ team: 'MILAN' }),
+        expect.objectContaining({ team: 'FIORENTINA' }),
+        expect.objectContaining({ team: 'INTERNAZIONALE' }),
       ])
     );
+    expect(response.body).toHaveLength(4);
   });
 });
