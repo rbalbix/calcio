@@ -34,9 +34,9 @@ describe('Rank', () => {
       { team: 'FIORENTINA', points: 10, wons: 10, goalDifference: 20 },
       { team: 'MILAN', points: 20, wons: 10, goalDifference: 20 },
       { team: 'JUVENTUS', points: 5, wons: 10, goalDifference: 20 },
-      { team: 'NAPOLI', points: 9, wons: 10, goalDifference: 20 },
-      { team: 'SUASSUOLO', points: 8, wons: 10, goalDifference: 20 },
-      { team: 'PARMA', points: 7, wons: 10, goalDifference: 20 },
+      { team: 'NAPOLI', points: 8, wons: 10, goalDifference: 10 },
+      { team: 'SUASSUOLO', points: 8, wons: 10, goalDifference: 15 },
+      { team: 'PARMA', points: 8, wons: 10, goalDifference: 20 },
       { team: 'PALERMO', points: 6, wons: 10, goalDifference: 20 },
       { team: 'ROMA', points: 4, wons: 10, goalDifference: 20 },
     ]);
