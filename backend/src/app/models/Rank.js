@@ -2,6 +2,10 @@ const { Schema, model } = require('../../database').mongoose;
 
 const RankSchema = Schema(
   {
+    category: {
+      type: String,
+      required: true,
+    },
     team: {
       type: String,
       required: true,
