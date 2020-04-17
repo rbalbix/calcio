@@ -13,7 +13,7 @@ module.exports = {
       const top = 4;
 
       const ranks = await Rank.find().select(
-        'category team points wons goalDifference -_id'
+        'category team points wons goalDifference'
       );
 
       const response = {

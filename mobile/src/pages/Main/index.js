@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
+
+import api from '../../services/api';
 
 import {
   Container,
@@ -19,26 +21,31 @@ import {
 } from './styles';
 
 import sampImg from '../../assets/sampdoria.png';
-import juvImg from '../../assets/juventus.png';
-import interImg from '../../assets/inter-de-milao.png';
-import milanImg from '../../assets/milan.png';
 
 export default function Main() {
+  const [ranks, setRanks] = useState(null);
   const navigation = useNavigation();
 
   function navigateToCategory(category) {
     navigation.navigate('Category', { category });
   }
 
-  // RETIRAR ISSO. SO PARA TESTE
-  const category = 'categoria';
+  async function loadRanks() {
+    const response = await api.get('/rank/top');
+
+    setRanks(response.data);
+  }
+
+  useEffect(() => {
+    loadRanks();
+  }, []);
 
   return (
     <Container>
       <Category>
         <TouchableOpacity
           onPress={() => {
-            navigateToCategory({ category });
+            navigateToCategory({ category: 'A' });
           }}
         >
           <CategoryTitle>TORNEIO A</CategoryTitle>
@@ -50,60 +57,26 @@ export default function Main() {
           <HeaderTableText>SG</HeaderTableText>
         </HeaderTable>
 
-        <TeamView>
-          <Team>
-            <PositionText>1</PositionText>
-            <TeamShield source={sampImg} />
-            <TeamText>SAMPDORIA</TeamText>
-          </Team>
-          <Score>
-            <ScoreText>30</ScoreText>
-            <ScoreText>10</ScoreText>
-            <ScoreText>20</ScoreText>
-          </Score>
-        </TeamView>
-        <TeamView>
-          <Team>
-            <PositionText>2</PositionText>
-            <TeamShield source={juvImg} />
-            <TeamText>JUVENTUS</TeamText>
-          </Team>
-          <Score>
-            <ScoreText>30</ScoreText>
-            <ScoreText>10</ScoreText>
-            <ScoreText>20</ScoreText>
-          </Score>
-        </TeamView>
-        <TeamView>
-          <Team>
-            <PositionText>3</PositionText>
-            <TeamShield source={interImg} />
-            <TeamText>INTERNAZIONALE</TeamText>
-          </Team>
-          <Score>
-            <ScoreText>30</ScoreText>
-            <ScoreText>10</ScoreText>
-            <ScoreText>20</ScoreText>
-          </Score>
-        </TeamView>
-        <TeamView>
-          <Team>
-            <PositionText>4</PositionText>
-            <TeamShield source={milanImg} />
-            <TeamText>MILAN</TeamText>
-          </Team>
-          <Score>
-            <ScoreText>30</ScoreText>
-            <ScoreText>10</ScoreText>
-            <ScoreText>20</ScoreText>
-          </Score>
-        </TeamView>
+        {ranks.A.map((rank, index) => (
+          <TeamView key={rank._id}>
+            <Team>
+              <PositionText>{index + 1}</PositionText>
+              <TeamShield source={sampImg} />
+              <TeamText>{rank.team}</TeamText>
+            </Team>
+            <Score>
+              <ScoreText>{rank.points}</ScoreText>
+              <ScoreText>{rank.wons}</ScoreText>
+              <ScoreText>{rank.goalDifference}</ScoreText>
+            </Score>
+          </TeamView>
+        ))}
       </Category>
 
       <Category>
         <TouchableOpacity
           onPress={() => {
-            navigateToCategory({ category });
+            navigateToCategory({ category: 'B' });
           }}
         >
           <CategoryTitle>TORNEIO B</CategoryTitle>
@@ -115,54 +88,20 @@ export default function Main() {
           <HeaderTableText>SG</HeaderTableText>
         </HeaderTable>
 
-        <TeamView>
-          <Team>
-            <PositionText>1</PositionText>
-            <TeamShield source={sampImg} />
-            <TeamText>SAMPDORIA</TeamText>
-          </Team>
-          <Score>
-            <ScoreText>30</ScoreText>
-            <ScoreText>10</ScoreText>
-            <ScoreText>20</ScoreText>
-          </Score>
-        </TeamView>
-        <TeamView>
-          <Team>
-            <PositionText>2</PositionText>
-            <TeamShield source={juvImg} />
-            <TeamText>JUVENTUS</TeamText>
-          </Team>
-          <Score>
-            <ScoreText>30</ScoreText>
-            <ScoreText>10</ScoreText>
-            <ScoreText>20</ScoreText>
-          </Score>
-        </TeamView>
-        <TeamView>
-          <Team>
-            <PositionText>3</PositionText>
-            <TeamShield source={interImg} />
-            <TeamText>INTERNAZIONALE</TeamText>
-          </Team>
-          <Score>
-            <ScoreText>30</ScoreText>
-            <ScoreText>10</ScoreText>
-            <ScoreText>20</ScoreText>
-          </Score>
-        </TeamView>
-        <TeamView>
-          <Team>
-            <PositionText>4</PositionText>
-            <TeamShield source={milanImg} />
-            <TeamText>MILAN</TeamText>
-          </Team>
-          <Score>
-            <ScoreText>30</ScoreText>
-            <ScoreText>10</ScoreText>
-            <ScoreText>20</ScoreText>
-          </Score>
-        </TeamView>
+        {ranks.B.map((rank, index) => (
+          <TeamView key={rank._id}>
+            <Team>
+              <PositionText>{index + 1}</PositionText>
+              <TeamShield source={sampImg} />
+              <TeamText>{rank.team}</TeamText>
+            </Team>
+            <Score>
+              <ScoreText>{rank.points}</ScoreText>
+              <ScoreText>{rank.wons}</ScoreText>
+              <ScoreText>{rank.goalDifference}</ScoreText>
+            </Score>
+          </TeamView>
+        ))}
       </Category>
     </Container>
   );

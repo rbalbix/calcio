@@ -93,6 +93,7 @@ export const ScoreText = styled.Text`
 export const RoundView = styled.View`
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   padding-top: 5px;
   padding-bottom: 5px;
   margin-top: 5px;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 
-import { FontAwesome } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 
 import {
   Container,
@@ -186,11 +186,11 @@ export default function Main() {
         <CategoryTitle>JOGOS</CategoryTitle>
         <RoundView>
           <TouchableOpacity onPress={() => {}}>
-            <FontAwesome name='chevron-left' size={16} color='#1e7a0e' />
+            <MaterialIcons name='navigate-before' size={24} color='#1e7a0e' />
           </TouchableOpacity>
           <RoundText>1ª RODADA</RoundText>
           <TouchableOpacity onPress={() => {}}>
-            <FontAwesome name='chevron-right' size={16} color='#1e7a0e' />
+            <MaterialIcons name='navigate-next' size={24} color='#1e7a0e' />
           </TouchableOpacity>
         </RoundView>
 
