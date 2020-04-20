@@ -21,7 +21,7 @@ import {
 } from './styles';
 
 export default function Main() {
-  const [ranks, setRanks] = useState([]);
+  const [ranks, setRanks] = useState('');
   const navigation = useNavigation();
 
   function navigateToCategory(category) {
@@ -30,7 +30,6 @@ export default function Main() {
 
   async function loadRanks() {
     const response = await api.get('/rank/top');
-    console.log(response.data);
     setRanks(response.data);
   }
 
@@ -55,7 +54,7 @@ export default function Main() {
           <HeaderTableText>SG</HeaderTableText>
         </HeaderTable>
 
-        {ranks.A.map((rank, index) => (
+        {/* {ranks.A.map((rank, index) => (
           <TeamView key={rank._id}>
             <Team>
               <PositionText>{index + 1}</PositionText>
@@ -68,7 +67,7 @@ export default function Main() {
               <ScoreText>{rank.goalDifference}</ScoreText>
             </Score>
           </TeamView>
-        ))}
+        ))} */}
       </Category>
 
       <Category>
