@@ -143,7 +143,7 @@ async function seedRank() {
     },
     {
       category: 'B',
-      thumbnail: 'suassuole.png',
+      thumbnail: 'suassuolo.png',
       team: 'SUASSUOLO',
       points: 35,
       wons: 10,

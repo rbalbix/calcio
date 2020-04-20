@@ -28,6 +28,8 @@ module.exports = {
           .slice(0, top),
       };
 
+      console.log(response);
+
       return res.json(response);
     } catch (err) {
       log.error(err);
