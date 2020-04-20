@@ -4,6 +4,7 @@ require('dotenv').config({
 
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const { errors } = require('celebrate');
 
 // Separa a lógica de criação do servidor da lógica de alocação da porta.
@@ -23,6 +24,10 @@ class AppController {
     this.express.use(cors());
     // To understand body with json format
     this.express.use(express.json());
+    this.express.use(
+      '/files',
+      express.static(path.resolve(__dirname, '..', 'uploads'))
+    );
   }
 
   routes() {

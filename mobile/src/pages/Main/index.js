@@ -20,10 +20,8 @@ import {
   ScoreText,
 } from './styles';
 
-import sampImg from '../../assets/sampdoria.png';
-
 export default function Main() {
-  const [ranks, setRanks] = useState(null);
+  const [ranks, setRanks] = useState([]);
   const navigation = useNavigation();
 
   function navigateToCategory(category) {
@@ -32,13 +30,13 @@ export default function Main() {
 
   async function loadRanks() {
     const response = await api.get('/rank/top');
-
+    console.log(response.data);
     setRanks(response.data);
   }
 
   useEffect(() => {
     loadRanks();
-  }, []);
+  }, [ranks]);
 
   return (
     <Container>
@@ -61,7 +59,7 @@ export default function Main() {
           <TeamView key={rank._id}>
             <Team>
               <PositionText>{index + 1}</PositionText>
-              <TeamShield source={sampImg} />
+              <TeamShield source={{ uri: rank.thumbnail_url }} />
               <TeamText>{rank.team}</TeamText>
             </Team>
             <Score>
@@ -88,11 +86,11 @@ export default function Main() {
           <HeaderTableText>SG</HeaderTableText>
         </HeaderTable>
 
-        {ranks.B.map((rank, index) => (
+        {/* {ranks.B.map((rank, index) => (
           <TeamView key={rank._id}>
             <Team>
               <PositionText>{index + 1}</PositionText>
-              <TeamShield source={sampImg} />
+              <TeamShield source={rank.thumbnail_url} />
               <TeamText>{rank.team}</TeamText>
             </Team>
             <Score>
@@ -101,7 +99,7 @@ export default function Main() {
               <ScoreText>{rank.goalDifference}</ScoreText>
             </Score>
           </TeamView>
-        ))}
+        ))} */}
       </Category>
     </Container>
   );

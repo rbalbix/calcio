@@ -6,6 +6,7 @@ const RankSchema = Schema(
       type: String,
       required: true,
     },
+    thumbnail: String,
     team: {
       type: String,
       required: true,
@@ -14,8 +15,17 @@ const RankSchema = Schema(
     wons: { type: Number, min: 0, max: 99 },
     goalDifference: { type: Number, min: 0, max: 99 },
   },
+  {
+    toJSON: {
+      virtuals: true,
+    },
+  },
   { timestamps: true }
 );
+
+RankSchema.virtual('thumbnail_url').get(function () {
+  return `https://rb-calcio.herokuapp.com/files/shields/${this.thumbnail}`;
+});
 
 const Rank = model('Rank', RankSchema);
 

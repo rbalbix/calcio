@@ -25,11 +25,6 @@ import {
   MatchTeamShield,
 } from './styles';
 
-import sampImg from '../../assets/sampdoria.png';
-import juvImg from '../../assets/juventus.png';
-import interImg from '../../assets/inter-de-milao.png';
-import milanImg from '../../assets/milan.png';
-
 export default function Main() {
   return (
     <Container>
