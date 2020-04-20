@@ -86,11 +86,11 @@ export default function Main() {
           <HeaderTableText>SG</HeaderTableText>
         </HeaderTable>
 
-        {/* {ranks.B.map((rank, index) => (
+        {ranks.B.map((rank, index) => (
           <TeamView key={rank._id}>
             <Team>
               <PositionText>{index + 1}</PositionText>
-              <TeamShield source={rank.thumbnail_url} />
+              <TeamShield source={{ uri: rank.thumbnail_url }} />
               <TeamText>{rank.team}</TeamText>
             </Team>
             <Score>
@@ -99,7 +99,7 @@ export default function Main() {
               <ScoreText>{rank.goalDifference}</ScoreText>
             </Score>
           </TeamView>
-        ))} */}
+        ))}
       </Category>
     </Container>
   );
