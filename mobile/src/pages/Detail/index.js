@@ -43,7 +43,12 @@ export default function Main() {
         <TeamView>
           <Team>
             <PositionText>1</PositionText>
-            <TeamShield source={sampImg} />
+            <TeamShield
+              source={{
+                uri:
+                  'https://rb-calcio.herokuapp.com/files/shields/sampdoria.png',
+              }}
+            />
             <MatchTeamText>SAM</MatchTeamText>
           </Team>
           <Score>
@@ -58,7 +63,12 @@ export default function Main() {
         <TeamView>
           <Team>
             <PositionText>2</PositionText>
-            <TeamShield source={juvImg} />
+            <TeamShield
+              source={{
+                uri:
+                  'https://rb-calcio.herokuapp.com/files/shields/sampdoria.png',
+              }}
+            />
             <MatchTeamText>JUV</MatchTeamText>
           </Team>
           <Score>
@@ -73,7 +83,12 @@ export default function Main() {
         <TeamView>
           <Team>
             <PositionText>3</PositionText>
-            <TeamShield source={interImg} />
+            <TeamShield
+              source={{
+                uri:
+                  'https://rb-calcio.herokuapp.com/files/shields/sampdoria.png',
+              }}
+            />
             <MatchTeamText>INT</MatchTeamText>
           </Team>
           <Score>
@@ -88,7 +103,12 @@ export default function Main() {
         <TeamView>
           <Team>
             <PositionText>4</PositionText>
-            <TeamShield source={milanImg} />
+            <TeamShield
+              source={{
+                uri:
+                  'https://rb-calcio.herokuapp.com/files/shields/sampdoria.png',
+              }}
+            />
             <MatchTeamText>MIL</MatchTeamText>
           </Team>
           <Score>
@@ -103,7 +123,12 @@ export default function Main() {
         <TeamView>
           <Team>
             <PositionText>5</PositionText>
-            <TeamShield source={sampImg} />
+            <TeamShield
+              source={{
+                uri:
+                  'https://rb-calcio.herokuapp.com/files/shields/sampdoria.png',
+              }}
+            />
             <MatchTeamText>SAM</MatchTeamText>
           </Team>
           <Score>
@@ -118,7 +143,12 @@ export default function Main() {
         <TeamView>
           <Team>
             <PositionText>6</PositionText>
-            <TeamShield source={juvImg} />
+            <TeamShield
+              source={{
+                uri:
+                  'https://rb-calcio.herokuapp.com/files/shields/sampdoria.png',
+              }}
+            />
             <MatchTeamText>JUV</MatchTeamText>
           </Team>
           <Score>
@@ -130,7 +160,12 @@ export default function Main() {
         <TeamView>
           <Team>
             <PositionText>7</PositionText>
-            <TeamShield source={interImg} />
+            <TeamShield
+              source={{
+                uri:
+                  'https://rb-calcio.herokuapp.com/files/shields/sampdoria.png',
+              }}
+            />
             <MatchTeamText>INT</MatchTeamText>
           </Team>
           <Score>
@@ -142,7 +177,12 @@ export default function Main() {
         <TeamView>
           <Team>
             <PositionText>8</PositionText>
-            <TeamShield source={milanImg} />
+            <TeamShield
+              source={{
+                uri:
+                  'https://rb-calcio.herokuapp.com/files/shields/sampdoria.png',
+              }}
+            />
             <MatchTeamText>MIL</MatchTeamText>
           </Team>
           <Score>
@@ -154,7 +194,12 @@ export default function Main() {
         <TeamView>
           <Team>
             <PositionText>9</PositionText>
-            <TeamShield source={interImg} />
+            <TeamShield
+              source={{
+                uri:
+                  'https://rb-calcio.herokuapp.com/files/shields/sampdoria.png',
+              }}
+            />
             <MatchTeamText>INT</MatchTeamText>
           </Team>
           <Score>
@@ -166,7 +211,12 @@ export default function Main() {
         <TeamView>
           <Team>
             <PositionText>10</PositionText>
-            <TeamShield source={milanImg} />
+            <TeamShield
+              source={{
+                uri:
+                  'https://rb-calcio.herokuapp.com/files/shields/sampdoria.png',
+              }}
+            />
             <MatchTeamText>MIL</MatchTeamText>
           </Team>
           <Score>
@@ -194,11 +244,21 @@ export default function Main() {
         </DateView>
         <MatchView>
           <MatchTeamText>SAM</MatchTeamText>
-          <MatchTeamShield source={sampImg}></MatchTeamShield>
+          <MatchTeamShield
+            source={{
+              uri:
+                'https://rb-calcio.herokuapp.com/files/shields/sampdoria.png',
+            }}
+          ></MatchTeamShield>
           <MatchTeamText>2</MatchTeamText>
           <MatchTeamText>X</MatchTeamText>
           <MatchTeamText>0</MatchTeamText>
-          <MatchTeamShield source={milanImg}></MatchTeamShield>
+          <MatchTeamShield
+            source={{
+              uri:
+                'https://rb-calcio.herokuapp.com/files/shields/sampdoria.png',
+            }}
+          ></MatchTeamShield>
           <MatchTeamText>MIL</MatchTeamText>
         </MatchView>
 
@@ -207,11 +267,21 @@ export default function Main() {
         </DateView>
         <MatchView>
           <MatchTeamText>SAM</MatchTeamText>
-          <MatchTeamShield source={sampImg}></MatchTeamShield>
+          <MatchTeamShield
+            source={{
+              uri:
+                'https://rb-calcio.herokuapp.com/files/shields/sampdoria.png',
+            }}
+          ></MatchTeamShield>
           <MatchTeamText>2</MatchTeamText>
           <MatchTeamText>X</MatchTeamText>
           <MatchTeamText>0</MatchTeamText>
-          <MatchTeamShield source={milanImg}></MatchTeamShield>
+          <MatchTeamShield
+            source={{
+              uri:
+                'https://rb-calcio.herokuapp.com/files/shields/sampdoria.png',
+            }}
+          ></MatchTeamShield>
           <MatchTeamText>MIL</MatchTeamText>
         </MatchView>
 
@@ -220,11 +290,21 @@ export default function Main() {
         </DateView>
         <MatchView>
           <MatchTeamText>SAM</MatchTeamText>
-          <MatchTeamShield source={sampImg}></MatchTeamShield>
+          <MatchTeamShield
+            source={{
+              uri:
+                'https://rb-calcio.herokuapp.com/files/shields/sampdoria.png',
+            }}
+          ></MatchTeamShield>
           <MatchTeamText>2</MatchTeamText>
           <MatchTeamText>X</MatchTeamText>
           <MatchTeamText>0</MatchTeamText>
-          <MatchTeamShield source={milanImg}></MatchTeamShield>
+          <MatchTeamShield
+            source={{
+              uri:
+                'https://rb-calcio.herokuapp.com/files/shields/sampdoria.png',
+            }}
+          ></MatchTeamShield>
           <MatchTeamText>MIL</MatchTeamText>
         </MatchView>
 
@@ -233,11 +313,21 @@ export default function Main() {
         </DateView>
         <MatchView>
           <MatchTeamText>SAM</MatchTeamText>
-          <MatchTeamShield source={sampImg}></MatchTeamShield>
+          <MatchTeamShield
+            source={{
+              uri:
+                'https://rb-calcio.herokuapp.com/files/shields/sampdoria.png',
+            }}
+          ></MatchTeamShield>
           <MatchTeamText>2</MatchTeamText>
           <MatchTeamText>X</MatchTeamText>
           <MatchTeamText>0</MatchTeamText>
-          <MatchTeamShield source={milanImg}></MatchTeamShield>
+          <MatchTeamShield
+            source={{
+              uri:
+                'https://rb-calcio.herokuapp.com/files/shields/sampdoria.png',
+            }}
+          ></MatchTeamShield>
           <MatchTeamText>MIL</MatchTeamText>
         </MatchView>
 
@@ -246,11 +336,21 @@ export default function Main() {
         </DateView>
         <MatchView>
           <MatchTeamText>SAM</MatchTeamText>
-          <MatchTeamShield source={sampImg}></MatchTeamShield>
+          <MatchTeamShield
+            source={{
+              uri:
+                'https://rb-calcio.herokuapp.com/files/shields/sampdoria.png',
+            }}
+          ></MatchTeamShield>
           <MatchTeamText>2</MatchTeamText>
           <MatchTeamText>X</MatchTeamText>
           <MatchTeamText>0</MatchTeamText>
-          <MatchTeamShield source={milanImg}></MatchTeamShield>
+          <MatchTeamShield
+            source={{
+              uri:
+                'https://rb-calcio.herokuapp.com/files/shields/sampdoria.png',
+            }}
+          ></MatchTeamShield>
           <MatchTeamText>MIL</MatchTeamText>
         </MatchView>
       </Category>
