@@ -11,6 +11,7 @@ const { RankController } = require('./app/controllers');
  */
 
 routes.get('/rank/top', RankController.top);
+routes.get('/rank', RankController.index);
 
 /**
  *

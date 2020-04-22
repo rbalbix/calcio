@@ -28,8 +28,6 @@ module.exports = {
           .slice(0, top),
       };
 
-      console.log(response);
-
       return res.json(response);
     } catch (err) {
       log.error(err);
@@ -39,7 +37,13 @@ module.exports = {
 
   async index(req, res) {
     try {
-      return res.json({ message: 'TO DO' });
+      const response = await Rank.find({ category: 'A' })
+        .select(
+          'category thumbnail team points played wons drawn lost goalDifference'
+        )
+        .sort('-points');
+
+      return res.json(response);
     } catch (err) {
       log.error(err);
       res.status(503).send('Algo deu errado. Tente novamente.');

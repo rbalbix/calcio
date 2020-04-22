@@ -33,10 +33,10 @@ export default function Routes() {
         <Stack.Screen
           name='Category'
           component={Detail}
-          options={{
-            title: 'TORNEIO',
+          options={({ route }) => ({
+            title: `TORNEIO ${route.params.info.category}`,
             headerBackTitleVisible: false,
-          }}
+          })}
         />
       </Stack.Navigator>
     </NavigationContainer>

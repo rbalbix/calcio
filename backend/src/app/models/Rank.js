@@ -12,7 +12,10 @@ const RankSchema = Schema(
       required: true,
     },
     points: { type: Number, min: 0, max: 99 },
+    played: { type: Number, min: 0, max: 99 },
     wons: { type: Number, min: 0, max: 99 },
+    drawn: { type: Number, min: 0, max: 99 },
+    lost: { type: Number, min: 0, max: 99 },
     goalDifference: { type: Number, min: 0, max: 99 },
   },
   {

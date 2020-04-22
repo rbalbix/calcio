@@ -21,20 +21,15 @@ import {
 } from './styles';
 
 export default function Main() {
-  // const [rankA, setRankA] = useState([]);
-  // const [rankB, setRankB] = useState([]);
   const [ranks, setRanks] = useState([]);
   const navigation = useNavigation();
 
-  function navigateToCategory(category) {
-    navigation.navigate('Category', { category });
+  function navigateToCategory(info) {
+    navigation.navigate('Category', { info });
   }
 
   async function loadRanks() {
     const response = await api.get('/rank/top');
-
-    // setRankA(response.data.A);
-    // setRankB(response.data.B);
 
     setRanks([response.data.A, response.data.B]);
   }

@@ -55,7 +55,7 @@ export const TeamView = styled.View`
 export const Team = styled.View`
   flex-direction: row;
   align-items: center;
-  max-width: ${wp('52%')};
+  max-width: ${wp('18%')};
 `;
 
 export const PositionText = styled.Text`
