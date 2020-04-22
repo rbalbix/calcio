@@ -22,6 +22,7 @@ export const CategoryTitle = styled.Text`
   font-size: ${hp('4%')};
   font-weight: bold;
   color: #1e7a0e;
+  margin-bottom: ${hp('2%')};
 `;
 
 export const HeaderTable = styled.View`
@@ -36,7 +37,9 @@ export const HeaderTableText = styled.Text`
   font-size: ${hp('2.2%')};
   font-weight: bold;
   color: #999;
-  margin-left: ${wp('5%')};
+  width: ${wp('7.2%')};
+  margin-left: ${wp('1.8%')};
+  text-align: center;
 `;
 
 export const TeamView = styled.View`
@@ -59,19 +62,14 @@ export const PositionText = styled.Text`
   font-size: ${hp('2.4%')};
   font-weight: bold;
   color: #999;
+  width: ${wp('6.6%')};
   padding-right: 5px;
 `;
 
 export const TeamShield = styled.Image`
   width: ${wp('5.3%')};
   height: ${wp('5.3%')};
-`;
-
-export const TeamText = styled.Text`
-  font-size: ${hp('2.4%')};
-  font-weight: bold;
-  color: #717171;
-  padding-left: 5px;
+  margin-right: ${wp('1.3%')};
 `;
 
 export const Score = styled.View`
@@ -82,9 +80,10 @@ export const Score = styled.View`
 export const ScoreText = styled.Text`
   font-size: ${hp('2.2%')};
   font-weight: bold;
+  text-align: center;
   color: #999;
-  margin-left: ${wp('4.6%')};
-  margin-left: ${(props) => (props.score ? wp('4.6%') : wp('0%'))};
+  width: ${wp('7.2%')};
+  margin-left: ${(props) => (props.score ? wp('1.8%') : wp('0%'))};
 `;
 
 export const RoundView = styled.View`
@@ -103,7 +102,7 @@ export const RoundView = styled.View`
 `;
 
 export const RoundText = styled.Text`
-  font-size: 16px;
+  font-size: ${hp('2.5%')};
   font-weight: bold;
   color: #999;
 `;
@@ -113,29 +112,31 @@ export const DateView = styled.View`
 `;
 
 export const DateText = styled.Text`
+  font-size: ${hp('2%')};
   color: #999;
 `;
 
 export const MatchView = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  /* padding-top: 20px;
+  padding-bottom: 20px; */
+
+  padding: ${hp('3%')}px 0px;
 
   border-bottom-width: 1px;
   border-bottom-color: #e0e0e0;
 
-  margin-bottom: 10px;
+  margin-bottom: ${hp('1.5%')};
 `;
 
 export const MatchTeamText = styled.Text`
-  font-size: 18px;
+  font-size: ${hp('2.7%')};
   font-weight: bold;
   color: #717171;
-  /* padding-left: 10px; */
 `;
 
 export const MatchTeamShield = styled.Image`
-  width: 25px;
-  height: 25px;
+  width: ${wp('6.6%')};
+  height: ${wp('6.6%')};
 `;

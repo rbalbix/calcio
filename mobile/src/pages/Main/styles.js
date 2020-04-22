@@ -35,8 +35,10 @@ export const HeaderTable = styled.View`
 export const HeaderTableText = styled.Text`
   font-size: ${hp('2.2%')};
   font-weight: bold;
+  text-align: center;
   color: #999;
-  margin-left: ${wp('5%')};
+  width: ${wp('7.2%')};
+  margin-left: ${wp('2.2%')};
 `;
 
 export const TeamView = styled.View`
@@ -82,7 +84,8 @@ export const Score = styled.View`
 export const ScoreText = styled.Text`
   font-size: ${hp('2.2%')};
   font-weight: bold;
+  text-align: center;
   color: #999;
-  margin-left: ${wp('4.6%')};
-  margin-left: ${(props) => (props.score ? wp('4.6%') : wp('0%'))};
+  width: ${wp('7.2%')};
+  margin-left: ${(props) => (props.score ? wp('2.2%') : wp('0%'))};
 `;
