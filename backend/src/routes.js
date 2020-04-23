@@ -11,7 +11,15 @@ const { RankController } = require('./app/controllers');
  */
 
 routes.get('/rank/top', RankController.top);
-routes.get('/rank', RankController.index);
+routes.get(
+  '/rank',
+  celebrate({
+    [Segments.QUERY]: Joi.object().keys({
+      category: Joi.string().required(),
+    }),
+  }),
+  RankController.index
+);
 
 /**
  *

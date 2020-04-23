@@ -34,7 +34,9 @@ export default function Detail() {
   const info = route.params.info;
 
   async function loadRank() {
-    const response = await api.get('/rank');
+    const response = await api.get('/rank', {
+      params: { category: info.category },
+    });
 
     setRank(response.data);
   }
@@ -63,10 +65,10 @@ export default function Detail() {
               <PositionText>{index + 1}</PositionText>
               <TeamShield
                 source={{
-                  uri: item.thumbnail_url,
+                  uri: item.team.thumbnail_url,
                 }}
               />
-              <MatchTeamText>{item.team}</MatchTeamText>
+              <MatchTeamText>{item.team.shortName}</MatchTeamText>
             </Team>
             <Score>
               <ScoreText>{item.points}</ScoreText>

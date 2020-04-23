@@ -1,3 +1,9 @@
+/**
+ *
+ * A rank can be of a specific champ and category.
+ *
+ */
+
 const { Schema, model } = require('../../database').mongoose;
 
 const RankSchema = Schema(
@@ -6,9 +12,9 @@ const RankSchema = Schema(
       type: String,
       required: true,
     },
-    thumbnail: String,
     team: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: 'Team',
       required: true,
     },
     points: { type: Number, min: 0, max: 99 },
@@ -18,17 +24,8 @@ const RankSchema = Schema(
     lost: { type: Number, min: 0, max: 99 },
     goalDifference: { type: Number, min: 0, max: 99 },
   },
-  {
-    toJSON: {
-      virtuals: true,
-    },
-  },
   { timestamps: true }
 );
-
-RankSchema.virtual('thumbnail_url').get(function () {
-  return `https://rb-calcio.herokuapp.com/files/shields/${this.thumbnail}`;
-});
 
 const Rank = model('Rank', RankSchema);
 

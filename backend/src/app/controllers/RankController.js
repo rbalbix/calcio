@@ -12,18 +12,18 @@ module.exports = {
     try {
       const top = 4;
 
-      const ranks = await Rank.find().select(
-        'category thumbnail team points wons goalDifference'
-      );
+      const ranks = await Rank.find()
+        .select('category thumbnail team points wons goalDifference')
+        .populate('team');
 
       const response = {
         A: ranks
-          .filter((team) => team.category === 'A')
+          .filter((rank) => rank.category === 'A')
           .sort((a, b) => rank(a, b))
           .slice(0, top),
 
         B: ranks
-          .filter((team) => team.category === 'B')
+          .filter((rank) => rank.category === 'B')
           .sort((a, b) => rank(a, b))
           .slice(0, top),
       };
@@ -37,11 +37,13 @@ module.exports = {
 
   async index(req, res) {
     try {
-      const response = await Rank.find({ category: 'A' })
+      const { category } = req.query;
+      const response = await Rank.find({ category })
         .select(
           'category thumbnail team points played wons drawn lost goalDifference'
         )
-        .sort('-points');
+        .sort('-points')
+        .populate('team');
 
       return res.json(response);
     } catch (err) {

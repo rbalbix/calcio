@@ -60,8 +60,8 @@ export default function Main() {
             <TeamView key={item._id}>
               <Team>
                 <PositionText>{index + 1}</PositionText>
-                <TeamShield source={{ uri: item.thumbnail_url }} />
-                <TeamText>{item.team}</TeamText>
+                <TeamShield source={{ uri: item.team.thumbnail_url }} />
+                <TeamText>{item.team.longName}</TeamText>
               </Team>
 
               <Score>

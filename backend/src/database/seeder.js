@@ -1,5 +1,5 @@
 const db = require('./index');
-const { Rank } = require('../app/models');
+const { Team, Rank } = require('../app/models');
 
 async function connect() {
   db.connect();
@@ -9,14 +9,72 @@ async function disconnect(done) {
   db.disconnect(done);
 }
 
+async function seedTeam() {
+  await Team.deleteMany({});
+
+  await Team.create([
+    {
+      longName: 'SAMPDORIA',
+      shortName: 'SAM',
+      thumbnail: 'sampdoria.png',
+    },
+    {
+      longName: 'INTERNAZIONALE',
+      shortName: 'INT',
+      thumbnail: 'inter-de-milao.png',
+    },
+    {
+      longName: 'FIORENTINA',
+      shortName: 'FIO',
+      thumbnail: 'fiorentina.png',
+    },
+    {
+      longName: 'MILAN',
+      shortName: 'MIL',
+      thumbnail: 'milan.png',
+    },
+    {
+      longName: 'JUVENTUS',
+      shortName: 'JUV',
+      thumbnail: 'juventus.png',
+    },
+    {
+      longName: 'NAPOLI',
+      shortName: 'NAP',
+      thumbnail: 'napoli.png',
+    },
+    {
+      longName: 'SUASSUOLO',
+      shortName: 'SUA',
+      thumbnail: 'suassuolo.png',
+    },
+    {
+      longName: 'PARMA',
+      shortName: 'PAR',
+      thumbnail: 'parma.png',
+    },
+    {
+      longName: 'PALERMO',
+      shortName: 'PAL',
+      thumbnail: 'palermo.png',
+    },
+    {
+      longName: 'ROMA',
+      shortName: 'ROM',
+      thumbnail: 'roma.png',
+    },
+  ]);
+}
+
 async function seedRank() {
   await Rank.deleteMany({});
+
+  const teams = await Team.find();
 
   await Rank.create([
     {
       category: 'A',
-      thumbnail: 'sampdoria.png',
-      team: 'SAMPDORIA',
+      team: teams.find((team) => team.longName === 'SAMPDORIA')._id,
       points: 30,
       played: 5,
       wons: 10,
@@ -26,8 +84,7 @@ async function seedRank() {
     },
     {
       category: 'A',
-      thumbnail: 'inter-de-milao.png',
-      team: 'INTERNAZIONALE',
+      team: teams.find((team) => team.longName === 'INTERNAZIONALE')._id,
       points: 15,
       played: 5,
       wons: 10,
@@ -37,8 +94,7 @@ async function seedRank() {
     },
     {
       category: 'A',
-      thumbnail: 'fiorentina.png',
-      team: 'FIORENTINA',
+      team: teams.find((team) => team.longName === 'FIORENTINA')._id,
       points: 10,
       played: 5,
       wons: 10,
@@ -48,8 +104,7 @@ async function seedRank() {
     },
     {
       category: 'A',
-      thumbnail: 'milan.png',
-      team: 'MILAN',
+      team: teams.find((team) => team.longName === 'MILAN')._id,
       points: 20,
       played: 5,
       wons: 10,
@@ -59,8 +114,7 @@ async function seedRank() {
     },
     {
       category: 'A',
-      thumbnail: 'juventus.png',
-      team: 'JUVENTUS',
+      team: teams.find((team) => team.longName === 'JUVENTUS')._id,
       points: 5,
       played: 5,
       wons: 10,
@@ -70,8 +124,7 @@ async function seedRank() {
     },
     {
       category: 'A',
-      thumbnail: 'napoli.png',
-      team: 'NAPOLI',
+      team: teams.find((team) => team.longName === 'NAPOLI')._id,
       points: 8,
       played: 5,
       wons: 10,
@@ -81,8 +134,7 @@ async function seedRank() {
     },
     {
       category: 'A',
-      thumbnail: 'suassuolo.png',
-      team: 'SUASSUOLO',
+      team: teams.find((team) => team.longName === 'SUASSUOLO')._id,
       points: 8,
       played: 5,
       wons: 10,
@@ -92,8 +144,7 @@ async function seedRank() {
     },
     {
       category: 'A',
-      thumbnail: 'parma.png',
-      team: 'PARMA',
+      team: teams.find((team) => team.longName === 'PARMA')._id,
       points: 8,
       played: 5,
       wons: 10,
@@ -103,8 +154,7 @@ async function seedRank() {
     },
     {
       category: 'A',
-      thumbnail: 'palermo.png',
-      team: 'PALERMO',
+      team: teams.find((team) => team.longName === 'PALERMO')._id,
       points: 6,
       played: 5,
       wons: 10,
@@ -114,8 +164,7 @@ async function seedRank() {
     },
     {
       category: 'A',
-      thumbnail: 'roma.png',
-      team: 'ROMA',
+      team: teams.find((team) => team.longName === 'ROMA')._id,
       points: 4,
       played: 5,
       wons: 10,
@@ -125,8 +174,7 @@ async function seedRank() {
     },
     {
       category: 'B',
-      thumbnail: 'sampdoria.png',
-      team: 'SAMPDORIA',
+      team: teams.find((team) => team.longName === 'SAMPDORIA')._id,
       points: 30,
       played: 5,
       wons: 10,
@@ -136,8 +184,7 @@ async function seedRank() {
     },
     {
       category: 'B',
-      thumbnail: 'inter-de-milao.png',
-      team: 'INTERNAZIONALE',
+      team: teams.find((team) => team.longName === 'INTERNAZIONALE')._id,
       points: 25,
       played: 5,
       wons: 10,
@@ -147,8 +194,7 @@ async function seedRank() {
     },
     {
       category: 'B',
-      thumbnail: 'fiorentina.png',
-      team: 'FIORENTINA',
+      team: teams.find((team) => team.longName === 'FIORENTINA')._id,
       points: 6,
       played: 5,
       wons: 10,
@@ -158,8 +204,7 @@ async function seedRank() {
     },
     {
       category: 'B',
-      thumbnail: 'milan.png',
-      team: 'MILAN',
+      team: teams.find((team) => team.longName === 'MILAN')._id,
       points: 15,
       played: 5,
       wons: 10,
@@ -169,8 +214,7 @@ async function seedRank() {
     },
     {
       category: 'B',
-      thumbnail: '',
-      team: 'JUVENTUS',
+      team: teams.find((team) => team.longName === 'JUVENTUS')._id,
       points: 5,
       played: 5,
       wons: 10,
@@ -180,8 +224,7 @@ async function seedRank() {
     },
     {
       category: 'B',
-      thumbnail: 'napoli.png',
-      team: 'NAPOLI',
+      team: teams.find((team) => team.longName === 'NAPOLI')._id,
       points: 20,
       played: 5,
       wons: 10,
@@ -191,8 +234,7 @@ async function seedRank() {
     },
     {
       category: 'B',
-      thumbnail: 'suassuolo.png',
-      team: 'SUASSUOLO',
+      team: teams.find((team) => team.longName === 'SUASSUOLO')._id,
       points: 35,
       played: 5,
       wons: 10,
@@ -202,8 +244,7 @@ async function seedRank() {
     },
     {
       category: 'B',
-      thumbnail: 'parma.png',
-      team: 'PARMA',
+      team: teams.find((team) => team.longName === 'PARMA')._id,
       points: 8,
       played: 5,
       wons: 10,
@@ -213,8 +254,7 @@ async function seedRank() {
     },
     {
       category: 'B',
-      thumbnail: 'palermo.png',
-      team: 'PALERMO',
+      team: teams.find((team) => team.longName === 'PALERMO')._id,
       points: 6,
       played: 5,
       wons: 10,
@@ -224,8 +264,7 @@ async function seedRank() {
     },
     {
       category: 'B',
-      thumbnail: 'roma.png',
-      team: 'ROMA',
+      team: teams.find((team) => team.longName === 'ROMA')._id,
       points: 4,
       played: 5,
       wons: 10,
@@ -239,6 +278,7 @@ async function seedRank() {
 async function seed() {
   await connect();
 
+  await seedTeam();
   await seedRank();
 
   await disconnect();
