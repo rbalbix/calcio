@@ -58,6 +58,12 @@ export const Team = styled.View`
   max-width: ${wp('18%')};
 `;
 
+export const TeamText = styled.Text`
+  font-size: ${hp('2.7%')};
+  font-weight: bold;
+  color: #717171;
+`;
+
 export const PositionText = styled.Text`
   font-size: ${hp('2.4%')};
   font-weight: bold;
@@ -108,19 +114,20 @@ export const RoundText = styled.Text`
 `;
 
 export const DateView = styled.View`
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
 `;
 
 export const DateText = styled.Text`
   font-size: ${hp('2%')};
+  margin-left: ${(props) => (props.margin ? wp('1.8%') : wp('0%'))};
   color: #999;
 `;
 
 export const MatchView = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  /* padding-top: 20px;
-  padding-bottom: 20px; */
 
   padding: ${hp('3%')}px 0px;
 
@@ -133,10 +140,20 @@ export const MatchView = styled.View`
 export const MatchTeamText = styled.Text`
   font-size: ${hp('2.7%')};
   font-weight: bold;
+  width: ${(props) => (props.team ? wp('13%') : wp('5%'))};
+  text-align: ${(props) => props.align || 'center'};
   color: #717171;
 `;
 
+export const MatchScoreText = styled.Text`
+  font-size: ${hp('2.7%')};
+  font-weight: bold;
+  color: #717171;
+  width: ${wp('7.2%')};
+  text-align: center;
+`;
+
 export const MatchTeamShield = styled.Image`
-  width: ${wp('6.6%')};
-  height: ${wp('6.6%')};
+  width: ${wp('7%')};
+  height: ${wp('7%')};
 `;

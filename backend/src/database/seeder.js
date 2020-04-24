@@ -1,5 +1,5 @@
 const db = require('./index');
-const { Team, Rank } = require('../app/models');
+const { Team, Match, Rank } = require('../app/models');
 
 async function connect() {
   db.connect();
@@ -62,6 +62,126 @@ async function seedTeam() {
       longName: 'ROMA',
       shortName: 'ROM',
       thumbnail: 'roma.png',
+    },
+  ]);
+}
+
+async function seedMatch() {
+  await Match.deleteMany({});
+
+  const teams = await Team.find();
+
+  await Match.create([
+    {
+      category: 'A',
+      round: 1,
+      teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')._id,
+      scoreHome: 1,
+      teamAway: teams.find((team) => team.longName === 'NAPOLI')._id,
+      scoreAway: 3,
+      day: '2020-02-10 12:00:00',
+      week: 7,
+      weekDay: 'SEG',
+    },
+    {
+      category: 'A',
+      round: 1,
+      teamHome: teams.find((team) => team.longName === 'JUVENTUS')._id,
+      scoreHome: 1,
+      teamAway: teams.find((team) => team.longName === 'SAMPDORIA')._id,
+      scoreAway: 2,
+      day: '2020-02-11 12:00:00',
+      week: 7,
+      weekDay: 'TER',
+    },
+    {
+      category: 'A',
+      round: 1,
+      teamHome: teams.find((team) => team.longName === 'SUASSUOLO')._id,
+      scoreHome: 0,
+      teamAway: teams.find((team) => team.longName === 'PARMA')._id,
+      scoreAway: 2,
+      day: '2020-02-12 12:00:00',
+      week: 7,
+      weekDay: 'QUA',
+    },
+    {
+      category: 'A',
+      round: 1,
+      teamHome: teams.find((team) => team.longName === 'ROMA')._id,
+      scoreHome: 1,
+      teamAway: teams.find((team) => team.longName === 'PALERMO')._id,
+      scoreAway: 1,
+      day: '2020-02-13 12:00:00',
+      week: 7,
+      weekDay: 'QUI',
+    },
+    {
+      category: 'A',
+      round: 1,
+      teamHome: teams.find((team) => team.longName === 'MILAN')._id,
+      scoreHome: 5,
+      teamAway: teams.find((team) => team.longName === 'FIORENTINA')._id,
+      scoreAway: 1,
+      day: '2020-02-17 12:00:00',
+      week: 8,
+      weekDay: 'SEG',
+    },
+
+    {
+      category: 'A',
+      round: 2,
+      teamHome: teams.find((team) => team.longName === 'JUVENTUS')._id,
+      scoreHome: 1,
+      teamAway: teams.find((team) => team.longName === 'PARMA')._id,
+      scoreAway: 4,
+      day: '2020-02-18 12:00:00',
+      week: 8,
+      weekDay: 'TER',
+    },
+    {
+      category: 'A',
+      round: 2,
+      teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')._id,
+      scoreHome: 2,
+      teamAway: teams.find((team) => team.longName === 'ROMA')._id,
+      scoreAway: 4,
+      day: '2020-02-19 12:00:00',
+      week: 8,
+      weekDay: 'QUA',
+    },
+    {
+      category: 'A',
+      round: 2,
+      teamHome: teams.find((team) => team.longName === 'NAPOLI')._id,
+      scoreHome: 3,
+      teamAway: teams.find((team) => team.longName === 'SUASSUOLO')._id,
+      scoreAway: 3,
+      day: '2020-02-20 12:00:00',
+      week: 8,
+      weekDay: 'QUI',
+    },
+    {
+      category: 'A',
+      round: 2,
+      teamHome: teams.find((team) => team.longName === 'SAMPDORIA')._id,
+      scoreHome: '',
+      teamAway: teams.find((team) => team.longName === 'MILAN')._id,
+      scoreAway: '',
+      day: '2020-03-02 12:00:00',
+      week: 10,
+      weekDay: 'SEG',
+    },
+    {
+      category: 'A',
+      round: 2,
+      teamHome: teams.find((team) => team.longName === 'PALERMO')._id,
+      scoreHome: 4,
+      teamAway: teams.find((team) => team.longName === 'FIORENTINA')._id,
+      scoreAway: 4,
+      day: '2020-03-03 12:00:00',
+      week: 10,
+      weekDay: 'TER',
     },
   ]);
 }
@@ -279,6 +399,7 @@ async function seed() {
   await connect();
 
   await seedTeam();
+  await seedMatch();
   await seedRank();
 
   await disconnect();

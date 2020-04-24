@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 
 import { MaterialIcons } from '@expo/vector-icons';
@@ -14,6 +14,7 @@ import {
   HeaderTableText,
   TeamView,
   Team,
+  TeamText,
   PositionText,
   TeamShield,
   Score,
@@ -24,11 +25,13 @@ import {
   DateText,
   MatchView,
   MatchTeamText,
+  MatchScoreText,
   MatchTeamShield,
 } from './styles';
 
 export default function Detail() {
   const [rank, setRank] = useState([]);
+  const [matches, setMatches] = useState([]);
 
   const route = useRoute();
   const info = route.params.info;
@@ -41,8 +44,17 @@ export default function Detail() {
     setRank(response.data);
   }
 
+  async function loadMatches() {
+    const response = await api.get('/match', {
+      params: { category: info.category },
+    });
+    console.log(response.data);
+    setMatches(response.data);
+  }
+
   useEffect(() => {
     loadRank();
+    loadMatches();
   }, []);
 
   return (
@@ -68,7 +80,7 @@ export default function Detail() {
                   uri: item.team.thumbnail_url,
                 }}
               />
-              <MatchTeamText>{item.team.shortName}</MatchTeamText>
+              <TeamText>{item.team.shortName}</TeamText>
             </Team>
             <Score>
               <ScoreText>{item.points}</ScoreText>
@@ -94,120 +106,40 @@ export default function Detail() {
           </TouchableOpacity>
         </RoundView>
 
-        <DateView>
-          <DateText>20/10</DateText>
-        </DateView>
-        <MatchView>
-          <MatchTeamText>SAM</MatchTeamText>
-          <MatchTeamShield
-            source={{
-              uri:
-                'https://rb-calcio.herokuapp.com/files/shields/sampdoria.png',
-            }}
-          ></MatchTeamShield>
-          <MatchTeamText>25</MatchTeamText>
-          <MatchTeamText>X</MatchTeamText>
-          <MatchTeamText>30</MatchTeamText>
-          <MatchTeamShield
-            source={{
-              uri:
-                'https://rb-calcio.herokuapp.com/files/shields/sampdoria.png',
-            }}
-          ></MatchTeamShield>
-          <MatchTeamText>MIL</MatchTeamText>
-        </MatchView>
-
-        <DateView>
-          <DateText>20/10</DateText>
-        </DateView>
-        <MatchView>
-          <MatchTeamText>SAM</MatchTeamText>
-          <MatchTeamShield
-            source={{
-              uri:
-                'https://rb-calcio.herokuapp.com/files/shields/sampdoria.png',
-            }}
-          ></MatchTeamShield>
-          <MatchTeamText>2</MatchTeamText>
-          <MatchTeamText>X</MatchTeamText>
-          <MatchTeamText>0</MatchTeamText>
-          <MatchTeamShield
-            source={{
-              uri:
-                'https://rb-calcio.herokuapp.com/files/shields/sampdoria.png',
-            }}
-          ></MatchTeamShield>
-          <MatchTeamText>MIL</MatchTeamText>
-        </MatchView>
-
-        <DateView>
-          <DateText>20/10</DateText>
-        </DateView>
-        <MatchView>
-          <MatchTeamText>SAM</MatchTeamText>
-          <MatchTeamShield
-            source={{
-              uri:
-                'https://rb-calcio.herokuapp.com/files/shields/sampdoria.png',
-            }}
-          ></MatchTeamShield>
-          <MatchTeamText>2</MatchTeamText>
-          <MatchTeamText>X</MatchTeamText>
-          <MatchTeamText>0</MatchTeamText>
-          <MatchTeamShield
-            source={{
-              uri:
-                'https://rb-calcio.herokuapp.com/files/shields/sampdoria.png',
-            }}
-          ></MatchTeamShield>
-          <MatchTeamText>MIL</MatchTeamText>
-        </MatchView>
-
-        <DateView>
-          <DateText>20/10</DateText>
-        </DateView>
-        <MatchView>
-          <MatchTeamText>SAM</MatchTeamText>
-          <MatchTeamShield
-            source={{
-              uri:
-                'https://rb-calcio.herokuapp.com/files/shields/sampdoria.png',
-            }}
-          ></MatchTeamShield>
-          <MatchTeamText>2</MatchTeamText>
-          <MatchTeamText>X</MatchTeamText>
-          <MatchTeamText>0</MatchTeamText>
-          <MatchTeamShield
-            source={{
-              uri:
-                'https://rb-calcio.herokuapp.com/files/shields/sampdoria.png',
-            }}
-          ></MatchTeamShield>
-          <MatchTeamText>MIL</MatchTeamText>
-        </MatchView>
-
-        <DateView>
-          <DateText>20/10</DateText>
-        </DateView>
-        <MatchView>
-          <MatchTeamText>SAM</MatchTeamText>
-          <MatchTeamShield
-            source={{
-              uri:
-                'https://rb-calcio.herokuapp.com/files/shields/sampdoria.png',
-            }}
-          ></MatchTeamShield>
-          <MatchTeamText>2</MatchTeamText>
-          <MatchTeamText>X</MatchTeamText>
-          <MatchTeamText>0</MatchTeamText>
-          <MatchTeamShield
-            source={{
-              uri:
-                'https://rb-calcio.herokuapp.com/files/shields/sampdoria.png',
-            }}
-          ></MatchTeamShield>
-          <MatchTeamText>MIL</MatchTeamText>
-        </MatchView>
+        {matches.map((match) => (
+          <View key={match._id}>
+            <DateView>
+              <DateText>{match.weekDay}</DateText>
+              <DateText margin>
+                {new Intl.DateTimeFormat('pt-BR', {
+                  month: '2-digit',
+                  day: '2-digit',
+                }).format(new Date(match.day))}
+              </DateText>
+            </DateView>
+            <MatchView>
+              <MatchTeamText team align='right'>
+                {match.teamHome.shortName}
+              </MatchTeamText>
+              <MatchTeamShield
+                source={{
+                  uri: match.teamHome.thumbnail_url,
+                }}
+              ></MatchTeamShield>
+              <MatchScoreText>{match.scoreHome}</MatchScoreText>
+              <MatchTeamText>X</MatchTeamText>
+              <MatchScoreText>{match.scoreAway}</MatchScoreText>
+              <MatchTeamShield
+                source={{
+                  uri: match.teamAway.thumbnail_url,
+                }}
+              ></MatchTeamShield>
+              <MatchTeamText team align='left'>
+                {match.teamAway.shortName}
+              </MatchTeamText>
+            </MatchView>
+          </View>
+        ))}
       </Category>
     </Container>
   );

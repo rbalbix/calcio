@@ -2,7 +2,7 @@ const routes = require('express').Router();
 // Add validation with Celebrate
 const { celebrate, Segments, Joi } = require('celebrate');
 
-const { RankController } = require('./app/controllers');
+const { RankController, MatchController } = require('./app/controllers');
 
 /**
  *
@@ -19,6 +19,16 @@ routes.get(
     }),
   }),
   RankController.index
+);
+
+routes.get(
+  '/match',
+  celebrate({
+    [Segments.QUERY]: Joi.object().keys({
+      category: Joi.string().required(),
+    }),
+  }),
+  MatchController.index
 );
 
 /**
