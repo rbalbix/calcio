@@ -30,6 +30,7 @@ import {
 } from './styles';
 
 export default function Detail() {
+  const [round, setRound] = useState(1);
   const [rank, setRank] = useState([]);
   const [matches, setMatches] = useState([]);
 
@@ -48,8 +49,17 @@ export default function Detail() {
     const response = await api.get('/match', {
       params: { category: info.category },
     });
-    console.log(response.data);
     setMatches(response.data);
+  }
+
+  async function loadPreviousMatches() {
+    console.log('previous', round - 1);
+    setRound(round - 1);
+  }
+
+  async function loadNextMatches() {
+    console.log('next', round + 1);
+    setRound(round + 1);
   }
 
   useEffect(() => {
@@ -97,11 +107,11 @@ export default function Detail() {
       <Category>
         <CategoryTitle>JOGOS</CategoryTitle>
         <RoundView>
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity onPress={loadPreviousMatches}>
             <MaterialIcons name='navigate-before' size={24} color='#1e7a0e' />
           </TouchableOpacity>
           <RoundText>1ª RODADA</RoundText>
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity onPress={loadNextMatches}>
             <MaterialIcons name='navigate-next' size={24} color='#1e7a0e' />
           </TouchableOpacity>
         </RoundView>
@@ -111,7 +121,7 @@ export default function Detail() {
             <DateView>
               <DateText>{match.weekDay}</DateText>
               <DateText margin>
-                {new Intl.DateTimeFormat('pt-BR', {
+                {Intl.DateTimeFormat('pt-BR', {
                   month: '2-digit',
                   day: '2-digit',
                 }).format(new Date(match.day))}

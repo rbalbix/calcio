@@ -7,7 +7,10 @@ module.exports = {
       const { category } = req.query;
       const response = await Match.find({ category })
         .sort('day')
+        .limit(5)
         .populate('teamHome teamAway');
+
+      res.header('X-Total-Count', await Match.countDocuments());
 
       return res.json(response);
     } catch (err) {
