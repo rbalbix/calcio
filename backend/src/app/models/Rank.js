@@ -22,6 +22,8 @@ const RankSchema = Schema(
     wons: { type: Number, min: 0, max: 99 },
     drawn: { type: Number, min: 0, max: 99 },
     lost: { type: Number, min: 0, max: 99 },
+    goalsFor: { type: Number, min: 0, max: 99 },
+    goalsAgainst: { type: Number, min: 0, max: 99 },
     goalDifference: Number,
   },
   { timestamps: true }

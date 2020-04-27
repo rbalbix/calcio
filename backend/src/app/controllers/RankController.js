@@ -10,6 +10,14 @@ function rank(a, b) {
     if (a.wons === b.wons) {
       if (a.goalDifference > b.goalDifference) return -1;
       if (a.goalDifference < b.goalDifference) return 1;
+      if (a.goalDifference === b.goalDifference) {
+        if (a.goalsFor > b.goalsFor) return -1;
+        if (a.goalsFor < b.goalsFor) return 1;
+        if (a.goalsFor === b.goalsFor) {
+          if (a.goalsAgainst > b.goalsAgainst) return -1;
+          if (a.goalsAgainst < b.goalsAgainst) return 1;
+        }
+      }
     }
   }
   return 0;
@@ -21,7 +29,9 @@ module.exports = {
       const top = 4;
 
       const ranks = await Rank.find()
-        .select('category thumbnail team points wons goalDifference')
+        .select(
+          'category thumbnail team points wons goalsFor goalsAgainst goalDifference'
+        )
         .populate('team');
 
       const response = {
@@ -48,9 +58,9 @@ module.exports = {
       const { category } = req.query;
       const response = await Rank.find({ category })
         .select(
-          'category thumbnail team points played wons drawn lost goalDifference'
+          'category thumbnail team points played wons drawn lost goalsFor goalsAgainst goalDifference'
         )
-        .sort('-points -wons -goalDifference')
+        .sort('-points -wons -goalDifference ')
         .populate('team');
 
       return res.json(response);

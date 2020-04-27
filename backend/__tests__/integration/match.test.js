@@ -22,7 +22,7 @@ describe('Rank', () => {
   });
 
   it('should find a /match [get] route', async () => {
-    const response = await request(app).get('/match?category=A');
+    const response = await request(app).get('/match?category=A&round=1');
 
     expect(response.status).toBe(200);
   });
@@ -199,9 +199,17 @@ describe('Rank', () => {
       },
     ]);
 
-    const response = await request(app).get('/match?category=A');
+    const response = await request(app).get('/match?category=A&round=1');
 
     expect(response.status).toBe(200);
     expect(response.body).toHaveLength(5);
+    expect(response.body).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          category: 'A',
+          // teamAway: { longName: 'NAPOLI' },
+        }),
+      ])
+    );
   });
 });

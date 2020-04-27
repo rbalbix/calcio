@@ -13,7 +13,7 @@ export const Container = styled.ScrollView`
 
 export const Category = styled.View`
   background-color: #fff;
-  padding: ${hp('2.5%')}px;
+  padding: ${hp('2%')}px;
   border-radius: 8px;
   margin-bottom: ${hp('2.4%')};
 `;
@@ -68,7 +68,7 @@ export const PositionText = styled.Text`
   font-size: ${hp('2.4%')};
   font-weight: bold;
   color: #999;
-  width: ${wp('6.6%')};
+  width: ${wp('7.3%')};
   padding-right: 5px;
 `;
 
@@ -138,7 +138,7 @@ export const MatchView = styled.View`
 `;
 
 export const MatchTeamText = styled.Text`
-  font-size: ${hp('2.7%')};
+  font-size: ${hp('2.5%')};
   font-weight: bold;
   width: ${(props) => (props.team ? wp('13%') : wp('5%'))};
   text-align: ${(props) => props.align || 'center'};

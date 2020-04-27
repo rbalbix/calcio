@@ -30,7 +30,7 @@ import {
 } from './styles';
 
 export default function Detail() {
-  const [round, setRound] = useState(1);
+  const [round, setRound] = useState(0);
   const [total, setTotal] = useState(0);
   const [rank, setRank] = useState([]);
   const [matches, setMatches] = useState([]);
@@ -50,7 +50,10 @@ export default function Detail() {
     const response = await api.get('/match', {
       params: { category: info.category, round },
     });
-    setTotal(response.headers['x-total-count']);
+
+    setTotal(parseInt(response.headers['x-total-count']));
+    if (round === 0) setRound(parseInt(response.headers['x-round']));
+
     setMatches(response.data);
   }
 
@@ -60,7 +63,7 @@ export default function Detail() {
   }
 
   async function loadNextMatches() {
-    if (round + 1 > total) return;
+    if (round + 1 > total) return setRound(1);
     setRound(round + 1);
   }
 

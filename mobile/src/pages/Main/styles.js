@@ -13,7 +13,7 @@ export const Container = styled.ScrollView`
 
 export const Category = styled.View`
   background-color: #fff;
-  padding: ${hp('2.5%')}px;
+  padding: ${hp('2%')}px;
   border-radius: 8px;
   margin-bottom: ${hp('2.4%')};
 `;
