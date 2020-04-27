@@ -108,7 +108,7 @@ export const RoundView = styled.View`
 `;
 
 export const RoundText = styled.Text`
-  font-size: ${hp('2.5%')};
+  font-size: ${hp('3%')};
   font-weight: bold;
   color: #999;
 `;

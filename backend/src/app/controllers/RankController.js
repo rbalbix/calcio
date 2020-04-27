@@ -4,6 +4,14 @@ const log = require('../../services/logger');
 function rank(a, b) {
   if (a.points > b.points) return -1;
   if (a.points < b.points) return 1;
+  if (a.points === b.points) {
+    if (a.wons > b.wons) return -1;
+    if (a.wons < b.wons) return 1;
+    if (a.wons === b.wons) {
+      if (a.goalDifference > b.goalDifference) return -1;
+      if (a.goalDifference < b.goalDifference) return 1;
+    }
+  }
   return 0;
 }
 
@@ -42,7 +50,7 @@ module.exports = {
         .select(
           'category thumbnail team points played wons drawn lost goalDifference'
         )
-        .sort('-points')
+        .sort('-points -wons -goalDifference')
         .populate('team');
 
       return res.json(response);

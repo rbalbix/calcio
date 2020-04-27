@@ -26,6 +26,7 @@ routes.get(
   celebrate({
     [Segments.QUERY]: Joi.object().keys({
       category: Joi.string().required(),
+      round: Joi.number().required(),
     }),
   }),
   MatchController.index

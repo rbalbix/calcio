@@ -31,6 +31,7 @@ import {
 
 export default function Detail() {
   const [round, setRound] = useState(1);
+  const [total, setTotal] = useState(0);
   const [rank, setRank] = useState([]);
   const [matches, setMatches] = useState([]);
 
@@ -47,18 +48,19 @@ export default function Detail() {
 
   async function loadMatches() {
     const response = await api.get('/match', {
-      params: { category: info.category },
+      params: { category: info.category, round },
     });
+    setTotal(response.headers['x-total-count']);
     setMatches(response.data);
   }
 
   async function loadPreviousMatches() {
-    console.log('previous', round - 1);
+    if (round - 1 <= 0) return;
     setRound(round - 1);
   }
 
   async function loadNextMatches() {
-    console.log('next', round + 1);
+    if (round + 1 > total) return;
     setRound(round + 1);
   }
 
@@ -66,6 +68,10 @@ export default function Detail() {
     loadRank();
     loadMatches();
   }, []);
+
+  useEffect(() => {
+    loadMatches();
+  }, [round]);
 
   return (
     <Container>
@@ -108,11 +114,11 @@ export default function Detail() {
         <CategoryTitle>JOGOS</CategoryTitle>
         <RoundView>
           <TouchableOpacity onPress={loadPreviousMatches}>
-            <MaterialIcons name='navigate-before' size={24} color='#1e7a0e' />
+            <MaterialIcons name='navigate-before' size={30} color='#1e7a0e' />
           </TouchableOpacity>
-          <RoundText>1ª RODADA</RoundText>
+          <RoundText>{round}ª RODADA</RoundText>
           <TouchableOpacity onPress={loadNextMatches}>
-            <MaterialIcons name='navigate-next' size={24} color='#1e7a0e' />
+            <MaterialIcons name='navigate-next' size={30} color='#1e7a0e' />
           </TouchableOpacity>
         </RoundView>
 
