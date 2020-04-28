@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 
 import { MaterialIcons } from '@expo/vector-icons';
@@ -21,6 +21,7 @@ import {
   ScoreText,
   RoundView,
   RoundText,
+  Loading,
   DateView,
   DateText,
   MatchView,
@@ -32,6 +33,8 @@ import {
 export default function Detail() {
   const [round, setRound] = useState(0);
   const [total, setTotal] = useState(0);
+  const [loadingRank, setLoadingRank] = useState(true);
+  const [loadingMatches, setLoadingMatches] = useState(true);
   const [rank, setRank] = useState([]);
   const [matches, setMatches] = useState([]);
 
@@ -39,20 +42,27 @@ export default function Detail() {
   const info = route.params.info;
 
   async function loadRank() {
+    setLoadingRank(true);
+
     const response = await api.get('/rank', {
       params: { category: info.category },
     });
 
+    setLoadingRank(false);
     setRank(response.data);
   }
 
   async function loadMatches() {
+    setLoadingMatches(true);
+
     const response = await api.get('/match', {
       params: { category: info.category, round },
     });
 
     setTotal(parseInt(response.headers['x-total-count']));
     if (round === 0) setRound(parseInt(response.headers['x-round']));
+
+    setLoadingMatches(false);
 
     setMatches(response.data);
   }
@@ -90,27 +100,35 @@ export default function Detail() {
           <HeaderTableText>SG</HeaderTableText>
         </HeaderTable>
 
-        {rank.map((item, index) => (
-          <TeamView key={item._id}>
-            <Team>
-              <PositionText>{index + 1}</PositionText>
-              <TeamShield
-                source={{
-                  uri: item.team.thumbnail_url,
-                }}
-              />
-              <TeamText>{item.team.shortName}</TeamText>
-            </Team>
-            <Score>
-              <ScoreText>{item.points}</ScoreText>
-              <ScoreText score>{item.played}</ScoreText>
-              <ScoreText score>{item.wons}</ScoreText>
-              <ScoreText score>{item.drawn}</ScoreText>
-              <ScoreText score>{item.lost}</ScoreText>
-              <ScoreText score>{item.goalDifference}</ScoreText>
-            </Score>
+        {loadingRank ? (
+          <TeamView>
+            <Loading>
+              <ActivityIndicator size='large' />
+            </Loading>
           </TeamView>
-        ))}
+        ) : (
+          rank.map((item, index) => (
+            <TeamView key={item._id}>
+              <Team>
+                <PositionText>{index + 1}</PositionText>
+                <TeamShield
+                  source={{
+                    uri: item.team.thumbnail_url,
+                  }}
+                />
+                <TeamText>{item.team.shortName}</TeamText>
+              </Team>
+              <Score>
+                <ScoreText>{item.points}</ScoreText>
+                <ScoreText score>{item.played}</ScoreText>
+                <ScoreText score>{item.wons}</ScoreText>
+                <ScoreText score>{item.drawn}</ScoreText>
+                <ScoreText score>{item.lost}</ScoreText>
+                <ScoreText score>{item.goalDifference}</ScoreText>
+              </Score>
+            </TeamView>
+          ))
+        )}
       </Category>
 
       <Category>
@@ -125,40 +143,46 @@ export default function Detail() {
           </TouchableOpacity>
         </RoundView>
 
-        {matches.map((match) => (
-          <View key={match._id}>
-            <DateView>
-              <DateText>{match.weekDay}</DateText>
-              <DateText margin>
-                {Intl.DateTimeFormat('pt-BR', {
-                  month: '2-digit',
-                  day: '2-digit',
-                }).format(new Date(match.day))}
-              </DateText>
-            </DateView>
-            <MatchView>
-              <MatchTeamText team align='right'>
-                {match.teamHome.shortName}
-              </MatchTeamText>
-              <MatchTeamShield
-                source={{
-                  uri: match.teamHome.thumbnail_url,
-                }}
-              ></MatchTeamShield>
-              <MatchScoreText>{match.scoreHome}</MatchScoreText>
-              <MatchTeamText>X</MatchTeamText>
-              <MatchScoreText>{match.scoreAway}</MatchScoreText>
-              <MatchTeamShield
-                source={{
-                  uri: match.teamAway.thumbnail_url,
-                }}
-              ></MatchTeamShield>
-              <MatchTeamText team align='left'>
-                {match.teamAway.shortName}
-              </MatchTeamText>
-            </MatchView>
-          </View>
-        ))}
+        {loadingMatches ? (
+          <Loading>
+            <ActivityIndicator size='large' />
+          </Loading>
+        ) : (
+          matches.map((match) => (
+            <View key={match._id}>
+              <DateView>
+                <DateText>{match.weekDay}</DateText>
+                <DateText margin>
+                  {Intl.DateTimeFormat('pt-BR', {
+                    month: '2-digit',
+                    day: '2-digit',
+                  }).format(new Date(match.day))}
+                </DateText>
+              </DateView>
+              <MatchView>
+                <MatchTeamText team align='right'>
+                  {match.teamHome.shortName}
+                </MatchTeamText>
+                <MatchTeamShield
+                  source={{
+                    uri: match.teamHome.thumbnail_url,
+                  }}
+                ></MatchTeamShield>
+                <MatchScoreText>{match.scoreHome}</MatchScoreText>
+                <MatchTeamText>X</MatchTeamText>
+                <MatchScoreText>{match.scoreAway}</MatchScoreText>
+                <MatchTeamShield
+                  source={{
+                    uri: match.teamAway.thumbnail_url,
+                  }}
+                ></MatchTeamShield>
+                <MatchTeamText team align='left'>
+                  {match.teamAway.shortName}
+                </MatchTeamText>
+              </MatchView>
+            </View>
+          ))
+        )}
       </Category>
     </Container>
   );

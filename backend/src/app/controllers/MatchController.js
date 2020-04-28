@@ -7,7 +7,7 @@ module.exports = {
     try {
       const { category, limit = 5 } = req.query;
       let { round } = req.query;
-      let response;
+
       if (round === 0) {
         const result = await Match.find({
           $or: [
@@ -18,7 +18,7 @@ module.exports = {
         round = result.length > 0 ? result[0].round : 1;
       }
 
-      response = await Match.find({ category, round })
+      const response = await Match.find({ category, round })
         .sort('day')
         .limit(limit)
         .populate('teamHome teamAway');

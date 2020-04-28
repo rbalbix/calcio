@@ -27,7 +27,7 @@ describe('Rank', () => {
     expect(response.status).toBe(200);
   });
 
-  it('should get the matches', async () => {
+  it('should get the matches by category and round', async () => {
     await Team.create([
       {
         longName: 'SAMPDORIA',

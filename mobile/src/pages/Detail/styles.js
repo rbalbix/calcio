@@ -113,6 +113,13 @@ export const RoundText = styled.Text`
   color: #999;
 `;
 
+export const Loading = styled.View`
+  flex: 1;
+  height: ${hp('40%')};
+  justify-content: center;
+  align-items: center;
+`;
+
 export const DateView = styled.View`
   flex-direction: row;
   justify-content: center;

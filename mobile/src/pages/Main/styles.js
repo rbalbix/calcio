@@ -24,6 +24,13 @@ export const CategoryTitle = styled.Text`
   color: #1e7a0e;
 `;
 
+export const Loading = styled.View`
+  flex: 1;
+  height: ${hp('40%')};
+  justify-content: center;
+  align-items: center;
+`;
+
 export const HeaderTable = styled.View`
   flex-direction: row;
   justify-content: flex-end;
