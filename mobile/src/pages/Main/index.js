@@ -48,7 +48,7 @@ export default function Main() {
       {loading ? (
         <TeamView>
           <Loading>
-            <ActivityIndicator size='large' />
+            <ActivityIndicator size='large' color='#1e7a0e' />
           </Loading>
         </TeamView>
       ) : (

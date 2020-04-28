@@ -103,7 +103,7 @@ export default function Detail() {
         {loadingRank ? (
           <TeamView>
             <Loading>
-              <ActivityIndicator size='large' />
+              <ActivityIndicator size='large' color='#1e7a0e' />
             </Loading>
           </TeamView>
         ) : (
@@ -145,7 +145,7 @@ export default function Detail() {
 
         {loadingMatches ? (
           <Loading>
-            <ActivityIndicator size='large' />
+            <ActivityIndicator size='large' color='#1e7a0e' />
           </Loading>
         ) : (
           matches.map((match) => (
