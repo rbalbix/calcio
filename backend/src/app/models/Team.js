@@ -3,6 +3,7 @@
  **/
 
 const { Schema, model } = require('../../database').mongoose;
+const dbConfig = require('../../config/baseUrl.json');
 
 const TeamSchema = new Schema(
   {
@@ -30,7 +31,7 @@ const TeamSchema = new Schema(
 );
 
 TeamSchema.virtual('thumbnail_url').get(function () {
-  return `https://rb-calcio.herokuapp.com/files/shields/${this.thumbnail}`;
+  return `${dbConfig.baseURL}/files/shields/${this.thumbnail}`;
 });
 
 const Team = model('Team', TeamSchema);
