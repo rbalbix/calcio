@@ -1,5 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { TouchableOpacity, ActivityIndicator } from 'react-native';
+import React, { useState, useEffect, useCallback } from 'react';
+import {
+  TouchableOpacity,
+  ActivityIndicator,
+  RefreshControl,
+} from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 
@@ -24,7 +28,16 @@ import {
 export default function Main() {
   const [ranks, setRanks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const navigation = useNavigation();
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+
+    loadRanks();
+
+    setRefreshing(false);
+  }, [refreshing]);
 
   function navigateToDetail(info) {
     navigation.navigate('Category', { info });
@@ -44,7 +57,11 @@ export default function Main() {
   }, []);
 
   return (
-    <Container>
+    <Container
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+    >
       {loading ? (
         <TeamView>
           <Loading>

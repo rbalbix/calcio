@@ -1,5 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { View, TouchableOpacity, ActivityIndicator } from 'react-native';
+import React, { useState, useEffect, useCallback } from 'react';
+import {
+  View,
+  TouchableOpacity,
+  ActivityIndicator,
+  RefreshControl,
+} from 'react-native';
 import { useRoute } from '@react-navigation/native';
 
 import { MaterialIcons } from '@expo/vector-icons';
@@ -35,11 +40,21 @@ export default function Detail() {
   const [total, setTotal] = useState(0);
   const [loadingRank, setLoadingRank] = useState(true);
   const [loadingMatches, setLoadingMatches] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [rank, setRank] = useState([]);
   const [matches, setMatches] = useState([]);
 
   const route = useRoute();
   const info = route.params.info;
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+
+    loadRank();
+    loadMatches();
+
+    setRefreshing(false);
+  }, [refreshing]);
 
   async function loadRank() {
     setLoadingRank(true);
@@ -87,7 +102,11 @@ export default function Detail() {
   }, [round]);
 
   return (
-    <Container>
+    <Container
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+    >
       <Category>
         <CategoryTitle>TORNEIO {info.category} - TABELA</CategoryTitle>
 
