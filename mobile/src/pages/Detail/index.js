@@ -47,15 +47,6 @@ export default function Detail() {
   const route = useRoute();
   const info = route.params.info;
 
-  const onRefresh = useCallback(() => {
-    setRefreshing(true);
-
-    loadRank();
-    loadMatches();
-
-    setRefreshing(false);
-  }, [refreshing]);
-
   async function loadRank() {
     setLoadingRank(true);
 
@@ -100,6 +91,15 @@ export default function Detail() {
   useEffect(() => {
     loadMatches();
   }, [round]);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+
+    loadRank();
+    loadMatches();
+
+    setRefreshing(false);
+  }, [refreshing]);
 
   return (
     <Container

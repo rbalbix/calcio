@@ -36,14 +36,6 @@ export default function Main() {
   const [refreshing, setRefreshing] = useState(false);
   const navigation = useNavigation();
 
-  const onRefresh = useCallback(() => {
-    setRefreshing(true);
-
-    loadRanks();
-
-    setRefreshing(false);
-  }, [refreshing]);
-
   function navigateToDetail(info) {
     navigation.navigate('Category', { info });
   }
@@ -60,6 +52,14 @@ export default function Main() {
   useEffect(() => {
     loadRanks();
   }, []);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+
+    loadRanks();
+
+    setRefreshing(false);
+  }, [refreshing]);
 
   return (
     <Container
