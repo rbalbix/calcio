@@ -152,16 +152,18 @@ export default function Detail() {
 
       <Category>
         <CategoryTitle>JOGOS</CategoryTitle>
-        <RoundView>
-          <TouchableOpacity onPress={loadPreviousMatches}>
-            <MaterialIcons name='navigate-before' size={30} color='#1e7a0e' />
-          </TouchableOpacity>
-          <RoundText>{round}ª RODADA</RoundText>
-          <TouchableOpacity onPress={loadNextMatches}>
-            <MaterialIcons name='navigate-next' size={30} color='#1e7a0e' />
-          </TouchableOpacity>
-        </RoundView>
 
+        {round !== 0 && (
+          <RoundView>
+            <TouchableOpacity onPress={loadPreviousMatches}>
+              <MaterialIcons name='navigate-before' size={30} color='#1e7a0e' />
+            </TouchableOpacity>
+            <RoundText>{round}ª RODADA</RoundText>
+            <TouchableOpacity onPress={loadNextMatches}>
+              <MaterialIcons name='navigate-next' size={30} color='#1e7a0e' />
+            </TouchableOpacity>
+          </RoundView>
+        )}
         {loadingMatches ? (
           <Loading>
             <ActivityIndicator size='large' color='#1e7a0e' />
