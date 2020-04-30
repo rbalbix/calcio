@@ -1,5 +1,6 @@
 const { Rank } = require('../models');
 const log = require('../../services/logger');
+const getCurrentChamp = require('../../utils/getCurrentChamp');
 
 function rank(a, b) {
   if (a.points > b.points) return -1;
@@ -28,11 +29,12 @@ module.exports = {
     try {
       const top = 4;
 
-      const ranks = await Rank.find()
+      const champ = await getCurrentChamp();
+      const ranks = await Rank.find({ champ })
         .select(
           'category thumbnail team points wons goalsFor goalsAgainst goalDifference'
         )
-        .populate('team');
+        .populate({ path: 'team', select: 'longName thumbnail thumbnail_url' });
 
       const response = {
         A: ranks
@@ -56,7 +58,9 @@ module.exports = {
   async index(req, res) {
     try {
       const { category } = req.query;
-      const response = await Rank.find({ category })
+
+      const champ = await getCurrentChamp();
+      const response = await Rank.find({ champ, category })
         .select(
           'category thumbnail team points played wons drawn lost goalsFor goalsAgainst goalDifference'
         )

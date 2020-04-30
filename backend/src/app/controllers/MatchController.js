@@ -1,6 +1,7 @@
 const moment = require('moment');
 const { Match } = require('../models');
 const log = require('../../services/logger');
+const getCurrentChamp = require('../../utils/getCurrentChamp');
 
 module.exports = {
   async index(req, res) {
@@ -18,14 +19,22 @@ module.exports = {
         round = result.length > 0 ? result[0].round : 1;
       }
 
-      const response = await Match.find({ category, round })
+      const champ = await getCurrentChamp();
+      const response = await Match.find({ champ, category, round })
         .sort('day')
         .limit(limit)
-        .populate('teamHome teamAway');
+        .populate({
+          path: 'teamHome',
+          select: 'shortName thumbnail thumbnail_url',
+        })
+        .populate({
+          path: 'teamAway',
+          select: 'shortName thumbnail thumbnail_url',
+        });
 
       res.header(
         'X-Total-Count',
-        (await Match.countDocuments({ category })) / limit
+        (await Match.countDocuments({ champ, category })) / limit
       );
       res.header('X-round', round);
       return res.json(response);

@@ -8,6 +8,11 @@ const { Schema, model } = require('../../database').mongoose;
 
 const RankSchema = Schema(
   {
+    champ: {
+      type: Schema.Types.ObjectId,
+      ref: 'Champ',
+      required: true,
+    },
     category: {
       type: String,
       required: true,

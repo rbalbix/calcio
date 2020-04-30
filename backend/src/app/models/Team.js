@@ -26,8 +26,8 @@ const TeamSchema = new Schema(
     toJSON: {
       virtuals: true,
     },
-  },
-  { timestamps: true }
+    timestamps: true,
+  }
 );
 
 TeamSchema.virtual('thumbnail_url').get(function () {

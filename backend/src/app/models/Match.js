@@ -7,6 +7,11 @@ const { Schema, model } = require('../../database').mongoose;
 
 const MatchSchema = new Schema(
   {
+    champ: {
+      type: Schema.Types.ObjectId,
+      ref: 'Champ',
+      required: true,
+    },
     category: {
       type: String,
       required: true,
