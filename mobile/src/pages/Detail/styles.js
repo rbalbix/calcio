@@ -15,14 +15,14 @@ export const Category = styled.View`
   background-color: #fff;
   padding: ${hp('2%')}px;
   border-radius: 8px;
-  margin-bottom: ${hp('2.4%')};
+  margin-bottom: ${hp('2.4%')}px;
 `;
 
 export const CategoryTitle = styled.Text`
-  font-size: ${hp('4%')};
+  font-size: ${hp('4%')}px;
   font-weight: bold;
   color: #1e7a0e;
-  margin-bottom: ${hp('2%')};
+  margin-bottom: ${hp('2%')}px;
 `;
 
 export const HeaderTable = styled.View`
@@ -34,11 +34,11 @@ export const HeaderTable = styled.View`
 `;
 
 export const HeaderTableText = styled.Text`
-  font-size: ${hp('2.2%')};
+  font-size: ${hp('2.2%')}px;
   font-weight: bold;
   color: #999;
-  width: ${wp('7.2%')};
-  margin-left: ${wp('1.8%')};
+  width: ${wp('7.2%')}px;
+  margin-left: ${wp('1.8%')}px;
   text-align: center;
 `;
 
@@ -46,7 +46,7 @@ export const TeamView = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-top: ${hp('3%')};
+  margin-top: ${hp('3%')}px;
   padding-bottom: 5px;
   border-bottom-width: 1px;
   border-bottom-color: #e0e0e0;
@@ -55,27 +55,27 @@ export const TeamView = styled.View`
 export const Team = styled.View`
   flex-direction: row;
   align-items: center;
-  max-width: ${wp('18%')};
+  max-width: ${wp('18%')}px;
 `;
 
 export const TeamText = styled.Text`
-  font-size: ${hp('2.7%')};
+  font-size: ${hp('2.7%')}px;
   font-weight: bold;
   color: #717171;
 `;
 
 export const PositionText = styled.Text`
-  font-size: ${hp('2.4%')};
+  font-size: ${hp('2.4%')}px;
   font-weight: bold;
   color: #999;
-  width: ${wp('7.3%')};
+  width: ${wp('7.3%')}px;
   padding-right: 5px;
 `;
 
 export const TeamShield = styled.Image`
-  width: ${wp('5.3%')};
-  height: ${wp('5.3%')};
-  margin-right: ${wp('1.3%')};
+  width: ${wp('5.3%')}px;
+  height: ${wp('5.3%')}px;
+  margin-right: ${wp('1.3%')}px;
 `;
 
 export const Score = styled.View`
@@ -84,12 +84,12 @@ export const Score = styled.View`
 `;
 
 export const ScoreText = styled.Text`
-  font-size: ${hp('2.2%')};
+  font-size: ${hp('2.2%')}px;
   font-weight: bold;
   text-align: center;
   color: #999;
-  width: ${wp('7.2%')};
-  margin-left: ${(props) => (props.score ? wp('1.8%') : wp('0%'))};
+  width: ${wp('7.2%')}px;
+  margin-left: ${(props) => (props.score ? wp('1.8%') : wp('0%'))}px;
 `;
 
 export const RoundView = styled.View`
@@ -108,14 +108,14 @@ export const RoundView = styled.View`
 `;
 
 export const RoundText = styled.Text`
-  font-size: ${hp('3%')};
+  font-size: ${hp('3%')}px;
   font-weight: bold;
   color: #999;
 `;
 
 export const Loading = styled.View`
   flex: 1;
-  height: ${hp('40%')};
+  height: ${hp('40%')}px;
   justify-content: center;
   align-items: center;
 `;
@@ -127,8 +127,8 @@ export const DateView = styled.View`
 `;
 
 export const DateText = styled.Text`
-  font-size: ${hp('2%')};
-  margin-left: ${(props) => (props.margin ? wp('1.8%') : wp('0%'))};
+  font-size: ${hp('2%')}px;
+  margin-left: ${(props) => (props.margin ? wp('1.8%') : wp('0%'))}px;
   color: #999;
 `;
 
@@ -141,26 +141,26 @@ export const MatchView = styled.View`
   border-bottom-width: 1px;
   border-bottom-color: #e0e0e0;
 
-  margin-bottom: ${hp('1.5%')};
+  margin-bottom: ${hp('1.5%')}px;
 `;
 
 export const MatchTeamText = styled.Text`
-  font-size: ${hp('2.5%')};
+  font-size: ${hp('2.5%')}px;
   font-weight: bold;
-  width: ${(props) => (props.team ? wp('13%') : wp('5%'))};
+  width: ${(props) => (props.team ? wp('13%') : wp('5%'))}px;
   text-align: ${(props) => props.align || 'center'};
   color: #717171;
 `;
 
 export const MatchScoreText = styled.Text`
-  font-size: ${hp('2.7%')};
+  font-size: ${hp('2.7%')}px;
   font-weight: bold;
   color: #717171;
-  width: ${wp('7.2%')};
+  width: ${wp('7.2%')}px;
   text-align: center;
 `;
 
 export const MatchTeamShield = styled.Image`
-  width: ${wp('7%')};
-  height: ${wp('7%')};
+  width: ${wp('7%')}px;
+  height: ${wp('7%')}px;
 `;

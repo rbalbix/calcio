@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import {
   View,
+  Text,
   TouchableOpacity,
   ActivityIndicator,
   RefreshControl,
@@ -9,6 +10,9 @@ import { useRoute } from '@react-navigation/native';
 
 import { MaterialIcons } from '@expo/vector-icons';
 
+import 'intl';
+import 'intl/locale-data/jsonp/en';
+import { IntlProvider, FormattedDateParts } from 'react-intl';
 import api from '../../services/api';
 
 import {
@@ -174,10 +178,21 @@ export default function Detail() {
               <DateView>
                 <DateText>{match.weekDay}</DateText>
                 <DateText margin>
-                  {Intl.DateTimeFormat('pt-BR', {
-                    month: '2-digit',
-                    day: '2-digit',
-                  }).format(new Date(match.day))}
+                  <IntlProvider locale='en'>
+                    <FormattedDateParts
+                      value={match.day}
+                      month='2-digit'
+                      day='2-digit'
+                    >
+                      {(parts) => (
+                        <>
+                          <Text>{parts[2].value}</Text>
+                          {parts[1].value}
+                          <Text>{parts[0].value}</Text>
+                        </>
+                      )}
+                    </FormattedDateParts>
+                  </IntlProvider>
                 </DateText>
               </DateView>
               <MatchView>
