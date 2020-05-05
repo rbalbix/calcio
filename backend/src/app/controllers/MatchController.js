@@ -1,7 +1,7 @@
 const moment = require('moment');
 const { Match } = require('../models');
 const log = require('../../services/logger');
-const getCurrentChamp = require('../../utils/getCurrentChamp');
+const getCurrentChampId = require('../../utils/getCurrentChampId');
 
 module.exports = {
   async index(req, res) {
@@ -19,7 +19,7 @@ module.exports = {
         round = result.length > 0 ? result[0].round : 1;
       }
 
-      const champ = await getCurrentChamp();
+      const champ = await getCurrentChampId();
       const response = await Match.find({ champ, category, round })
         .sort('day')
         .limit(limit)

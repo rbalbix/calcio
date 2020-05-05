@@ -3,7 +3,7 @@ const request = require('supertest');
 
 const mongoTest = require('../../src/database');
 
-const { Team, Rank } = require('../../src/app/models');
+const { Champ, Team, Rank } = require('../../src/app/models');
 
 describe('Rank', () => {
   beforeAll(async (done) => {
@@ -22,12 +22,26 @@ describe('Rank', () => {
   });
 
   it('should find a /rank/top [get] route', async () => {
+    await Champ.create([
+      {
+        name: 'Campeonato 2020',
+        season: 2020,
+      },
+    ]);
+
     const response = await request(app).get('/rank/top');
 
     expect(response.status).toBe(200);
   });
 
   it('should get the top teams of ranking', async () => {
+    await Champ.create([
+      {
+        name: 'Campeonato 2020',
+        season: 2020,
+      },
+    ]);
+
     await Team.create([
       {
         longName: 'SAMPDORIA',
@@ -80,10 +94,13 @@ describe('Rank', () => {
         thumbnail: 'roma.png',
       },
     ]);
+
+    const champs = await Champ.find();
     const teams = await Team.find();
 
     await Rank.create([
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'A',
         team: teams.find((team) => team.longName === 'SAMPDORIA')._id,
         points: 30,
@@ -94,6 +111,7 @@ describe('Rank', () => {
         goalDifference: 20,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'A',
         team: teams.find((team) => team.longName === 'INTERNAZIONALE')._id,
         points: 15,
@@ -104,6 +122,7 @@ describe('Rank', () => {
         goalDifference: 20,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'A',
         team: teams.find((team) => team.longName === 'FIORENTINA')._id,
         points: 10,
@@ -114,6 +133,7 @@ describe('Rank', () => {
         goalDifference: 20,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'A',
         team: teams.find((team) => team.longName === 'MILAN')._id,
         points: 20,
@@ -124,6 +144,7 @@ describe('Rank', () => {
         goalDifference: 20,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'A',
         team: teams.find((team) => team.longName === 'JUVENTUS')._id,
         points: 5,
@@ -134,6 +155,7 @@ describe('Rank', () => {
         goalDifference: 20,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'A',
         team: teams.find((team) => team.longName === 'NAPOLI')._id,
         points: 8,
@@ -144,6 +166,7 @@ describe('Rank', () => {
         goalDifference: 10,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'A',
         team: teams.find((team) => team.longName === 'SUASSUOLO')._id,
         points: 8,
@@ -154,6 +177,7 @@ describe('Rank', () => {
         goalDifference: 15,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'A',
         team: teams.find((team) => team.longName === 'PARMA')._id,
         points: 8,
@@ -164,6 +188,7 @@ describe('Rank', () => {
         goalDifference: 20,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'A',
         team: teams.find((team) => team.longName === 'PALERMO')._id,
         points: 6,
@@ -174,6 +199,7 @@ describe('Rank', () => {
         goalDifference: 20,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'A',
         team: teams.find((team) => team.longName === 'ROMA')._id,
         points: 4,
@@ -184,6 +210,7 @@ describe('Rank', () => {
         goalDifference: 20,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'B',
         team: teams.find((team) => team.longName === 'SAMPDORIA')._id,
         points: 30,
@@ -194,6 +221,7 @@ describe('Rank', () => {
         goalDifference: 20,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'B',
         team: teams.find((team) => team.longName === 'INTERNAZIONALE')._id,
         points: 25,
@@ -204,6 +232,7 @@ describe('Rank', () => {
         goalDifference: 20,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'B',
         team: teams.find((team) => team.longName === 'FIORENTINA')._id,
         points: 6,
@@ -214,6 +243,7 @@ describe('Rank', () => {
         goalDifference: 20,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'B',
         team: teams.find((team) => team.longName === 'MILAN')._id,
         points: 15,
@@ -224,6 +254,7 @@ describe('Rank', () => {
         goalDifference: 20,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'B',
         team: teams.find((team) => team.longName === 'JUVENTUS')._id,
         points: 5,
@@ -234,6 +265,7 @@ describe('Rank', () => {
         goalDifference: 20,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'B',
         team: teams.find((team) => team.longName === 'NAPOLI')._id,
         points: 20,
@@ -244,6 +276,7 @@ describe('Rank', () => {
         goalDifference: 10,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'B',
         team: teams.find((team) => team.longName === 'SUASSUOLO')._id,
         points: 35,
@@ -254,6 +287,7 @@ describe('Rank', () => {
         goalDifference: 15,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'B',
         team: teams.find((team) => team.longName === 'PARMA')._id,
         points: 8,
@@ -264,6 +298,7 @@ describe('Rank', () => {
         goalDifference: 20,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'B',
         team: teams.find((team) => team.longName === 'PALERMO')._id,
         points: 6,
@@ -274,6 +309,7 @@ describe('Rank', () => {
         goalDifference: 20,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'B',
         team: teams.find((team) => team.longName === 'ROMA')._id,
         points: 4,
@@ -339,12 +375,26 @@ describe('Rank', () => {
   });
 
   it('should find a /rank [get] route', async () => {
+    await Champ.create([
+      {
+        name: 'Campeonato 2020',
+        season: 2020,
+      },
+    ]);
+
     const response = await request(app).get('/rank?category=A');
 
     expect(response.status).toBe(200);
   });
 
   it('should get the total ranking for a specific category', async () => {
+    await Champ.create([
+      {
+        name: 'Campeonato 2020',
+        season: 2020,
+      },
+    ]);
+
     await Team.create([
       {
         longName: 'SAMPDORIA',
@@ -397,10 +447,13 @@ describe('Rank', () => {
         thumbnail: 'roma.png',
       },
     ]);
+
+    const champs = await Champ.find();
     const teams = await Team.find();
 
     await Rank.create([
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'A',
         team: teams.find((team) => team.longName === 'SAMPDORIA')._id,
         points: 30,
@@ -411,6 +464,7 @@ describe('Rank', () => {
         goalDifference: 20,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'A',
         team: teams.find((team) => team.longName === 'INTERNAZIONALE')._id,
         points: 15,
@@ -421,6 +475,7 @@ describe('Rank', () => {
         goalDifference: 20,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'A',
         team: teams.find((team) => team.longName === 'FIORENTINA')._id,
         points: 10,
@@ -431,6 +486,7 @@ describe('Rank', () => {
         goalDifference: 20,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'A',
         team: teams.find((team) => team.longName === 'MILAN')._id,
         points: 20,
@@ -441,6 +497,7 @@ describe('Rank', () => {
         goalDifference: 20,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'A',
         team: teams.find((team) => team.longName === 'JUVENTUS')._id,
         points: 5,
@@ -451,6 +508,7 @@ describe('Rank', () => {
         goalDifference: 20,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'A',
         team: teams.find((team) => team.longName === 'NAPOLI')._id,
         points: 8,
@@ -461,6 +519,7 @@ describe('Rank', () => {
         goalDifference: 10,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'A',
         team: teams.find((team) => team.longName === 'SUASSUOLO')._id,
         points: 8,
@@ -471,6 +530,7 @@ describe('Rank', () => {
         goalDifference: 15,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'A',
         team: teams.find((team) => team.longName === 'PARMA')._id,
         points: 8,
@@ -481,6 +541,7 @@ describe('Rank', () => {
         goalDifference: 20,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'A',
         team: teams.find((team) => team.longName === 'PALERMO')._id,
         points: 6,
@@ -491,6 +552,7 @@ describe('Rank', () => {
         goalDifference: 20,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'A',
         team: teams.find((team) => team.longName === 'ROMA')._id,
         points: 4,
@@ -501,6 +563,7 @@ describe('Rank', () => {
         goalDifference: 20,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'B',
         team: teams.find((team) => team.longName === 'SAMPDORIA')._id,
         points: 30,
@@ -511,6 +574,7 @@ describe('Rank', () => {
         goalDifference: 20,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'B',
         team: teams.find((team) => team.longName === 'INTERNAZIONALE')._id,
         points: 25,
@@ -521,6 +585,7 @@ describe('Rank', () => {
         goalDifference: 20,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'B',
         team: teams.find((team) => team.longName === 'FIORENTINA')._id,
         points: 6,
@@ -531,6 +596,7 @@ describe('Rank', () => {
         goalDifference: 20,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'B',
         team: teams.find((team) => team.longName === 'MILAN')._id,
         points: 15,
@@ -541,6 +607,7 @@ describe('Rank', () => {
         goalDifference: 20,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'B',
         team: teams.find((team) => team.longName === 'JUVENTUS')._id,
         points: 5,
@@ -551,6 +618,7 @@ describe('Rank', () => {
         goalDifference: 20,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'B',
         team: teams.find((team) => team.longName === 'NAPOLI')._id,
         points: 20,
@@ -561,6 +629,7 @@ describe('Rank', () => {
         goalDifference: 10,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'B',
         team: teams.find((team) => team.longName === 'SUASSUOLO')._id,
         points: 35,
@@ -571,6 +640,7 @@ describe('Rank', () => {
         goalDifference: 15,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'B',
         team: teams.find((team) => team.longName === 'PARMA')._id,
         points: 8,
@@ -581,6 +651,7 @@ describe('Rank', () => {
         goalDifference: 20,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'B',
         team: teams.find((team) => team.longName === 'PALERMO')._id,
         points: 6,
@@ -591,6 +662,7 @@ describe('Rank', () => {
         goalDifference: 20,
       },
       {
+        champ: champs.find((champ) => champ.season === 2020)._id,
         category: 'B',
         team: teams.find((team) => team.longName === 'ROMA')._id,
         points: 4,
@@ -620,7 +692,8 @@ describe('Rank', () => {
           goalDifference: 20,
         }),
         // expect.objectContaining({
-        //   category: 'A',
+        //   champ: champs.find((champ) => champ.season === 2020)._id,
+        // (category: 'A'),
         //   // team: 'INTERNAZIONALE',
         //   points: 15,
         //   played: 5,
@@ -630,7 +703,8 @@ describe('Rank', () => {
         //   goalDifference: 20,
         // }),
         // expect.objectContaining({
-        //   category: 'A',
+        //   champ: champs.find((champ) => champ.season === 2020)._id,
+        // (category: 'A'),
         //   // team: 'FIORENTINA',
         //   points: 10,
         //   played: 5,
@@ -640,7 +714,8 @@ describe('Rank', () => {
         //   goalDifference: 20,
         // }),
         // expect.objectContaining({
-        //   category: 'A',
+        //   champ: champs.find((champ) => champ.season === 2020)._id,
+        //(category: 'A'),
         //   thumbnail: 'milan.png',
         //   team: 'MILAN',
         //   points: 20,
@@ -651,7 +726,8 @@ describe('Rank', () => {
         //   goalDifference: 20,
         // }),
         // expect.objectContaining({
-        //   category: 'A',
+        //   champ: champs.find((champ) => champ.season === 2020)._id,
+        //(category: 'A'),
         //   thumbnail: 'juventus.png',
         //   team: 'JUVENTUS',
         //   points: 5,
@@ -662,7 +738,8 @@ describe('Rank', () => {
         //   goalDifference: 20,
         // }),
         // expect.objectContaining({
-        //   category: 'A',
+        //   champ: champs.find((champ) => champ.season === 2020)._id,
+        //(category: 'A'),
         //   // team: 'NAPOLI',
         //   points: 8,
         //   played: 5,
@@ -672,7 +749,8 @@ describe('Rank', () => {
         //   goalDifference: 10,
         // }),
         // expect.objectContaining({
-        //   category: 'A',
+        //   champ: champs.find((champ) => champ.season === 2020)._id,
+        //(category: 'A'),
         //   // team: 'SUASSUOLO',
         //   points: 8,
         //   played: 5,
@@ -682,7 +760,8 @@ describe('Rank', () => {
         //   goalDifference: 15,
         // }),
         // expect.objectContaining({
-        //   category: 'A',
+        //   champ: champs.find((champ) => champ.season === 2020)._id,
+        //(category: 'A'),
         //   // team: 'PARMA',
         //   points: 8,
         //   played: 5,
@@ -692,7 +771,8 @@ describe('Rank', () => {
         //   goalDifference: 20,
         // }),
         // expect.objectContaining({
-        //   category: 'A',
+        //   champ: champs.find((champ) => champ.season === 2020)._id,
+        //(category: 'A'),
         //   // team: 'PALERMO',
         //   points: 6,
         //   played: 5,
@@ -702,7 +782,8 @@ describe('Rank', () => {
         //   goalDifference: 20,
         // }),
         // expect.objectContaining({
-        //   category: 'A',
+        //   champ: champs.find((champ) => champ.season === 2020)._id,
+        //(category: 'A'),
         //   // team: 'ROMA',
         //   points: 4,
         //   played: 5,
@@ -713,5 +794,17 @@ describe('Rank', () => {
         // }),
       ])
     );
+  });
+
+  it('should return a 503 error status for /rank/top route', async () => {
+    const response = await request(app).get('/rank/top');
+
+    expect(response.status).toBe(503);
+  });
+
+  it('should return a 503 error status for /rank route', async () => {
+    const response = await request(app).get('/rank?category=A');
+
+    expect(response.status).toBe(503);
   });
 });

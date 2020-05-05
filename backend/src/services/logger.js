@@ -1,6 +1,14 @@
+require('dotenv').config({
+  path: process.env.NODE_ENV === 'test' ? '.env.test' : '.env',
+});
 const log4js = require('log4js');
-const level = process.env.NODE_LOGGING_LEVEL || 'info';
-const levelError = process.env.NODE_LOGGING_LEVEL_ERROR || 'error';
+
+const level =
+  process.env.LOGGING_LEVEL_TEST || process.env.NODE_LOGGING_LEVEL || 'info';
+const levelError =
+  process.env.LOGGING_LEVEL_TEST ||
+  process.env.NODE_LOGGING_LEVEL_ERROR ||
+  'error';
 
 // Log - Log4js
 log4js.configure({
@@ -27,7 +35,7 @@ log4js.configure({
     default: {
       // appenders: ["logConsoleFilter", "logFileFilter"],
       appenders: ['logConsoleFilter'],
-      level: 'all',
+      level,
     },
   },
 });
