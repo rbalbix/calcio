@@ -4,6 +4,7 @@
 **/
 
 const { Schema, model } = require('../../database').mongoose;
+const Rank = require('./Rank');
 
 const MatchSchema = new Schema(
   {
@@ -44,6 +45,30 @@ const MatchSchema = new Schema(
   },
   { timestamps: true }
 );
+
+// Trigger to update Rank
+MatchSchema.post('save', async function (doc) {
+  const champ = doc.champ;
+  const category = doc.category;
+  const teamHome = doc.teamHome;
+  const teamAway = doc.teamAway;
+  console.log('%s has been saved', doc._id);
+  console.log('Champ ', champ);
+  console.log('Category ', category);
+  console.log(`teamHome: ${teamHome} -> ${doc.scoreHome}`);
+  console.log(`teamAway: ${teamAway} -> ${doc.scoreAway}`);
+  console.log('teamHome won: ', doc.scoreHome > doc.scoreAway);
+  console.log('drawn: ', doc.scoreHome === doc.scoreAway);
+
+  // Update teamHome rank
+  const rank = await Rank.findOne({
+    champ: doc.champ,
+    category: doc.category,
+    team: doc.teamHome,
+  });
+  console.log(rank);
+  // Update teamAway rank
+});
 
 const Match = model('Match', MatchSchema);
 
