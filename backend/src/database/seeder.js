@@ -1299,9 +1299,9 @@ async function seedMatch() {
       category: 'A',
       round: 20,
       teamHome: teams.find((team) => team.longName === 'SASSUOLO')._id,
-      scoreHome: 4,
+      scoreHome: '',
       teamAway: teams.find((team) => team.longName === 'MILAN')._id,
-      scoreAway: 4,
+      scoreAway: '',
       day: '2020-08-31 21:00:00',
       week: 36,
       weekDay: 'SEG',
@@ -2944,9 +2944,9 @@ async function seedMatch() {
       category: 'B',
       round: 20,
       teamHome: teams.find((team) => team.longName === 'SASSUOLO')._id,
-      scoreHome: 4,
+      scoreHome: '',
       teamAway: teams.find((team) => team.longName === 'MILAN')._id,
-      scoreAway: 4,
+      scoreAway: '',
       day: '2020-08-31 21:00:00',
       week: 36,
       weekDay: 'SEG',
@@ -4594,9 +4594,9 @@ async function seedMatch() {
       category: 'A',
       round: 20,
       teamHome: teams.find((team) => team.longName === 'SASSUOLO')._id,
-      scoreHome: 4,
+      scoreHome: '',
       teamAway: teams.find((team) => team.longName === 'MILAN')._id,
-      scoreAway: 4,
+      scoreAway: '',
       day: '2020-08-31 21:00:00',
       week: 36,
       weekDay: 'SEG',
@@ -6239,9 +6239,9 @@ async function seedMatch() {
       category: 'B',
       round: 20,
       teamHome: teams.find((team) => team.longName === 'SASSUOLO')._id,
-      scoreHome: 4,
+      scoreHome: '',
       teamAway: teams.find((team) => team.longName === 'MILAN')._id,
-      scoreAway: 4,
+      scoreAway: '',
       day: '2020-08-31 21:00:00',
       week: 36,
       weekDay: 'SEG',
@@ -7225,10 +7225,13 @@ async function seedRank() {
 async function seed() {
   await connect();
 
+  await Rank.deleteMany({});
+
   await seedChamp();
   await seedTeam();
   await seedMatch();
-  await seedRank();
+
+  // await seedRank();
 
   await disconnect();
 }
