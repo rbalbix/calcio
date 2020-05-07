@@ -449,4 +449,95 @@ describe('Rank', () => {
 
     expect(response.status).toBe(503);
   });
+
+  it('should update the ranking', async () => {
+    await Champ.create({
+      name: 'Campeonato 2020',
+      season: 2020,
+    });
+
+    await Team.create([
+      {
+        longName: 'SAMPDORIA',
+        shortName: 'SAM',
+        thumbnail: 'sampdoria.png',
+      },
+      {
+        longName: 'INTERNAZIONALE',
+        shortName: 'INT',
+        thumbnail: 'inter-de-milao.png',
+      },
+    ]);
+
+    const champs = await Champ.find();
+    const teams = await Team.find();
+
+    await Match.create([
+      {
+        champ: champs.find((champ) => champ.season === 2020)._id,
+        category: 'A',
+        round: 1,
+        teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')._id,
+        scoreHome: 1,
+        teamAway: teams.find((team) => team.longName === 'SAMPDORIA')._id,
+        scoreAway: 3,
+        day: '2020-02-10 21:00:00',
+        week: 7,
+        weekDay: 'SEG',
+      },
+      {
+        champ: champs.find((champ) => champ.season === 2020)._id,
+        category: 'A',
+        round: 1,
+        teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')._id,
+        scoreHome: 2,
+        teamAway: teams.find((team) => team.longName === 'SAMPDORIA')._id,
+        scoreAway: 1,
+        day: '2020-02-11 21:00:00',
+        week: 7,
+        weekDay: 'TER',
+      },
+      {
+        champ: champs.find((champ) => champ.season === 2020)._id,
+        category: 'A',
+        round: 1,
+        teamHome: teams.find((team) => team.longName === 'SAMPDORIA')._id,
+        scoreHome: 0,
+        teamAway: teams.find((team) => team.longName === 'INTERNAZIONALE')._id,
+        scoreAway: 0,
+        day: '2020-02-12 21:00:00',
+        week: 7,
+        weekDay: 'QUA',
+      },
+    ]);
+
+    const response = await request(app).get('/rank?category=A');
+
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveLength(2);
+    expect(response.body).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          category: 'A',
+          // team: 'SAMPDORIA',
+          // points: 4,
+          // played: 3,
+          // wons: 1,
+          // drawn: 1,
+          // lost: 1,
+          // goalDifference: 1,
+        }),
+        expect.objectContaining({
+          category: 'A',
+          // team: 'INTERNAZIONALE',
+          // points: 4,
+          // played: 2,
+          // wons: 1,
+          // drawn: 1,
+          // lost: 1,
+          // goalDifference: -1,
+        }),
+      ])
+    );
+  });
 });

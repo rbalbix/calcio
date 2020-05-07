@@ -4,9 +4,7 @@
 **/
 
 const { Schema, model } = require('../../database').mongoose;
-const Rank = require('./Rank');
-const Champ = require('./Champ');
-const Team = require('./Team');
+const updateRank = require('../../utils/updateRank');
 
 const MatchSchema = new Schema(
   {
@@ -49,100 +47,12 @@ const MatchSchema = new Schema(
 );
 
 // Trigger to update Rank
-// MatchSchema.post('findOneAndUpdate', async function (doc) {
-//   console.log('...');
-// });
+MatchSchema.post('findOneAndUpdate', async function (doc) {
+  await updateRank(doc);
+});
 
-// MatchSchema.post('save', async function (doc) {
 MatchSchema.post('save', async function (doc) {
-  // const champ = await Champ.findById(doc.champ);
-  // const home = await Team.findById(doc.teamHome);
-  // const away = await Team.findById(doc.teamAway);
-  // (2020 - A) ROUND 1: HOME 2 x 3 AWAY
-  // console.log(
-  //   `(${champ.season} - ${doc.category}) ROUND ${doc.round}: ${
-  //     home.shortName
-  //   } ${doc.scoreHome === null ? ' ' : doc.scoreHome} x ${
-  //     doc.scoreAway === null ? ' ' : doc.scoreAway
-  //   } ${away.shortName}`
-  // );
-
-  // Champ.findById(doc.champ)
-  //   .then((champ) => {
-  //     Team.findById(doc.teamHome)
-  //       .then((home) => {
-  //         Team.findById(doc.teamAway)
-  //           .then((away) => {
-  //             console.log(
-  //               `(${champ.season} - ${doc.category}) ROUND ${doc.round}: ${
-  //                 home.shortName
-  //               } ${doc.scoreHome === null ? ' ' : doc.scoreHome} x ${
-  //                 doc.scoreAway === null ? ' ' : doc.scoreAway
-  //               } ${away.shortName}`
-  //             );
-  //           })
-  //           .catch((e) => console.log(e));
-  //       })
-  //       .catch((e) => console.log(e));
-  //   })
-  //   .catch((e) => console.log(e));
-
-  if (doc.scoreHome !== null && doc.scoreAway !== null) {
-    const drawn = doc.scoreHome === doc.scoreAway;
-    const homeWon = doc.scoreHome > doc.scoreAway;
-
-    await Rank.findOneAndUpdate(
-      {
-        champ: doc.champ,
-        category: doc.category,
-        team: doc.teamHome,
-      },
-      {
-        champ: doc.champ,
-        category: doc.category,
-        team: doc.teamHome,
-        $inc: {
-          points: drawn ? 1 : homeWon ? 3 : 0,
-          played: 1,
-          wons: homeWon ? 1 : 0,
-          drawn: drawn ? 1 : 0,
-          lost: drawn ? 0 : homeWon ? 0 : 1,
-          goalsFor: doc.scoreHome,
-          goalsAgainst: doc.scoreAway,
-          goalDifference: doc.scoreHome - doc.scoreAway,
-        },
-      },
-      {
-        upsert: true,
-      }
-    );
-
-    await Rank.findOneAndUpdate(
-      {
-        champ: doc.champ,
-        category: doc.category,
-        team: doc.teamAway,
-      },
-      {
-        champ: doc.champ,
-        category: doc.category,
-        team: doc.teamAway,
-        $inc: {
-          points: drawn ? 1 : !homeWon ? 3 : 0,
-          played: 1,
-          wons: drawn ? 0 : !homeWon ? 1 : 0,
-          drawn: drawn ? 1 : 0,
-          lost: drawn ? 0 : homeWon ? 1 : 0,
-          goalsFor: doc.scoreAway,
-          goalsAgainst: doc.scoreHome,
-          goalDifference: doc.scoreAway - doc.scoreHome,
-        },
-      },
-      {
-        upsert: true,
-      }
-    );
-  }
+  await updateRank(doc);
 });
 
 const Match = model('Match', MatchSchema);

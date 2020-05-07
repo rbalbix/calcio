@@ -83,6 +83,7 @@ async function seedTeam() {
 
 async function seedMatch() {
   await Match.deleteMany({});
+  await Rank.deleteMany({});
 
   const champs = await Champ.find();
   const teams = await Team.find();
@@ -1898,7 +1899,7 @@ async function seedMatch() {
       teamHome: teams.find((team) => team.longName === 'MILAN')._id,
       scoreHome: 2,
       teamAway: teams.find((team) => team.longName === 'NAPOLI')._id,
-      scoreAway: 3,
+      scoreAway: 2,
       day: '2020-03-10 21:00:00',
       week: 11,
       weekDay: 'TER',
@@ -5193,7 +5194,7 @@ async function seedMatch() {
       teamHome: teams.find((team) => team.longName === 'MILAN')._id,
       scoreHome: 2,
       teamAway: teams.find((team) => team.longName === 'NAPOLI')._id,
-      scoreAway: 3,
+      scoreAway: 2,
       day: '2020-03-10 21:00:00',
       week: 11,
       weekDay: 'TER',
@@ -7224,8 +7225,6 @@ async function seedRank() {
 
 async function seed() {
   await connect();
-
-  await Rank.deleteMany({});
 
   await seedChamp();
   await seedTeam();
