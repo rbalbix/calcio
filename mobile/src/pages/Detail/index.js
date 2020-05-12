@@ -178,9 +178,6 @@ export default function Detail() {
                   {moment(match.day).utc().format('DD/MM')}
                 </DateText>
               </DateView>
-              <DateView>
-                <DateText>{match.day}</DateText>
-              </DateView>
               <MatchView>
                 <MatchTeamText team align='right'>
                   {match.teamHome.shortName}
