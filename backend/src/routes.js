@@ -2,7 +2,11 @@ const routes = require('express').Router();
 // Add validation with Celebrate
 const { celebrate, Segments, Joi } = require('celebrate');
 
-const { RankController, MatchController } = require('./app/controllers');
+const {
+  RankController,
+  MatchController,
+  SeederController,
+} = require('./app/controllers');
 
 /**
  *
@@ -31,6 +35,9 @@ routes.get(
   }),
   MatchController.index
 );
+
+// Route to seed initial data
+routes.get('/seed', SeederController.index);
 
 /**
  *

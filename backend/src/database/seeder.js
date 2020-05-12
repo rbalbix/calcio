@@ -7238,4 +7238,10 @@ async function seed() {
   await disconnect();
 }
 
-seed();
+// seed();
+
+module.exports = {
+  seedChamp,
+  seedTeam,
+  seedMatch,
+};

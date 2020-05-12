@@ -9,25 +9,25 @@ module.exports = {
       const { category, limit = 5 } = req.query;
       let { round } = req.query;
 
+      const champ = await getCurrentChampId();
+
       if (round === 0) {
         moment.locale('pt-BR');
-        const result = await Match.find({
-          $or: [
-            {
-              day: moment(moment(Date.now()).format('YYYY-MM-DD'))
-                .utc()
-                .format(),
-            },
-            // { week: moment(Date.now()).format('ww') },
-          ],
+        let result = await Match.find({
+          champ,
+          category,
+          day: moment(moment(Date.now()).format('YYYY-MM-DD')).utc().format(),
         });
-        console.log(
-          moment(moment(Date.now()).format('YYYY-MM-DD')).utc().format()
-        );
+        if (!result.length) {
+          result = await Match.find({
+            champ,
+            category,
+            week: moment(Date.now()).format('ww'),
+          });
+        }
         round = result.length > 0 ? result[0].round : 1;
       }
 
-      const champ = await getCurrentChampId();
       const response = await Match.find({ champ, category, round })
         .sort('day')
         .limit(limit)
