@@ -14,7 +14,7 @@ module.exports = {
         const result = await Match.find({
           $or: [
             {
-              day: moment(moment(Date.now()).format('YYYY-MM-DD 21:00:00'))
+              day: moment(moment(Date.now()).format('YYYY-MM-DD'))
                 .utc()
                 .format(),
             },
@@ -22,9 +22,7 @@ module.exports = {
           ],
         });
         console.log(
-          moment(moment(Date.now()).format('YYYY-MM-DD 21:00:00'))
-            .utc()
-            .format()
+          moment(moment(Date.now()).format('YYYY-MM-DD')).utc().format()
         );
         round = result.length > 0 ? result[0].round : 1;
       }
