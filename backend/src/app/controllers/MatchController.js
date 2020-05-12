@@ -10,9 +10,14 @@ module.exports = {
       let { round } = req.query;
 
       if (round === 0) {
+        moment.locale('pt-BR');
         const result = await Match.find({
           $or: [
-            { day: moment(Date.now()).format('YYYY-MM-DD 21:00:00') },
+            {
+              day: moment(moment(Date.now()).format('YYYY-MM-DD 21:00:00'))
+                .utc()
+                .format(),
+            },
             { week: moment(Date.now()).format('ww') },
           ],
         });
