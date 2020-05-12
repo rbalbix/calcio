@@ -18,9 +18,14 @@ module.exports = {
                 .utc()
                 .format(),
             },
-            { week: moment(Date.now()).format('ww') },
+            // { week: moment(Date.now()).format('ww') },
           ],
         });
+        console.log(
+          moment(moment(Date.now()).format('YYYY-MM-DD 21:00:00'))
+            .utc()
+            .format()
+        );
         round = result.length > 0 ? result[0].round : 1;
       }
 
