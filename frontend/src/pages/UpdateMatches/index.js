@@ -55,8 +55,172 @@ export default function UpdateMatches() {
               <ScoreText score>100</ScoreText>
             </Score>
           </TeamView>
+          <TeamView>
+            <Team>
+              <PositionText>1</PositionText>
+              <TeamShield src="https://rb-calcio.herokuapp.com/files/shields/sampdoria.png" />
+              <TeamText>SAMPDORIA</TeamText>
+            </Team>
+            <Score>
+              <ScoreText>12</ScoreText>
+              <ScoreText score>4</ScoreText>
+              <ScoreText score>6</ScoreText>
+              <ScoreText score>87</ScoreText>
+              <ScoreText score>34</ScoreText>
+              <ScoreText score>88</ScoreText>
+              <ScoreText score>5</ScoreText>
+              <ScoreText score>6</ScoreText>
+              <ScoreText score>100</ScoreText>
+            </Score>
+          </TeamView>
+          <TeamView>
+            <Team>
+              <PositionText>1</PositionText>
+              <TeamShield src="https://rb-calcio.herokuapp.com/files/shields/sampdoria.png" />
+              <TeamText>SAMPDORIA</TeamText>
+            </Team>
+            <Score>
+              <ScoreText>12</ScoreText>
+              <ScoreText score>4</ScoreText>
+              <ScoreText score>6</ScoreText>
+              <ScoreText score>87</ScoreText>
+              <ScoreText score>34</ScoreText>
+              <ScoreText score>88</ScoreText>
+              <ScoreText score>5</ScoreText>
+              <ScoreText score>6</ScoreText>
+              <ScoreText score>100</ScoreText>
+            </Score>
+          </TeamView>
+          <TeamView>
+            <Team>
+              <PositionText>1</PositionText>
+              <TeamShield src="https://rb-calcio.herokuapp.com/files/shields/sampdoria.png" />
+              <TeamText>SAMPDORIA</TeamText>
+            </Team>
+            <Score>
+              <ScoreText>12</ScoreText>
+              <ScoreText score>4</ScoreText>
+              <ScoreText score>6</ScoreText>
+              <ScoreText score>87</ScoreText>
+              <ScoreText score>34</ScoreText>
+              <ScoreText score>88</ScoreText>
+              <ScoreText score>5</ScoreText>
+              <ScoreText score>6</ScoreText>
+              <ScoreText score>100</ScoreText>
+            </Score>
+          </TeamView>
+          <TeamView>
+            <Team>
+              <PositionText>1</PositionText>
+              <TeamShield src="https://rb-calcio.herokuapp.com/files/shields/sampdoria.png" />
+              <TeamText>SAMPDORIA</TeamText>
+            </Team>
+            <Score>
+              <ScoreText>12</ScoreText>
+              <ScoreText score>4</ScoreText>
+              <ScoreText score>6</ScoreText>
+              <ScoreText score>87</ScoreText>
+              <ScoreText score>34</ScoreText>
+              <ScoreText score>88</ScoreText>
+              <ScoreText score>5</ScoreText>
+              <ScoreText score>6</ScoreText>
+              <ScoreText score>100</ScoreText>
+            </Score>
+          </TeamView>
+          <TeamView>
+            <Team>
+              <PositionText>1</PositionText>
+              <TeamShield src="https://rb-calcio.herokuapp.com/files/shields/sampdoria.png" />
+              <TeamText>SAMPDORIA</TeamText>
+            </Team>
+            <Score>
+              <ScoreText>12</ScoreText>
+              <ScoreText score>4</ScoreText>
+              <ScoreText score>6</ScoreText>
+              <ScoreText score>87</ScoreText>
+              <ScoreText score>34</ScoreText>
+              <ScoreText score>88</ScoreText>
+              <ScoreText score>5</ScoreText>
+              <ScoreText score>6</ScoreText>
+              <ScoreText score>100</ScoreText>
+            </Score>
+          </TeamView>
+          <TeamView>
+            <Team>
+              <PositionText>1</PositionText>
+              <TeamShield src="https://rb-calcio.herokuapp.com/files/shields/sampdoria.png" />
+              <TeamText>SAMPDORIA</TeamText>
+            </Team>
+            <Score>
+              <ScoreText>12</ScoreText>
+              <ScoreText score>4</ScoreText>
+              <ScoreText score>6</ScoreText>
+              <ScoreText score>87</ScoreText>
+              <ScoreText score>34</ScoreText>
+              <ScoreText score>88</ScoreText>
+              <ScoreText score>5</ScoreText>
+              <ScoreText score>6</ScoreText>
+              <ScoreText score>100</ScoreText>
+            </Score>
+          </TeamView>
+          <TeamView>
+            <Team>
+              <PositionText>1</PositionText>
+              <TeamShield src="https://rb-calcio.herokuapp.com/files/shields/sampdoria.png" />
+              <TeamText>SAMPDORIA</TeamText>
+            </Team>
+            <Score>
+              <ScoreText>12</ScoreText>
+              <ScoreText score>4</ScoreText>
+              <ScoreText score>6</ScoreText>
+              <ScoreText score>87</ScoreText>
+              <ScoreText score>34</ScoreText>
+              <ScoreText score>88</ScoreText>
+              <ScoreText score>5</ScoreText>
+              <ScoreText score>6</ScoreText>
+              <ScoreText score>100</ScoreText>
+            </Score>
+          </TeamView>
+          <TeamView>
+            <Team>
+              <PositionText>1</PositionText>
+              <TeamShield src="https://rb-calcio.herokuapp.com/files/shields/sampdoria.png" />
+              <TeamText>SAMPDORIA</TeamText>
+            </Team>
+            <Score>
+              <ScoreText>12</ScoreText>
+              <ScoreText score>4</ScoreText>
+              <ScoreText score>6</ScoreText>
+              <ScoreText score>87</ScoreText>
+              <ScoreText score>34</ScoreText>
+              <ScoreText score>88</ScoreText>
+              <ScoreText score>5</ScoreText>
+              <ScoreText score>6</ScoreText>
+              <ScoreText score>100</ScoreText>
+            </Score>
+          </TeamView>
+          <TeamView>
+            <Team>
+              <PositionText>1</PositionText>
+              <TeamShield src="https://rb-calcio.herokuapp.com/files/shields/sampdoria.png" />
+              <TeamText>SAMPDORIA</TeamText>
+            </Team>
+            <Score>
+              <ScoreText>12</ScoreText>
+              <ScoreText score>4</ScoreText>
+              <ScoreText score>6</ScoreText>
+              <ScoreText score>87</ScoreText>
+              <ScoreText score>34</ScoreText>
+              <ScoreText score>88</ScoreText>
+              <ScoreText score>5</ScoreText>
+              <ScoreText score>6</ScoreText>
+              <ScoreText score>100</ScoreText>
+            </Score>
+          </TeamView>
         </ClassificationContainer>
-        <MatchContainer></MatchContainer>
+        <MatchContainer>
+          <h1>JOGOS</h1>
+        </MatchContainer>
       </CategoryResult>
     </Container>
   );
