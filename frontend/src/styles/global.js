@@ -48,25 +48,22 @@ form input {
   padding: 0 2.4rem;
 }
 
-.button {
-  width: 100%;
-  height: 6.0rem;
-  background: ${theme.primary};
-  border: 0;
-  border-radius: 0.8rem;
-  color: #fff;
-  font-weight: 700;
-  margin-top: 1.6rem;
-  display: inline-block;
-  text-align: center;
-  text-decoration: none;
-  font-size: 1.8rem;
-  line-height: 6.0rem;
-  transition: filter 0.2s;
+@media(max-width: 1120px) {
+  html {
+    font-size: 58%;
+  }
 }
 
-.button:hover {
-  filter: brightness(90%);
+@media(max-width: 1040px) {
+  html {
+    font-size: 55%;
+  }
+}
+
+@media(max-width: 1040px) {
+  html {
+    font-size: 52%;
+  }
 }
 
 @media(max-width: 768px) {
