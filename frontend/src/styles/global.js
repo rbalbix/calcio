@@ -22,7 +22,6 @@ body {
 html {
   /* every 1rem will be considered 10px - responsiveness */
   font-size: 62.5%;
-  height: 62.5%;
 }
 
 html,
@@ -44,9 +43,9 @@ form input {
   width: 100%;
   height: 6.0rem;
   color: #333;
-  border: 1px solid #dcdce6;
-  border-radius: 8px;
-  padding: 0 24px;
+  border: 0.1rem solid #dcdce6;
+  border-radius: 0.8rem;
+  padding: 0 2.4rem;
 }
 
 .button {
@@ -54,10 +53,10 @@ form input {
   height: 6.0rem;
   background: ${theme.primary};
   border: 0;
-  border-radius: 8px;
+  border-radius: 0.8rem;
   color: #fff;
   font-weight: 700;
-  margin-top: 16px;
+  margin-top: 1.6rem;
   display: inline-block;
   text-align: center;
   text-decoration: none;

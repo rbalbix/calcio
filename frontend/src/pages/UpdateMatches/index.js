@@ -220,6 +220,7 @@ export default function UpdateMatches() {
         </ClassificationContainer>
         <MatchContainer>
           <h1>JOGOS</h1>
+          <button className="button">ATUALIZAR</button>
         </MatchContainer>
       </CategoryResult>
     </Container>

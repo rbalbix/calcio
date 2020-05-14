@@ -4,17 +4,17 @@ import * as theme from '../../styles/variables';
 export const Container = styled.div`
   background-color: ${theme.bgContainer};
   width: 95%;
-  margin-top: 10px;
+  margin-top: 1rem;
   margin-left: auto;
   margin-right: auto;
-  padding: 10px;
-  border-radius: 8px;
+  padding: 1rem;
+  border-radius: 0.8rem;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
 
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.25);
 `;
 
 export const CategoryTitle = styled.h1`
@@ -26,14 +26,14 @@ export const CategoryTitle = styled.h1`
 
 export const CategoryResult = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
 `;
 
 export const ClassificationContainer = styled.div`
-  border: 1px solid ${theme.border};
-  border-radius: 8px;
-  padding: 10px;
-  margin-right: 5px;
+  border: 0.1rem solid ${theme.border};
+  border-radius: 0.8rem;
+  padding: 1rem;
+  margin-right: 0.5rem;
 
   flex: 1;
 `;
@@ -48,8 +48,8 @@ export const ClassificationTitle = styled.h2`
 export const HeaderTable = styled.div`
   display: flex;
   justify-content: flex-end;
-  padding-bottom: 5px;
-  border-bottom: 1px solid;
+  padding-bottom: 0.5rem;
+  border-bottom: 0.1rem solid;
   border-bottom-color: ${theme.border};
 `;
 
@@ -64,10 +64,10 @@ export const TeamView = styled.div`
   /* background-color: #ff0; */
   display: flex;
   justify-content: space-between;
-  margin-top: 2px;
+  margin-top: 0.2rem;
 
-  padding-bottom: 3px;
-  border-bottom: 1px solid;
+  padding-bottom: 0.3rem;
+  border-bottom: 0.1rem solid;
   border-bottom-color: ${theme.border};
 `;
 
@@ -81,7 +81,7 @@ export const PositionText = styled.h3`
   font-size: 1.6rem;
   line-height: 1.8rem;
   color: ${theme.textColor};
-  padding-right: 2px;
+  padding-right: 0.2rem;
 `;
 
 export const TeamText = styled.h3`
@@ -92,9 +92,9 @@ export const TeamText = styled.h3`
 `;
 
 export const TeamShield = styled.img`
-  width: 20px;
-  height: 20px;
-  margin-right: 2px;
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.2rem;
 `;
 
 export const Score = styled.div`
@@ -110,13 +110,13 @@ export const ScoreText = styled.h3`
   line-height: 1.6rem;
   font-weight: bold;
   color: ${theme.textColor};
-  margin-left: ${(props) => (props.score ? '2px' : '0px')};
+  margin-left: ${(props) => (props.score ? '0.2rem' : 0)};
 `;
 
 export const MatchContainer = styled.div`
-  border: 1px solid ${theme.border};
-  border-radius: 8px;
-  padding: 10px;
+  border: 0.1rem solid ${theme.border};
+  border-radius: 0.8rem;
+  padding: 1rem;
 
   display: flex;
   flex: 1;
