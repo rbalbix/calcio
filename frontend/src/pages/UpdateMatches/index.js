@@ -30,6 +30,7 @@ import {
   MatchScoreText,
   MatchTeamShield,
   Button,
+  InputScore,
 } from './styles';
 
 export default function UpdateMatches() {
@@ -255,9 +256,24 @@ export default function UpdateMatches() {
                   SAMPDORIA
                 </MatchTeamText>
                 <MatchTeamShield src="https://rb-calcio.herokuapp.com/files/shields/sampdoria.png"></MatchTeamShield>
-                <MatchScoreText>2</MatchScoreText>
+                <InputScore
+                  type="tel"
+                  pattern="\d*"
+                  title="Apenas números"
+                  min="0"
+                  max="99"
+                  maxLength="2"
+                />
+
                 <MatchTeamText>X</MatchTeamText>
-                <MatchScoreText>1</MatchScoreText>
+                <InputScore
+                  type="tel"
+                  pattern="\d*"
+                  title="Apenas números"
+                  min="0"
+                  max="99"
+                  maxLength="2"
+                />
                 <MatchTeamShield src="https://rb-calcio.herokuapp.com/files/shields/sampdoria.png"></MatchTeamShield>
                 <MatchTeamText team align="left">
                   INTERNAZIONALE

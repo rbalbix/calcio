@@ -25,18 +25,26 @@ export const CategoryTitle = styled.h1`
 
 export const CategoryResult = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: 0.5rem;
 
   margin-top: 1rem;
+
+  @media (max-width: 420px) {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+  @media (max-width: 370px) {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  @media (max-width: 320px) {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
 `;
 
 export const ClassificationContainer = styled.div`
   border: 0.1rem solid ${theme.border};
   border-radius: 0.8rem;
   padding: 1.5rem;
-
-  flex: 1;
 `;
 
 export const ClassificationTitle = styled.h2`
@@ -57,7 +65,6 @@ export const HeaderTable = styled.div`
 `;
 
 export const HeaderTableText = styled.h3`
-  /* background-color: #ff0; */
   font-size: 1.6rem;
   line-height: 1.8rem;
   font-weight: bold;
@@ -79,13 +86,11 @@ export const TeamView = styled.div`
 `;
 
 export const Team = styled.div`
-  /* background-color: #00cc00; */
   display: flex;
   align-items: center;
 `;
 
 export const PositionText = styled.h3`
-  /* background-color: #ff0; */
   font-size: 1.6rem;
   line-height: 1.8rem;
   color: ${theme.textColor};
@@ -109,15 +114,12 @@ export const TeamShield = styled.img`
 `;
 
 export const Score = styled.div`
-  /* background-color: #ff0000; */
   display: flex;
-  flex: 1;
   align-items: center;
   justify-content: flex-end;
 `;
 
 export const ScoreText = styled.h3`
-  /* background-color: #ff0; */
   font-size: 1.6rem;
   line-height: 1.8rem;
   font-weight: 500;
@@ -132,8 +134,6 @@ export const MatchContainer = styled.div`
   border: 0.1rem solid ${theme.border};
   border-radius: 0.8rem;
   padding: 1.5rem;
-
-  flex: 1;
 `;
 
 export const MatchTitle = styled.h2`
@@ -166,7 +166,6 @@ export const RoundText = styled.h3`
 export const Matches = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 1;
 `;
 
 export const Match = styled.div`
@@ -176,7 +175,6 @@ export const Match = styled.div`
 `;
 
 export const DateView = styled.div`
-  /* background-color: #ff0; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -204,7 +202,6 @@ export const MatchView = styled.div`
 `;
 
 export const MatchTeamText = styled.h3`
-  /* background-color: #ff0; */
   font-size: 1.6rem;
   line-height: 1.8rem;
   font-weight: 500;
@@ -215,7 +212,6 @@ export const MatchTeamText = styled.h3`
 `;
 
 export const MatchScoreText = styled.h3`
-  /* background-color: #ff0; */
   font-size: 1.6rem;
   line-height: 1.8rem;
   font-weight: bold;
@@ -247,5 +243,22 @@ export const Button = styled.button`
 
   &:hover {
     filter: brightness(90%);
+  }
+`;
+
+export const InputScore = styled.input`
+  width: 3rem;
+  height: 3rem;
+  color: ${theme.teamTextColor};
+  border: 0.1rem solid ${theme.border};
+  border-radius: 0.8rem;
+  padding: 0 0.4rem;
+
+  text-align: center;
+  font-size: 1.4rem;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
   }
 `;

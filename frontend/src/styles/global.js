@@ -39,13 +39,10 @@ button {
   cursor: pointer;
 }
 
-form input {
-  width: 100%;
-  height: 6.0rem;
-  color: #333;
-  border: 0.1rem solid #dcdce6;
-  border-radius: 0.8rem;
-  padding: 0 2.4rem;
+@media(max-width: 1170px) {
+  html {
+    font-size: 60%;
+  }
 }
 
 @media(max-width: 1120px) {
@@ -54,21 +51,93 @@ form input {
   }
 }
 
-@media(max-width: 1040px) {
+@media(max-width: 1080px) {
   html {
-    font-size: 55%;
+    font-size: 56%;
   }
 }
 
-@media(max-width: 1040px) {
+@media(max-width: 1050px) {
+  html {
+    font-size: 54%;
+  }
+}
+
+@media(max-width: 1010px) {
   html {
     font-size: 52%;
   }
 }
 
-@media(max-width: 768px) {
+@media(max-width: 970px) {
   html {
     font-size: 50%;
+  }
+}
+
+@media(max-width: 940px) {
+  html {
+    font-size: 48%;
+  }
+}
+
+@media(max-width: 900px) {
+  html {
+    font-size: 46%;
+  }
+}
+
+@media(max-width: 876px) {
+  html {
+    font-size: 62.5%;
+  }
+}
+
+@media(max-width: 590px) {
+  html {
+    font-size: 55%;
+  }
+}
+
+@media(max-width: 520px) {
+  html {
+    font-size: 50%;
+  }
+}
+
+@media(max-width: 470px) {
+  html {
+    font-size: 45%;
+  }
+}
+
+@media(max-width: 430px) {
+  html {
+    font-size: 40%;
+  }
+}
+
+@media(max-width: 370px) {
+  html {
+    font-size: 35%;
+  }
+}
+
+@media(max-width: 320px) {
+  html {
+    font-size: 30%;
+  }
+}
+
+@media(max-width: 280px) {
+  html {
+    font-size: 25%;
+  }
+}
+
+@media(max-width: 240px) {
+  html {
+    font-size: 20%;
   }
 }
 
