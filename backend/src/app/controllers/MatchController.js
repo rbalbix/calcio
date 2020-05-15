@@ -33,11 +33,11 @@ module.exports = {
         .limit(limit)
         .populate({
           path: 'teamHome',
-          select: 'shortName thumbnail thumbnail_url',
+          select: 'shortName longName thumbnail thumbnail_url',
         })
         .populate({
           path: 'teamAway',
-          select: 'shortName thumbnail thumbnail_url',
+          select: 'shortName longName thumbnail thumbnail_url',
         });
 
       res.header(
@@ -45,6 +45,7 @@ module.exports = {
         (await Match.countDocuments({ champ, category })) / limit
       );
       res.header('X-round', round);
+
       return res.json(response);
     } catch (err) {
       log.error(err);

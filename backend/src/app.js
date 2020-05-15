@@ -21,7 +21,7 @@ class AppController {
 
   middlewares() {
     this.express.disable('x-powered-by');
-    this.express.use(cors());
+    this.express.use(cors({ exposedHeaders: ['X-Total-Count', 'X-round'] }));
     // To understand body with json format
     this.express.use(express.json());
     this.express.use(
