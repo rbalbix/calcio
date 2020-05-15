@@ -141,6 +141,18 @@ button {
   }
 }
 
+@media(max-width: 200px) {
+  html {
+    font-size: 15%;
+  }
+}
+
+@media(max-width: 150px) {
+  html {
+    font-size: 10%;
+  }
+}
+
 `;
 
 export default GlobalStyle;

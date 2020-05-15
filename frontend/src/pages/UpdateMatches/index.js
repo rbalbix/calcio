@@ -46,10 +46,10 @@ export default function UpdateMatches() {
             <HeaderTableText>V</HeaderTableText>
             <HeaderTableText>E</HeaderTableText>
             <HeaderTableText>D</HeaderTableText>
-            <HeaderTableText>GP</HeaderTableText>
-            <HeaderTableText>GC</HeaderTableText>
+            <HeaderTableText className="optional">GP</HeaderTableText>
+            <HeaderTableText className="optional">GC</HeaderTableText>
             <HeaderTableText>SG</HeaderTableText>
-            <HeaderTableText>%</HeaderTableText>
+            <HeaderTableText className="optional">%</HeaderTableText>
           </HeaderTable>
 
           <TeamView>
@@ -64,10 +64,16 @@ export default function UpdateMatches() {
               <ScoreText score>6</ScoreText>
               <ScoreText score>87</ScoreText>
               <ScoreText score>34</ScoreText>
-              <ScoreText score>88</ScoreText>
-              <ScoreText score>5</ScoreText>
+              <ScoreText score className="optional">
+                88
+              </ScoreText>
+              <ScoreText score className="optional">
+                5
+              </ScoreText>
               <ScoreText score>6</ScoreText>
-              <ScoreText score>100</ScoreText>
+              <ScoreText score className="optional">
+                100
+              </ScoreText>
             </Score>
           </TeamView>
           <TeamView>
@@ -82,10 +88,16 @@ export default function UpdateMatches() {
               <ScoreText score>6</ScoreText>
               <ScoreText score>87</ScoreText>
               <ScoreText score>34</ScoreText>
-              <ScoreText score>88</ScoreText>
-              <ScoreText score>5</ScoreText>
+              <ScoreText score className="optional">
+                88
+              </ScoreText>
+              <ScoreText score className="optional">
+                5
+              </ScoreText>
               <ScoreText score>6</ScoreText>
-              <ScoreText score>100</ScoreText>
+              <ScoreText score className="optional">
+                100
+              </ScoreText>
             </Score>
           </TeamView>
           <TeamView>
@@ -100,10 +112,16 @@ export default function UpdateMatches() {
               <ScoreText score>6</ScoreText>
               <ScoreText score>87</ScoreText>
               <ScoreText score>34</ScoreText>
-              <ScoreText score>88</ScoreText>
-              <ScoreText score>5</ScoreText>
+              <ScoreText score className="optional">
+                88
+              </ScoreText>
+              <ScoreText score className="optional">
+                5
+              </ScoreText>
               <ScoreText score>6</ScoreText>
-              <ScoreText score>100</ScoreText>
+              <ScoreText score className="optional">
+                100
+              </ScoreText>
             </Score>
           </TeamView>
           <TeamView>
@@ -118,10 +136,16 @@ export default function UpdateMatches() {
               <ScoreText score>6</ScoreText>
               <ScoreText score>87</ScoreText>
               <ScoreText score>34</ScoreText>
-              <ScoreText score>88</ScoreText>
-              <ScoreText score>5</ScoreText>
+              <ScoreText score className="optional">
+                88
+              </ScoreText>
+              <ScoreText score className="optional">
+                5
+              </ScoreText>
               <ScoreText score>6</ScoreText>
-              <ScoreText score>100</ScoreText>
+              <ScoreText score className="optional">
+                100
+              </ScoreText>
             </Score>
           </TeamView>
           <TeamView>
@@ -136,10 +160,16 @@ export default function UpdateMatches() {
               <ScoreText score>6</ScoreText>
               <ScoreText score>87</ScoreText>
               <ScoreText score>34</ScoreText>
-              <ScoreText score>88</ScoreText>
-              <ScoreText score>5</ScoreText>
+              <ScoreText score className="optional">
+                88
+              </ScoreText>
+              <ScoreText score className="optional">
+                5
+              </ScoreText>
               <ScoreText score>6</ScoreText>
-              <ScoreText score>100</ScoreText>
+              <ScoreText score className="optional">
+                100
+              </ScoreText>
             </Score>
           </TeamView>
           <TeamView>
@@ -154,10 +184,16 @@ export default function UpdateMatches() {
               <ScoreText score>6</ScoreText>
               <ScoreText score>87</ScoreText>
               <ScoreText score>34</ScoreText>
-              <ScoreText score>88</ScoreText>
-              <ScoreText score>5</ScoreText>
+              <ScoreText score className="optional">
+                88
+              </ScoreText>
+              <ScoreText score className="optional">
+                5
+              </ScoreText>
               <ScoreText score>6</ScoreText>
-              <ScoreText score>100</ScoreText>
+              <ScoreText score className="optional">
+                100
+              </ScoreText>
             </Score>
           </TeamView>
           <TeamView>
@@ -172,10 +208,16 @@ export default function UpdateMatches() {
               <ScoreText score>6</ScoreText>
               <ScoreText score>87</ScoreText>
               <ScoreText score>34</ScoreText>
-              <ScoreText score>88</ScoreText>
-              <ScoreText score>5</ScoreText>
+              <ScoreText score className="optional">
+                88
+              </ScoreText>
+              <ScoreText score className="optional">
+                5
+              </ScoreText>
               <ScoreText score>6</ScoreText>
-              <ScoreText score>100</ScoreText>
+              <ScoreText score className="optional">
+                100
+              </ScoreText>
             </Score>
           </TeamView>
           <TeamView>
@@ -190,10 +232,16 @@ export default function UpdateMatches() {
               <ScoreText score>6</ScoreText>
               <ScoreText score>87</ScoreText>
               <ScoreText score>34</ScoreText>
-              <ScoreText score>88</ScoreText>
-              <ScoreText score>5</ScoreText>
+              <ScoreText score className="optional">
+                88
+              </ScoreText>
+              <ScoreText score className="optional">
+                5
+              </ScoreText>
               <ScoreText score>6</ScoreText>
-              <ScoreText score>100</ScoreText>
+              <ScoreText score className="optional">
+                100
+              </ScoreText>
             </Score>
           </TeamView>
           <TeamView>
@@ -208,10 +256,16 @@ export default function UpdateMatches() {
               <ScoreText score>6</ScoreText>
               <ScoreText score>87</ScoreText>
               <ScoreText score>34</ScoreText>
-              <ScoreText score>88</ScoreText>
-              <ScoreText score>5</ScoreText>
+              <ScoreText score className="optional">
+                88
+              </ScoreText>
+              <ScoreText score className="optional">
+                5
+              </ScoreText>
               <ScoreText score>6</ScoreText>
-              <ScoreText score>100</ScoreText>
+              <ScoreText score className="optional">
+                100
+              </ScoreText>
             </Score>
           </TeamView>
           <TeamView>
@@ -226,10 +280,16 @@ export default function UpdateMatches() {
               <ScoreText score>6</ScoreText>
               <ScoreText score>87</ScoreText>
               <ScoreText score>34</ScoreText>
-              <ScoreText score>88</ScoreText>
-              <ScoreText score>5</ScoreText>
+              <ScoreText score className="optional">
+                88
+              </ScoreText>
+              <ScoreText score className="optional">
+                5
+              </ScoreText>
               <ScoreText score>6</ScoreText>
-              <ScoreText score>100</ScoreText>
+              <ScoreText score className="optional">
+                100
+              </ScoreText>
             </Score>
           </TeamView>
         </ClassificationContainer>

@@ -14,6 +14,15 @@ export const Container = styled.div`
   justify-content: center;
 
   box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.25);
+
+  @media (max-width: 420px) {
+    width: 100%;
+    margin: 0;
+
+    .optional {
+      display: none;
+    }
+  }
 `;
 
 export const CategoryTitle = styled.h1`
@@ -31,13 +40,7 @@ export const CategoryResult = styled.div`
   margin-top: 1rem;
 
   @media (max-width: 420px) {
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  }
-  @media (max-width: 370px) {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  }
-  @media (max-width: 320px) {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: none;
   }
 `;
 
@@ -45,6 +48,10 @@ export const ClassificationContainer = styled.div`
   border: 0.1rem solid ${theme.border};
   border-radius: 0.8rem;
   padding: 1.5rem;
+
+  @media (max-width: 420px) {
+    padding: 0.5rem;
+  }
 `;
 
 export const ClassificationTitle = styled.h2`
@@ -78,6 +85,7 @@ export const HeaderTableText = styled.h3`
 export const TeamView = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-top: 1.5rem;
 
   padding-bottom: 1rem;
@@ -209,6 +217,10 @@ export const MatchTeamText = styled.h3`
   width: ${(props) => (props.team ? '15rem' : '1rem')};
   text-align: ${(props) => props.align || 'center'};
   color: ${theme.teamTextColor};
+
+  @media (max-width: 420px) {
+    width: fit-content;
+  }
 `;
 
 export const MatchScoreText = styled.h3`
@@ -260,5 +272,10 @@ export const InputScore = styled.input`
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
+  }
+
+  &:focus,
+  &:hover {
+    border: 0.15rem solid ${theme.primary};
   }
 `;
