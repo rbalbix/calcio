@@ -31,8 +31,17 @@ const RankSchema = Schema(
     goalsAgainst: { type: Number, min: 0, max: 99 },
     goalDifference: Number,
   },
-  { timestamps: true }
+  {
+    toJSON: {
+      virtuals: true,
+    },
+    timestamps: true,
+  }
 );
+
+RankSchema.virtual('performance').get(function () {
+  return Math.round((this.points / (this.played * 3)) * 100);
+});
 
 const Rank = model('Rank', RankSchema);
 
