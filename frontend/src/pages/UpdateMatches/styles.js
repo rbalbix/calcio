@@ -173,6 +173,7 @@ export const RoundText = styled.h3`
 
 export const Matches = styled.div`
   display: flex;
+  flex: 1;
   flex-direction: column;
 `;
 
@@ -258,6 +259,11 @@ export const Button = styled.button`
   }
 `;
 
+export const PrevNextRound = styled.button`
+  border: 0;
+  text-decoration: none;
+`;
+
 export const InputScore = styled.input`
   width: 3rem;
   height: 3rem;
@@ -278,4 +284,12 @@ export const InputScore = styled.input`
   &:hover {
     border: 0.15rem solid ${theme.primary};
   }
+`;
+
+export const Loading = styled.div`
+  display: flex;
+  flex: 1;
+  height: 40rem;
+  justify-content: center;
+  align-items: center;
 `;

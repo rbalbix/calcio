@@ -1,6 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md';
+import moment from 'moment';
+import ReactLoading from 'react-loading';
+
+import api from '../../services/api';
 
 import {
   Container,
@@ -30,10 +33,88 @@ import {
   MatchScoreText,
   MatchTeamShield,
   Button,
+  PrevNextRound,
   InputScore,
+  Loading,
 } from './styles';
 
 export default function UpdateMatches() {
+  const [round, setRound] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [rank, setRank] = useState([]);
+  const [matches, setMatches] = useState([]);
+
+  const [loadingRank, setLoadingRank] = useState(false);
+  const [loadingMatches, setLoadingMatches] = useState(false);
+
+  const [scoreFields, setScoreFields] = useState([
+    { scoreHome: '', scoreAway: '' },
+    { scoreHome: '', scoreAway: '' },
+    { scoreHome: '', scoreAway: '' },
+    { scoreHome: '', scoreAway: '' },
+    { scoreHome: '', scoreAway: '' },
+  ]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('scoreFields', scoreFields);
+  };
+
+  const handleInputChange = (index, event) => {
+    const values = [...scoreFields];
+    if (event.target.name === 'scoreHome') {
+      values[index].scoreHome = event.target.value;
+    } else {
+      values[index].scoreAway = event.target.value;
+    }
+
+    setScoreFields(values);
+  };
+
+  async function loadRank() {
+    setLoadingRank(true);
+
+    const response = await api.get('/rank', {
+      params: { category: 'A' },
+    });
+
+    setLoadingRank(false);
+    setRank(response.data);
+  }
+
+  async function loadMatches() {
+    setLoadingMatches(true);
+
+    const response = await api.get('/match', {
+      params: { category: 'A', round },
+    });
+
+    setTotal(response.headers['x-total-count']);
+    if (round === 0) setRound(response.headers['x-round']);
+
+    setLoadingMatches(false);
+    setMatches(response.data);
+  }
+
+  async function loadPreviousMatches() {
+    if (round - 1 <= 0) return;
+    setRound(round - 1);
+  }
+
+  async function loadNextMatches() {
+    if (round + 1 > total) return setRound(1);
+    setRound(round + 1);
+  }
+
+  useEffect(() => {
+    loadRank();
+    loadMatches();
+  }, []);
+
+  useEffect(() => {
+    loadMatches();
+  }, [round]);
+
   return (
     <Container>
       <CategoryTitle>TORNEIO A</CategoryTitle>
@@ -51,374 +132,141 @@ export default function UpdateMatches() {
             <HeaderTableText>SG</HeaderTableText>
             <HeaderTableText className="optional">%</HeaderTableText>
           </HeaderTable>
-
-          <TeamView>
-            <Team>
-              <PositionText>1</PositionText>
-              <TeamShield src="https://rb-calcio.herokuapp.com/files/shields/sampdoria.png" />
-              <TeamText>SAMPDORIA</TeamText>
-            </Team>
-            <Score>
-              <ScoreText>12</ScoreText>
-              <ScoreText score>4</ScoreText>
-              <ScoreText score>6</ScoreText>
-              <ScoreText score>87</ScoreText>
-              <ScoreText score>34</ScoreText>
-              <ScoreText score className="optional">
-                88
-              </ScoreText>
-              <ScoreText score className="optional">
-                5
-              </ScoreText>
-              <ScoreText score>6</ScoreText>
-              <ScoreText score className="optional">
-                100
-              </ScoreText>
-            </Score>
-          </TeamView>
-          <TeamView>
-            <Team>
-              <PositionText>2</PositionText>
-              <TeamShield src="https://rb-calcio.herokuapp.com/files/shields/sampdoria.png" />
-              <TeamText>INTERNAZIONALE</TeamText>
-            </Team>
-            <Score>
-              <ScoreText>12</ScoreText>
-              <ScoreText score>4</ScoreText>
-              <ScoreText score>6</ScoreText>
-              <ScoreText score>87</ScoreText>
-              <ScoreText score>34</ScoreText>
-              <ScoreText score className="optional">
-                88
-              </ScoreText>
-              <ScoreText score className="optional">
-                5
-              </ScoreText>
-              <ScoreText score>6</ScoreText>
-              <ScoreText score className="optional">
-                100
-              </ScoreText>
-            </Score>
-          </TeamView>
-          <TeamView>
-            <Team>
-              <PositionText>3</PositionText>
-              <TeamShield src="https://rb-calcio.herokuapp.com/files/shields/sampdoria.png" />
-              <TeamText>INTER DE MILÃO</TeamText>
-            </Team>
-            <Score>
-              <ScoreText>12</ScoreText>
-              <ScoreText score>4</ScoreText>
-              <ScoreText score>6</ScoreText>
-              <ScoreText score>87</ScoreText>
-              <ScoreText score>34</ScoreText>
-              <ScoreText score className="optional">
-                88
-              </ScoreText>
-              <ScoreText score className="optional">
-                5
-              </ScoreText>
-              <ScoreText score>6</ScoreText>
-              <ScoreText score className="optional">
-                100
-              </ScoreText>
-            </Score>
-          </TeamView>
-          <TeamView>
-            <Team>
-              <PositionText>4</PositionText>
-              <TeamShield src="https://rb-calcio.herokuapp.com/files/shields/sampdoria.png" />
-              <TeamText>SAMPDORIA</TeamText>
-            </Team>
-            <Score>
-              <ScoreText>12</ScoreText>
-              <ScoreText score>4</ScoreText>
-              <ScoreText score>6</ScoreText>
-              <ScoreText score>87</ScoreText>
-              <ScoreText score>34</ScoreText>
-              <ScoreText score className="optional">
-                88
-              </ScoreText>
-              <ScoreText score className="optional">
-                5
-              </ScoreText>
-              <ScoreText score>6</ScoreText>
-              <ScoreText score className="optional">
-                100
-              </ScoreText>
-            </Score>
-          </TeamView>
-          <TeamView>
-            <Team>
-              <PositionText>5</PositionText>
-              <TeamShield src="https://rb-calcio.herokuapp.com/files/shields/sampdoria.png" />
-              <TeamText>SAMPDORIA</TeamText>
-            </Team>
-            <Score>
-              <ScoreText>12</ScoreText>
-              <ScoreText score>4</ScoreText>
-              <ScoreText score>6</ScoreText>
-              <ScoreText score>87</ScoreText>
-              <ScoreText score>34</ScoreText>
-              <ScoreText score className="optional">
-                88
-              </ScoreText>
-              <ScoreText score className="optional">
-                5
-              </ScoreText>
-              <ScoreText score>6</ScoreText>
-              <ScoreText score className="optional">
-                100
-              </ScoreText>
-            </Score>
-          </TeamView>
-          <TeamView>
-            <Team>
-              <PositionText>6</PositionText>
-              <TeamShield src="https://rb-calcio.herokuapp.com/files/shields/sampdoria.png" />
-              <TeamText>SAMPDORIA</TeamText>
-            </Team>
-            <Score>
-              <ScoreText>12</ScoreText>
-              <ScoreText score>4</ScoreText>
-              <ScoreText score>6</ScoreText>
-              <ScoreText score>87</ScoreText>
-              <ScoreText score>34</ScoreText>
-              <ScoreText score className="optional">
-                88
-              </ScoreText>
-              <ScoreText score className="optional">
-                5
-              </ScoreText>
-              <ScoreText score>6</ScoreText>
-              <ScoreText score className="optional">
-                100
-              </ScoreText>
-            </Score>
-          </TeamView>
-          <TeamView>
-            <Team>
-              <PositionText>7</PositionText>
-              <TeamShield src="https://rb-calcio.herokuapp.com/files/shields/sampdoria.png" />
-              <TeamText>SAMPDORIA</TeamText>
-            </Team>
-            <Score>
-              <ScoreText>12</ScoreText>
-              <ScoreText score>4</ScoreText>
-              <ScoreText score>6</ScoreText>
-              <ScoreText score>87</ScoreText>
-              <ScoreText score>34</ScoreText>
-              <ScoreText score className="optional">
-                88
-              </ScoreText>
-              <ScoreText score className="optional">
-                5
-              </ScoreText>
-              <ScoreText score>6</ScoreText>
-              <ScoreText score className="optional">
-                100
-              </ScoreText>
-            </Score>
-          </TeamView>
-          <TeamView>
-            <Team>
-              <PositionText>8</PositionText>
-              <TeamShield src="https://rb-calcio.herokuapp.com/files/shields/sampdoria.png" />
-              <TeamText>SAMPDORIA</TeamText>
-            </Team>
-            <Score>
-              <ScoreText>12</ScoreText>
-              <ScoreText score>4</ScoreText>
-              <ScoreText score>6</ScoreText>
-              <ScoreText score>87</ScoreText>
-              <ScoreText score>34</ScoreText>
-              <ScoreText score className="optional">
-                88
-              </ScoreText>
-              <ScoreText score className="optional">
-                5
-              </ScoreText>
-              <ScoreText score>6</ScoreText>
-              <ScoreText score className="optional">
-                100
-              </ScoreText>
-            </Score>
-          </TeamView>
-          <TeamView>
-            <Team>
-              <PositionText>9</PositionText>
-              <TeamShield src="https://rb-calcio.herokuapp.com/files/shields/sampdoria.png" />
-              <TeamText>SAMPDORIA</TeamText>
-            </Team>
-            <Score>
-              <ScoreText>12</ScoreText>
-              <ScoreText score>4</ScoreText>
-              <ScoreText score>6</ScoreText>
-              <ScoreText score>87</ScoreText>
-              <ScoreText score>34</ScoreText>
-              <ScoreText score className="optional">
-                88
-              </ScoreText>
-              <ScoreText score className="optional">
-                5
-              </ScoreText>
-              <ScoreText score>6</ScoreText>
-              <ScoreText score className="optional">
-                100
-              </ScoreText>
-            </Score>
-          </TeamView>
-          <TeamView>
-            <Team>
-              <PositionText>10</PositionText>
-              <TeamShield src="https://rb-calcio.herokuapp.com/files/shields/sampdoria.png" />
-              <TeamText>SAMPDORIA</TeamText>
-            </Team>
-            <Score>
-              <ScoreText>12</ScoreText>
-              <ScoreText score>4</ScoreText>
-              <ScoreText score>6</ScoreText>
-              <ScoreText score>87</ScoreText>
-              <ScoreText score>34</ScoreText>
-              <ScoreText score className="optional">
-                88
-              </ScoreText>
-              <ScoreText score className="optional">
-                5
-              </ScoreText>
-              <ScoreText score>6</ScoreText>
-              <ScoreText score className="optional">
-                100
-              </ScoreText>
-            </Score>
-          </TeamView>
+          {loadingRank ? (
+            <Loading>
+              <ReactLoading
+                type="spinningBubbles"
+                color="#1E7A0E"
+                height="20%"
+                width="20%"
+              />
+            </Loading>
+          ) : (
+            rank.map((item, index) => (
+              <TeamView key={item._id}>
+                <Team>
+                  <PositionText>{index + 1}</PositionText>
+                  <TeamShield src={item.team.thumbnail_url} />
+                  <TeamText>{item.team.longName}</TeamText>
+                </Team>
+                <Score>
+                  <ScoreText>{item.points}</ScoreText>
+                  <ScoreText score>{item.played}</ScoreText>
+                  <ScoreText score>{item.wons}</ScoreText>
+                  <ScoreText score>{item.drawn}</ScoreText>
+                  <ScoreText score>{item.lost}</ScoreText>
+                  <ScoreText score className="optional">
+                    {item.goalsFor}
+                  </ScoreText>
+                  <ScoreText score className="optional">
+                    {item.goalsAgainst}
+                  </ScoreText>
+                  <ScoreText score>{item.goalDifference}</ScoreText>
+                  <ScoreText score className="optional">
+                    {item.performance}
+                  </ScoreText>
+                </Score>
+              </TeamView>
+            ))
+          )}
         </ClassificationContainer>
+
         <MatchContainer>
           <MatchTitle>JOGOS</MatchTitle>
           <RoundView>
-            <Link className="previous" to="/">
+            <PrevNextRound onClick={() => loadPreviousMatches()} type="button">
               <MdNavigateBefore size={36} color="#1E7A0E" />
-            </Link>
-            <RoundText>1ª RODADA</RoundText>
-            <Link className="next" to="/">
+            </PrevNextRound>
+            <RoundText>{round}ª RODADA</RoundText>
+            <PrevNextRound onClick={() => loadNextMatches()} type="button">
               <MdNavigateNext size={36} color="#1E7A0E" />
-            </Link>
+            </PrevNextRound>
           </RoundView>
 
           <Matches>
-            <Match>
-              <DateView>
-                <DateText>SEX</DateText>
-                <DateText margin>20/10</DateText>
-              </DateView>
-              <MatchView>
-                <MatchTeamText team align="right">
-                  SAMPDORIA
-                </MatchTeamText>
-                <MatchTeamShield src="https://rb-calcio.herokuapp.com/files/shields/sampdoria.png"></MatchTeamShield>
-                <InputScore
-                  type="tel"
-                  pattern="\d*"
-                  title="Apenas números"
-                  min="0"
-                  max="99"
-                  maxLength="2"
-                />
-
-                <MatchTeamText>X</MatchTeamText>
-                <InputScore
-                  type="tel"
-                  pattern="\d*"
-                  title="Apenas números"
-                  min="0"
-                  max="99"
-                  maxLength="2"
-                />
-                <MatchTeamShield src="https://rb-calcio.herokuapp.com/files/shields/sampdoria.png"></MatchTeamShield>
-                <MatchTeamText team align="left">
-                  INTERNAZIONALE
-                </MatchTeamText>
-              </MatchView>
-            </Match>
-            <Match>
-              <DateView>
-                <DateText>SEX</DateText>
-                <DateText margin>20/10</DateText>
-              </DateView>
-              <MatchView>
-                <MatchTeamText team align="right">
-                  SAMPDORIA
-                </MatchTeamText>
-                <MatchTeamShield src="https://rb-calcio.herokuapp.com/files/shields/sampdoria.png"></MatchTeamShield>
-                <MatchScoreText>10</MatchScoreText>
-                <MatchTeamText>X</MatchTeamText>
-                <MatchScoreText>15</MatchScoreText>
-                <MatchTeamShield src="https://rb-calcio.herokuapp.com/files/shields/sampdoria.png"></MatchTeamShield>
-                <MatchTeamText team align="left">
-                  INTERNAZIONALE
-                </MatchTeamText>
-              </MatchView>
-            </Match>
-            <Match>
-              <DateView>
-                <DateText>SEX</DateText>
-                <DateText margin>20/10</DateText>
-              </DateView>
-              <MatchView>
-                <MatchTeamText team align="right">
-                  SAMPDORIA
-                </MatchTeamText>
-                <MatchTeamShield src="https://rb-calcio.herokuapp.com/files/shields/sampdoria.png"></MatchTeamShield>
-                <MatchScoreText>2</MatchScoreText>
-                <MatchTeamText>X</MatchTeamText>
-                <MatchScoreText>1</MatchScoreText>
-                <MatchTeamShield src="https://rb-calcio.herokuapp.com/files/shields/sampdoria.png"></MatchTeamShield>
-                <MatchTeamText team align="left">
-                  INTERNAZIONALE
-                </MatchTeamText>
-              </MatchView>
-            </Match>
-            <Match>
-              <DateView>
-                <DateText>SEX</DateText>
-                <DateText margin>20/10</DateText>
-              </DateView>
-              <MatchView>
-                <MatchTeamText team align="right">
-                  SAMPDORIA
-                </MatchTeamText>
-                <MatchTeamShield src="https://rb-calcio.herokuapp.com/files/shields/sampdoria.png"></MatchTeamShield>
-                <MatchScoreText>2</MatchScoreText>
-                <MatchTeamText>X</MatchTeamText>
-                <MatchScoreText>1</MatchScoreText>
-                <MatchTeamShield src="https://rb-calcio.herokuapp.com/files/shields/sampdoria.png"></MatchTeamShield>
-                <MatchTeamText team align="left">
-                  INTERNAZIONALE
-                </MatchTeamText>
-              </MatchView>
-            </Match>
-            <Match>
-              <DateView>
-                <DateText>SEX</DateText>
-                <DateText margin>20/10</DateText>
-              </DateView>
-              <MatchView>
-                <MatchTeamText team align="right">
-                  SAMPDORIA
-                </MatchTeamText>
-                <MatchTeamShield src="https://rb-calcio.herokuapp.com/files/shields/sampdoria.png"></MatchTeamShield>
-                <MatchScoreText>2</MatchScoreText>
-                <MatchTeamText>X</MatchTeamText>
-                <MatchScoreText>1</MatchScoreText>
-                <MatchTeamShield src="https://rb-calcio.herokuapp.com/files/shields/sampdoria.png"></MatchTeamShield>
-                <MatchTeamText team align="left">
-                  INTERNAZIONALE
-                </MatchTeamText>
-              </MatchView>
-            </Match>
+            <form onSubmit={handleSubmit}>
+              {loadingMatches ? (
+                <Loading>
+                  <ReactLoading
+                    type="spinningBubbles"
+                    color="#1E7A0E"
+                    height="20%"
+                    width="20%"
+                  />
+                </Loading>
+              ) : (
+                matches.map((match, index) => (
+                  <Match key={match._id}>
+                    <DateView>
+                      <DateText>{match.weekDay}</DateText>
+                      <DateText margin>
+                        {moment(match.day).utc().format('DD/MM')}
+                        {/* {moment(new Date()).format('DD/MM/YYYY')} */}
+                      </DateText>
+                    </DateView>
+                    <MatchView>
+                      <MatchTeamText team align="right">
+                        {match.teamHome.longName}
+                      </MatchTeamText>
+                      <MatchTeamShield
+                        src={match.teamHome.thumbnail_url}
+                      ></MatchTeamShield>
+                      <MatchScoreText>
+                        {match.scoreHome === null ? (
+                          <InputScore
+                            type="tel"
+                            pattern="\d*"
+                            title="Apenas números"
+                            min="0"
+                            max="99"
+                            maxLength="2"
+                            id="scoreHome"
+                            name="scoreHome"
+                            value={scoreFields.scoreHome}
+                            onChange={(event) =>
+                              handleInputChange(index, event)
+                            }
+                          />
+                        ) : (
+                          match.scoreHome
+                        )}
+                      </MatchScoreText>
+                      <MatchTeamText>X</MatchTeamText>
+                      <MatchScoreText>
+                        {match.scoreAway === null ? (
+                          <InputScore
+                            type="tel"
+                            pattern="\d*"
+                            title="Apenas números"
+                            min="0"
+                            max="99"
+                            maxLength="2"
+                            id="scoreAway"
+                            name="scoreAway"
+                            value={scoreFields.scoreAway}
+                            onChange={(event) =>
+                              handleInputChange(index, event)
+                            }
+                          />
+                        ) : (
+                          match.scoreAway
+                        )}
+                      </MatchScoreText>
+                      <MatchTeamShield
+                        src={match.teamAway.thumbnail_url}
+                      ></MatchTeamShield>
+                      <MatchTeamText team align="left">
+                        {match.teamAway.longName}
+                      </MatchTeamText>
+                    </MatchView>
+                  </Match>
+                ))
+              )}
+              <Button type="submit" onSubmit={handleSubmit}>
+                ATUALIZAR
+              </Button>
+            </form>
           </Matches>
-
-          <Button>ATUALIZAR</Button>
         </MatchContainer>
       </CategoryResult>
     </Container>
