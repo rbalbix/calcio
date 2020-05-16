@@ -137,8 +137,8 @@ export default function UpdateMatches() {
               <ReactLoading
                 type="spinningBubbles"
                 color="#1E7A0E"
-                height="20%"
-                width="20%"
+                height="15%"
+                width="15%"
               />
             </Loading>
           ) : (
@@ -177,7 +177,7 @@ export default function UpdateMatches() {
             <PrevNextRound onClick={() => loadPreviousMatches()} type="button">
               <MdNavigateBefore size={36} color="#1E7A0E" />
             </PrevNextRound>
-            <RoundText>{round}ª RODADA</RoundText>
+            <RoundText>{!loadingMatches && `${round}ª`} RODADA</RoundText>
             <PrevNextRound onClick={() => loadNextMatches()} type="button">
               <MdNavigateNext size={36} color="#1E7A0E" />
             </PrevNextRound>
@@ -190,8 +190,8 @@ export default function UpdateMatches() {
                   <ReactLoading
                     type="spinningBubbles"
                     color="#1E7A0E"
-                    height="20%"
-                    width="20%"
+                    height="15%"
+                    width="15%"
                   />
                 </Loading>
               ) : (
@@ -262,9 +262,11 @@ export default function UpdateMatches() {
                   </Match>
                 ))
               )}
-              <Button type="submit" onSubmit={handleSubmit}>
-                ATUALIZAR
-              </Button>
+              {!loadingMatches && (
+                <Button type="submit" onSubmit={handleSubmit}>
+                  ATUALIZAR
+                </Button>
+              )}
             </form>
           </Matches>
         </MatchContainer>

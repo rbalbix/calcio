@@ -289,7 +289,7 @@ export const InputScore = styled.input`
 export const Loading = styled.div`
   display: flex;
   flex: 1;
-  height: 40rem;
+  padding: 5rem;
   justify-content: center;
   align-items: center;
 `;
