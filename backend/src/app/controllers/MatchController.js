@@ -25,7 +25,7 @@ module.exports = {
             week: moment(Date.now()).format('ww'),
           });
         }
-        round = result.length > 0 ? result[0].round : 1;
+        round = result.length > 0 ? result[result.length - 1].round : 1;
       }
 
       const response = await Match.find({ champ, category, round })
