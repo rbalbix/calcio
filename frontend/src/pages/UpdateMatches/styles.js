@@ -86,11 +86,15 @@ export const TeamView = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 1.5rem;
+  /* margin-top: 1.5rem; */
 
-  padding-bottom: 1rem;
+  padding: 1.3rem 0;
   border-bottom: 0.1rem solid;
   border-bottom-color: ${theme.border};
+
+  &:hover {
+    background-color: ${theme.lineColor};
+  }
 `;
 
 export const Team = styled.div`
@@ -156,7 +160,7 @@ export const RoundView = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 1rem 0;
-  margin: 3rem 0 0.8rem 0;
+  margin-top: 3rem;
 
   border-top: 0.1rem solid;
   border-top-color: ${theme.border};
@@ -181,12 +185,18 @@ export const Match = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+
+  &:hover {
+    background-color: ${theme.lineColor};
+  }
 `;
 
 export const DateView = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  padding-top: 0.5rem;
 `;
 
 export const DateText = styled.h4`
@@ -202,12 +212,10 @@ export const MatchView = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  padding: 1.2rem 0;
+  padding: 1.5rem 0;
 
   border-bottom: 0.1rem solid;
   border-bottom-color: ${theme.border};
-
-  margin-bottom: 0.8rem;
 `;
 
 export const MatchTeamText = styled.h3`

@@ -121,17 +121,19 @@ export default function UpdateMatches() {
       <CategoryResult>
         <ClassificationContainer>
           <ClassificationTitle>CLASSIFICAÇÃO</ClassificationTitle>
-          <HeaderTable>
-            <HeaderTableText>P</HeaderTableText>
-            <HeaderTableText>J</HeaderTableText>
-            <HeaderTableText>V</HeaderTableText>
-            <HeaderTableText>E</HeaderTableText>
-            <HeaderTableText>D</HeaderTableText>
-            <HeaderTableText className="optional">GP</HeaderTableText>
-            <HeaderTableText className="optional">GC</HeaderTableText>
-            <HeaderTableText>SG</HeaderTableText>
-            <HeaderTableText className="optional">%</HeaderTableText>
-          </HeaderTable>
+          {!loadingMatches && (
+            <HeaderTable>
+              <HeaderTableText>P</HeaderTableText>
+              <HeaderTableText>J</HeaderTableText>
+              <HeaderTableText>V</HeaderTableText>
+              <HeaderTableText>E</HeaderTableText>
+              <HeaderTableText>D</HeaderTableText>
+              <HeaderTableText className="optional">GP</HeaderTableText>
+              <HeaderTableText className="optional">GC</HeaderTableText>
+              <HeaderTableText>SG</HeaderTableText>
+              <HeaderTableText className="optional">%</HeaderTableText>
+            </HeaderTable>
+          )}
           {loadingRank ? (
             <Loading>
               <ReactLoading
@@ -173,15 +175,20 @@ export default function UpdateMatches() {
 
         <MatchContainer>
           <MatchTitle>JOGOS</MatchTitle>
-          <RoundView>
-            <PrevNextRound onClick={() => loadPreviousMatches()} type="button">
-              <MdNavigateBefore size={36} color="#1E7A0E" />
-            </PrevNextRound>
-            <RoundText>{!loadingMatches && `${round}ª`} RODADA</RoundText>
-            <PrevNextRound onClick={() => loadNextMatches()} type="button">
-              <MdNavigateNext size={36} color="#1E7A0E" />
-            </PrevNextRound>
-          </RoundView>
+          {!loadingMatches && (
+            <RoundView>
+              <PrevNextRound
+                onClick={() => loadPreviousMatches()}
+                type="button"
+              >
+                <MdNavigateBefore size={36} color="#1E7A0E" />
+              </PrevNextRound>
+              <RoundText>{round}ª RODADA</RoundText>
+              <PrevNextRound onClick={() => loadNextMatches()} type="button">
+                <MdNavigateNext size={36} color="#1E7A0E" />
+              </PrevNextRound>
+            </RoundView>
+          )}
 
           <Matches>
             <form onSubmit={handleSubmit}>
