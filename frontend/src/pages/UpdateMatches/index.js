@@ -89,8 +89,8 @@ export default function UpdateMatches() {
       params: { category: 'A', round },
     });
 
-    setTotal(response.headers['x-total-count']);
-    if (round === 0) setRound(response.headers['x-round']);
+    setTotal(parseInt(response.headers['x-total-count']));
+    if (round === 0) setRound(parseInt(response.headers['x-round']));
 
     setLoadingMatches(false);
     setMatches(response.data);
