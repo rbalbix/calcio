@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md';
 import moment from 'moment';
 import ReactLoading from 'react-loading';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 import api from '../../services/api';
 
@@ -47,21 +49,45 @@ export default function UpdateMatches() {
   const [loadingRank, setLoadingRank] = useState(false);
   const [loadingMatches, setLoadingMatches] = useState(false);
 
-  const [scoreFields, setScoreFields] = useState([
-    { scoreHome: '', scoreAway: '' },
-    { scoreHome: '', scoreAway: '' },
-    { scoreHome: '', scoreAway: '' },
-    { scoreHome: '', scoreAway: '' },
-    { scoreHome: '', scoreAway: '' },
-  ]);
+  const initialScoreFields = [
+    { _id: null, scoreHome: '', scoreAway: '' },
+    { _id: null, scoreHome: '', scoreAway: '' },
+    { _id: null, scoreHome: '', scoreAway: '' },
+    { _id: null, scoreHome: '', scoreAway: '' },
+    { _id: null, scoreHome: '', scoreAway: '' },
+  ];
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('scoreFields', scoreFields);
+  const initialDateFields = [
+    { _id: null, day: new Date() },
+    { _id: null, day: new Date() },
+    { _id: null, day: new Date() },
+    { _id: null, day: new Date() },
+    { _id: null, day: new Date() },
+  ];
+
+  const [scoreFields, setScoreFields] = useState(initialScoreFields);
+  const [dateFields, setDateFields] = useState(initialDateFields);
+
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+
+      console.log(dateFields);
+
+      const response = await api.post('/match', { scoreFields });
+
+      loadRank();
+      loadMatches();
+
+      setScoreFields([...initialScoreFields]);
+    } catch (err) {
+      alert('Falha ao atualizar, tente novamente');
+    }
   };
 
-  const handleInputChange = (index, event) => {
+  const handleInputChange = (index, event, _id) => {
     const values = [...scoreFields];
+    values[index]._id = _id;
     if (event.target.name === 'scoreHome') {
       values[index].scoreHome = event.target.value;
     } else {
@@ -69,6 +95,15 @@ export default function UpdateMatches() {
     }
 
     setScoreFields(values);
+  };
+
+  const handleDateChange = (index, event, _id) => {
+    const values = [...dateFields];
+
+    values[index]._id = _id;
+    values[index].day = event;
+
+    setDateFields(values);
   };
 
   async function loadRank() {
@@ -117,6 +152,13 @@ export default function UpdateMatches() {
 
   return (
     <Container>
+      <DatePicker
+        dateFormat="dd/MM"
+        minDate={new Date()}
+        isClearable
+        selected={dateFields.day}
+        onChange={(event) => handleDateChange(0, event, 'sertgf567')}
+      />
       <CategoryTitle>TORNEIO A</CategoryTitle>
       <CategoryResult>
         <ClassificationContainer>
@@ -210,6 +252,15 @@ export default function UpdateMatches() {
                         {moment(match.day).utc().format('DD/MM')}
                         {/* {moment(new Date()).format('DD/MM/YYYY')} */}
                       </DateText>
+                      <DatePicker
+                        dateFormat="dd/MM"
+                        minDate={new Date()}
+                        isClearable
+                        selected={dateFields[index].day}
+                        onChange={(event) =>
+                          handleDateChange(index, event, match._id)
+                        }
+                      />
                     </DateView>
                     <MatchView>
                       <MatchTeamText team align="right">
@@ -231,7 +282,7 @@ export default function UpdateMatches() {
                             name="scoreHome"
                             value={scoreFields.scoreHome}
                             onChange={(event) =>
-                              handleInputChange(index, event)
+                              handleInputChange(index, event, match._id)
                             }
                           />
                         ) : (
@@ -252,7 +303,7 @@ export default function UpdateMatches() {
                             name="scoreAway"
                             value={scoreFields.scoreAway}
                             onChange={(event) =>
-                              handleInputChange(index, event)
+                              handleInputChange(index, event, match._id)
                             }
                           />
                         ) : (
@@ -269,11 +320,7 @@ export default function UpdateMatches() {
                   </Match>
                 ))
               )}
-              {!loadingMatches && (
-                <Button type="submit" onSubmit={handleSubmit}>
-                  ATUALIZAR
-                </Button>
-              )}
+              {!loadingMatches && <Button type="submit">ATUALIZAR</Button>}
             </form>
           </Matches>
         </MatchContainer>

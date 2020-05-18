@@ -36,6 +36,8 @@ routes.get(
   MatchController.index
 );
 
+routes.post('/match', MatchController.update);
+
 // Route to seed initial data
 routes.get('/seed', SeederController.index);
 

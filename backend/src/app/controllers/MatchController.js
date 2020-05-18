@@ -52,4 +52,26 @@ module.exports = {
       res.status(503).send('Algo deu errado. Tente novamente.');
     }
   },
+
+  async update(req, res) {
+    try {
+      const { scoreFields } = req.body;
+
+      scoreFields.map(async (score) => {
+        const { _id, scoreHome, scoreAway } = score;
+
+        if (_id && scoreHome && scoreAway) {
+          const match = await Match.findById(_id);
+          match.scoreHome = scoreHome;
+          match.scoreAway = scoreAway;
+          await match.save();
+        }
+      });
+
+      return res.json({ response: 'ok' });
+    } catch (err) {
+      log.error(err);
+      res.status(503).send('Algo deu errado. Tente novamente.');
+    }
+  },
 };
