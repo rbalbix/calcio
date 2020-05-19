@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md';
 import moment from 'moment';
 import ReactLoading from 'react-loading';
-import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 import api from '../../services/api';
@@ -40,6 +39,10 @@ import {
   Loading,
 } from './styles';
 
+import DatePicker, { registerLocale } from 'react-datepicker';
+import ptBR from 'date-fns/locale/pt-BR';
+registerLocale('pt-BR', ptBR);
+
 export default function UpdateMatches() {
   const [round, setRound] = useState(0);
   const [total, setTotal] = useState(0);
@@ -58,11 +61,11 @@ export default function UpdateMatches() {
   ];
 
   const initialDateFields = [
-    { _id: null, day: new Date() },
-    { _id: null, day: new Date() },
-    { _id: null, day: new Date() },
-    { _id: null, day: new Date() },
-    { _id: null, day: new Date() },
+    { _id: null, day: null },
+    { _id: null, day: null },
+    { _id: null, day: null },
+    { _id: null, day: null },
+    { _id: null, day: null },
   ];
 
   const [scoreFields, setScoreFields] = useState(initialScoreFields);
@@ -73,13 +76,15 @@ export default function UpdateMatches() {
       e.preventDefault();
 
       console.log(dateFields);
+      console.log(scoreFields);
 
-      const response = await api.post('/match', { scoreFields });
+      // const response = await api.post('/match', { scoreFields });
 
-      loadRank();
-      loadMatches();
+      // loadRank();
+      // loadMatches();
 
       setScoreFields([...initialScoreFields]);
+      setDateFields([...initialDateFields]);
     } catch (err) {
       alert('Falha ao atualizar, tente novamente');
     }
@@ -104,6 +109,12 @@ export default function UpdateMatches() {
     values[index].day = event;
 
     setDateFields(values);
+  };
+
+  const handleCalendarClose = (_id) => {
+    if (document.querySelector(`.date-picker${_id}`).value === '') {
+      document.querySelector(`#toggle${_id}`).checked = false;
+    }
   };
 
   async function loadRank() {
@@ -152,13 +163,6 @@ export default function UpdateMatches() {
 
   return (
     <Container>
-      <DatePicker
-        dateFormat="dd/MM"
-        minDate={new Date()}
-        isClearable
-        selected={dateFields.day}
-        onChange={(event) => handleDateChange(0, event, 'sertgf567')}
-      />
       <CategoryTitle>TORNEIO A</CategoryTitle>
       <CategoryResult>
         <ClassificationContainer>
@@ -247,20 +251,39 @@ export default function UpdateMatches() {
                 matches.map((match, index) => (
                   <Match key={match._id}>
                     <DateView>
-                      <DateText>{match.weekDay}</DateText>
-                      <DateText margin>
-                        {moment(match.day).utc().format('DD/MM')}
-                        {/* {moment(new Date()).format('DD/MM/YYYY')} */}
+                      <DateText>
+                        <input
+                          id={`toggle${match._id}`}
+                          type="checkbox"
+                          style={{ display: 'none' }}
+                        ></input>
+                        <label htmlFor={`toggle${match._id}`}>
+                          {`${match.weekDay} ${moment(match.day)
+                            .utc()
+                            .format('DD/MM')}`}
+                        </label>
+
+                        <DatePicker
+                          selected={dateFields[index].day}
+                          onChange={(event) =>
+                            handleDateChange(index, event, match._id)
+                          }
+                          openToDate={
+                            new Date(
+                              moment(match.day).utc().format('YYYY/MM/DD')
+                            )
+                          }
+                          minDate={
+                            new Date(
+                              moment(match.day).utc().format('YYYY/MM/DD')
+                            )
+                          }
+                          dateFormat="E dd/MM"
+                          locale="pt-BR"
+                          onCalendarClose={() => handleCalendarClose(match._id)}
+                          className={`date-picker${match._id}`}
+                        />
                       </DateText>
-                      <DatePicker
-                        dateFormat="dd/MM"
-                        minDate={new Date()}
-                        isClearable
-                        selected={dateFields[index].day}
-                        onChange={(event) =>
-                          handleDateChange(index, event, match._id)
-                        }
-                      />
                     </DateView>
                     <MatchView>
                       <MatchTeamText team align="right">

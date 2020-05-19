@@ -197,12 +197,42 @@ export const DateView = styled.div`
   align-items: center;
 
   padding-top: 0.5rem;
+
+  input {
+    width: 8rem;
+    height: 2.5rem;
+    color: ${theme.textColor};
+    border: 0.1rem solid ${theme.border};
+    border-radius: 0.8rem;
+    padding: 0 0.4rem;
+
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+
+    ~ div {
+      display: none;
+    }
+
+    &:focus,
+    &:hover {
+      border: 0.15rem solid ${theme.primary};
+    }
+
+    &:checked ~ label {
+      display: none;
+    }
+
+    &:checked ~ div {
+      display: block;
+    }
+  }
 `;
 
 export const DateText = styled.h4`
   font-size: 1.4rem;
   line-height: 1.6rem;
-  margin-left: ${(props) => (props.margin ? '1rem' : 0)};
   color: ${theme.textColor};
 `;
 
