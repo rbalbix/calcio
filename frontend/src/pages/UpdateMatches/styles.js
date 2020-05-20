@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-import * as theme from '../../styles/variables';
 
 export const Container = styled.div`
-  background-color: ${theme.bgContainer};
+  background-color: var(--bgContainer);
   width: 95%;
   max-width: 1200px;
   margin: 1rem auto;
@@ -29,7 +28,7 @@ export const CategoryTitle = styled.h1`
   font-size: 3.6rem;
   font-weight: 500;
   line-height: 4.2rem;
-  color: ${theme.primary};
+  color: var(--primary);
 `;
 
 export const CategoryResult = styled.div`
@@ -45,7 +44,7 @@ export const CategoryResult = styled.div`
 `;
 
 export const ClassificationContainer = styled.div`
-  border: 0.1rem solid ${theme.border};
+  border: 0.1rem solid var(--border);
   border-radius: 0.8rem;
   padding: 1.5rem;
 
@@ -58,7 +57,7 @@ export const ClassificationTitle = styled.h2`
   font-size: 2.4rem;
   font-weight: 500;
   line-height: 2.8rem;
-  color: ${theme.primary};
+  color: var(--primary);
 `;
 
 export const HeaderTable = styled.div`
@@ -66,7 +65,7 @@ export const HeaderTable = styled.div`
   justify-content: flex-end;
   padding-bottom: 0.5rem;
   border-bottom: 0.1rem solid;
-  border-bottom-color: ${theme.border};
+  border-bottom-color: var(--border);
 
   margin-top: 1rem;
 `;
@@ -75,7 +74,7 @@ export const HeaderTableText = styled.h3`
   font-size: 1.6rem;
   line-height: 1.8rem;
   font-weight: bold;
-  color: ${theme.textColor};
+  color: var(--textColor);
 
   margin-left: 0.5rem;
   width: 3rem;
@@ -90,10 +89,10 @@ export const TeamView = styled.div`
 
   padding: 1.3rem 0;
   border-bottom: 0.1rem solid;
-  border-bottom-color: ${theme.border};
+  border-bottom-color: var(--border);
 
   &:hover {
-    background-color: ${theme.lineColor};
+    background-color: var(--lineColor);
   }
 `;
 
@@ -105,7 +104,7 @@ export const Team = styled.div`
 export const PositionText = styled.h3`
   font-size: 1.6rem;
   line-height: 1.8rem;
-  color: ${theme.textColor};
+  color: var(--textColor);
   margin-right: 0.3rem;
 
   text-align: center;
@@ -116,7 +115,7 @@ export const TeamText = styled.h3`
   font-size: 1.6rem;
   line-height: 1.8rem;
   font-weight: 500;
-  color: ${theme.teamTextColor};
+  color: var(--teamTextColor);
 `;
 
 export const TeamShield = styled.img`
@@ -135,7 +134,7 @@ export const ScoreText = styled.h3`
   font-size: 1.6rem;
   line-height: 1.8rem;
   font-weight: 500;
-  color: ${theme.textColor};
+  color: var(--textColor);
 
   margin-left: ${(props) => (props.score ? '0.5rem' : 0)};
   width: 3rem;
@@ -143,7 +142,7 @@ export const ScoreText = styled.h3`
 `;
 
 export const MatchContainer = styled.div`
-  border: 0.1rem solid ${theme.border};
+  border: 0.1rem solid var(--border);
   border-radius: 0.8rem;
   padding: 1.5rem;
 `;
@@ -152,7 +151,7 @@ export const MatchTitle = styled.h2`
   font-size: 2.4rem;
   font-weight: 500;
   line-height: 2.8rem;
-  color: ${theme.primary};
+  color: var(--primary);
 `;
 
 export const RoundView = styled.div`
@@ -163,16 +162,16 @@ export const RoundView = styled.div`
   margin-top: 3rem;
 
   border-top: 0.1rem solid;
-  border-top-color: ${theme.border};
+  border-top-color: var(--border);
   border-bottom: 0.1rem solid;
-  border-bottom-color: ${theme.border};
+  border-bottom-color: var(--border);
 `;
 
 export const RoundText = styled.h3`
   font-size: 2rem;
   line-height: 2.2rem;
   font-weight: bold;
-  color: ${theme.textColor};
+  color: var(--textColor);
 `;
 
 export const Matches = styled.div`
@@ -187,7 +186,7 @@ export const Match = styled.div`
   flex-direction: column;
 
   &:hover {
-    background-color: ${theme.lineColor};
+    background-color: var(--lineColor);
   }
 `;
 
@@ -201,8 +200,8 @@ export const DateView = styled.div`
   input {
     width: 8rem;
     height: 2.5rem;
-    color: ${theme.textColor};
-    border: 0.1rem solid ${theme.border};
+    color: var(--textColor);
+    border: 0.1rem solid var(--border);
     border-radius: 0.8rem;
     padding: 0 0.4rem;
 
@@ -217,7 +216,7 @@ export const DateView = styled.div`
 
     &:focus,
     &:hover {
-      border: 0.15rem solid ${theme.primary};
+      border: 0.15rem solid var(--primary);
     }
 
     &:checked ~ label {
@@ -233,7 +232,7 @@ export const DateView = styled.div`
 export const DateText = styled.h4`
   font-size: 1.4rem;
   line-height: 1.6rem;
-  color: ${theme.textColor};
+  color: var(--textColor);
 `;
 
 export const MatchView = styled.div`
@@ -245,17 +244,17 @@ export const MatchView = styled.div`
   padding: 1.5rem 0;
 
   border-bottom: 0.1rem solid;
-  border-bottom-color: ${theme.border};
+  border-bottom-color: var(--border);
 `;
 
 export const MatchTeamText = styled.h3`
   font-size: 1.6rem;
   line-height: 1.8rem;
   font-weight: 500;
-  color: ${theme.teamTextColor};
+  color: var(--teamTextColor);
   width: ${(props) => (props.team ? '15rem' : '1rem')};
   text-align: ${(props) => props.align || 'center'};
-  color: ${theme.teamTextColor};
+  color: var(--teamTextColor);
 
   @media (max-width: 420px) {
     width: fit-content;
@@ -266,7 +265,7 @@ export const MatchScoreText = styled.h3`
   font-size: 1.6rem;
   line-height: 1.8rem;
   font-weight: bold;
-  color: ${theme.teamTextColor};
+  color: var(--teamTextColor);
   width: 3rem;
   text-align: center;
 `;
@@ -279,10 +278,10 @@ export const MatchTeamShield = styled.img`
 export const Button = styled.button`
   width: 100%;
   height: 5rem;
-  background: ${theme.primary};
+  background: var(--primary);
   border: 0;
   border-radius: 0.8rem;
-  color: ${theme.buttonText};
+  color: var(--buttonText);
   font-weight: bold;
   margin-top: 1rem;
   display: inline-block;
@@ -306,8 +305,8 @@ export const PrevNextRound = styled.button`
 export const InputScore = styled.input`
   width: 3rem;
   height: 3rem;
-  color: ${theme.teamTextColor};
-  border: 0.1rem solid ${theme.border};
+  color: var(--teamTextColor);
+  border: 0.1rem solid var(--border);
   border-radius: 0.8rem;
   padding: 0 0.4rem;
 
@@ -321,7 +320,7 @@ export const InputScore = styled.input`
 
   &:focus,
   &:hover {
-    border: 0.15rem solid ${theme.primary};
+    border: 0.15rem solid var(--primary);
   }
 `;
 

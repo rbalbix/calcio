@@ -1,8 +1,20 @@
 import { createGlobalStyle } from 'styled-components';
-import * as theme from './variables';
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap');
+
+:root{
+  --primary       : #1E7A0E;
+
+  --bgColor       : #E0E0E0;
+  --lineColor     : #FFFFD8;
+  --bgContainer   : #FFFFFF;
+  --border        : #E0E0E0;
+
+  --buttonText    : #FFFFFF;
+  --textColor     : #999999;
+  --teamTextColor : #717171;
+}
 
 * {
   margin: 0;
@@ -14,7 +26,7 @@ const GlobalStyle = createGlobalStyle`
 body {
   font-size: 1.4rem;
   font-family: 'Roboto', sans-serif;
-  background: ${theme.bgColor};
+  background: var(--bgColor);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }

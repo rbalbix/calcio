@@ -256,6 +256,11 @@ export default function UpdateMatches() {
                               id={`toggle${match._id}`}
                               type="checkbox"
                               style={{ display: 'none' }}
+                              onClick={() =>
+                                document
+                                  .querySelector(`.date-picker${match._id}`)
+                                  .focus()
+                              }
                             ></input>
                             <label
                               style={{ cursor: 'pointer' }}
