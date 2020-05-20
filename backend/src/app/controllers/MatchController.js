@@ -55,7 +55,7 @@ module.exports = {
 
   async update(req, res) {
     try {
-      const { scoreFields } = req.body;
+      const { scoreFields, dateFields } = req.body;
 
       scoreFields.map(async (score) => {
         const { _id, scoreHome, scoreAway } = score;
@@ -65,6 +65,23 @@ module.exports = {
           match.scoreHome = scoreHome;
           match.scoreAway = scoreAway;
           await match.save();
+        }
+      });
+
+      dateFields.map(async (item) => {
+        const { _id, day } = item;
+
+        if (_id && day) {
+          moment.locale('pt-BR');
+          const formatedDay = moment(day).utc().format('YYYY-MM-DD');
+          const week = moment(day).utc().format('ww');
+          const weekDay = moment(day).utc().format('ddd');
+
+          const match = await Match.findByIdAndUpdate(_id, {
+            day: formatedDay,
+            week,
+            weekDay,
+          });
         }
       });
 

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md';
 import moment from 'moment';
 import ReactLoading from 'react-loading';
-import 'react-datepicker/dist/react-datepicker.css';
 
 import api from '../../services/api';
 
@@ -40,6 +39,7 @@ import {
 } from './styles';
 
 import DatePicker, { registerLocale } from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import ptBR from 'date-fns/locale/pt-BR';
 registerLocale('pt-BR', ptBR);
 
@@ -75,13 +75,10 @@ export default function UpdateMatches() {
     try {
       e.preventDefault();
 
-      console.log(dateFields);
-      console.log(scoreFields);
+      const response = await api.post('/match', { scoreFields, dateFields });
 
-      // const response = await api.post('/match', { scoreFields });
-
-      // loadRank();
-      // loadMatches();
+      loadRank();
+      loadMatches();
 
       setScoreFields([...initialScoreFields]);
       setDateFields([...initialDateFields]);
@@ -252,37 +249,51 @@ export default function UpdateMatches() {
                   <Match key={match._id}>
                     <DateView>
                       <DateText>
-                        <input
-                          id={`toggle${match._id}`}
-                          type="checkbox"
-                          style={{ display: 'none' }}
-                        ></input>
-                        <label htmlFor={`toggle${match._id}`}>
-                          {`${match.weekDay} ${moment(match.day)
-                            .utc()
-                            .format('DD/MM')}`}
-                        </label>
-
-                        <DatePicker
-                          selected={dateFields[index].day}
-                          onChange={(event) =>
-                            handleDateChange(index, event, match._id)
-                          }
-                          openToDate={
-                            new Date(
-                              moment(match.day).utc().format('YYYY/MM/DD')
-                            )
-                          }
-                          minDate={
-                            new Date(
-                              moment(match.day).utc().format('YYYY/MM/DD')
-                            )
-                          }
-                          dateFormat="E dd/MM"
-                          locale="pt-BR"
-                          onCalendarClose={() => handleCalendarClose(match._id)}
-                          className={`date-picker${match._id}`}
-                        />
+                        {match.scoreHome === null &&
+                        match.scoreAway === null ? (
+                          <>
+                            <input
+                              id={`toggle${match._id}`}
+                              type="checkbox"
+                              style={{ display: 'none' }}
+                            ></input>
+                            <label
+                              style={{ cursor: 'pointer' }}
+                              htmlFor={`toggle${match._id}`}
+                            >
+                              {`${match.weekDay} ${moment(match.day)
+                                .utc()
+                                .format('DD/MM')}`}
+                            </label>
+                            <DatePicker
+                              selected={dateFields[index].day}
+                              onChange={(event) =>
+                                handleDateChange(index, event, match._id)
+                              }
+                              openToDate={
+                                new Date(
+                                  moment(match.day).utc().format('YYYY/MM/DD')
+                                )
+                              }
+                              minDate={
+                                new Date(
+                                  moment(match.day).utc().format('YYYY/MM/DD')
+                                )
+                              }
+                              dateFormat="E dd/MM"
+                              locale="pt-BR"
+                              onCalendarClose={() =>
+                                handleCalendarClose(match._id)
+                              }
+                              className={`date-picker${match._id}`}
+                            />
+                          </>
+                        ) : (
+                          <div style={{ cursor: 'not-allowed' }}>
+                            {match.weekDay}{' '}
+                            {moment(match.day).utc().format('DD/MM')}
+                          </div>
+                        )}
                       </DateText>
                     </DateView>
                     <MatchView>

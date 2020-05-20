@@ -300,6 +300,7 @@ export const Button = styled.button`
 export const PrevNextRound = styled.button`
   border: 0;
   text-decoration: none;
+  background-color: transparent;
 `;
 
 export const InputScore = styled.input`
