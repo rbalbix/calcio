@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md';
 import moment from 'moment';
 import ReactLoading from 'react-loading';
+import { useSnackbar } from 'notistack';
 
 import api from '../../services/api';
 
@@ -44,6 +45,8 @@ import ptBR from 'date-fns/locale/pt-BR';
 registerLocale('pt-BR', ptBR);
 
 export default function UpdateMatches() {
+  const { enqueueSnackbar } = useSnackbar();
+
   const [round, setRound] = useState(0);
   const [total, setTotal] = useState(0);
   const [rank, setRank] = useState([]);
@@ -75,15 +78,21 @@ export default function UpdateMatches() {
     try {
       e.preventDefault();
 
-      const response = await api.post('/match', { scoreFields, dateFields });
+      await api.post('/match', { scoreFields, dateFields });
 
-      loadRank();
-      loadMatches();
+      await loadRank();
+      await loadMatches();
 
       setScoreFields([...initialScoreFields]);
       setDateFields([...initialDateFields]);
+
+      enqueueSnackbar('Atualizado com sucesso !', {
+        variant: 'success',
+      });
     } catch (err) {
-      alert('Falha ao atualizar, tente novamente');
+      enqueueSnackbar('Falha ao atualizar, tente novamente !', {
+        variant: 'error',
+      });
     }
   };
 
@@ -152,10 +161,12 @@ export default function UpdateMatches() {
   useEffect(() => {
     loadRank();
     loadMatches();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     loadMatches();
+    // eslint-disable-next-line
   }, [round]);
 
   return (
