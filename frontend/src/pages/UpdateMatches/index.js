@@ -44,7 +44,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import ptBR from 'date-fns/locale/pt-BR';
 registerLocale('pt-BR', ptBR);
 
-export default function UpdateMatches() {
+export default function UpdateMatches(props) {
   const { enqueueSnackbar } = useSnackbar();
 
   const [round, setRound] = useState(0);

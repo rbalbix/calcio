@@ -14,6 +14,8 @@ const GlobalStyle = createGlobalStyle`
   --buttonText    : #FFFFFF;
   --textColor     : #999999;
   --teamTextColor : #717171;
+
+  --fontFamily    : 'Roboto', sans-serif;
 }
 
 * {
@@ -25,7 +27,7 @@ const GlobalStyle = createGlobalStyle`
 
 body {
   font-size: 1.4rem;
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--fontFamily);
   background: var(--bgColor);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -44,7 +46,7 @@ body,
 
 input,
 button{
-  font-family: Roboto, sans-serif;
+  font-family: var(--fontFamily);
 }
 
 button {

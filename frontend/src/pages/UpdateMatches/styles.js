@@ -22,6 +22,27 @@ export const Container = styled.div`
       display: none;
     }
   }
+
+  .react-datepicker {
+    font-size: 1.3rem !important;
+  }
+
+  .react-datepicker__current-month {
+    font-size: 1.5rem !important;
+  }
+
+  .react-datepicker__header {
+    padding-top: 0.6rem !important;
+  }
+
+  .react-datepicker__navigation {
+    top: 1.3rem !important;
+  }
+
+  .react-datepicker__day-name,
+  .react-datepicker__day {
+    margin: 0.5rem !important;
+  }
 `;
 
 export const CategoryTitle = styled.h1`
@@ -85,7 +106,6 @@ export const TeamView = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* margin-top: 1.5rem; */
 
   padding: 1.3rem 0;
   border-bottom: 0.1rem solid;
