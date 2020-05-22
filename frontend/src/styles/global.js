@@ -23,6 +23,7 @@ const GlobalStyle = createGlobalStyle`
   padding: 0;
   outline: 0;
   box-sizing: border-box;
+
 }
 
 body {
@@ -42,6 +43,10 @@ html,
 body,
 #root {
   height: 100vh;
+
+  .MuiSnackbarContent-message {
+    font-size: 1.6rem;
+  }
 }
 
 input,

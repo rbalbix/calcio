@@ -74,6 +74,11 @@ export const ClassificationContainer = styled.div`
   }
 `;
 
+export const ClassificationTitleView = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 export const ClassificationTitle = styled.h2`
   font-size: 2.4rem;
   font-weight: 500;
@@ -167,6 +172,11 @@ export const MatchContainer = styled.div`
   padding: 1.5rem;
 `;
 
+export const MatchTitleView = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 export const MatchTitle = styled.h2`
   font-size: 2.4rem;
   font-weight: 500;
@@ -179,7 +189,7 @@ export const RoundView = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 1rem 0;
-  margin-top: 3rem;
+  margin-top: 1.2rem;
 
   border-top: 0.1rem solid;
   border-top-color: var(--border);
@@ -219,15 +229,15 @@ export const DateView = styled.div`
 
   input {
     width: 8rem;
-    height: 2.5rem;
+    height: 2rem;
     color: var(--textColor);
     border: 0.1rem solid var(--border);
-    border-radius: 0.8rem;
+    border-radius: 0.4rem;
     padding: 0 0.4rem;
 
     text-align: center;
     font-weight: bold;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     line-height: 1.6rem;
 
     ~ div {
@@ -250,8 +260,8 @@ export const DateView = styled.div`
 `;
 
 export const DateText = styled.h4`
-  font-size: 1.4rem;
-  line-height: 1.6rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
   color: var(--textColor);
 `;
 
@@ -342,12 +352,4 @@ export const InputScore = styled.input`
   &:hover {
     border: 0.15rem solid var(--primary);
   }
-`;
-
-export const Loading = styled.div`
-  display: flex;
-  flex: 1;
-  padding: 5rem;
-  justify-content: center;
-  align-items: center;
 `;

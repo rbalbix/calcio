@@ -11,6 +11,7 @@ import {
   CategoryTitle,
   CategoryResult,
   ClassificationContainer,
+  ClassificationTitleView,
   ClassificationTitle,
   HeaderTable,
   HeaderTableText,
@@ -22,6 +23,7 @@ import {
   Score,
   ScoreText,
   MatchContainer,
+  MatchTitleView,
   MatchTitle,
   RoundView,
   RoundText,
@@ -36,7 +38,6 @@ import {
   Button,
   PrevNextRound,
   InputScore,
-  Loading,
 } from './styles';
 
 import DatePicker, { registerLocale } from 'react-datepicker';
@@ -44,7 +45,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import ptBR from 'date-fns/locale/pt-BR';
 registerLocale('pt-BR', ptBR);
 
-export default function UpdateMatches(props) {
+export default function UpdateMatches() {
   const { enqueueSnackbar } = useSnackbar();
 
   const [round, setRound] = useState(0);
@@ -78,18 +79,47 @@ export default function UpdateMatches(props) {
     try {
       e.preventDefault();
 
-      await api.post('/match', { scoreFields, dateFields });
+      let hasScoreFields = false;
+      let hasDateFields = false;
 
-      await loadRank();
-      await loadMatches();
+      for (const i in scoreFields) {
+        if (
+          scoreFields[i]._id !== null &&
+          scoreFields[i].scoreHome !== '' &&
+          scoreFields[i].scoreAway !== ''
+        ) {
+          console.log(scoreFields[i]);
+          hasScoreFields = true;
+          break;
+        }
+      }
 
-      setScoreFields([...initialScoreFields]);
-      setDateFields([...initialDateFields]);
+      for (const i in dateFields) {
+        if (dateFields[i]._id !== null && dateFields[i].day !== null) {
+          console.log(dateFields[i]);
+          hasDateFields = true;
+          break;
+        }
+      }
 
-      enqueueSnackbar('Atualizado com sucesso !', {
-        variant: 'success',
-      });
+      if (hasScoreFields || hasDateFields) {
+        await api.post('/match', { scoreFields, dateFields });
+
+        await loadRank();
+        await loadMatches();
+
+        setScoreFields([...initialScoreFields]);
+        setDateFields([...initialDateFields]);
+
+        if (document.querySelector('input:checked'))
+          document.querySelector('input:checked').checked = false;
+
+        enqueueSnackbar('Atualizado com sucesso !', {
+          variant: 'success',
+        });
+      }
     } catch (err) {
+      console.log(err);
       enqueueSnackbar('Falha ao atualizar, tente novamente !', {
         variant: 'error',
       });
@@ -174,203 +204,216 @@ export default function UpdateMatches(props) {
       <CategoryTitle>TORNEIO A</CategoryTitle>
       <CategoryResult>
         <ClassificationContainer>
-          <ClassificationTitle>CLASSIFICAÇÃO</ClassificationTitle>
-          {!loadingMatches && (
-            <HeaderTable>
-              <HeaderTableText>P</HeaderTableText>
-              <HeaderTableText>J</HeaderTableText>
-              <HeaderTableText>V</HeaderTableText>
-              <HeaderTableText>E</HeaderTableText>
-              <HeaderTableText>D</HeaderTableText>
-              <HeaderTableText className="optional">GP</HeaderTableText>
-              <HeaderTableText className="optional">GC</HeaderTableText>
-              <HeaderTableText>SG</HeaderTableText>
-              <HeaderTableText className="optional">%</HeaderTableText>
-            </HeaderTable>
-          )}
-          {loadingRank ? (
-            <Loading>
-              <ReactLoading
-                type="spinningBubbles"
-                color="#1E7A0E"
-                height="15%"
-                width="15%"
-              />
-            </Loading>
-          ) : (
-            rank.map((item, index) => (
-              <TeamView key={item._id}>
-                <Team>
-                  <PositionText>{index + 1}</PositionText>
-                  <TeamShield src={item.team.thumbnail_url} />
-                  <TeamText>{item.team.longName}</TeamText>
-                </Team>
-                <Score>
-                  <ScoreText>{item.points}</ScoreText>
-                  <ScoreText score>{item.played}</ScoreText>
-                  <ScoreText score>{item.wons}</ScoreText>
-                  <ScoreText score>{item.drawn}</ScoreText>
-                  <ScoreText score>{item.lost}</ScoreText>
-                  <ScoreText score className="optional">
-                    {item.goalsFor}
-                  </ScoreText>
-                  <ScoreText score className="optional">
-                    {item.goalsAgainst}
-                  </ScoreText>
-                  <ScoreText score>{item.goalDifference}</ScoreText>
-                  <ScoreText score className="optional">
-                    {item.performance}
-                  </ScoreText>
-                </Score>
-              </TeamView>
-            ))
-          )}
+          <ClassificationTitleView>
+            <ClassificationTitle>CLASSIFICAÇÃO</ClassificationTitle>
+            <ClassificationTitle>
+              {loadingRank ? (
+                <ReactLoading
+                  type="spokes"
+                  color="#1E7A0E"
+                  height="2rem"
+                  width="2rem"
+                />
+              ) : (
+                ''
+              )}
+            </ClassificationTitle>
+          </ClassificationTitleView>
+
+          <HeaderTable>
+            <HeaderTableText>P</HeaderTableText>
+            <HeaderTableText>J</HeaderTableText>
+            <HeaderTableText>V</HeaderTableText>
+            <HeaderTableText>E</HeaderTableText>
+            <HeaderTableText>D</HeaderTableText>
+            <HeaderTableText className="optional">GP</HeaderTableText>
+            <HeaderTableText className="optional">GC</HeaderTableText>
+            <HeaderTableText>SG</HeaderTableText>
+            <HeaderTableText className="optional">%</HeaderTableText>
+          </HeaderTable>
+
+          {rank.map((item, index) => (
+            <TeamView key={item._id}>
+              <Team>
+                <PositionText>{index + 1}</PositionText>
+                <TeamShield src={item.team.thumbnail_url} />
+                <TeamText>{item.team.longName}</TeamText>
+              </Team>
+              <Score>
+                <ScoreText>{item.points}</ScoreText>
+                <ScoreText score>{item.played}</ScoreText>
+                <ScoreText score>{item.wons}</ScoreText>
+                <ScoreText score>{item.drawn}</ScoreText>
+                <ScoreText score>{item.lost}</ScoreText>
+                <ScoreText score className="optional">
+                  {item.goalsFor}
+                </ScoreText>
+                <ScoreText score className="optional">
+                  {item.goalsAgainst}
+                </ScoreText>
+                <ScoreText score>{item.goalDifference}</ScoreText>
+                <ScoreText score className="optional">
+                  {item.performance}
+                </ScoreText>
+              </Score>
+            </TeamView>
+          ))}
         </ClassificationContainer>
 
         <MatchContainer>
-          <MatchTitle>JOGOS</MatchTitle>
-          {!loadingMatches && (
-            <RoundView>
-              <PrevNextRound
-                onClick={() => loadPreviousMatches()}
-                type="button"
-              >
-                <MdNavigateBefore size={36} color="#1E7A0E" />
-              </PrevNextRound>
-              <RoundText>{round}ª RODADA</RoundText>
-              <PrevNextRound onClick={() => loadNextMatches()} type="button">
-                <MdNavigateNext size={36} color="#1E7A0E" />
-              </PrevNextRound>
-            </RoundView>
-          )}
+          <MatchTitleView>
+            <MatchTitle>JOGOS</MatchTitle>
+            <MatchTitle>
+              {loadingMatches ? (
+                <ReactLoading
+                  type="spokes"
+                  color="#1E7A0E"
+                  height="2rem"
+                  width="2rem"
+                />
+              ) : (
+                ''
+              )}
+            </MatchTitle>
+          </MatchTitleView>
 
+          <RoundView>
+            <PrevNextRound
+              onClick={() => loadPreviousMatches()}
+              type="button"
+              disabled={loadingMatches}
+            >
+              <MdNavigateBefore size={36} color="#1E7A0E" />
+            </PrevNextRound>
+            <RoundText>
+              {round === 0 ? '' : `${round}ª `}
+              RODADA
+            </RoundText>
+            <PrevNextRound
+              onClick={() => loadNextMatches()}
+              type="button"
+              disabled={loadingMatches}
+            >
+              <MdNavigateNext size={36} color="#1E7A0E" />
+            </PrevNextRound>
+          </RoundView>
           <Matches>
             <form onSubmit={handleSubmit}>
-              {loadingMatches ? (
-                <Loading>
-                  <ReactLoading
-                    type="spinningBubbles"
-                    color="#1E7A0E"
-                    height="15%"
-                    width="15%"
-                  />
-                </Loading>
-              ) : (
-                matches.map((match, index) => (
-                  <Match key={match._id}>
-                    <DateView>
-                      <DateText>
-                        {match.scoreHome === null &&
-                        match.scoreAway === null ? (
-                          <>
-                            <input
-                              id={`toggle${match._id}`}
-                              type="checkbox"
-                              style={{ display: 'none' }}
-                              onClick={() =>
-                                document
-                                  .querySelector(`.date-picker${match._id}`)
-                                  .focus()
-                              }
-                            ></input>
-                            <label
-                              style={{ cursor: 'pointer' }}
-                              htmlFor={`toggle${match._id}`}
-                            >
-                              {`${match.weekDay} ${moment(match.day)
-                                .utc()
-                                .format('DD/MM')}`}
-                            </label>
-                            <DatePicker
-                              selected={dateFields[index].day}
-                              onChange={(event) =>
-                                handleDateChange(index, event, match._id)
-                              }
-                              openToDate={
-                                new Date(
-                                  moment(match.day).utc().format('YYYY/MM/DD')
-                                )
-                              }
-                              minDate={
-                                new Date(
-                                  moment(match.day).utc().format('YYYY/MM/DD')
-                                )
-                              }
-                              dateFormat="E dd/MM"
-                              locale="pt-BR"
-                              onCalendarClose={() =>
-                                handleCalendarClose(match._id)
-                              }
-                              className={`date-picker${match._id}`}
-                            />
-                          </>
-                        ) : (
-                          <div style={{ cursor: 'not-allowed' }}>
-                            {match.weekDay}{' '}
-                            {moment(match.day).utc().format('DD/MM')}
-                          </div>
-                        )}
-                      </DateText>
-                    </DateView>
-                    <MatchView>
-                      <MatchTeamText team align="right">
-                        {match.teamHome.longName}
-                      </MatchTeamText>
-                      <MatchTeamShield
-                        src={match.teamHome.thumbnail_url}
-                      ></MatchTeamShield>
-                      <MatchScoreText>
-                        {match.scoreHome === null ? (
-                          <InputScore
-                            type="tel"
-                            pattern="\d*"
-                            title="Apenas números"
-                            min="0"
-                            max="99"
-                            maxLength="2"
-                            id="scoreHome"
-                            name="scoreHome"
-                            value={scoreFields.scoreHome}
-                            onChange={(event) =>
-                              handleInputChange(index, event, match._id)
+              {matches.map((match, index) => (
+                <Match key={match._id}>
+                  <DateView>
+                    <DateText>
+                      {match.scoreHome === null && match.scoreAway === null ? (
+                        <>
+                          <input
+                            id={`toggle${match._id}`}
+                            type="checkbox"
+                            style={{ display: 'none' }}
+                            onClick={() =>
+                              document
+                                .querySelector(`.date-picker${match._id}`)
+                                .focus()
                             }
-                          />
-                        ) : (
-                          match.scoreHome
-                        )}
-                      </MatchScoreText>
-                      <MatchTeamText>X</MatchTeamText>
-                      <MatchScoreText>
-                        {match.scoreAway === null ? (
-                          <InputScore
-                            type="tel"
-                            pattern="\d*"
-                            title="Apenas números"
-                            min="0"
-                            max="99"
-                            maxLength="2"
-                            id="scoreAway"
-                            name="scoreAway"
-                            value={scoreFields.scoreAway}
+                          ></input>
+                          <label
+                            style={{ cursor: 'pointer' }}
+                            htmlFor={`toggle${match._id}`}
+                          >
+                            {`${match.weekDay} ${moment(match.day)
+                              .utc()
+                              .format('DD/MM')}`}
+                          </label>
+                          <DatePicker
+                            selected={dateFields[index].day}
                             onChange={(event) =>
-                              handleInputChange(index, event, match._id)
+                              handleDateChange(index, event, match._id)
                             }
+                            openToDate={
+                              new Date(
+                                moment(match.day).utc().format('YYYY/MM/DD')
+                              )
+                            }
+                            minDate={
+                              new Date(
+                                moment(match.day).utc().format('YYYY/MM/DD')
+                              )
+                            }
+                            dateFormat="E dd/MM"
+                            locale="pt-BR"
+                            onCalendarClose={() =>
+                              handleCalendarClose(match._id)
+                            }
+                            className={`date-picker${match._id}`}
                           />
-                        ) : (
-                          match.scoreAway
-                        )}
-                      </MatchScoreText>
-                      <MatchTeamShield
-                        src={match.teamAway.thumbnail_url}
-                      ></MatchTeamShield>
-                      <MatchTeamText team align="left">
-                        {match.teamAway.longName}
-                      </MatchTeamText>
-                    </MatchView>
-                  </Match>
-                ))
-              )}
-              {!loadingMatches && <Button type="submit">ATUALIZAR</Button>}
+                        </>
+                      ) : (
+                        <div style={{ cursor: 'not-allowed' }}>
+                          {match.weekDay}{' '}
+                          {moment(match.day).utc().format('DD/MM')}
+                        </div>
+                      )}
+                    </DateText>
+                  </DateView>
+                  <MatchView>
+                    <MatchTeamText team align="right">
+                      {match.teamHome.longName}
+                    </MatchTeamText>
+                    <MatchTeamShield
+                      src={match.teamHome.thumbnail_url}
+                    ></MatchTeamShield>
+                    <MatchScoreText>
+                      {match.scoreHome === null ? (
+                        <InputScore
+                          type="tel"
+                          pattern="\d*"
+                          title="Apenas números"
+                          min="0"
+                          max="99"
+                          maxLength="2"
+                          id="scoreHome"
+                          name="scoreHome"
+                          value={scoreFields.scoreHome}
+                          onChange={(event) =>
+                            handleInputChange(index, event, match._id)
+                          }
+                        />
+                      ) : (
+                        match.scoreHome
+                      )}
+                    </MatchScoreText>
+                    <MatchTeamText>X</MatchTeamText>
+                    <MatchScoreText>
+                      {match.scoreAway === null ? (
+                        <InputScore
+                          type="tel"
+                          pattern="\d*"
+                          title="Apenas números"
+                          min="0"
+                          max="99"
+                          maxLength="2"
+                          id="scoreAway"
+                          name="scoreAway"
+                          value={scoreFields.scoreAway}
+                          onChange={(event) =>
+                            handleInputChange(index, event, match._id)
+                          }
+                        />
+                      ) : (
+                        match.scoreAway
+                      )}
+                    </MatchScoreText>
+                    <MatchTeamShield
+                      src={match.teamAway.thumbnail_url}
+                    ></MatchTeamShield>
+                    <MatchTeamText team align="left">
+                      {match.teamAway.longName}
+                    </MatchTeamText>
+                  </MatchView>
+                </Match>
+              ))}
+              <Button type="submit" disabled={loadingMatches}>
+                ATUALIZAR
+              </Button>
             </form>
           </Matches>
         </MatchContainer>
