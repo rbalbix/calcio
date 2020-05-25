@@ -91,4 +91,14 @@ module.exports = {
       res.status(503).send('Algo deu errado. Tente novamente.');
     }
   },
+
+  async categoriesDistinct(req, res) {
+    try {
+      const response = await Match.find().distinct('category');
+      return res.json(response);
+    } catch (err) {
+      log.error(err);
+      res.status(503).send('Algo deu errado. Tente novamente.');
+    }
+  },
 };
