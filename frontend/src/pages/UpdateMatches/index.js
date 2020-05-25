@@ -355,8 +355,11 @@ export default function UpdateMatches() {
                     </DateText>
                   </DateView>
                   <MatchView>
-                    <MatchTeamText team align="right">
+                    <MatchTeamText team align="right" long="true">
                       {match.teamHome.longName}
+                    </MatchTeamText>
+                    <MatchTeamText team align="right" long="false">
+                      {match.teamHome.shortName}
                     </MatchTeamText>
                     <MatchTeamShield
                       src={match.teamHome.thumbnail_url}
@@ -405,8 +408,11 @@ export default function UpdateMatches() {
                     <MatchTeamShield
                       src={match.teamAway.thumbnail_url}
                     ></MatchTeamShield>
-                    <MatchTeamText team align="left">
+                    <MatchTeamText team align="left" long="true">
                       {match.teamAway.longName}
+                    </MatchTeamText>
+                    <MatchTeamText team align="left" long="false">
+                      {match.teamAway.shortName}
                     </MatchTeamText>
                   </MatchView>
                 </Match>

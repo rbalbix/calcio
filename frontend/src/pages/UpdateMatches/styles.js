@@ -77,6 +77,7 @@ export const ClassificationContainer = styled.div`
 export const ClassificationTitleView = styled.div`
   display: flex;
   justify-content: space-between;
+  padding-right: 1rem;
 `;
 
 export const ClassificationTitle = styled.h2`
@@ -175,6 +176,7 @@ export const MatchContainer = styled.div`
 export const MatchTitleView = styled.div`
   display: flex;
   justify-content: space-between;
+  padding-right: 1rem;
 `;
 
 export const MatchTitle = styled.h2`
@@ -286,8 +288,11 @@ export const MatchTeamText = styled.h3`
   text-align: ${(props) => props.align || 'center'};
   color: var(--teamTextColor);
 
+  display: ${(props) => (props.long === 'true' ? 'block' : 'none')};
+
   @media (max-width: 420px) {
-    width: fit-content;
+    width: ${(props) => (props.team ? '6rem' : '1rem')};
+    display: ${(props) => (props.long === 'true' ? 'none' : 'block')};
   }
 `;
 
