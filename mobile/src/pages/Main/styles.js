@@ -8,7 +8,7 @@ import Constants from 'expo-constants';
 export const Container = styled.ScrollView`
   flex: 1;
   background-color: #f0f0f0;
-  padding: ${Constants.statusBarHeight}px ${hp('2%')}px 0px;
+  padding: ${Constants.statusBarHeight}px ${hp('1.5%')}px 0px;
 `;
 
 export const Category = styled.View`
@@ -19,7 +19,7 @@ export const Category = styled.View`
 `;
 
 export const CategoryTitle = styled.Text`
-  font-size: ${hp('4%')}px;
+  font-size: ${Math.min(hp('4%'), 28)}px;
   font-weight: bold;
   color: #1e7a0e;
 `;
@@ -40,12 +40,12 @@ export const HeaderTable = styled.View`
 `;
 
 export const HeaderTableText = styled.Text`
-  font-size: ${hp('2.2%')}px;
+  font-size: ${Math.min(hp('2.2%'), 16)}px;
   font-weight: bold;
   text-align: center;
   color: #999;
-  width: ${wp('7.2%')}px;
-  margin-left: ${wp('2.2%')}px;
+  width: ${Math.min(wp('7.2%'), 28)}px;
+  margin-left: ${wp('0.1%')}px;
 `;
 
 export const TeamView = styled.View`
@@ -65,7 +65,7 @@ export const Team = styled.View`
 `;
 
 export const PositionText = styled.Text`
-  font-size: ${hp('2.4%')}px;
+  font-size: ${Math.min(hp('2.4%'), 18)}px;
   font-weight: bold;
   color: #999;
   padding-right: 5px;
@@ -77,7 +77,7 @@ export const TeamShield = styled.Image`
 `;
 
 export const TeamText = styled.Text`
-  font-size: ${hp('2.4%')}px;
+  font-size: ${Math.min(hp('2.4%'), 18)}px;
   font-weight: bold;
   color: #717171;
   padding-left: 5px;
@@ -89,10 +89,10 @@ export const Score = styled.View`
 `;
 
 export const ScoreText = styled.Text`
-  font-size: ${hp('2.2%')}px;
+  font-size: ${Math.min(hp('2.2%'), 16)}px;
   font-weight: bold;
   text-align: center;
   color: #999;
-  width: ${wp('7.2%')}px;
-  margin-left: ${(props) => (props.score ? wp('2.2%') : wp('0%'))}px;
+  width: ${Math.min(wp('7.2%'), 28)}px;
+  margin-left: ${(props) => (props.score ? wp('0.1%') : wp('0%'))}px;
 `;

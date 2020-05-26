@@ -32,7 +32,7 @@ module.exports = {
       const champ = await getCurrentChampId();
       const ranks = await Rank.find({ champ })
         .select(
-          'category thumbnail team points wons goalsFor goalsAgainst goalDifference'
+          'category thumbnail team points wons drawn lost goalsFor goalsAgainst goalDifference'
         )
         .populate({ path: 'team', select: 'longName thumbnail thumbnail_url' });
 

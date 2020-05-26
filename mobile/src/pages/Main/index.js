@@ -87,6 +87,8 @@ export default function Main() {
             <HeaderTable>
               <HeaderTableText>P</HeaderTableText>
               <HeaderTableText>V</HeaderTableText>
+              <HeaderTableText>E</HeaderTableText>
+              <HeaderTableText>D</HeaderTableText>
               <HeaderTableText>SG</HeaderTableText>
             </HeaderTable>
 
@@ -106,6 +108,8 @@ export default function Main() {
                 <Score>
                   <ScoreText>{item.points}</ScoreText>
                   <ScoreText score>{item.wons}</ScoreText>
+                  <ScoreText score>{item.drawn}</ScoreText>
+                  <ScoreText score>{item.lost}</ScoreText>
                   <ScoreText score>{item.goalDifference}</ScoreText>
                 </Score>
               </TeamView>

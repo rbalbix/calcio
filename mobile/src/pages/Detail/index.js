@@ -117,6 +117,8 @@ export default function Detail() {
           <HeaderTableText>V</HeaderTableText>
           <HeaderTableText>E</HeaderTableText>
           <HeaderTableText>D</HeaderTableText>
+          <HeaderTableText>GP</HeaderTableText>
+          <HeaderTableText>GC</HeaderTableText>
           <HeaderTableText>SG</HeaderTableText>
         </HeaderTable>
 
@@ -144,6 +146,8 @@ export default function Detail() {
                 <ScoreText score>{item.wons}</ScoreText>
                 <ScoreText score>{item.drawn}</ScoreText>
                 <ScoreText score>{item.lost}</ScoreText>
+                <ScoreText score>{item.goalsFor}</ScoreText>
+                <ScoreText score>{item.goalsAgainst}</ScoreText>
                 <ScoreText score>{item.goalDifference}</ScoreText>
               </Score>
             </TeamView>
