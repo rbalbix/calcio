@@ -87,7 +87,6 @@ export default function UpdateMatchesComponent(props) {
           scoreFields[i].scoreHome !== '' &&
           scoreFields[i].scoreAway !== ''
         ) {
-          console.log(scoreFields[i]);
           hasScoreFields = true;
           break;
         }
@@ -95,7 +94,6 @@ export default function UpdateMatchesComponent(props) {
 
       for (const i in dateFields) {
         if (dateFields[i]._id !== null && dateFields[i].day !== null) {
-          console.log(dateFields[i]);
           hasDateFields = true;
           break;
         }
@@ -379,7 +377,7 @@ export default function UpdateMatchesComponent(props) {
                       match.scoreHome
                     )}
                   </MatchScoreText>
-                  <MatchTeamText>X</MatchTeamText>
+                  <MatchScoreText>X</MatchScoreText>
                   <MatchScoreText>
                     {match.scoreAway === null ? (
                       <InputScore
