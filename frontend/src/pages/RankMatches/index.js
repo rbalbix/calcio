@@ -1,12 +1,22 @@
 import React, { useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { MdArrowBack } from 'react-icons/md';
 
 import Rank from '../../components/Rank';
 import Matches from '../../components/Matches';
 
-import { CategoryContainer, CategoryTitle, CategoryResult } from './styles';
+import {
+  CategoryContainer,
+  CategoryTitleView,
+  Back,
+  CategoryTitle,
+  CategoryResult,
+} from './styles';
 
-export default function RankMatches() {
+export default function RankMatches({ location }) {
   const loadRankRef = useRef();
+
+  const category = location.query?.category || location.state?.category;
 
   function loadRank() {
     loadRankRef.current.loadRankRef();
@@ -14,10 +24,17 @@ export default function RankMatches() {
 
   return (
     <CategoryContainer>
-      <CategoryTitle>TORNEIO A</CategoryTitle>
+      <CategoryTitleView>
+        <Link style={{ textDecoration: 'none' }} to="/">
+          <Back>
+            <MdArrowBack size={26} />
+          </Back>
+        </Link>
+        <CategoryTitle>TORNEIO {category}</CategoryTitle>
+      </CategoryTitleView>
       <CategoryResult>
-        <Rank ref={loadRankRef} category="A" />
-        <Matches loadRank={loadRank} category="A" />
+        <Rank ref={loadRankRef} category={category} />
+        <Matches loadRank={loadRank} category={category} />
       </CategoryResult>
     </CategoryContainer>
   );

@@ -4,18 +4,19 @@ const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap');
 
 :root{
-  --primary       : #1E7A0E;
+  --primary         : #1E7A0E;
 
-  --bgColor       : #E0E0E0;
-  --lineColor     : #FFFFD8;
-  --bgContainer   : #FFFFFF;
-  --border        : #E0E0E0;
+  --bgColor         : #E0E0E0;
+  --lineColor       : #FFFFD8;
+  --bgContainer     : #FFFFFF;
+  --bgContainerDark : #333333;
+  --border          : #E0E0E0;
 
-  --buttonText    : #FFFFFF;
-  --textColor     : #999999;
-  --teamTextColor : #717171;
+  --buttonText      : #FFFFFF;
+  --textColor       : #999999;
+  --teamTextColor   : #717171;
 
-  --fontFamily    : 'Roboto', sans-serif;
+  --fontFamily      : 'Roboto', sans-serif;
 }
 
 * {

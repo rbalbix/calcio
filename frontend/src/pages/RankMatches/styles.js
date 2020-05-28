@@ -15,10 +15,38 @@ export const CategoryContainer = styled.div`
   box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.25);
 `;
 
+export const CategoryTitleView = styled.div`
+  display: flex;
+`;
+
+export const Back = styled.div`
+  background-color: var(--primary);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  margin-left: 0.5rem;
+  margin-right: 1rem;
+
+  opacity: 0.8;
+  transition: opacity 0.2s;
+  color: var(--bgContainer);
+
+  &:hover {
+    transform: translateY(-2px);
+    opacity: 1;
+    transition: opacity 0.2s;
+    cursor: pointer;
+  }
+`;
+
 export const CategoryTitle = styled.h1`
-  font-size: 3.6rem;
+  font-size: 3rem;
   font-weight: 500;
-  line-height: 4.2rem;
   color: var(--primary);
 `;
 
@@ -27,7 +55,7 @@ export const CategoryResult = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: 0.5rem;
 
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 
   @media (max-width: 420px) {
     grid-template-columns: none;

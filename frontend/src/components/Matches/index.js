@@ -92,8 +92,9 @@ const Matches = ({ category, loadRank }) => {
         setScoreFields([...initialScoreFields]);
         setDateFields([...initialDateFields]);
 
-        if (document.querySelector('input:checked'))
-          document.querySelector('input:checked').checked = false;
+        document.querySelectorAll('input:checked').forEach(function (el) {
+          el.checked = false;
+        });
 
         enqueueSnackbar('Atualizado com sucesso !', {
           variant: 'success',
