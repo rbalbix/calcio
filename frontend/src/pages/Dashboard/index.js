@@ -30,22 +30,22 @@ export default function Dashboard() {
       <DashboardTitle>Painel de Controle</DashboardTitle>
       <Cards>
         {categories.map((category) => (
-          <Link
-            style={{ textDecoration: 'none' }}
-            key={category}
-            to={{
-              pathname: '/rank',
-              query: { category },
-              state: { category },
-            }}
-          >
-            <Card>
+          <Card>
+            <Link
+              style={{ textDecoration: 'none' }}
+              key={category}
+              to={{
+                pathname: '/rank',
+                query: { category },
+                state: { category },
+              }}
+            >
               <CardHeader>TABELA E JOGOS</CardHeader>
               <CardBody>
                 <CardText>TORNEIO {category}</CardText>
               </CardBody>
-            </Card>
-          </Link>
+            </Link>
+          </Card>
         ))}
       </Cards>
     </Container>

@@ -38,6 +38,7 @@ body {
 html {
   /* every 1rem will be considered 10px - responsiveness */
   font-size: 62.5%;
+  /* font-size: 59%;  */
 }
 
 html,

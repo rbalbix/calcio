@@ -20,7 +20,6 @@ export const DashboardTitle = styled.h1`
 export const Cards = styled.div`
   background-color: var(--bgContainer);
 
-  width: 90%;
   max-width: 800px;
 
   padding: 1.5rem;
@@ -28,6 +27,8 @@ export const Cards = styled.div`
 
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  justify-items: center;
+  align-items: center;
   gap: 1.5rem;
 `;
 
@@ -38,6 +39,7 @@ export const Card = styled.div`
   -ms-flex-direction: column;
   flex-direction: column;
   min-width: 0;
+  max-width: 20rem;
   height: 18rem;
   word-wrap: break-word;
   background-color: var(--bgContainer);
