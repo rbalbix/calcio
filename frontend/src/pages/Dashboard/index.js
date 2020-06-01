@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+import Top4 from '../../components/Top4';
+
 import api from '../../services/api';
 
 import {
@@ -10,7 +12,7 @@ import {
   Card,
   CardHeader,
   CardBody,
-  CardText,
+  // CardText,
 } from './styles';
 
 export default function Dashboard() {
@@ -30,7 +32,7 @@ export default function Dashboard() {
       <DashboardTitle>Painel de Controle</DashboardTitle>
       <Cards>
         {categories.map((category) => (
-          <Card>
+          <Card key={category} draggable="true">
             <Link
               style={{ textDecoration: 'none' }}
               key={category}
@@ -42,7 +44,7 @@ export default function Dashboard() {
             >
               <CardHeader>TABELA E JOGOS</CardHeader>
               <CardBody>
-                <CardText>TORNEIO {category}</CardText>
+                <Top4 category={category} />
               </CardBody>
             </Link>
           </Card>

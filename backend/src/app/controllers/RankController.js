@@ -34,7 +34,10 @@ module.exports = {
         .select(
           'category thumbnail team points wons drawn lost goalsFor goalsAgainst goalDifference'
         )
-        .populate({ path: 'team', select: 'longName thumbnail thumbnail_url' });
+        .populate({
+          path: 'team',
+          select: 'shortName longName thumbnail thumbnail_url',
+        });
 
       const response = {
         A: ranks

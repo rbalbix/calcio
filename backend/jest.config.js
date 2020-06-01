@@ -10,6 +10,7 @@ module.exports = {
     'src/**',
     '!src/database/index.js',
     '!src/database/migrations/**',
+    '!src/config/**',
   ],
   // The directory where Jest should output its coverage files
   coverageDirectory: '__tests__/coverage',

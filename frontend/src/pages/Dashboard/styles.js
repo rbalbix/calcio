@@ -13,6 +13,7 @@ export const Container = styled.div`
 `;
 
 export const DashboardTitle = styled.h1`
+  font-size: 4rem;
   color: var(--bgContainer);
   margin-bottom: 1rem;
 `;
@@ -20,7 +21,7 @@ export const DashboardTitle = styled.h1`
 export const Cards = styled.div`
   background-color: var(--bgContainer);
 
-  max-width: 800px;
+  max-width: 1000px;
 
   padding: 1.5rem;
   border-radius: 0.6rem;
@@ -39,8 +40,8 @@ export const Card = styled.div`
   -ms-flex-direction: column;
   flex-direction: column;
   min-width: 0;
-  max-width: 20rem;
-  height: 18rem;
+  /* max-width: 20rem; */
+  /* height: 18rem; */
   word-wrap: break-word;
   background-color: var(--bgContainer);
   background-clip: border-box;
@@ -63,7 +64,7 @@ export const CardHeader = styled.div`
   background-color: rgba(0, 0, 0, 0.03);
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 
-  font-size: 1.8rem;
+  font-size: 2.5rem;
   font-weight: bold;
   color: var(--primary);
 `;
@@ -72,7 +73,7 @@ export const CardBody = styled.div`
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
   min-height: 1px;
-  padding: 1.25rem;
+  padding: 1rem;
 `;
 
 export const CardText = styled.h3`
