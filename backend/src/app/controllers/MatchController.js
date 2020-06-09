@@ -1,7 +1,7 @@
 const moment = require('moment');
 const { Match } = require('../models');
 const log = require('../../services/logger');
-const getCurrentChampId = require('../../utils/getCurrentChampId');
+const getCurrentChamp = require('../../utils/getCurrentChamp');
 
 module.exports = {
   async index(req, res) {
@@ -9,18 +9,18 @@ module.exports = {
       const { category, limit = 5 } = req.query;
       let { round } = req.query;
 
-      const champ = await getCurrentChampId();
+      const { _id } = await getCurrentChamp();
 
       if (round === 0) {
         moment.locale('pt-BR');
         let result = await Match.find({
-          champ,
+          champ: _id,
           category,
           day: moment(moment(Date.now()).format('YYYY-MM-DD')).utc().format(),
         });
         if (!result.length) {
           result = await Match.find({
-            champ,
+            champ: _id,
             category,
             week: moment(Date.now()).format('ww'),
           });
@@ -28,7 +28,7 @@ module.exports = {
         round = result.length > 0 ? result[result.length - 1].round : 1;
       }
 
-      const response = await Match.find({ champ, category, round })
+      const response = await Match.find({ champ: _id, category, round })
         .sort('day')
         .limit(limit)
         .populate({
@@ -42,7 +42,7 @@ module.exports = {
 
       res.header(
         'X-Total-Count',
-        (await Match.countDocuments({ champ, category })) / limit
+        (await Match.countDocuments({ champ: _id, category })) / limit
       );
       res.header('X-round', round);
 
