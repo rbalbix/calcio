@@ -5,6 +5,7 @@ const { celebrate, Segments, Joi } = require('celebrate');
 const {
   RankController,
   MatchController,
+  ChampController,
   SeederController,
 } = require('./app/controllers');
 
@@ -37,8 +38,9 @@ routes.get(
 );
 
 routes.post('/match', MatchController.update);
-
 routes.get('/match/categories', MatchController.categoriesDistinct);
+
+routes.get('/champ/current', ChampController.current);
 
 // Route to seed initial data
 routes.get('/seed', SeederController.index);

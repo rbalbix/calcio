@@ -18,10 +18,16 @@ export const DashboardTitle = styled.h1`
   margin-bottom: 1rem;
 `;
 
+export const ChampTitle = styled.h2`
+  font-size: 3rem;
+  color: var(--textColor);
+  margin-bottom: 1rem;
+`;
+
 export const Cards = styled.div`
   background-color: var(--bgContainer);
 
-  max-width: 1000px;
+  max-width: 800px;
 
   padding: 1.5rem;
   border-radius: 0.6rem;
@@ -34,19 +40,11 @@ export const Cards = styled.div`
 `;
 
 export const Card = styled.div`
-  position: relative;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-direction: column;
   flex-direction: column;
-  min-width: 0;
-  /* max-width: 20rem; */
-  /* height: 18rem; */
-  word-wrap: break-word;
   background-color: var(--bgContainer);
-  background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 0.25rem;
+  border-radius: 0.35rem;
   opacity: 0.8;
   transition: opacity 0.2s;
   box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.25);
@@ -70,14 +68,6 @@ export const CardHeader = styled.div`
 `;
 
 export const CardBody = styled.div`
-  -ms-flex: 1 1 auto;
-  flex: 1 1 auto;
   min-height: 1px;
   padding: 1rem;
-`;
-
-export const CardText = styled.h3`
-  font-size: 1.6rem;
-  line-height: 1.8;
-  color: #333333;
 `;

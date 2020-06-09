@@ -8,28 +8,39 @@ import api from '../../services/api';
 import {
   Container,
   DashboardTitle,
+  ChampTitle,
   Cards,
   Card,
   CardHeader,
   CardBody,
-  // CardText,
 } from './styles';
 
 export default function Dashboard() {
   const [categories, setCategories] = useState([]);
-
-  async function loadCategories() {
-    const response = await api.get('/match/categories');
-    setCategories(response.data);
-  }
+  const [champ, setChamp] = useState('');
 
   useEffect(() => {
+    async function loadCategories() {
+      const response = await api.get('/match/categories');
+      setCategories(response.data);
+    }
+
     loadCategories();
+  }, []);
+
+  useEffect(() => {
+    async function loadCurrentChamp() {
+      const response = await api.get('/champ/current');
+      setChamp(response.data);
+    }
+
+    loadCurrentChamp();
   }, []);
 
   return (
     <Container>
       <DashboardTitle>Painel de Controle</DashboardTitle>
+      <ChampTitle>{champ.name}</ChampTitle>
       <Cards>
         {categories.map((category) => (
           <Card key={category} draggable="true">
