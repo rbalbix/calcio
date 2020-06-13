@@ -1,12 +1,22 @@
-/**
- *
- * A rank can be of a specific champ and category.
- *
- */
+import { mongoose } from '../../database';
 
-const { Schema, model } = require('../../database').mongoose;
+const { Schema, model } = mongoose;
 
-const RankSchema = Schema(
+export interface IRank extends mongoose.Document {
+  champ: {};
+  category: string;
+  team: {};
+  points: number;
+  played: number;
+  wons: number;
+  drawn: number;
+  lost: number;
+  goalsFor: number;
+  goalsAgainst: number;
+  goalDifference: number;
+}
+
+const RankSchema = new Schema(
   {
     champ: {
       type: Schema.Types.ObjectId,
@@ -39,10 +49,8 @@ const RankSchema = Schema(
   }
 );
 
-RankSchema.virtual('performance').get(function () {
+RankSchema.virtual('performance').get(function (this: IRank) {
   return Math.round((this.points / (this.played * 3)) * 100);
 });
 
-const Rank = model('Rank', RankSchema);
-
-module.exports = Rank;
+export const Rank = model<IRank>('Rank', RankSchema);

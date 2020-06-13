@@ -1,7 +1,4 @@
-require('dotenv').config({
-  path: process.env.NODE_ENV === 'test' ? '.env.test' : '.env',
-});
-const log4js = require('log4js');
+import log4js from 'log4js';
 
 const level =
   process.env.LOGGING_LEVEL_TEST || process.env.NODE_LOGGING_LEVEL || 'info';
@@ -40,6 +37,6 @@ log4js.configure({
   },
 });
 
-const logger = log4js.getLogger();
+const log = log4js.getLogger();
 
-module.exports = logger;
+export default log;
