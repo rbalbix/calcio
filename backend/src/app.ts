@@ -1,8 +1,6 @@
 import express, { Application } from 'express';
 import { config } from 'dotenv';
-if (process.env.NODE_ENV === 'development') {
-  import morgan from 'morgan';
-}
+import morgan from 'morgan';
 import path from 'path';
 
 // Security stuff
