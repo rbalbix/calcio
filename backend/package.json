@@ -10,6 +10,7 @@
     "dev": "ts-node-dev --ignore-watch node_modules src/server.ts",
     "start:ts": "ts-node src/server.ts",
     "build": "tsc && yarn uploads",
+    "uploads": "cp -r ./uploads/ ./dist/uploads/",
     "start": "node dist/src/server.js",
     "seed": "ts-node src/database/seeds/seeder.ts",
     "seed:prod": "cross-env NODE_ENV=production ts-node src/database/seeds/seeder.ts",
