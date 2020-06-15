@@ -1,4 +1,9 @@
 import log4js from 'log4js';
+import { config } from 'dotenv';
+
+config({
+  path: process.env.NODE_ENV === 'test' ? '.env.test' : '.env',
+});
 
 const level =
   process.env.LOGGING_LEVEL_TEST || process.env.NODE_LOGGING_LEVEL || 'info';

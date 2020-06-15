@@ -37,6 +37,10 @@ function connect() {
   }
 }
 
+function disconnectTest(done: any) {
+  mongoose.disconnect(done);
+}
+
 function disconnect() {
   mongoose.disconnect();
 }
@@ -49,4 +53,4 @@ async function truncate() {
   }
 }
 
-export { connect, disconnect, truncate, mongoose };
+export { connect, disconnect, disconnectTest, truncate, mongoose };

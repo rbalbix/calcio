@@ -31,10 +31,10 @@ export const top = async (req: Request, res: Response) => {
   try {
     const top = 4;
 
-    const current = await getCurrentChamp();
+    const champ = await getCurrentChamp();
+    if (!champ) throw new Error('Championship does not exists.');
 
-    const { _id } = current;
-    const ranks = await Rank.find({ champ: _id })
+    const ranks = await Rank.find({ champ })
       .select(
         'category thumbnail team points wons drawn lost goalsFor goalsAgainst goalDifference'
       )
@@ -66,6 +66,7 @@ export const index = async (req: Request, res: Response) => {
   try {
     const { category } = req.query as ParamsDictionary;
     const champ = await getCurrentChamp();
+    if (!champ) throw new Error('Championship does not exists.');
 
     const response = await Rank.find({ champ, category })
       .select(

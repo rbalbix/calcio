@@ -1,4 +1,7 @@
 module.exports = {
+  transform: {
+    '^.+\\.tsx?$': 'ts-jest',
+  },
   // Stop running tests after `n` failures
   bail: true,
   // Automatically clear mock calls and instances between every test
@@ -10,6 +13,7 @@ module.exports = {
     'src/**',
     '!src/database/index.js',
     '!src/database/migrations/**',
+    '!src/database/seeds/**',
     '!src/config/**',
   ],
   // The directory where Jest should output its coverage files
@@ -19,6 +23,7 @@ module.exports = {
   // The glob patterns Jest uses to detect test files
   testMatch: [
     '**/__tests__/**/*.test.js?(x)',
-    // "**/?(*.)+(spec|test).[tj]s?(x)"
+    '**/?(*.)+(spec|test).[tj]s?(x)',
   ],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
 };

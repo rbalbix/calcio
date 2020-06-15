@@ -14,6 +14,7 @@ export const index = async (req: Request, res: Response) => {
     let { round } = req.query as Round;
 
     const champ = await getCurrentChamp();
+    if (!champ) throw new Error('Championship does not exists.');
 
     if (round === 0) {
       moment.locale('pt-BR');
