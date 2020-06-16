@@ -8,11 +8,6 @@ config({
 });
 
 describe('Current Champ', () => {
-  beforeAll(async () => {
-    connect();
-    await truncate();
-  });
-
   beforeEach(async () => {
     connect();
     await truncate();

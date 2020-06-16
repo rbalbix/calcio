@@ -64,8 +64,7 @@ export const update = async (req: Request, res: Response) => {
 
     scoreFields.map(async (score: ParamsDictionary) => {
       const { _id, scoreHome, scoreAway } = score;
-
-      if (_id && scoreHome && scoreAway) {
+      if (_id && scoreHome !== null && scoreAway !== null) {
         const match = await Match.findById(_id);
         match!.scoreHome = Number(scoreHome);
         match!.scoreAway = Number(scoreAway);
@@ -100,6 +99,8 @@ export const update = async (req: Request, res: Response) => {
 export const categoriesDistinct = async (req: Request, res: Response) => {
   try {
     const response = await Match.find().distinct('category');
+    if (response.length === 0) throw new Error('Categories do not exists.');
+
     return res.status(OK).json(response);
   } catch (err) {
     log.error(err);

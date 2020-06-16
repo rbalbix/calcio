@@ -6,6 +6,7 @@ import log from '../../services/logger';
 export const currentChamp = async (req: Request, res: Response) => {
   try {
     const response = await getCurrentChamp();
+    if (!response) throw new Error('Championship does not exists.');
 
     return res.status(OK).json(response);
   } catch (err) {

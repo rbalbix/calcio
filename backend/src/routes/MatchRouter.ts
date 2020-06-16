@@ -28,7 +28,7 @@ router.get(
 router.post('/', MatchController.update);
 
 /******************************************************************************
- *                      Post Match - "POST /match"
+ *                      Get Match - "GET /match/categories"
  ******************************************************************************/
 
 router.get('/categories', MatchController.categoriesDistinct);

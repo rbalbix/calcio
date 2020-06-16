@@ -4,7 +4,7 @@ import { OK, BAD_REQUEST } from 'http-status-codes';
 
 import { connect, disconnectTest, truncate } from '../../src/database';
 
-import { Champ, Team, Match } from '../../src/app/models';
+import { Champ, Team, Match, IMatch } from '../../src/app/models';
 
 const app = new App().getApp();
 
@@ -536,5 +536,140 @@ describe('Rank', () => {
         }),
       ])
     );
+  });
+
+  it('should update a match /match/update route', async () => {
+    await Champ.create({
+      name: 'Campeonato 2020',
+      season: 2020,
+    });
+
+    await Team.create([
+      {
+        longName: 'SAMPDORIA',
+        shortName: 'SAM',
+        thumbnail: 'sampdoria.png',
+      },
+      {
+        longName: 'INTERNAZIONALE',
+        shortName: 'INT',
+        thumbnail: 'inter-de-milao.png',
+      },
+    ]);
+
+    const champs = await Champ.find();
+    const teams = await Team.find();
+
+    const match: IMatch = await Match.create({
+      champ: champs.find((champ) => champ.season === 2020)!._id,
+      category: 'A',
+      round: 1,
+      teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
+      scoreHome: null,
+      teamAway: teams.find((team) => team.longName === 'SAMPDORIA')!._id,
+      scoreAway: null,
+      day: '2020-02-10 21:00:00',
+      week: 7,
+      weekDay: 'SEG',
+    });
+
+    const scoreFields = [
+      { _id: null, scoreHome: 0, scoreAway: 2 },
+      { _id: null, scoreHome: '', scoreAway: '' },
+      { _id: null, scoreHome: '', scoreAway: '' },
+      { _id: null, scoreHome: '', scoreAway: '' },
+      { _id: null, scoreHome: '', scoreAway: '' },
+    ];
+
+    const dateFields = [
+      { _id: match._id, day: '2020-04-06' },
+      { _id: null, day: null },
+      { _id: null, day: null },
+      { _id: null, day: null },
+      { _id: null, day: null },
+    ];
+
+    const response = await request(app).post('/match').send({
+      scoreFields,
+      dateFields,
+    });
+
+    expect(response.status).toBe(OK);
+  });
+
+  it('should get distincted categories of matches /match/categories route', async () => {
+    await Champ.create({
+      name: 'Campeonato 2020',
+      season: 2020,
+    });
+
+    await Team.create([
+      {
+        longName: 'SAMPDORIA',
+        shortName: 'SAM',
+        thumbnail: 'sampdoria.png',
+      },
+      {
+        longName: 'INTERNAZIONALE',
+        shortName: 'INT',
+        thumbnail: 'inter-de-milao.png',
+      },
+    ]);
+
+    const champs = await Champ.find();
+    const teams = await Team.find();
+
+    await Match.create(
+      {
+        champ: champs.find((champ) => champ.season === 2020)!._id,
+        category: 'INICIO',
+        round: 1,
+        teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
+        scoreHome: null,
+        teamAway: teams.find((team) => team.longName === 'SAMPDORIA')!._id,
+        scoreAway: null,
+        day: '2020-02-10 21:00:00',
+        week: 7,
+        weekDay: 'SEG',
+      },
+      {
+        champ: champs.find((champ) => champ.season === 2020)!._id,
+        category: 'A',
+        round: 1,
+        teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
+        scoreHome: null,
+        teamAway: teams.find((team) => team.longName === 'SAMPDORIA')!._id,
+        scoreAway: null,
+        day: '2020-02-10 21:00:00',
+        week: 7,
+        weekDay: 'SEG',
+      },
+      {
+        champ: champs.find((champ) => champ.season === 2020)!._id,
+        category: 'B',
+        round: 1,
+        teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
+        scoreHome: null,
+        teamAway: teams.find((team) => team.longName === 'SAMPDORIA')!._id,
+        scoreAway: null,
+        day: '2020-02-10 21:00:00',
+        week: 7,
+        weekDay: 'SEG',
+      }
+    );
+
+    const response = await request(app).get('/match/categories');
+
+    expect(response.status).toBe(OK);
+
+    expect(response.body).toHaveLength(3);
+    expect(response.body).toContain('INICIO');
+    expect(response.body).toContain('A');
+    expect(response.body).toContain('B');
+  });
+
+  it('should get a BAD REQUEST to /match/categories route', async () => {
+    const response = await request(app).get('/match/categories');
+    expect(response.status).toBe(BAD_REQUEST);
   });
 });
