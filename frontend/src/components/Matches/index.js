@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md';
+import { MdNavigateBefore, MdNavigateNext, MdSecurity } from 'react-icons/md';
 import moment from 'moment';
 import ReactLoading from 'react-loading';
 import { useSnackbar } from 'notistack';
@@ -191,8 +191,17 @@ const Matches = ({ category, loadRank }) => {
           <MdNavigateBefore size={36} color="#1E7A0E" />
         </PrevNextRound>
         <RoundText>
-          {round === 0 ? '' : `${round}ª `}
-          RODADA
+          {round === 28
+            ? 'QUARTAS'
+            : round === 29
+            ? 'QUARTAS'
+            : round === 30
+            ? 'SEMIFINAL'
+            : round === 31
+            ? 'FINAL'
+            : round === 0
+            ? ''
+            : `${round}ª RODADA`}
         </RoundText>
         <PrevNextRound
           onClick={() => loadNextMatches()}
@@ -254,14 +263,18 @@ const Matches = ({ category, loadRank }) => {
               </DateView>
               <MatchView>
                 <MatchTeamText team align="right" long="true">
-                  {match.teamHome.longName}
+                  {match.teamHome ? match.teamHome.longName : 'TIME'}
                 </MatchTeamText>
                 <MatchTeamText team align="right" long="false">
-                  {match.teamHome.shortName}
+                  {match.teamHome ? match.teamHome.shortName : 'TIM'}
                 </MatchTeamText>
-                <MatchTeamShield
-                  src={match.teamHome.thumbnail_url}
-                ></MatchTeamShield>
+                {match.teamHome ? (
+                  <MatchTeamShield
+                    src={match.teamHome.thumbnail_url}
+                  ></MatchTeamShield>
+                ) : (
+                  <MdSecurity size={30} color="#999999" />
+                )}
                 <MatchScoreText>
                   {match.scoreHome === null ? (
                     <InputScore
@@ -303,14 +316,18 @@ const Matches = ({ category, loadRank }) => {
                     match.scoreAway
                   )}
                 </MatchScoreText>
-                <MatchTeamShield
-                  src={match.teamAway.thumbnail_url}
-                ></MatchTeamShield>
+                {match.teamAway ? (
+                  <MatchTeamShield
+                    src={match.teamAway.thumbnail_url}
+                  ></MatchTeamShield>
+                ) : (
+                  <MdSecurity size={30} color="#999999" />
+                )}
                 <MatchTeamText team align="left" long="true">
-                  {match.teamAway.longName}
+                  {match.teamAway ? match.teamAway.longName : 'TIME'}
                 </MatchTeamText>
                 <MatchTeamText team align="left" long="false">
-                  {match.teamAway.shortName}
+                  {match.teamAway ? match.teamAway.shortName : 'TIM'}
                 </MatchTeamText>
               </MatchView>
             </MatchGlobalView>

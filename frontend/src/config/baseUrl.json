@@ -1,3 +1,3 @@
 {
-  "baseURL": "https://rb-calcio.herokuapp.com"
+  "baseURL": "http://localhost:3333"
 }

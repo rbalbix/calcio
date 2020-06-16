@@ -45,10 +45,13 @@ export const index = async (req: Request, res: Response) => {
         select: 'shortName longName thumbnail thumbnail_url',
       });
 
-    res.header(
-      'X-Total-Count',
-      String((await Match.countDocuments({ champ, category })) / Number(limit))
-    );
+    const max = await Match.aggregate([
+      { $group: { _id: null, maxRound: { $max: '$round' } } },
+      { $project: { _id: 0, maxRound: 1 } },
+    ]);
+
+    res.header('X-Total-Count', String(max[0].maxRound));
+
     res.header('X-round', String(round));
 
     return res.status(OK).json(response);

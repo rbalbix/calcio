@@ -13,11 +13,8 @@ async function seed() {
   log.info('Connecting ...');
   connect();
 
-  log.info('Seeding Champs ...');
   await seedChamp();
-  log.info('Seeding Teams ...');
   await seedTeam();
-  log.info('Seeding Matches ...');
   await seedMatch();
 
   log.info('Disconnecting ...');

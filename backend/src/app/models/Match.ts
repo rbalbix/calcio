@@ -7,6 +7,7 @@ export interface IMatch extends mongoose.Document {
   champ: {} | any;
   category: string;
   round: number;
+  roundName?: string;
   day: {} | any;
   week: number;
   weekDay: string;
@@ -31,6 +32,9 @@ const MatchSchema = new Schema(
       type: Number,
       required: true,
     },
+    roundName: {
+      type: String,
+    },
     day: {
       type: Date,
       required: true,
@@ -43,13 +47,13 @@ const MatchSchema = new Schema(
     teamHome: {
       type: Schema.Types.ObjectId,
       ref: 'Team',
-      required: true,
+      // required: true,
     },
     scoreHome: { type: Number, min: 0, max: 99 },
     teamAway: {
       type: Schema.Types.ObjectId,
       ref: 'Team',
-      required: true,
+      // required: true,
     },
     scoreAway: { type: Number, min: 0, max: 99 },
   },
