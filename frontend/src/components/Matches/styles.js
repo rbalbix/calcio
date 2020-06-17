@@ -191,6 +191,12 @@ export const PrevNextRound = styled.button`
   background-color: transparent;
 `;
 
+export const InputView = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const InputScore = styled.input`
   width: 3rem;
   height: 3rem;
@@ -201,6 +207,29 @@ export const InputScore = styled.input`
 
   text-align: center;
   font-size: 1.4rem;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+
+  &:focus,
+  &:hover {
+    border: 0.15rem solid var(--primary);
+  }
+`;
+
+export const InputPenalty = styled.input`
+  display: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--teamTextColor);
+  border: 0.1rem solid var(--border);
+  border-radius: 0.8rem;
+  margin: 0 0.2rem;
+
+  text-align: center;
+  font-size: 1.2rem;
 
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {

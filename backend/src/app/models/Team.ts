@@ -4,6 +4,7 @@ import { baseURL } from '../../config';
 const { Schema, model } = mongoose;
 
 export interface ITeam extends mongoose.Document {
+  isFake?: boolean;
   longName: string;
   shortName: string;
   thumbnail: string;
@@ -11,6 +12,7 @@ export interface ITeam extends mongoose.Document {
 
 const TeamSchema = new Schema(
   {
+    isFake: Boolean,
     longName: {
       type: String,
       uppercase: true,

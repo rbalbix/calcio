@@ -20,7 +20,9 @@ import {
   MatchTeamShield,
   Button,
   PrevNextRound,
+  InputView,
   InputScore,
+  InputPenalty,
 } from './styles';
 
 import api from '../../services/api';
@@ -55,8 +57,17 @@ const Matches = ({ category, loadRank }) => {
     { _id: null, day: null },
   ];
 
+  const initialPenaltyFields = [
+    { _id: null, penaltyHome: '', penaltyAway: '' },
+    { _id: null, penaltyHome: '', penaltyAway: '' },
+    { _id: null, penaltyHome: '', penaltyAway: '' },
+    { _id: null, penaltyHome: '', penaltyAway: '' },
+    { _id: null, penaltyHome: '', penaltyAway: '' },
+  ];
+
   const [scoreFields, setScoreFields] = useState(initialScoreFields);
   const [dateFields, setDateFields] = useState(initialDateFields);
+  const [penaltyFields, setPenaltyFields] = useState(initialPenaltyFields);
 
   const handleSubmit = async (e) => {
     try {
@@ -117,7 +128,35 @@ const Matches = ({ category, loadRank }) => {
       values[index].scoreAway = event.target.value;
     }
 
+    if (values[index].scoreAway !== '' && values[index].scoreHome !== '') {
+      //round > 27
+      if (values[index].scoreAway === values[index].scoreHome) {
+        document.querySelector(`.penalty-home${_id}`).style.display = 'block';
+        document.querySelector(`.penalty-away${_id}`).style.display = 'block';
+      } else {
+        const penalties = [...penaltyFields];
+        penalties[index].penaltyHome = '';
+        penalties[index].penaltyAway = '';
+        setPenaltyFields(penalties);
+        document.querySelector(`.penalty-home${_id}`).value = '';
+        document.querySelector(`.penalty-away${_id}`).value = '';
+        document.querySelector(`.penalty-home${_id}`).style.display = 'none';
+        document.querySelector(`.penalty-away${_id}`).style.display = 'none';
+      }
+    }
+
     setScoreFields(values);
+  };
+
+  const handlePenaltyChange = (index, event, _id) => {
+    const values = [...penaltyFields];
+    values[index]._id = _id;
+    if (event.target.name === 'penaltyHome') {
+      values[index].penaltyHome = event.target.value;
+    } else {
+      values[index].penaltyAway = event.target.value;
+    }
+    setPenaltyFields(values);
   };
 
   const handleDateChange = (index, event, _id) => {
@@ -275,9 +314,10 @@ const Matches = ({ category, loadRank }) => {
                 ) : (
                   <MdSecurity size={30} color="#999999" />
                 )}
-                <MatchScoreText>
-                  {match.scoreHome === null ? (
+                {match.scoreHome === null ? (
+                  <InputView>
                     <InputScore
+                      disabled={match.teamHome.isFake || match.teamAway.isFake}
                       type="tel"
                       pattern="\d*"
                       title="Apenas números"
@@ -291,14 +331,45 @@ const Matches = ({ category, loadRank }) => {
                         handleInputChange(index, event, match._id)
                       }
                     />
-                  ) : (
-                    match.scoreHome
-                  )}
-                </MatchScoreText>
+                    <InputPenalty
+                      type="tel"
+                      pattern="\d*"
+                      title="Apenas números"
+                      min="0"
+                      max="99"
+                      maxLength="2"
+                      id="penaltyHome"
+                      name="penaltyHome"
+                      value={penaltyFields.penaltyHome}
+                      onChange={(event) =>
+                        handlePenaltyChange(index, event, match._id)
+                      }
+                      className={`penalty-home${match._id}`}
+                    />
+                  </InputView>
+                ) : (
+                  <MatchScoreText>match.scoreHome</MatchScoreText>
+                )}
                 <MatchScoreText>X</MatchScoreText>
-                <MatchScoreText>
-                  {match.scoreAway === null ? (
+                {match.scoreAway === null ? (
+                  <InputView>
+                    <InputPenalty
+                      type="tel"
+                      pattern="\d*"
+                      title="Apenas números"
+                      min="0"
+                      max="99"
+                      maxLength="2"
+                      id="penaltyAway"
+                      name="penaltyAway"
+                      value={penaltyFields.penaltyAway}
+                      onChange={(event) =>
+                        handlePenaltyChange(index, event, match._id)
+                      }
+                      className={`penalty-away${match._id}`}
+                    />
                     <InputScore
+                      disabled={match.teamHome.isFake || match.teamAway.isFake}
                       type="tel"
                       pattern="\d*"
                       title="Apenas números"
@@ -312,10 +383,10 @@ const Matches = ({ category, loadRank }) => {
                         handleInputChange(index, event, match._id)
                       }
                     />
-                  ) : (
-                    match.scoreAway
-                  )}
-                </MatchScoreText>
+                  </InputView>
+                ) : (
+                  <MatchScoreText>match.scoreAway</MatchScoreText>
+                )}
                 {match.teamAway ? (
                   <MatchTeamShield
                     src={match.teamAway.thumbnail_url}

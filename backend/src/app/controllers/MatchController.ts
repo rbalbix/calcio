@@ -38,11 +38,11 @@ export const index = async (req: Request, res: Response) => {
       .limit(Number(limit))
       .populate({
         path: 'teamHome',
-        select: 'shortName longName thumbnail thumbnail_url',
+        select: 'isFake shortName longName thumbnail thumbnail_url',
       })
       .populate({
         path: 'teamAway',
-        select: 'shortName longName thumbnail thumbnail_url',
+        select: 'isFake shortName longName thumbnail thumbnail_url',
       });
 
     const max = await Match.aggregate([

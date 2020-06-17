@@ -57,6 +57,102 @@ async function seed() {
         shortName: 'ROM',
         thumbnail: 'roma.png',
       },
+      /**
+       * FAKE TEAMS
+       */
+      /**
+       * FOR QUARTAS
+       */
+      {
+        isFake: true,
+        longName: '1º',
+        shortName: '1º',
+        thumbnail: 'fake-shield.png',
+      },
+      {
+        isFake: true,
+        longName: '2º',
+        shortName: '2º',
+        thumbnail: 'fake-shield.png',
+      },
+      {
+        isFake: true,
+        longName: '3º',
+        shortName: '3º',
+        thumbnail: 'fake-shield.png',
+      },
+      {
+        isFake: true,
+        longName: '4º',
+        shortName: '4º',
+        thumbnail: 'fake-shield.png',
+      },
+      {
+        isFake: true,
+        longName: '5º',
+        shortName: '5º',
+        thumbnail: 'fake-shield.png',
+      },
+      {
+        isFake: true,
+        longName: '6º',
+        shortName: '6º',
+        thumbnail: 'fake-shield.png',
+      },
+      {
+        isFake: true,
+        longName: '7º',
+        shortName: '7º',
+        thumbnail: 'fake-shield.png',
+      },
+      {
+        isFake: true,
+        longName: '8º',
+        shortName: '8º',
+        thumbnail: 'fake-shield.png',
+      },
+      /**
+       * FOR SEMIFINAL
+       */
+      {
+        isFake: true,
+        longName: 'Venc. Quartas 1',
+        shortName: 'QF1',
+        thumbnail: 'fake-shield.png',
+      },
+      {
+        isFake: true,
+        longName: 'Venc. Quartas 2',
+        shortName: 'QF2',
+        thumbnail: 'fake-shield.png',
+      },
+      {
+        isFake: true,
+        longName: 'Venc. Quartas 3',
+        shortName: 'QF3',
+        thumbnail: 'fake-shield.png',
+      },
+      {
+        isFake: true,
+        longName: 'Venc. Quartas 4',
+        shortName: 'QF4',
+        thumbnail: 'fake-shield.png',
+      },
+      /**
+       * FOR FINAL
+       */
+      {
+        isFake: true,
+        longName: 'Semifinal 1',
+        shortName: 'SF1',
+        thumbnail: 'fake-shield.png',
+      },
+      {
+        isFake: true,
+        longName: 'Semifinal 2',
+        shortName: 'SF2',
+        thumbnail: 'fake-shield.png',
+      },
     ]);
   } catch (err) {
     log.error(err);
