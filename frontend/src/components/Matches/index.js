@@ -17,6 +17,7 @@ import {
   MatchView,
   MatchTeamText,
   MatchScoreText,
+  MatchPenaltyText,
   MatchTeamShield,
   Button,
   PrevNextRound,
@@ -75,6 +76,7 @@ const Matches = ({ category, loadRank }) => {
 
       let hasScoreFields = false;
       let hasDateFields = false;
+      let hasPenaltyFields = false;
 
       for (const i in scoreFields) {
         if (
@@ -94,14 +96,32 @@ const Matches = ({ category, loadRank }) => {
         }
       }
 
-      if (hasScoreFields || hasDateFields) {
-        await api.post('/match', { scoreFields, dateFields });
+      for (const i in penaltyFields) {
+        if (
+          penaltyFields[i]._id !== null &&
+          penaltyFields[i].penaltyHome !== '' &&
+          penaltyFields[i].penaltyAway !== ''
+        ) {
+          hasPenaltyFields = true;
+          break;
+        }
+      }
+
+      if (hasScoreFields || hasDateFields || hasPenaltyFields) {
+        await api.post('/match', {
+          scoreFields,
+          dateFields,
+          penaltyFields,
+          round,
+          category,
+        });
 
         loadRank();
         await loadMatches();
 
         setScoreFields([...initialScoreFields]);
         setDateFields([...initialDateFields]);
+        setDateFields([...initialPenaltyFields]);
 
         document.querySelectorAll('input:checked').forEach(function (el) {
           el.checked = false;
@@ -128,8 +148,11 @@ const Matches = ({ category, loadRank }) => {
       values[index].scoreAway = event.target.value;
     }
 
-    if (values[index].scoreAway !== '' && values[index].scoreHome !== '') {
-      //round > 27
+    if (
+      round > 27 &&
+      values[index].scoreAway !== '' &&
+      values[index].scoreHome !== ''
+    ) {
       if (values[index].scoreAway === values[index].scoreHome) {
         document.querySelector(`.penalty-home${_id}`).style.display = 'block';
         document.querySelector(`.penalty-away${_id}`).style.display = 'block';
@@ -348,7 +371,14 @@ const Matches = ({ category, loadRank }) => {
                     />
                   </InputView>
                 ) : (
-                  <MatchScoreText>match.scoreHome</MatchScoreText>
+                  <>
+                    <MatchScoreText>{match.scoreHome}</MatchScoreText>
+                    {match.penaltyHome && (
+                      <MatchPenaltyText>
+                        {`(${match.penaltyHome}`}
+                      </MatchPenaltyText>
+                    )}
+                  </>
                 )}
                 <MatchScoreText>X</MatchScoreText>
                 {match.scoreAway === null ? (
@@ -385,7 +415,14 @@ const Matches = ({ category, loadRank }) => {
                     />
                   </InputView>
                 ) : (
-                  <MatchScoreText>match.scoreAway</MatchScoreText>
+                  <>
+                    {match.penaltyAway && (
+                      <MatchPenaltyText>
+                        {`${match.penaltyAway})`}
+                      </MatchPenaltyText>
+                    )}
+                    <MatchScoreText>{match.scoreAway}</MatchScoreText>
+                  </>
                 )}
                 {match.teamAway ? (
                   <MatchTeamShield

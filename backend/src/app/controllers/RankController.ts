@@ -72,7 +72,7 @@ export const index = async (req: Request, res: Response) => {
       .select(
         'category thumbnail team points played wons drawn lost goalsFor goalsAgainst goalDifference'
       )
-      .sort('-points -wons -goalDifference ')
+      .sort('-points -wons -goalDifference -goalsFor -goalsAgainst')
       .populate('team');
 
     return res.status(OK).json(response);

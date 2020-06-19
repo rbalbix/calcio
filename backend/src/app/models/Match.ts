@@ -8,13 +8,16 @@ export interface IMatch extends mongoose.Document {
   category: string;
   round: number;
   roundName?: string;
+  game?: number;
   day: {} | any;
   week: number;
   weekDay: string;
   teamHome: {} | any;
   scoreHome: number | null;
+  penaltyHome?: number;
   teamAway: {} | any;
   scoreAway: number | null;
+  penaltyAway?: number;
 }
 
 const MatchSchema = new Schema(
@@ -35,6 +38,9 @@ const MatchSchema = new Schema(
     roundName: {
       type: String,
     },
+    game: {
+      type: Number,
+    },
     day: {
       type: Date,
       required: true,
@@ -50,12 +56,14 @@ const MatchSchema = new Schema(
       // required: true,
     },
     scoreHome: { type: Number, min: 0, max: 99 },
+    penaltyHome: { type: Number, min: 0, max: 99 },
     teamAway: {
       type: Schema.Types.ObjectId,
       ref: 'Team',
       // required: true,
     },
     scoreAway: { type: Number, min: 0, max: 99 },
+    penaltyAway: { type: Number, min: 0, max: 99 },
   },
   { timestamps: true }
 );
@@ -72,7 +80,7 @@ MatchSchema.post('save', async function (doc: IMatch) {
 export const Match = model<IMatch>('Match', MatchSchema);
 
 async function updateRank(doc: IMatch) {
-  if (doc.scoreHome !== null && doc.scoreAway !== null) {
+  if (doc.round <= 27 && doc.scoreHome !== null && doc.scoreAway !== null) {
     const drawn = doc.scoreHome === doc.scoreAway;
     const homeWon = doc.scoreHome > doc.scoreAway;
 

@@ -159,6 +159,14 @@ export const MatchScoreText = styled.h3`
   text-align: center;
 `;
 
+export const MatchPenaltyText = styled.h3`
+  font-size: 1.3rem;
+  line-height: 1.5rem;
+  font-weight: 500;
+  color: var(--textColor);
+  text-align: center;
+`;
+
 export const MatchTeamShield = styled.img`
   width: 3rem;
   height: 3rem;
