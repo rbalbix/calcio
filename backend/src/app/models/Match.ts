@@ -9,6 +9,7 @@ export interface IMatch extends mongoose.Document {
   round: number;
   roundName?: string;
   game?: number;
+  leg?: number;
   day: {} | any;
   week: number;
   weekDay: string;
@@ -39,6 +40,9 @@ const MatchSchema = new Schema(
       type: String,
     },
     game: {
+      type: Number,
+    },
+    leg: {
       type: Number,
     },
     day: {

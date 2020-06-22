@@ -61,6 +61,40 @@ export const index = async (req: Request, res: Response) => {
   }
 };
 
+export const show = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    const response = await Match.findById(id);
+
+    return res.status(OK).json(response);
+  } catch (err) {
+    log.error(err);
+    res.status(BAD_REQUEST).send('Algo deu errado. Tente novamente.');
+  }
+};
+
+export const leg = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    const match = await Match.findById(id);
+
+    const response = await Match.findOne({
+      champ: match?.champ,
+      category: match?.category,
+      roundName: match?.roundName,
+      game: match?.game,
+      leg: 1,
+    });
+
+    return res.status(OK).json(response);
+  } catch (err) {
+    log.error(err);
+    res.status(BAD_REQUEST).send('Algo deu errado. Tente novamente.');
+  }
+};
+
 export const update = async (req: Request, res: Response) => {
   try {
     const {
@@ -71,13 +105,15 @@ export const update = async (req: Request, res: Response) => {
       category,
     } = req.body;
 
-    await updateScore(scoreFields);
-    await updateDate(dateFields);
-    await updatePenalty(penaltyFields);
-
-    if (round >= 27 && round < 31) {
-      await createFinalMatches(round, category);
-    }
+    updateScore(scoreFields).then(() => {
+      updateDate(dateFields).then(() => {
+        updatePenalty(penaltyFields).then(async () => {
+          if (round >= 27 && round < 31) {
+            await createFinalMatches(round, category);
+          }
+        });
+      });
+    });
 
     return res.status(OK).json({ response: 'ok' });
   } catch (err) {
@@ -90,6 +126,8 @@ export const categoriesDistinct = async (req: Request, res: Response) => {
   try {
     const response = await Match.find().distinct('category');
     if (response.length === 0) throw new Error('Categories do not exists.');
+
+    console.log(response);
 
     return res.status(OK).json(response);
   } catch (err) {
@@ -109,6 +147,7 @@ async function updatePenalty(penaltyFields: any) {
       });
     }
   });
+  return;
 }
 
 async function updateDate(dateFields: any) {
@@ -128,6 +167,7 @@ async function updateDate(dateFields: any) {
       });
     }
   });
+  return;
 }
 
 async function updateScore(scoreFields: any) {
@@ -140,6 +180,7 @@ async function updateScore(scoreFields: any) {
       await match!.save();
     }
   });
+  return;
 }
 
 async function createFinalMatches(round: number, category: string) {
@@ -150,7 +191,7 @@ async function createFinalMatches(round: number, category: string) {
     case 30:
       await createFinal(champ, category);
       break;
-    case 28 || 29:
+    case 29:
       await createSemifinal(champ, category);
       break;
     case 27:
@@ -175,8 +216,13 @@ async function createFinal(champ: IChamp, category: string) {
       return;
     }
 
-    // venc S1 --> Final Home
-    // venc S2 --> Final Away
+    const semiWinnerGame1: ITeam | null = getClassifiedTeam(
+      matches.filter((match) => match.game === 1)
+    );
+
+    const semiWinnerGame2: ITeam | null = getClassifiedTeam(
+      matches.filter((match) => match.game === 2)
+    );
 
     const finals = await Match.find({
       champ,
@@ -185,8 +231,8 @@ async function createFinal(champ: IChamp, category: string) {
     });
 
     finals.map(async (final: IMatch) => {
-      // final.teamHome = ;
-      // final.teamAway = ;
+      final.teamHome = semiWinnerGame1;
+      final.teamAway = semiWinnerGame2;
 
       await final.save();
     });
@@ -196,10 +242,6 @@ async function createFinal(champ: IChamp, category: string) {
     log.error(err);
     throw new Error('Algo deu errado. Tente novamente.');
   }
-}
-
-function getClassifiedTeam(game: IMatch[]): ITeam {
-  return ITeam;
 }
 
 async function createSemifinal(champ: IChamp, category: string) {
@@ -216,15 +258,21 @@ async function createSemifinal(champ: IChamp, category: string) {
       return;
     }
 
-    const quarterWinnerGame1: ITeam = getClassifiedTeam(
+    const quarterWinnerGame1: ITeam | null = getClassifiedTeam(
       matches.filter((match) => match.game === 1)
     );
 
-    // venc Q1 --> S1 Home
-    // venc Q4 --> S1 Away
+    const quarterWinnerGame2: ITeam | null = getClassifiedTeam(
+      matches.filter((match) => match.game === 2)
+    );
 
-    // venc Q2 --> S2 Home
-    // venc Q3 --> S2 Away
+    const quarterWinnerGame3: ITeam | null = getClassifiedTeam(
+      matches.filter((match) => match.game === 3)
+    );
+
+    const quarterWinnerGame4: ITeam | null = getClassifiedTeam(
+      matches.filter((match) => match.game === 4)
+    );
 
     const semifinals = await Match.find({
       champ,
@@ -235,12 +283,12 @@ async function createSemifinal(champ: IChamp, category: string) {
     semifinals.map(async (semifinal: IMatch) => {
       switch (semifinal.game) {
         case 1:
-          // semifinal.teamHome = ;
-          // semifinal.teamAway = ;
+          semifinal.teamHome = quarterWinnerGame1;
+          semifinal.teamAway = quarterWinnerGame4;
           break;
         case 2:
-          // semifinal.teamHome = ;
-          // semifinal.teamAway = ;
+          semifinal.teamHome = quarterWinnerGame2;
+          semifinal.teamAway = quarterWinnerGame3;
           break;
 
         default:
@@ -310,4 +358,52 @@ async function createQuarter(champ: IChamp, category: string) {
     log.error(err);
     throw new Error('Algo deu errado. Tente novamente.');
   }
+}
+
+function getClassifiedTeam(game: IMatch[]): ITeam | null {
+  let firstLeg, secondLeg;
+  let classifiedTeam: ITeam | null = null;
+
+  if (game[0].round === game[1].round) {
+    if (game[0].week < game[1].week) {
+      firstLeg = game[0];
+      secondLeg = game[1];
+    } else {
+      firstLeg = game[1];
+      secondLeg = game[0];
+    }
+  } else if (game[0].round < game[1].round) {
+    firstLeg = game[0];
+    secondLeg = game[1];
+  } else {
+    firstLeg = game[1];
+    secondLeg = game[0];
+  }
+
+  if (
+    firstLeg.scoreHome !== null &&
+    secondLeg.scoreHome !== null &&
+    firstLeg.scoreAway !== null &&
+    secondLeg.scoreAway !== null
+  ) {
+    const accScoreHome = firstLeg.scoreHome + secondLeg.scoreHome;
+    const accScoreAway = firstLeg.scoreAway + secondLeg.scoreAway;
+
+    if (accScoreHome === accScoreAway) {
+      if (secondLeg.penaltyHome && secondLeg.penaltyAway) {
+        secondLeg.penaltyHome > secondLeg.penaltyAway
+          ? (classifiedTeam = secondLeg.teamHome)
+          : (classifiedTeam = secondLeg.teamAway);
+      }
+    } else {
+      if (accScoreHome > accScoreAway) {
+        classifiedTeam = firstLeg.teamHome;
+      } else {
+        classifiedTeam = firstLeg.teamAway;
+      }
+    }
+  } else {
+    throw new Error('Erro ao classificar um time. Tente outra vez.');
+  }
+  return classifiedTeam;
 }

@@ -139,36 +139,59 @@ const Matches = ({ category, loadRank }) => {
     }
   };
 
-  const handleInputChange = (index, event, _id) => {
-    const values = [...scoreFields];
-    values[index]._id = _id;
-    if (event.target.name === 'scoreHome') {
-      values[index].scoreHome = event.target.value;
-    } else {
-      values[index].scoreAway = event.target.value;
-    }
-
-    if (
-      round > 27 &&
-      values[index].scoreAway !== '' &&
-      values[index].scoreHome !== ''
-    ) {
-      if (values[index].scoreAway === values[index].scoreHome) {
-        document.querySelector(`.penalty-home${_id}`).style.display = 'block';
-        document.querySelector(`.penalty-away${_id}`).style.display = 'block';
+  const handleInputChange = async (index, event, _id) => {
+    try {
+      const values = [...scoreFields];
+      values[index]._id = _id;
+      if (event.target.name === 'scoreHome') {
+        values[index].scoreHome = event.target.value;
       } else {
-        const penalties = [...penaltyFields];
-        penalties[index].penaltyHome = '';
-        penalties[index].penaltyAway = '';
-        setPenaltyFields(penalties);
-        document.querySelector(`.penalty-home${_id}`).value = '';
-        document.querySelector(`.penalty-away${_id}`).value = '';
-        document.querySelector(`.penalty-home${_id}`).style.display = 'none';
-        document.querySelector(`.penalty-away${_id}`).style.display = 'none';
+        values[index].scoreAway = event.target.value;
       }
-    }
+      setScoreFields(values);
 
-    setScoreFields(values);
+      // Verify penalty
+      if (
+        round > 27 &&
+        values[index].scoreAway !== '' &&
+        values[index].scoreHome !== ''
+      ) {
+        const match = await api.get(`/match/${_id}`);
+        if (match.leg === 1) {
+          return;
+        }
+        console.log('222222');
+        //2ND Leg
+        // Buscar 1ST Leg
+        const matchLeg = await api.get(`/match/leg/${_id}`);
+
+        // Verifica somatório de 1ST Leg + 2ND Leg
+        const scoreHome =
+          Number(matchLeg.data.scoreHome) + Number(values[index].scoreHome);
+        const scoreAway =
+          Number(matchLeg.data.scoreAway) + Number(values[index].scoreAway);
+        console.log(scoreHome, scoreAway);
+        if (scoreHome === scoreAway) {
+          // if (values[index].scoreAway === values[index].scoreHome) {
+          document.querySelector(`.penalty-home${_id}`).style.display = 'block';
+          document.querySelector(`.penalty-away${_id}`).style.display = 'block';
+        } else {
+          const penalties = [...penaltyFields];
+          penalties[index].penaltyHome = '';
+          penalties[index].penaltyAway = '';
+          setPenaltyFields(penalties);
+          document.querySelector(`.penalty-home${_id}`).value = '';
+          document.querySelector(`.penalty-away${_id}`).value = '';
+          document.querySelector(`.penalty-home${_id}`).style.display = 'none';
+          document.querySelector(`.penalty-away${_id}`).style.display = 'none';
+        }
+      }
+    } catch (err) {
+      console.log(err);
+      enqueueSnackbar('Falha ao atualizar, tente novamente !', {
+        variant: 'error',
+      });
+    }
   };
 
   const handlePenaltyChange = (index, event, _id) => {
@@ -254,9 +277,9 @@ const Matches = ({ category, loadRank }) => {
         </PrevNextRound>
         <RoundText>
           {round === 28
-            ? 'QUARTAS'
+            ? 'QUARTAS (IDA)'
             : round === 29
-            ? 'QUARTAS'
+            ? 'QUARTAS (VOLTA)'
             : round === 30
             ? 'SEMIFINAL'
             : round === 31
