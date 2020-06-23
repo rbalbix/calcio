@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { ChampController } from '../app/controllers';
+import { ChampController } from '@controllers';
 
 // Init shared
 const router = Router();

@@ -1,7 +1,10 @@
+const { compilerOptions } = require('./tsconfig.json');
+const { pathsToModuleNameMapper } = require('ts-jest/utils');
+
 module.exports = {
-  transform: {
-    '^.+\\.tsx?$': 'ts-jest',
-  },
+  // transform: {
+  //   '^.+\\.tsx?$': 'ts-jest',
+  // },
   // Stop running tests after `n` failures
   bail: true,
   // Automatically clear mock calls and instances between every test
@@ -27,4 +30,10 @@ module.exports = {
     '**/?(*.)+(spec|test).[tj]s?(x)',
   ],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+
+  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
+    prefix: '<rootDir>',
+  }),
+
+  preset: 'ts-jest',
 };

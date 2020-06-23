@@ -1,6 +1,6 @@
 import moment from 'moment';
-import log from '../../../services/logger';
-import { Champ, Team, Match } from '../../../app/models';
+import log from '@services/logger';
+import { Champ, Team, Match } from '@models';
 
 async function seed() {
   try {

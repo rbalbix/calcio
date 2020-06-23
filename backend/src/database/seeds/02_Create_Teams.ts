@@ -1,5 +1,5 @@
-import { Team } from '../../app/models';
-import log from '../../services/logger';
+import { Team } from '@models';
+import log from '@services/logger';
 
 async function seed() {
   try {

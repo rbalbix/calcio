@@ -1,5 +1,5 @@
-import { Match, Rank } from '../../app/models';
-import log from '../../services/logger';
+import { Match, Rank } from '@models';
+import log from '@services/logger';
 import { seedA } from './matches/A_matches';
 import { seedAFinals } from './matches/A_Finals_matches';
 import { seedB } from './matches/B_matches';

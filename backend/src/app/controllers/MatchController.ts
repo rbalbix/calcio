@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import moment from 'moment';
-import { Match, IChamp, Rank, IMatch, ITeam } from '../models';
+import { Match, IChamp, Rank, IMatch, ITeam } from '@models';
 import { getCurrentChamp } from './utils/getCurrentChamp';
 import { ParamsDictionary } from './utils/Interfaces';
 import { OK, BAD_REQUEST } from 'http-status-codes';

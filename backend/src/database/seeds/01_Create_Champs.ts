@@ -1,5 +1,5 @@
-import { Champ } from '../../app/models';
-import log from '../../services/logger';
+import { Champ } from '@models';
+import log from '@services/logger';
 
 async function seed() {
   try {
