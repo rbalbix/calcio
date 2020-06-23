@@ -42,13 +42,14 @@ router.get(
 );
 
 /******************************************************************************
- *                      Get 1ST Leg Match - "GET /match/leg/:id"
+ *                      Get a Leg Match - "GET /match/leg/:leg/:id"
  ******************************************************************************/
 
 router.get(
-  '/leg/:id',
+  '/leg/:leg/:id',
   celebrate({
     [Segments.PARAMS]: Joi.object().keys({
+      leg: Joi.number().required(),
       id: Joi.string().required(),
     }),
   }),

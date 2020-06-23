@@ -38,16 +38,17 @@ const Matches = ({ category, loadRank }) => {
 
   const [round, setRound] = useState(0);
   const [total, setTotal] = useState(0);
+  const [totalRegular, setTotalRegular] = useState(0);
   const [matches, setMatches] = useState([]);
 
   const [loadingMatches, setLoadingMatches] = useState(false);
 
   const initialScoreFields = [
-    { _id: null, scoreHome: '', scoreAway: '' },
-    { _id: null, scoreHome: '', scoreAway: '' },
-    { _id: null, scoreHome: '', scoreAway: '' },
-    { _id: null, scoreHome: '', scoreAway: '' },
-    { _id: null, scoreHome: '', scoreAway: '' },
+    { _id: null, scoreHome: '', scoreAway: '', game: '', leg: '' },
+    { _id: null, scoreHome: '', scoreAway: '', game: '', leg: '' },
+    { _id: null, scoreHome: '', scoreAway: '', game: '', leg: '' },
+    { _id: null, scoreHome: '', scoreAway: '', game: '', leg: '' },
+    { _id: null, scoreHome: '', scoreAway: '', game: '', leg: '' },
   ];
 
   const initialDateFields = [
@@ -139,7 +140,7 @@ const Matches = ({ category, loadRank }) => {
     }
   };
 
-  const handleInputChange = async (index, event, _id) => {
+  const handleInputChange = async (index, event, _id, game, leg) => {
     try {
       const values = [...scoreFields];
       values[index]._id = _id;
@@ -148,31 +149,57 @@ const Matches = ({ category, loadRank }) => {
       } else {
         values[index].scoreAway = event.target.value;
       }
+      values[index].game = game;
+      values[index].leg = leg;
       setScoreFields(values);
 
       // Verify penalty
       if (
-        round > 27 &&
+        round > totalRegular &&
         values[index].scoreAway !== '' &&
         values[index].scoreHome !== ''
       ) {
+        let scoreHome, scoreAway;
         const match = await api.get(`/match/${_id}`);
         if (match.leg === 1) {
           return;
         }
-        console.log('222222');
-        //2ND Leg
-        // Buscar 1ST Leg
-        const matchLeg = await api.get(`/match/leg/${_id}`);
+        const matchLeg = await api.get(`/match/leg/1/${_id}`);
 
-        // Verifica somatório de 1ST Leg + 2ND Leg
-        const scoreHome =
-          Number(matchLeg.data.scoreHome) + Number(values[index].scoreHome);
-        const scoreAway =
-          Number(matchLeg.data.scoreAway) + Number(values[index].scoreAway);
-        console.log(scoreHome, scoreAway);
+        // FOR SEMI OR FINAL
+        if (round >= totalRegular + 3) {
+          if (
+            matchLeg.data.scoreHome !== null &&
+            matchLeg.data.scoreAway !== null
+          ) {
+            scoreHome =
+              Number(matchLeg.data.scoreHome) + Number(values[index].scoreHome);
+            scoreAway =
+              Number(matchLeg.data.scoreAway) + Number(values[index].scoreAway);
+          } else {
+            if (leg === 1) {
+              return;
+            } else {
+              const leg1 = scoreFields.filter(
+                (score) => score.game === game && score.leg === 1
+              );
+              scoreHome =
+                Number(leg1[0].scoreHome) + Number(values[index].scoreHome);
+              scoreAway =
+                Number(leg1[0].scoreAway) + Number(values[index].scoreAway);
+            }
+          }
+        }
+
+        // FOR QUARTER
+        if (round === totalRegular + 2) {
+          scoreHome =
+            Number(matchLeg.data.scoreHome) + Number(values[index].scoreHome);
+          scoreAway =
+            Number(matchLeg.data.scoreAway) + Number(values[index].scoreAway);
+        }
+
         if (scoreHome === scoreAway) {
-          // if (values[index].scoreAway === values[index].scoreHome) {
           document.querySelector(`.penalty-home${_id}`).style.display = 'block';
           document.querySelector(`.penalty-away${_id}`).style.display = 'block';
         } else {
@@ -228,6 +255,7 @@ const Matches = ({ category, loadRank }) => {
     });
 
     setTotal(parseInt(response.headers['x-total-count']));
+    setTotalRegular(parseInt(response.headers['x-total-regular-count']));
     if (round === 0) setRound(parseInt(response.headers['x-round']));
 
     setLoadingMatches(false);
@@ -276,13 +304,13 @@ const Matches = ({ category, loadRank }) => {
           <MdNavigateBefore size={36} color="#1E7A0E" />
         </PrevNextRound>
         <RoundText>
-          {round === 28
+          {round === totalRegular + 1
             ? 'QUARTAS (IDA)'
-            : round === 29
+            : round === totalRegular + 2
             ? 'QUARTAS (VOLTA)'
-            : round === 30
+            : round === totalRegular + 3
             ? 'SEMIFINAL'
-            : round === 31
+            : round === totalRegular + 4
             ? 'FINAL'
             : round === 0
             ? ''
@@ -374,7 +402,13 @@ const Matches = ({ category, loadRank }) => {
                       name="scoreHome"
                       value={scoreFields.scoreHome}
                       onChange={(event) =>
-                        handleInputChange(index, event, match._id)
+                        handleInputChange(
+                          index,
+                          event,
+                          match._id,
+                          match.game,
+                          match.leg
+                        )
                       }
                     />
                     <InputPenalty
@@ -433,7 +467,13 @@ const Matches = ({ category, loadRank }) => {
                       name="scoreAway"
                       value={scoreFields.scoreAway}
                       onChange={(event) =>
-                        handleInputChange(index, event, match._id)
+                        handleInputChange(
+                          index,
+                          event,
+                          match._id,
+                          match.game,
+                          match.leg
+                        )
                       }
                     />
                   </InputView>

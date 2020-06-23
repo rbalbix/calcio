@@ -87,7 +87,7 @@ export const show = async (req: Request, res: Response) => {
 
 export const leg = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const { leg, id } = req.params;
 
     const match = await Match.findById(id);
 
@@ -96,7 +96,7 @@ export const leg = async (req: Request, res: Response) => {
       category: match?.category,
       roundName: match?.roundName,
       game: match?.game,
-      leg: 1,
+      leg: Number(leg),
     });
 
     return res.status(OK).json(response);
