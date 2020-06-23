@@ -4,13 +4,17 @@ import { Match, IChamp, Rank, IMatch, ITeam } from '@models';
 import { getCurrentChamp } from './utils/getCurrentChamp';
 import { ParamsDictionary } from './utils/Interfaces';
 import { OK, BAD_REQUEST } from 'http-status-codes';
-import log from '../../services/logger';
+import log from '@services/logger';
 
 type Round = { round: ParamsDictionary | number };
 
 export const index = async (req: Request, res: Response) => {
   try {
-    const { category, limit = 5 } = req.query as ParamsDictionary;
+    const calculatedLimit =
+      (await Match.find({ roundName: 'REGULAR' }).distinct('teamHome').lean())
+        .length / 2;
+
+    const { category, limit = calculatedLimit } = req.query as ParamsDictionary;
     let { round } = req.query as Round;
 
     const champ = await getCurrentChamp();
@@ -45,11 +49,18 @@ export const index = async (req: Request, res: Response) => {
         select: 'isFake shortName longName thumbnail thumbnail_url',
       });
 
+    const maxRegular = await Match.aggregate([
+      { $match: { roundName: 'REGULAR' } },
+      { $group: { _id: null, maxRound: { $max: '$round' } } },
+      { $project: { _id: 0, maxRound: 1 } },
+    ]);
+
     const max = await Match.aggregate([
       { $group: { _id: null, maxRound: { $max: '$round' } } },
       { $project: { _id: 0, maxRound: 1 } },
     ]);
 
+    res.header('X-Total-Regular-Count', String(maxRegular[0].maxRound));
     res.header('X-Total-Count', String(max[0].maxRound));
 
     res.header('X-round', String(round));
@@ -105,10 +116,21 @@ export const update = async (req: Request, res: Response) => {
       category,
     } = req.body;
 
+    const maxRegular = await Match.aggregate([
+      { $match: { roundName: 'REGULAR' } },
+      { $group: { _id: null, maxRound: { $max: '$round' } } },
+      { $project: { _id: 0, maxRound: 1 } },
+    ]);
+
+    const max = await Match.aggregate([
+      { $group: { _id: null, maxRound: { $max: '$round' } } },
+      { $project: { _id: 0, maxRound: 1 } },
+    ]);
+
     updateScore(scoreFields).then(() => {
       updateDate(dateFields).then(() => {
         updatePenalty(penaltyFields).then(async () => {
-          if (round >= 27 && round < 31) {
+          if (round >= maxRegular[0].maxRound && round < max[0].maxRound) {
             await createFinalMatches(round, category);
           }
         });
@@ -187,14 +209,20 @@ async function createFinalMatches(round: number, category: string) {
   const champ = await getCurrentChamp();
   if (!champ) throw new Error('Championship does not exists.');
 
+  const maxRegular = await Match.aggregate([
+    { $match: { roundName: 'REGULAR' } },
+    { $group: { _id: null, maxRound: { $max: '$round' } } },
+    { $project: { _id: 0, maxRound: 1 } },
+  ]);
+
   switch (round) {
-    case 30:
+    case maxRegular[0].maxRound + 3:
       await createFinal(champ, category);
       break;
-    case 29:
+    case maxRegular[0].maxRound + 2:
       await createSemifinal(champ, category);
       break;
-    case 27:
+    case maxRegular[0].maxRound:
       await createQuarter(champ, category);
       break;
     default:
@@ -216,11 +244,11 @@ async function createFinal(champ: IChamp, category: string) {
       return;
     }
 
-    const semiWinnerGame1: ITeam | null = getClassifiedTeam(
+    const winnerGame1: ITeam | null = getClassifiedTeam(
       matches.filter((match) => match.game === 1)
     );
 
-    const semiWinnerGame2: ITeam | null = getClassifiedTeam(
+    const winnerGame2: ITeam | null = getClassifiedTeam(
       matches.filter((match) => match.game === 2)
     );
 
@@ -231,8 +259,8 @@ async function createFinal(champ: IChamp, category: string) {
     });
 
     finals.map(async (final: IMatch) => {
-      final.teamHome = semiWinnerGame1;
-      final.teamAway = semiWinnerGame2;
+      final.teamHome = winnerGame1;
+      final.teamAway = winnerGame2;
 
       await final.save();
     });
@@ -258,19 +286,19 @@ async function createSemifinal(champ: IChamp, category: string) {
       return;
     }
 
-    const quarterWinnerGame1: ITeam | null = getClassifiedTeam(
+    const winnerGame1: ITeam | null = getClassifiedTeam(
       matches.filter((match) => match.game === 1)
     );
 
-    const quarterWinnerGame2: ITeam | null = getClassifiedTeam(
+    const winnerGame2: ITeam | null = getClassifiedTeam(
       matches.filter((match) => match.game === 2)
     );
 
-    const quarterWinnerGame3: ITeam | null = getClassifiedTeam(
+    const winnerGame3: ITeam | null = getClassifiedTeam(
       matches.filter((match) => match.game === 3)
     );
 
-    const quarterWinnerGame4: ITeam | null = getClassifiedTeam(
+    const winnerGame4: ITeam | null = getClassifiedTeam(
       matches.filter((match) => match.game === 4)
     );
 
@@ -283,12 +311,12 @@ async function createSemifinal(champ: IChamp, category: string) {
     semifinals.map(async (semifinal: IMatch) => {
       switch (semifinal.game) {
         case 1:
-          semifinal.teamHome = quarterWinnerGame1;
-          semifinal.teamAway = quarterWinnerGame4;
+          semifinal.teamHome = winnerGame1;
+          semifinal.teamAway = winnerGame4;
           break;
         case 2:
-          semifinal.teamHome = quarterWinnerGame2;
-          semifinal.teamAway = quarterWinnerGame3;
+          semifinal.teamHome = winnerGame2;
+          semifinal.teamAway = winnerGame3;
           break;
 
         default:

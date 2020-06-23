@@ -44,7 +44,11 @@ export default class App {
       this.express.use(helmet());
     }
     this.express.disable('x-powered-by');
-    this.express.use(cors({ exposedHeaders: ['X-Total-Count', 'X-round'] }));
+    this.express.use(
+      cors({
+        exposedHeaders: ['X-Total-Count', 'X-Total-Regular-Count', 'X-round'],
+      })
+    );
 
     // To understand body with json format
     this.express.use(express.json());
