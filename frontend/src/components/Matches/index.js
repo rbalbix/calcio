@@ -192,6 +192,9 @@ const Matches = ({ category, loadRank }) => {
         }
 
         // FOR QUARTER
+        if (round === totalRegular + 1) {
+          return;
+        }
         if (round === totalRegular + 2) {
           scoreHome =
             Number(matchLeg.data.scoreHome) + Number(values[index].scoreHome);
