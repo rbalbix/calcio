@@ -1,37 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { MdNavigateBefore, MdNavigateNext, MdSecurity } from 'react-icons/md';
-import moment from 'moment';
-import ReactLoading from 'react-loading';
 import { useSnackbar } from 'notistack';
-
-import {
-  MatchContainer,
-  MatchTitleView,
-  MatchTitle,
-  RoundView,
-  RoundText,
-  MatchesView,
-  MatchGlobalView,
-  DateView,
-  DateText,
-  MatchView,
-  MatchTeamText,
-  MatchScoreText,
-  MatchPenaltyText,
-  MatchTeamShield,
-  Button,
-  PrevNextRound,
-  InputView,
-  InputScore,
-  InputPenalty,
-} from './styles';
 
 import api from '../../services/api';
 
-import DatePicker, { registerLocale } from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import ptBR from 'date-fns/locale/pt-BR';
-registerLocale('pt-BR', ptBR);
+import MatchHeader from '../MatchHeader';
+import RoundHeader from '../RoundHeader';
+import Match from '../Match';
+
+import {
+  MatchContainer,
+  MatchesView,
+  Button,
+} from './styles';
 
 const Matches = ({ category, loadRank }) => {
   const { enqueueSnackbar } = useSnackbar();
@@ -244,12 +224,6 @@ const Matches = ({ category, loadRank }) => {
     setDateFields(values);
   };
 
-  const handleCalendarClose = (_id) => {
-    if (document.querySelector(`.date-picker${_id}`).value === '') {
-      document.querySelector(`#toggle${_id}`).checked = false;
-    }
-  };
-
   async function loadMatches() {
     setLoadingMatches(true);
 
@@ -282,229 +256,28 @@ const Matches = ({ category, loadRank }) => {
 
   return (
     <MatchContainer>
-      <MatchTitleView>
-        <MatchTitle>JOGOS</MatchTitle>
-        <MatchTitle>
-          {loadingMatches ? (
-            <ReactLoading
-              type="spokes"
-              color="#1E7A0E"
-              height="2rem"
-              width="2rem"
-            />
-          ) : (
-            ''
-          )}
-        </MatchTitle>
-      </MatchTitleView>
+      <MatchHeader loadingMatches={loadingMatches} />
+      <RoundHeader
+        round={round}
+        totalRegular={totalRegular}
+        loadingMatches={loadingMatches}
+        loadPreviousMatches={loadPreviousMatches}
+        loadNextMatches={loadNextMatches}
+      />
 
-      <RoundView>
-        <PrevNextRound
-          onClick={() => loadPreviousMatches()}
-          type="button"
-          disabled={loadingMatches}
-        >
-          <MdNavigateBefore size={36} color="#1E7A0E" />
-        </PrevNextRound>
-        <RoundText>
-          {round === totalRegular + 1
-            ? 'QUARTAS (IDA)'
-            : round === totalRegular + 2
-            ? 'QUARTAS (VOLTA)'
-            : round === totalRegular + 3
-            ? 'SEMIFINAL'
-            : round === totalRegular + 4
-            ? 'FINAL'
-            : round === 0
-            ? ''
-            : `${round}ª RODADA`}
-        </RoundText>
-        <PrevNextRound
-          onClick={() => loadNextMatches()}
-          type="button"
-          disabled={loadingMatches}
-        >
-          <MdNavigateNext size={36} color="#1E7A0E" />
-        </PrevNextRound>
-      </RoundView>
       <MatchesView>
         <form onSubmit={handleSubmit}>
           {matches.map((match, index) => (
-            <MatchGlobalView key={match._id}>
-              <DateView>
-                <DateText>
-                  {match.scoreHome === null && match.scoreAway === null ? (
-                    <>
-                      <input
-                        id={`toggle${match._id}`}
-                        type="checkbox"
-                        style={{ display: 'none' }}
-                        onClick={() =>
-                          document
-                            .querySelector(`.date-picker${match._id}`)
-                            .focus()
-                        }
-                      ></input>
-                      <label
-                        style={{ cursor: 'pointer' }}
-                        htmlFor={`toggle${match._id}`}
-                      >
-                        {`${match.weekDay} ${moment(match.day)
-                          .utc()
-                          .format('DD/MM')}`}
-                      </label>
-                      <DatePicker
-                        selected={dateFields[index].day}
-                        onChange={(event) =>
-                          handleDateChange(index, event, match._id)
-                        }
-                        openToDate={
-                          new Date(moment(match.day).utc().format('YYYY/MM/DD'))
-                        }
-                        minDate={
-                          new Date(moment(match.day).utc().format('YYYY/MM/DD'))
-                        }
-                        dateFormat="E dd/MM"
-                        locale="pt-BR"
-                        onCalendarClose={() => handleCalendarClose(match._id)}
-                        className={`date-picker${match._id}`}
-                      />
-                    </>
-                  ) : (
-                    <div style={{ cursor: 'not-allowed' }}>
-                      {match.weekDay} {moment(match.day).utc().format('DD/MM')}
-                    </div>
-                  )}
-                </DateText>
-              </DateView>
-              <MatchView>
-                <MatchTeamText team align="right" long="true">
-                  {match.teamHome ? match.teamHome.longName : 'TIME'}
-                </MatchTeamText>
-                <MatchTeamText team align="right" long="false">
-                  {match.teamHome ? match.teamHome.shortName : 'TIM'}
-                </MatchTeamText>
-                {match.teamHome ? (
-                  <MatchTeamShield
-                    src={match.teamHome.thumbnail_url}
-                  ></MatchTeamShield>
-                ) : (
-                  <MdSecurity size={30} color="#999999" />
-                )}
-                {match.scoreHome === null ? (
-                  <InputView>
-                    <InputScore
-                      disabled={match.teamHome.isFake || match.teamAway.isFake}
-                      type="tel"
-                      pattern="\d*"
-                      title="Apenas números"
-                      min="0"
-                      max="99"
-                      maxLength="2"
-                      id="scoreHome"
-                      name="scoreHome"
-                      value={scoreFields.scoreHome}
-                      onChange={(event) =>
-                        handleInputChange(
-                          index,
-                          event,
-                          match._id,
-                          match.game,
-                          match.leg
-                        )
-                      }
-                    />
-                    <InputPenalty
-                      type="tel"
-                      pattern="\d*"
-                      title="Apenas números"
-                      min="0"
-                      max="99"
-                      maxLength="2"
-                      id="penaltyHome"
-                      name="penaltyHome"
-                      value={penaltyFields.penaltyHome}
-                      onChange={(event) =>
-                        handlePenaltyChange(index, event, match._id)
-                      }
-                      className={`penalty-home${match._id}`}
-                    />
-                  </InputView>
-                ) : (
-                  <>
-                    <MatchScoreText>{match.scoreHome}</MatchScoreText>
-                    {match.penaltyHome && (
-                      <MatchPenaltyText>
-                        {`(${match.penaltyHome}`}
-                      </MatchPenaltyText>
-                    )}
-                  </>
-                )}
-                <MatchScoreText>X</MatchScoreText>
-                {match.scoreAway === null ? (
-                  <InputView>
-                    <InputPenalty
-                      type="tel"
-                      pattern="\d*"
-                      title="Apenas números"
-                      min="0"
-                      max="99"
-                      maxLength="2"
-                      id="penaltyAway"
-                      name="penaltyAway"
-                      value={penaltyFields.penaltyAway}
-                      onChange={(event) =>
-                        handlePenaltyChange(index, event, match._id)
-                      }
-                      className={`penalty-away${match._id}`}
-                    />
-                    <InputScore
-                      disabled={match.teamHome.isFake || match.teamAway.isFake}
-                      type="tel"
-                      pattern="\d*"
-                      title="Apenas números"
-                      min="0"
-                      max="99"
-                      maxLength="2"
-                      id="scoreAway"
-                      name="scoreAway"
-                      value={scoreFields.scoreAway}
-                      onChange={(event) =>
-                        handleInputChange(
-                          index,
-                          event,
-                          match._id,
-                          match.game,
-                          match.leg
-                        )
-                      }
-                    />
-                  </InputView>
-                ) : (
-                  <>
-                    {match.penaltyAway && (
-                      <MatchPenaltyText>
-                        {`${match.penaltyAway})`}
-                      </MatchPenaltyText>
-                    )}
-                    <MatchScoreText>{match.scoreAway}</MatchScoreText>
-                  </>
-                )}
-                {match.teamAway ? (
-                  <MatchTeamShield
-                    src={match.teamAway.thumbnail_url}
-                  ></MatchTeamShield>
-                ) : (
-                  <MdSecurity size={30} color="#999999" />
-                )}
-                <MatchTeamText team align="left" long="true">
-                  {match.teamAway ? match.teamAway.longName : 'TIME'}
-                </MatchTeamText>
-                <MatchTeamText team align="left" long="false">
-                  {match.teamAway ? match.teamAway.shortName : 'TIM'}
-                </MatchTeamText>
-              </MatchView>
-            </MatchGlobalView>
+            <Match key={match._id}
+              match={match}
+              index={index}
+              scoreFields={scoreFields}
+              penaltyFields={penaltyFields}
+              dateFields={dateFields}
+              handleInputChange={handleInputChange}
+              handlePenaltyChange={handlePenaltyChange}
+              handleDateChange={handleDateChange}
+            />
           ))}
           <Button type="submit" disabled={loadingMatches}>
             ATUALIZAR
