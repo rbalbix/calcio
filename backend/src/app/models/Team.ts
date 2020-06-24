@@ -1,5 +1,5 @@
-import { mongoose } from '../../database';
-import { baseURL } from '../../config';
+import { mongoose } from '@database';
+import { baseURL } from '@config';
 
 const { Schema, model } = mongoose;
 

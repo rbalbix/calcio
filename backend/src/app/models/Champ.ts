@@ -1,4 +1,4 @@
-import { mongoose } from '../../database';
+import { mongoose } from '@database';
 
 const { Schema, model } = mongoose;
 

@@ -21,7 +21,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     async function loadCategories() {
-      const response = await api.get('/match/categories');
+      const response = await api.get('/category/distinct');
       setCategories(response.data);
     }
 

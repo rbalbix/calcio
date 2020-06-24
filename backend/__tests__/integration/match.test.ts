@@ -597,7 +597,7 @@ describe('Rank', () => {
     expect(response.status).toBe(OK);
   });
 
-  it('should get distincted categories of matches /match/categories route', async () => {
+  it('should get distincted categories of matches /category/distinct route', async () => {
     await Champ.create({
       name: 'Campeonato 2020',
       season: 2020,
@@ -658,7 +658,7 @@ describe('Rank', () => {
       }
     );
 
-    const response = await request(app).get('/match/categories');
+    const response = await request(app).get('/category/distinct');
 
     expect(response.status).toBe(OK);
 
@@ -668,8 +668,8 @@ describe('Rank', () => {
     expect(response.body).toContain('B');
   });
 
-  it('should get a BAD REQUEST to /match/categories route', async () => {
-    const response = await request(app).get('/match/categories');
+  it('should get a BAD REQUEST to /category/distinct route', async () => {
+    const response = await request(app).get('/category/distinct');
     expect(response.status).toBe(BAD_REQUEST);
   });
 });

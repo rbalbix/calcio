@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { MatchController } from '../app/controllers';
+import { MatchController, FinalMatchController } from '@controllers';
 import { celebrate, Segments, Joi } from 'celebrate';
 
 // Init shared
@@ -22,12 +22,6 @@ router.get(
 );
 
 /******************************************************************************
- *                      Get Match - "GET /match/categories"
- ******************************************************************************/
-
-router.get('/categories', MatchController.categoriesDistinct);
-
-/******************************************************************************
  *                      Get Specific Match - "GET /match/:id"
  ******************************************************************************/
 
@@ -42,7 +36,7 @@ router.get(
 );
 
 /******************************************************************************
- *                      Get a Leg Match - "GET /match/leg/:leg/:id"
+ *               Get a Leg Final Match - "GET /match/leg/:leg/:id"
  ******************************************************************************/
 
 router.get(
@@ -53,7 +47,7 @@ router.get(
       id: Joi.string().required(),
     }),
   }),
-  MatchController.leg
+  FinalMatchController.leg
 );
 
 /******************************************************************************

@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import { Rank, IRank } from '../models';
+import { Rank, IRank } from '@models';
 import { getCurrentChamp } from './utils/getCurrentChamp';
 import { ParamsDictionary } from './utils/Interfaces';
 import { OK, BAD_REQUEST } from 'http-status-codes';
-import log from '../../services/logger';
+import log from '@services/logger';
 
 function rank(a: IRank, b: IRank) {
   if (a.points > b.points) return -1;

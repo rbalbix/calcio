@@ -7,7 +7,9 @@ import GlobalStyle from './styles/global';
 function App() {
   return (
     <SnackbarProvider
+      maxSnack={3}
       hideIconVariant={false}
+      autoHideDuration={3000}
       anchorOrigin={{
         vertical: 'top',
         horizontal: 'center',

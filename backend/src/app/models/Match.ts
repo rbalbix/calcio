@@ -1,5 +1,5 @@
-import { mongoose } from '../../database';
-import { Rank } from './Rank';
+import { mongoose } from '@database';
+import { Rank } from '@models';
 
 const { Schema, model } = mongoose;
 

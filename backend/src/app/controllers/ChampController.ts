@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { getCurrentChamp } from './utils/getCurrentChamp';
 import { OK, BAD_REQUEST } from 'http-status-codes';
-import log from '../../services/logger';
+import log from '@services/logger';
 
 export const currentChamp = async (req: Request, res: Response) => {
   try {
