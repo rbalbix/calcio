@@ -13,8 +13,8 @@ async function seed() {
     await Match.deleteMany({});
     await Rank.deleteMany({});
 
-    await seedA();
-    // await seedATestFinals();
+    // await seedA();
+    await seedATestFinals();
     await seedAFinals();
     await seedB();
     await seedBFinals();

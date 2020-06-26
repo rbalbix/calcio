@@ -160,6 +160,13 @@ export const MatchScoreText = styled.Text`
   text-align: center;
 `;
 
+export const MatchPenaltyText = styled.Text`
+  font-size: ${hp('2.0%')}px;
+  font-weight: bold;
+  color: #999;
+  text-align: center;
+`;
+
 export const MatchTeamShield = styled.Image`
   width: ${wp('7%')}px;
   height: ${wp('7%')}px;

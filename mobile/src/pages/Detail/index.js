@@ -32,6 +32,7 @@ import {
   DateText,
   MatchView,
   MatchTeamText,
+  MatchPenaltyText,
   MatchScoreText,
   MatchTeamShield,
 } from './styles';
@@ -39,6 +40,7 @@ import {
 export default function Detail() {
   const [round, setRound] = useState(0);
   const [total, setTotal] = useState(0);
+  const [totalRegular, setTotalRegular] = useState(0);
   const [loadingRank, setLoadingRank] = useState(true);
   const [loadingMatches, setLoadingMatches] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
@@ -67,6 +69,7 @@ export default function Detail() {
     });
 
     setTotal(parseInt(response.headers['x-total-count']));
+    setTotalRegular(parseInt(response.headers['x-total-regular-count']));
     if (round === 0) setRound(parseInt(response.headers['x-round']));
 
     setLoadingMatches(false);
@@ -129,30 +132,30 @@ export default function Detail() {
             </Loading>
           </TeamView>
         ) : (
-          rank.map((item, index) => (
-            <TeamView key={item._id}>
-              <Team>
-                <PositionText>{index + 1}</PositionText>
-                <TeamShield
-                  source={{
-                    uri: item.team.thumbnail_url,
-                  }}
-                />
-                <TeamText>{item.team.shortName}</TeamText>
-              </Team>
-              <Score>
-                <ScoreText>{item.points}</ScoreText>
-                <ScoreText score>{item.played}</ScoreText>
-                <ScoreText score>{item.wons}</ScoreText>
-                <ScoreText score>{item.drawn}</ScoreText>
-                <ScoreText score>{item.lost}</ScoreText>
-                <ScoreText score>{item.goalsFor}</ScoreText>
-                <ScoreText score>{item.goalsAgainst}</ScoreText>
-                <ScoreText score>{item.goalDifference}</ScoreText>
-              </Score>
-            </TeamView>
-          ))
-        )}
+            rank.map((item, index) => (
+              <TeamView key={item._id}>
+                <Team>
+                  <PositionText>{index + 1}</PositionText>
+                  <TeamShield
+                    source={{
+                      uri: item.team.thumbnail_url,
+                    }}
+                  />
+                  <TeamText>{item.team.shortName}</TeamText>
+                </Team>
+                <Score>
+                  <ScoreText>{item.points}</ScoreText>
+                  <ScoreText score>{item.played}</ScoreText>
+                  <ScoreText score>{item.wons}</ScoreText>
+                  <ScoreText score>{item.drawn}</ScoreText>
+                  <ScoreText score>{item.lost}</ScoreText>
+                  <ScoreText score>{item.goalsFor}</ScoreText>
+                  <ScoreText score>{item.goalsAgainst}</ScoreText>
+                  <ScoreText score>{item.goalDifference}</ScoreText>
+                </Score>
+              </TeamView>
+            ))
+          )}
       </Category>
 
       <Category>
@@ -163,7 +166,19 @@ export default function Detail() {
             <TouchableOpacity onPress={loadPreviousMatches}>
               <MaterialIcons name='navigate-before' size={30} color='#1e7a0e' />
             </TouchableOpacity>
-            <RoundText>{round}ª RODADA</RoundText>
+            <RoundText>
+              {round === totalRegular + 1
+                ? 'QUARTAS (IDA)'
+                : round === totalRegular + 2
+                  ? 'QUARTAS (VOLTA)'
+                  : round === totalRegular + 3
+                    ? 'SEMIFINAL'
+                    : round === totalRegular + 4
+                      ? 'FINAL'
+                      : round === 0
+                        ? ''
+                        : `${round}ª RODADA`}
+            </RoundText>
             <TouchableOpacity onPress={loadNextMatches}>
               <MaterialIcons name='navigate-next' size={30} color='#1e7a0e' />
             </TouchableOpacity>
@@ -174,38 +189,57 @@ export default function Detail() {
             <ActivityIndicator size='large' color='#1e7a0e' />
           </Loading>
         ) : (
-          matches.map((match) => (
-            <View key={match._id}>
-              <DateView>
-                <DateText>{match.weekDay}</DateText>
-                <DateText margin>
-                  {moment(match.day).utc().format('DD/MM')}
-                </DateText>
-              </DateView>
-              <MatchView>
-                <MatchTeamText team align='right'>
-                  {match.teamHome.shortName}
-                </MatchTeamText>
-                <MatchTeamShield
-                  source={{
-                    uri: match.teamHome.thumbnail_url,
-                  }}
-                ></MatchTeamShield>
-                <MatchScoreText>{match.scoreHome}</MatchScoreText>
-                <MatchTeamText>X</MatchTeamText>
-                <MatchScoreText>{match.scoreAway}</MatchScoreText>
-                <MatchTeamShield
-                  source={{
-                    uri: match.teamAway.thumbnail_url,
-                  }}
-                ></MatchTeamShield>
-                <MatchTeamText team align='left'>
-                  {match.teamAway.shortName}
-                </MatchTeamText>
-              </MatchView>
-            </View>
-          ))
-        )}
+            matches.map((match) => (
+              <View key={match._id}>
+                <DateView>
+                  <DateText>{match.weekDay}</DateText>
+                  <DateText margin>
+                    {moment(match.day).utc().format('DD/MM')}
+                  </DateText>
+                </DateView>
+                <MatchView>
+                  <MatchTeamText team align='right'>
+                    {match.teamHome.shortName}
+                  </MatchTeamText>
+                  <MatchTeamShield
+                    source={{
+                      uri: match.teamHome.thumbnail_url,
+                    }}
+                  ></MatchTeamShield>
+                  <>
+                    <MatchScoreText>
+                      {match.scoreHome}
+                    </MatchScoreText>
+                    {match.penaltyHome !== undefined && (
+                      <MatchPenaltyText>
+                        {`(${match.penaltyHome}`}
+                      </MatchPenaltyText>
+                    )}
+
+                  </>
+                  <MatchTeamText>X</MatchTeamText>
+                  <>
+                    {match.penaltyAway !== undefined && (
+                      <MatchPenaltyText>
+                        {`${match.penaltyAway})`}
+                      </MatchPenaltyText>
+                    )}
+                    <MatchScoreText>
+                      {match.scoreAway}
+                    </MatchScoreText>
+                  </>
+                  <MatchTeamShield
+                    source={{
+                      uri: match.teamAway.thumbnail_url,
+                    }}
+                  ></MatchTeamShield>
+                  <MatchTeamText team align='left'>
+                    {match.teamAway.shortName}
+                  </MatchTeamText>
+                </MatchView>
+              </View>
+            ))
+          )}
       </Category>
     </Container>
   );
