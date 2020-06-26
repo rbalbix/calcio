@@ -5,6 +5,10 @@
   "main": "index.js",
   "author": "Ricardo Balbi",
   "license": "MIT",
+  "scripts": {
+    "all": "git add . && git commit",
+    "push": "git push && git subtree push --prefix backend heroku master"
+  },
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",

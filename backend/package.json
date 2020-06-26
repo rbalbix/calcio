@@ -13,7 +13,7 @@
     "uploads": "cp -r ./uploads/ ./dist/uploads/",
     "start": "node dist/server.js",
     "seed": "ts-node -r tsconfig-paths/register src/database/seeds/seeder.ts",
-    "seed:prod": "cross-env NODE_ENV=production ts-node src/database/seeds/seeder.ts",
+    "seed:prod": "cross-env NODE_ENV=production ts-node -r tsconfig-paths/register src/database/seeds/seeder.ts",
     "test": "cross-env NODE_ENV=test jest --watch --detectOpenHandles"
   },
   "dependencies": {
