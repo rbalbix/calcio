@@ -4,27 +4,24 @@ import { OK, BAD_REQUEST } from 'http-status-codes';
 
 import { connect, disconnectTest, truncate } from '../../src/database';
 
-import { Champ, Team, Rank } from '../../src/app/models';
+import { Champ } from '../../src/app/models';
+
+import { seedChamp } from '../../src/database/seeds/01_Create_Champs';
 
 const app = new App().getApp();
 
-describe('Rank', () => {
+describe('Champ', () => {
   beforeEach(async () => {
     connect();
     await truncate();
   });
 
-  afterEach((done) => {
+  afterEach((done: any) => {
     disconnectTest(done);
   });
 
   it('should find a /champ/current [get] route', async () => {
-    await Champ.create([
-      {
-        name: 'Campeonato 2020',
-        season: 2020,
-      },
-    ]);
+    await seedChamp();
 
     const response = await request(app).get('/champ/current');
 

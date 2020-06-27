@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import moment from 'moment';
 import { Match } from '@models';
-import { FinalMatchController } from '@controllers'
+import { FinalMatchController } from '@controllers';
 import { getCurrentChamp } from './utils/getCurrentChamp';
 import { ParamsDictionary } from './utils/Interfaces';
 import { OK, BAD_REQUEST } from 'http-status-codes';
@@ -170,6 +170,3 @@ async function updateDate(dateFields: any) {
   });
   return;
 }
-
-
-

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSnackbar } from 'notistack';
 
 import api from '../../services/api';
@@ -7,11 +7,7 @@ import MatchHeader from '../MatchHeader';
 import RoundHeader from '../RoundHeader';
 import Match from '../Match';
 
-import {
-  MatchContainer,
-  MatchesView,
-  Button,
-} from './styles';
+import { MatchContainer, MatchesView, Button } from './styles';
 
 const Matches = ({ category, loadRank }) => {
   const { enqueueSnackbar } = useSnackbar();
@@ -120,91 +116,99 @@ const Matches = ({ category, loadRank }) => {
     }
   };
 
-  const handleInputChange = async (index, event, _id, game, leg) => {
-    try {
-      const values = [...scoreFields];
-      values[index]._id = _id;
-      if (event.target.name === 'scoreHome') {
-        values[index].scoreHome = event.target.value;
-      } else {
-        values[index].scoreAway = event.target.value;
-      }
-      values[index].game = game;
-      values[index].leg = leg;
-      setScoreFields(values);
-
-      // Verify penalty
-      if (
-        round > totalRegular &&
-        values[index].scoreAway !== '' &&
-        values[index].scoreHome !== ''
-      ) {
-        let scoreHome, scoreAway;
-        const match = await api.get(`/match/${_id}`);
-        if (match.leg === 1) {
-          return;
+  const handleInputChange = useCallback(
+    async (index, event, _id, game, leg) => {
+      try {
+        const values = [...scoreFields];
+        values[index]._id = _id;
+        if (event.target.name === 'scoreHome') {
+          values[index].scoreHome = event.target.value;
+        } else {
+          values[index].scoreAway = event.target.value;
         }
-        const matchLeg = await api.get(`/match/leg/1/${_id}`);
+        values[index].game = game;
+        values[index].leg = leg;
+        setScoreFields(values);
 
-        // FOR SEMI OR FINAL
-        if (round >= totalRegular + 3) {
-          if (
-            matchLeg.data.scoreHome !== null &&
-            matchLeg.data.scoreAway !== null
-          ) {
+        // Verify penalty
+        if (
+          round > totalRegular &&
+          values[index].scoreAway !== '' &&
+          values[index].scoreHome !== ''
+        ) {
+          let scoreHome, scoreAway;
+          const match = await api.get(`/match/${_id}`);
+          if (match.leg === 1) {
+            return;
+          }
+          const matchLeg = await api.get(`/match/leg/1/${_id}`);
+
+          // FOR SEMI OR FINAL
+          if (round >= totalRegular + 3) {
+            if (
+              matchLeg.data.scoreHome !== null &&
+              matchLeg.data.scoreAway !== null
+            ) {
+              scoreHome =
+                Number(matchLeg.data.scoreHome) +
+                Number(values[index].scoreHome);
+              scoreAway =
+                Number(matchLeg.data.scoreAway) +
+                Number(values[index].scoreAway);
+            } else {
+              if (leg === 1) {
+                return;
+              } else {
+                const leg1 = scoreFields.filter(
+                  (score) => score.game === game && score.leg === 1
+                );
+                scoreHome =
+                  Number(leg1[0].scoreHome) + Number(values[index].scoreHome);
+                scoreAway =
+                  Number(leg1[0].scoreAway) + Number(values[index].scoreAway);
+              }
+            }
+          }
+
+          // FOR QUARTER
+          if (round === totalRegular + 1) {
+            return;
+          }
+          if (round === totalRegular + 2) {
             scoreHome =
               Number(matchLeg.data.scoreHome) + Number(values[index].scoreHome);
             scoreAway =
               Number(matchLeg.data.scoreAway) + Number(values[index].scoreAway);
+          }
+
+          if (scoreHome === scoreAway) {
+            document.querySelector(`.penalty-home${_id}`).style.display =
+              'block';
+            document.querySelector(`.penalty-away${_id}`).style.display =
+              'block';
           } else {
-            if (leg === 1) {
-              return;
-            } else {
-              const leg1 = scoreFields.filter(
-                (score) => score.game === game && score.leg === 1
-              );
-              scoreHome =
-                Number(leg1[0].scoreHome) + Number(values[index].scoreHome);
-              scoreAway =
-                Number(leg1[0].scoreAway) + Number(values[index].scoreAway);
-            }
+            const penalties = [...penaltyFields];
+            penalties[index].penaltyHome = '';
+            penalties[index].penaltyAway = '';
+            setPenaltyFields(penalties);
+            document.querySelector(`.penalty-home${_id}`).value = '';
+            document.querySelector(`.penalty-away${_id}`).value = '';
+            document.querySelector(`.penalty-home${_id}`).style.display =
+              'none';
+            document.querySelector(`.penalty-away${_id}`).style.display =
+              'none';
           }
         }
-
-        // FOR QUARTER
-        if (round === totalRegular + 1) {
-          return;
-        }
-        if (round === totalRegular + 2) {
-          scoreHome =
-            Number(matchLeg.data.scoreHome) + Number(values[index].scoreHome);
-          scoreAway =
-            Number(matchLeg.data.scoreAway) + Number(values[index].scoreAway);
-        }
-
-        if (scoreHome === scoreAway) {
-          document.querySelector(`.penalty-home${_id}`).style.display = 'block';
-          document.querySelector(`.penalty-away${_id}`).style.display = 'block';
-        } else {
-          const penalties = [...penaltyFields];
-          penalties[index].penaltyHome = '';
-          penalties[index].penaltyAway = '';
-          setPenaltyFields(penalties);
-          document.querySelector(`.penalty-home${_id}`).value = '';
-          document.querySelector(`.penalty-away${_id}`).value = '';
-          document.querySelector(`.penalty-home${_id}`).style.display = 'none';
-          document.querySelector(`.penalty-away${_id}`).style.display = 'none';
-        }
+      } catch (err) {
+        console.log(err);
+        enqueueSnackbar('Falha ao atualizar, tente novamente !', {
+          variant: 'error',
+        });
       }
-    } catch (err) {
-      console.log(err);
-      enqueueSnackbar('Falha ao atualizar, tente novamente !', {
-        variant: 'error',
-      });
     }
-  };
+  );
 
-  const handlePenaltyChange = (index, event, _id) => {
+  const handlePenaltyChange = useCallback((index, event, _id) => {
     const values = [...penaltyFields];
     values[index]._id = _id;
     if (event.target.name === 'penaltyHome') {
@@ -213,16 +217,16 @@ const Matches = ({ category, loadRank }) => {
       values[index].penaltyAway = event.target.value;
     }
     setPenaltyFields(values);
-  };
+  });
 
-  const handleDateChange = (index, event, _id) => {
+  const handleDateChange = useCallback((index, event, _id) => {
     const values = [...dateFields];
 
     values[index]._id = _id;
     values[index].day = event;
 
     setDateFields(values);
-  };
+  });
 
   async function loadMatches() {
     setLoadingMatches(true);
@@ -268,7 +272,8 @@ const Matches = ({ category, loadRank }) => {
       <MatchesView>
         <form onSubmit={handleSubmit}>
           {matches.map((match, index) => (
-            <Match key={match._id}
+            <Match
+              key={match._id}
               match={match}
               index={index}
               scoreFields={scoreFields}

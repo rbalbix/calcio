@@ -6,6 +6,7 @@ module.exports = {
   //   '^.+\\.tsx?$': 'ts-jest',
   // },
   // Stop running tests after `n` failures
+  testTimeout: 20000,
   bail: true,
   // Automatically clear mock calls and instances between every test
   clearMocks: true,
