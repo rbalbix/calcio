@@ -108,8 +108,8 @@ export const RoundView = styled.View`
 `;
 
 export const RoundText = styled.Text`
+  font-family: 'Ubuntu_700Bold';
   font-size: ${hp('3%')}px;
-  font-weight: bold;
   color: #999;
 `;
 
@@ -127,6 +127,7 @@ export const DateView = styled.View`
 `;
 
 export const DateText = styled.Text`
+  font-family: 'Roboto_400Regular';
   font-size: ${hp('2%')}px;
   margin-left: ${(props) => (props.margin ? wp('1.8%') : wp('0%'))}px;
   color: #999;
@@ -145,24 +146,24 @@ export const MatchView = styled.View`
 `;
 
 export const MatchTeamText = styled.Text`
+  font-family: 'Roboto_500Medium';
   font-size: ${hp('2.5%')}px;
-  font-weight: bold;
   width: ${(props) => (props.team ? wp('13%') : wp('5%'))}px;
   text-align: ${(props) => props.align || 'center'};
   color: #717171;
 `;
 
 export const MatchScoreText = styled.Text`
+  font-family: 'Ubuntu_700Bold';
   font-size: ${hp('2.7%')}px;
-  font-weight: bold;
   color: #717171;
   width: ${wp('7.2%')}px;
   text-align: center;
 `;
 
 export const MatchPenaltyText = styled.Text`
+  font-family: 'Roboto_500Medium';
   font-size: ${hp('2.0%')}px;
-  font-weight: bold;
   color: #999;
   text-align: center;
 `;
