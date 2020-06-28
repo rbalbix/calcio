@@ -19,8 +19,8 @@ export const Category = styled.View`
 `;
 
 export const CategoryTitle = styled.Text`
+  font-family: 'Ubuntu_700Bold';
   font-size: ${Math.min(hp('4%'), 28)}px;
-  font-weight: bold;
   color: #1e7a0e;
   margin-bottom: ${hp('2%')}px;
 `;
@@ -34,8 +34,8 @@ export const HeaderTable = styled.View`
 `;
 
 export const HeaderTableText = styled.Text`
+  font-family: 'Ubuntu_700Bold';
   font-size: ${Math.min(hp('2.2%'), 18)}px;
-  font-weight: bold;
   color: #999;
   width: ${wp('7.2%')}px;
   margin-left: ${wp('0.2%')}px;
@@ -58,18 +58,18 @@ export const Team = styled.View`
   max-width: ${wp('18%')}px;
 `;
 
-export const TeamText = styled.Text`
-  font-size: ${Math.min(hp('2.7%'), 20)}px;
-  font-weight: bold;
-  color: #717171;
-`;
-
 export const PositionText = styled.Text`
+  font-family: 'Roboto_700Bold';
   font-size: ${Math.min(hp('2.4%'), 20)}px;
-  font-weight: bold;
   color: #999;
   width: ${wp('7.2%')}px;
   padding-right: 5px;
+`;
+
+export const TeamText = styled.Text`
+  font-family: 'Roboto_500Medium';
+  font-size: ${Math.min(hp('2.7%'), 20)}px;
+  color: #717171;
 `;
 
 export const TeamShield = styled.Image`
@@ -84,8 +84,8 @@ export const Score = styled.View`
 `;
 
 export const ScoreText = styled.Text`
+  font-family: 'Roboto_400Regular';
   font-size: ${Math.min(hp('2.2%'), 18)}px;
-  font-weight: bold;
   text-align: center;
   color: #999;
   width: ${wp('7.2%')}px;

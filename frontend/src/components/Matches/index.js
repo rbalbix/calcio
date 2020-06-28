@@ -205,28 +205,35 @@ const Matches = ({ category, loadRank }) => {
           variant: 'error',
         });
       }
-    }
+    },
+    [scoreFields, penaltyFields, round, totalRegular, enqueueSnackbar]
   );
 
-  const handlePenaltyChange = useCallback((index, event, _id) => {
-    const values = [...penaltyFields];
-    values[index]._id = _id;
-    if (event.target.name === 'penaltyHome') {
-      values[index].penaltyHome = event.target.value;
-    } else {
-      values[index].penaltyAway = event.target.value;
-    }
-    setPenaltyFields(values);
-  });
+  const handlePenaltyChange = useCallback(
+    (index, event, _id) => {
+      const values = [...penaltyFields];
+      values[index]._id = _id;
+      if (event.target.name === 'penaltyHome') {
+        values[index].penaltyHome = event.target.value;
+      } else {
+        values[index].penaltyAway = event.target.value;
+      }
+      setPenaltyFields(values);
+    },
+    [penaltyFields]
+  );
 
-  const handleDateChange = useCallback((index, event, _id) => {
-    const values = [...dateFields];
+  const handleDateChange = useCallback(
+    (index, event, _id) => {
+      const values = [...dateFields];
 
-    values[index]._id = _id;
-    values[index].day = event;
+      values[index]._id = _id;
+      values[index].day = event;
 
-    setDateFields(values);
-  });
+      setDateFields(values);
+    },
+    [dateFields]
+  );
 
   async function loadMatches() {
     setLoadingMatches(true);

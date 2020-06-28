@@ -17,6 +17,7 @@ export default function Routes() {
           headerStyle: { backgroundColor: '#1E7A0E' },
           headerTintColor: '#FFF',
           headerTitleStyle: {
+            fontFamily: 'Ubuntu_700Bold',
             fontWeight: 'bold',
             fontSize: 24,
           },
