@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { MdArrowBack } from 'react-icons/md';
 
 export const CategoryContainer = styled.div`
   background-color: var(--bgContainer);
@@ -17,6 +18,11 @@ export const CategoryContainer = styled.div`
 
 export const CategoryTitleView = styled.div`
   display: flex;
+`;
+
+export const IconArrowBack = styled(MdArrowBack)`
+  font-size: 2.6rem;
+  color: var(--buttonText);
 `;
 
 export const Back = styled.div`

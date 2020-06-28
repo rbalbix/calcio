@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { MdArrowBack } from 'react-icons/md';
 
 import Rank from '../../components/Rank';
 import Matches from '../../components/Matches';
@@ -8,6 +7,7 @@ import Matches from '../../components/Matches';
 import {
   CategoryContainer,
   CategoryTitleView,
+  IconArrowBack,
   Back,
   CategoryTitle,
   CategoryResult,
@@ -27,7 +27,7 @@ export default function RankMatches({ location }) {
       <CategoryTitleView>
         <Link style={{ textDecoration: 'none' }} to="/">
           <Back>
-            <MdArrowBack size={26} />
+            <IconArrowBack />
           </Back>
         </Link>
         <CategoryTitle>TORNEIO {category}</CategoryTitle>

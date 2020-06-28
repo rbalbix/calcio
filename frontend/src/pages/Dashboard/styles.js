@@ -11,12 +11,14 @@ export const Container = styled.div`
 
   padding: 1rem;
 `;
+Container.displayName = 'Container';
 
 export const DashboardTitle = styled.h1`
   font-size: 4rem;
   color: var(--bgContainer);
   margin-bottom: 1rem;
 `;
+DashboardTitle.displayName = 'DashboardTitle';
 
 export const ChampTitle = styled.h2`
   font-size: 3rem;
