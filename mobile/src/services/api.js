@@ -1,8 +1,8 @@
 import axios from 'axios';
-import dbConfig from '../config/baseUrl.json';
+import { baseURL } from '../config';
 
 const api = axios.create({
-  baseURL: dbConfig.baseURL,
+  baseURL,
 });
 
 export default api;
