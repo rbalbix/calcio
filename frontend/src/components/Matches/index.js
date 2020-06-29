@@ -267,7 +267,7 @@ const Matches = ({ category, loadRank }) => {
 
   return (
     <MatchContainer>
-      <MatchHeader loadingMatches={loadingMatches} />
+      <MatchHeader loading={loadingMatches} />
       <RoundHeader
         round={round}
         totalRegular={totalRegular}

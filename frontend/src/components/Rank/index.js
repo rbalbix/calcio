@@ -5,6 +5,9 @@ import React, {
   useEffect,
 } from 'react';
 
+import Loading from '../Loading';
+import api from '../../services/api';
+
 import {
   ClassificationContainer,
   ClassificationTitleView,
@@ -19,9 +22,6 @@ import {
   Score,
   ScoreText,
 } from './styles';
-
-import ReactLoading from 'react-loading';
-import api from '../../services/api';
 
 const Rank = forwardRef((props, ref) => {
   const { category } = props;
@@ -55,16 +55,7 @@ const Rank = forwardRef((props, ref) => {
       <ClassificationTitleView>
         <ClassificationTitle>CLASSIFICAÇÃO</ClassificationTitle>
         <ClassificationTitle>
-          {loadingRank ? (
-            <ReactLoading
-              type="spokes"
-              color="#1E7A0E"
-              height="2rem"
-              width="2rem"
-            />
-          ) : (
-            ''
-          )}
+          <Loading loading={loadingRank} />
         </ClassificationTitle>
       </ClassificationTitleView>
 

@@ -1,28 +1,17 @@
 import React from 'react';
-import ReactLoading from 'react-loading';
+import Loading from '../Loading';
 
-import {
-  MatchTitleView,
-  MatchTitle,
-} from './styles';
+import { MatchTitleView, MatchTitle } from './styles';
 
-const MatchHeader = ({ loadingMatches }) => {
+const MatchHeader = ({ loading }) => {
   return (
     <MatchTitleView>
       <MatchTitle>JOGOS</MatchTitle>
       <MatchTitle>
-        {loadingMatches ? (
-          <ReactLoading
-            type="spokes"
-            color="#1E7A0E"
-            height="2rem"
-            width="2rem"
-          />
-        ) : (
-            ''
-          )}
+        <Loading loading={loading} />
       </MatchTitle>
-    </MatchTitleView>)
-}
+    </MatchTitleView>
+  );
+};
 
 export default MatchHeader;
