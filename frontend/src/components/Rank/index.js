@@ -5,6 +5,7 @@ import React, {
   useEffect,
 } from 'react';
 
+import { CustomTooltip } from '../CustomTooltip';
 import Loading from '../Loading';
 import api from '../../services/api';
 
@@ -60,15 +61,33 @@ const Rank = forwardRef((props, ref) => {
       </ClassificationTitleView>
 
       <HeaderTable>
-        <HeaderTableText>P</HeaderTableText>
-        <HeaderTableText>J</HeaderTableText>
-        <HeaderTableText>V</HeaderTableText>
-        <HeaderTableText>E</HeaderTableText>
-        <HeaderTableText>D</HeaderTableText>
-        <HeaderTableText className="optional">GP</HeaderTableText>
-        <HeaderTableText className="optional">GC</HeaderTableText>
-        <HeaderTableText>SG</HeaderTableText>
-        <HeaderTableText className="optional">%</HeaderTableText>
+        <CustomTooltip title="Pontos">
+          <HeaderTableText>P</HeaderTableText>
+        </CustomTooltip>
+        <CustomTooltip title="Jogos">
+          <HeaderTableText>J</HeaderTableText>
+        </CustomTooltip>
+        <CustomTooltip title="Vitórias">
+          <HeaderTableText>V</HeaderTableText>
+        </CustomTooltip>
+        <CustomTooltip title="Empates">
+          <HeaderTableText>E</HeaderTableText>
+        </CustomTooltip>
+        <CustomTooltip title="Derrotas">
+          <HeaderTableText>D</HeaderTableText>
+        </CustomTooltip>
+        <CustomTooltip title="Gols pró">
+          <HeaderTableText className="optional">GP</HeaderTableText>
+        </CustomTooltip>
+        <CustomTooltip title="Gols contra">
+          <HeaderTableText className="optional">GC</HeaderTableText>
+        </CustomTooltip>
+        <CustomTooltip title="Saldo de gols">
+          <HeaderTableText>SG</HeaderTableText>
+        </CustomTooltip>
+        <CustomTooltip title="Aproveitamento">
+          <HeaderTableText className="optional">%</HeaderTableText>
+        </CustomTooltip>
       </HeaderTable>
 
       {rank.map((item, index) => (
