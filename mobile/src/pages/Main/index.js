@@ -4,11 +4,6 @@ import {
   ActivityIndicator,
   RefreshControl,
 } from 'react-native';
-// import {
-//   widthPercentageToDP as wp,
-//   heightPercentageToDP as hp,
-// } from 'react-native-responsive-screen';
-// import { SvgUri } from 'react-native-svg';
 
 import { useNavigation } from '@react-navigation/native';
 
@@ -97,11 +92,6 @@ export default function Main() {
                 <Team>
                   <PositionText>{index + 1}</PositionText>
                   <TeamShield source={{ uri: item.team.thumbnail_url }} />
-                  {/* <SvgUri
-                    width={wp('5.5%')}
-                    height={wp('5.5%')}
-                    uri={item.team.thumbnail_url}
-                  /> */}
                   <TeamText>{item.team.longName}</TeamText>
                 </Team>
 

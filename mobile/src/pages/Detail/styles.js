@@ -4,6 +4,7 @@ import {
 } from 'react-native-responsive-screen';
 import styled from 'styled-components/native';
 import Constants from 'expo-constants';
+import { MaterialIcons } from '@expo/vector-icons';
 
 export const Container = styled.ScrollView`
   /* flex: 1; */
@@ -111,6 +112,11 @@ export const RoundText = styled.Text`
   font-family: 'Ubuntu_700Bold';
   font-size: ${hp('3%')}px;
   color: #999;
+`;
+
+export const Icon = styled(MaterialIcons)`
+  font-size: ${hp('5%')}px;
+  color: #1e7a0e;
 `;
 
 export const Loading = styled.View`
