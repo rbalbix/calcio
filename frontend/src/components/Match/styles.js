@@ -6,7 +6,7 @@ export const MatchGlobalView = styled.div`
   flex-direction: column;
 
   &:hover {
-    background-color: var(--lineColor);
+    background-color: var(--line-color);
   }
 `;
 
@@ -20,8 +20,8 @@ export const DateView = styled.div`
   input {
     width: 8rem;
     height: 2rem;
-    color: var(--textColor);
-    border: 0.1rem solid var(--border);
+    color: var(--text-color);
+    border: 0.1rem solid var(--border-color);
     border-radius: 0.4rem;
     padding: 0 0.4rem;
 
@@ -36,7 +36,7 @@ export const DateView = styled.div`
 
     &:focus,
     &:hover {
-      border: 0.15rem solid var(--primary);
+      border: 0.15rem solid var(--primary-color-color);
     }
 
     &:checked ~ label {
@@ -52,7 +52,7 @@ export const DateView = styled.div`
 export const DateText = styled.h4`
   font-size: 1.5rem;
   line-height: 2rem;
-  color: var(--textColor);
+  color: var(--text-color);
 `;
 
 export const MatchView = styled.div`
@@ -64,17 +64,17 @@ export const MatchView = styled.div`
   padding: 1.5rem 0;
 
   border-bottom: 0.1rem solid;
-  border-bottom-color: var(--border);
+  border-bottom-color: var(--border-color);
 `;
 
 export const MatchTeamText = styled.h3`
   font-size: 1.6rem;
   line-height: 1.8rem;
   font-weight: 500;
-  color: var(--teamTextColor);
+  color: var(--team-text-color);
   width: ${(props) => (props.team ? '15rem' : '1rem')};
   text-align: ${(props) => props.align || 'center'};
-  color: var(--teamTextColor);
+  color: var(--team-text-color);
 
   display: ${(props) => (props.long === 'true' ? 'block' : 'none')};
 
@@ -88,7 +88,7 @@ export const MatchScoreText = styled.h3`
   font-size: 1.6rem;
   line-height: 1.8rem;
   font-weight: bold;
-  color: var(--teamTextColor);
+  color: var(--team-text-color);
   width: 3rem;
   text-align: center;
 `;
@@ -97,7 +97,7 @@ export const MatchPenaltyText = styled.h3`
   font-size: 1.3rem;
   line-height: 1.5rem;
   font-weight: 500;
-  color: var(--textColor);
+  color: var(--text-color);
   text-align: center;
 `;
 
@@ -115,8 +115,8 @@ export const InputView = styled.div`
 export const InputScore = styled.input`
   width: 3rem;
   height: 3rem;
-  color: var(--teamTextColor);
-  border: 0.1rem solid var(--border);
+  color: var(--team-text-color);
+  border: 0.1rem solid var(--border-color);
   border-radius: 0.8rem;
   padding: 0 0.4rem;
 
@@ -130,7 +130,7 @@ export const InputScore = styled.input`
 
   &:focus,
   &:hover {
-    border: 0.15rem solid var(--primary);
+    border: 0.15rem solid var(--primary-color-color);
   }
 `;
 
@@ -138,8 +138,8 @@ export const InputPenalty = styled.input`
   display: none;
   width: 2.5rem;
   height: 2.5rem;
-  color: var(--teamTextColor);
-  border: 0.1rem solid var(--border);
+  color: var(--team-text-color);
+  border: 0.1rem solid var(--border-color);
   border-radius: 0.8rem;
   margin: 0 0.2rem;
 
@@ -153,6 +153,6 @@ export const InputPenalty = styled.input`
 
   &:focus,
   &:hover {
-    border: 0.15rem solid var(--primary);
+    border: 0.15rem solid var(--primary-color-color);
   }
 `;

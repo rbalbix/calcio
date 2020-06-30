@@ -1,22 +1,23 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap');
+/* @import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap'); */
 
 :root{
-  --primary         : #1E7A0E;
+  --primary-color         : #1E7A0E;
 
-  --bgColor         : #E0E0E0;
-  --lineColor       : #FFFFD8;
-  --bgContainer     : #FFFFFF;
-  --bgContainerDark : #333333;
-  --border          : #E0E0E0;
+  --background-color      : #E0E0E0;
+  --border-color          : #E0E0E0;
+  --line-color            : #FFFFD8;
 
-  --buttonText      : #FFFFFF;
-  --textColor       : #999999;
-  --teamTextColor   : #717171;
+  --container-color-light : #FFFFFF;
+  --container-color-dark  : #333333;
 
-  --fontFamily      : 'Roboto', sans-serif;
+  --button-text-color     : #FFFFFF;
+  --text-color            : #999999;
+  --team-text-color       : #717171;
+
+  --font-family           : 'Roboto', sans-serif;
 }
 
 * {
@@ -29,8 +30,8 @@ const GlobalStyle = createGlobalStyle`
 
 body {
   font-size: 1.4rem;
-  font-family: var(--fontFamily);
-  background: var(--bgColor);
+  font-family: var(--font-family);
+  background: var(--background-color);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
@@ -38,7 +39,6 @@ body {
 html {
   /* every 1rem will be considered 10px - responsiveness */
   font-size: 62.5%;
-  /* font-size: 59%;  */
 }
 
 html,
@@ -53,7 +53,7 @@ body,
 
 input,
 button{
-  font-family: var(--fontFamily);
+  font-family: var(--font-family);
 }
 
 button {

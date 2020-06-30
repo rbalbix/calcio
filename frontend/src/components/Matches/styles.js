@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const MatchContainer = styled.div`
-  border: 0.1rem solid var(--border);
+  border: 0.1rem solid var(--border-color);
   border-radius: 0.8rem;
   padding: 1.5rem;
 
@@ -37,7 +37,7 @@ export const MatchTitle = styled.h2`
   font-size: 2.4rem;
   font-weight: 500;
   line-height: 2.8rem;
-  color: var(--primary);
+  color: var(--primary-color);
 `;
 
 export const RoundView = styled.div`
@@ -48,16 +48,16 @@ export const RoundView = styled.div`
   margin-top: 1.2rem;
 
   border-top: 0.1rem solid;
-  border-top-color: var(--border);
+  border-top-color: var(--border-color);
   border-bottom: 0.1rem solid;
-  border-bottom-color: var(--border);
+  border-bottom-color: var(--border-color);
 `;
 
 export const RoundText = styled.h3`
   font-size: 2rem;
   line-height: 2.2rem;
   font-weight: bold;
-  color: var(--textColor);
+  color: var(--text-color);
 `;
 
 export const MatchesView = styled.div`
@@ -69,10 +69,10 @@ export const MatchesView = styled.div`
 export const Button = styled.button`
   width: 100%;
   height: 5rem;
-  background: var(--primary);
+  background: var(--primary-color);
   border: 0;
   border-radius: 0.8rem;
-  color: var(--buttonText);
+  color: var(--button-text-color);
   font-weight: bold;
   margin-top: 1rem;
   display: inline-block;

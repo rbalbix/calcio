@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ClassificationContainer = styled.div`
-  border: 0.1rem solid var(--border);
+  border: 0.1rem solid var(--border-color);
   border-radius: 0.8rem;
   padding: 1.5rem;
 
@@ -27,7 +27,7 @@ export const ClassificationTitle = styled.h2`
   font-size: 2.4rem;
   font-weight: 500;
   line-height: 2.8rem;
-  color: var(--primary);
+  color: var(--primary-color);
 `;
 
 export const HeaderTable = styled.div`
@@ -35,7 +35,7 @@ export const HeaderTable = styled.div`
   justify-content: flex-end;
   padding-bottom: 0.5rem;
   border-bottom: 0.1rem solid;
-  border-bottom-color: var(--border);
+  border-bottom-color: var(--border-color);
 
   margin-top: 1rem;
 `;
@@ -44,7 +44,7 @@ export const HeaderTableText = styled.h3`
   font-size: 1.6rem;
   line-height: 1.8rem;
   font-weight: bold;
-  color: var(--textColor);
+  color: var(--text-color);
 
   margin-left: 0.5rem;
   width: 3rem;
@@ -58,10 +58,10 @@ export const TeamView = styled.div`
 
   padding: 1.3rem 0;
   border-bottom: 0.1rem solid;
-  border-bottom-color: var(--border);
+  border-bottom-color: var(--border-color);
 
   &:hover {
-    background-color: var(--lineColor);
+    background-color: var(--line-color);
   }
 `;
 
@@ -73,7 +73,7 @@ export const Team = styled.div`
 export const PositionText = styled.h3`
   font-size: 1.6rem;
   line-height: 1.8rem;
-  color: var(--textColor);
+  color: var(--text-color);
   margin-right: 0.3rem;
 
   text-align: center;
@@ -84,7 +84,7 @@ export const TeamText = styled.h3`
   font-size: 1.6rem;
   line-height: 1.8rem;
   font-weight: 500;
-  color: var(--teamTextColor);
+  color: var(--team-text-color);
 `;
 
 export const TeamShield = styled.img`
@@ -103,7 +103,7 @@ export const ScoreText = styled.h3`
   font-size: 1.6rem;
   line-height: 1.8rem;
   font-weight: 500;
-  color: var(--textColor);
+  color: var(--text-color);
 
   margin-left: ${(props) => (props.score ? '0.5rem' : 0)};
   width: 3rem;

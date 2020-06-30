@@ -8,16 +8,16 @@ export const RoundView = styled.div`
   margin-top: 1.2rem;
 
   border-top: 0.1rem solid;
-  border-top-color: var(--border);
+  border-top-color: var(--border-color);
   border-bottom: 0.1rem solid;
-  border-bottom-color: var(--border);
+  border-bottom-color: var(--border-color);
 `;
 
 export const RoundText = styled.h3`
   font-size: 2rem;
   line-height: 2.2rem;
   font-weight: bold;
-  color: var(--textColor);
+  color: var(--text-color);
 `;
 
 export const PrevNextRound = styled.button`

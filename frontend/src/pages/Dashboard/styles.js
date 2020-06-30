@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background-color: var(--bgContainerDark);
+  background-color: var(--container-color-dark);
   height: 100vh;
 
   display: flex;
@@ -15,19 +15,19 @@ Container.displayName = 'Container';
 
 export const DashboardTitle = styled.h1`
   font-size: 4rem;
-  color: var(--bgContainer);
+  color: var(--container-color-light);
   margin-bottom: 1rem;
 `;
 DashboardTitle.displayName = 'DashboardTitle';
 
 export const ChampTitle = styled.h2`
   font-size: 3rem;
-  color: var(--textColor);
+  color: var(--text-color);
   margin-bottom: 1rem;
 `;
 
 export const Cards = styled.div`
-  background-color: var(--bgContainer);
+  background-color: var(--container-color-light);
 
   max-width: 800px;
 
@@ -44,7 +44,7 @@ export const Cards = styled.div`
 export const Card = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: var(--bgContainer);
+  background-color: var(--container-color-light);
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.35rem;
   opacity: 0.8;
@@ -66,7 +66,7 @@ export const CardHeader = styled.div`
 
   font-size: 2.5rem;
   font-weight: bold;
-  color: var(--primary);
+  color: var(--primary-color);
 `;
 
 export const CardBody = styled.div`

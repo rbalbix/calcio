@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { MdArrowBack } from 'react-icons/md';
 
 export const CategoryContainer = styled.div`
-  background-color: var(--bgContainer);
+  background-color: var(--container-color-light);
   width: 95%;
   max-width: 1200px;
   margin: 1rem auto;
@@ -22,11 +22,11 @@ export const CategoryTitleView = styled.div`
 
 export const IconArrowBack = styled(MdArrowBack)`
   font-size: 2.6rem;
-  color: var(--buttonText);
+  color: var(--button-text-color);
 `;
 
 export const Back = styled.div`
-  background-color: var(--primary);
+  background-color: var(--primary-color);
 
   display: flex;
   justify-content: center;
@@ -40,7 +40,7 @@ export const Back = styled.div`
 
   opacity: 0.8;
   transition: opacity 0.2s;
-  color: var(--bgContainer);
+  color: var(--container-color-light);
 
   &:hover {
     transform: translateY(-2px);
@@ -53,7 +53,7 @@ export const Back = styled.div`
 export const CategoryTitle = styled.h1`
   font-size: 3rem;
   font-weight: 500;
-  color: var(--primary);
+  color: var(--primary-color);
 `;
 
 export const CategoryResult = styled.div`
