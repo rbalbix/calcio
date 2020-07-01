@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Skeleton from 'react-loading-skeleton';
 
 import Top4 from '../../components/Top4';
 
@@ -24,7 +25,6 @@ export default function Dashboard() {
       const response = await api.get('/category/distinct');
       setCategories(response.data);
     }
-
     loadCategories();
   }, []);
 
@@ -42,24 +42,44 @@ export default function Dashboard() {
       <DashboardTitle>Painel de Controle</DashboardTitle>
       <ChampTitle>{champ.name}</ChampTitle>
       <Cards>
-        {categories.map((category) => (
-          <Card key={category} draggable="true">
-            <Link
-              style={{ textDecoration: 'none' }}
-              key={category}
-              to={{
-                pathname: '/rank',
-                query: { category },
-                state: { category },
-              }}
-            >
-              <CardHeader>TABELA E JOGOS</CardHeader>
-              <CardBody>
-                <Top4 category={category} />
-              </CardBody>
-            </Link>
+        {categories.length > 0 ? (
+          categories.map((category) => (
+            <Card key={category} draggable="true">
+              <Link
+                style={{ textDecoration: 'none' }}
+                key={category}
+                to={{
+                  pathname: '/rank',
+                  query: { category },
+                  state: { category },
+                }}
+              >
+                <CardHeader>TABELA E JOGOS</CardHeader>
+                <CardBody>
+                  <Top4 category={category} />
+                </CardBody>
+              </Link>
+            </Card>
+          ))
+        ) : (
+          <Card>
+            <CardHeader>
+              <Skeleton width={250} />
+            </CardHeader>
+            <CardBody>
+              <Skeleton width={250} />
+            </CardBody>
+            <CardBody>
+              <Skeleton width={250} />
+            </CardBody>
+            <CardBody>
+              <Skeleton width={250} />
+            </CardBody>
+            <CardBody>
+              <Skeleton width={250} />
+            </CardBody>
           </Card>
-        ))}
+        )}
       </Cards>
     </Container>
   );
