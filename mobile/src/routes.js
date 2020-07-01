@@ -5,6 +5,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Main from './pages/Main';
 import Detail from './pages/Detail';
+import Rule from './pages/Rule';
+import RuleIcon from './components/RuleIcon';
 
 const Stack = createStackNavigator();
 
@@ -21,6 +23,7 @@ export default function Routes() {
             fontWeight: 'bold',
             fontSize: 24,
           },
+          headerTitleAlign: 'center',
         }}
       >
         <Stack.Screen
@@ -28,6 +31,7 @@ export default function Routes() {
           component={Main}
           options={{
             title: 'Calcio',
+            headerRight: () => <RuleIcon />,
           }}
         />
 
@@ -38,6 +42,15 @@ export default function Routes() {
             title: `TORNEIO ${route.params.info.category}`,
             headerBackTitleVisible: false,
           })}
+        />
+
+        <Stack.Screen
+          name='Rule'
+          component={Rule}
+          options={{
+            title: 'Regulamento',
+            headerBackTitleVisible: false,
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>
