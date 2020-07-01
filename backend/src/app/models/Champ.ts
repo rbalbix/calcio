@@ -1,4 +1,5 @@
 import { mongoose } from '@database';
+import { baseURL } from '@config';
 
 const { Schema, model } = mongoose;
 
@@ -18,7 +19,16 @@ const ChampSchema = new Schema(
       required: true,
     },
   },
-  { timestamps: true }
+  {
+    toJSON: {
+      virtuals: true,
+    },
+    timestamps: true,
+  }
 );
+
+ChampSchema.virtual('rule_url').get(function (this: IChamp) {
+  return `${baseURL}/files/rules/rule-${this.season}.pdf`;
+});
 
 export const Champ = model<IChamp>('Champ', ChampSchema);
