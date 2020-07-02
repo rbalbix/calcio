@@ -2,7 +2,7 @@ import React from 'react';
 import { TouchableOpacity, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import api from '../../services/api';
-import * as WebBrowser from 'expo-web-browser';
+import * as Linking from 'expo-linking';
 import { MaterialIcons } from '@expo/vector-icons';
 
 export default function RuleIcon() {
@@ -14,7 +14,7 @@ export default function RuleIcon() {
 
   async function handleRuleClick() {
     const response = await api.get('/champ/current');
-    await WebBrowser.openBrowserAsync(response.data.rule_url);
+    Linking.openURL(response.data.rule_url);
   }
 
   return (
