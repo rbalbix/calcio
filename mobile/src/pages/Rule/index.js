@@ -19,6 +19,8 @@ const Rule = () => {
       source={{
         uri: `https://rb-calcio.herokuapp.com/files/rules/rule-${champ.season}.pdf`,
       }}
+      withScroll='true'
+      withPinchZoom='true'
     />
   );
 };
