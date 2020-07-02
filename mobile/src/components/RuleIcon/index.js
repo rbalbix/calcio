@@ -24,7 +24,7 @@ export default function RuleIcon() {
       }}
       style={{ marginRight: 10 }}
     >
-      <MaterialIcons name="picture-as-pdf" color="yellow" size={30} />
+      <MaterialIcons name="picture-as-pdf" color="white" size={30} />
     </TouchableOpacity>
   );
 }
