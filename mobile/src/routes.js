@@ -27,7 +27,7 @@ export default function Routes() {
         }}
       >
         <Stack.Screen
-          name='Calcio'
+          name="Calcio"
           component={Main}
           options={{
             title: 'Calcio',
@@ -36,7 +36,7 @@ export default function Routes() {
         />
 
         <Stack.Screen
-          name='Category'
+          name="Category"
           component={Detail}
           options={({ route }) => ({
             title: `TORNEIO ${route.params.info.category}`,
@@ -45,7 +45,7 @@ export default function Routes() {
         />
 
         <Stack.Screen
-          name='Rule'
+          name="Rule"
           component={Rule}
           options={{
             title: 'Regulamento',
