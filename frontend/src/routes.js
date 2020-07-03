@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import Dashboard from './pages/Dashboard';
-import RankMatches from './pages/RankMatches';
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const RankMatches = lazy(() => import('./pages/RankMatches'));
 
 export default function Routes() {
   return (
     <BrowserRouter>
-      <Switch>
-        <Route path="/" exact component={Dashboard} />
-        <Route path="/rank" exact component={RankMatches} />
-      </Switch>
+      <Suspense fallback={<div>Carregando ...</div>}>
+        <Switch>
+          <Route path="/" exact component={Dashboard} />
+          <Route path="/rank" exact component={RankMatches} />
+        </Switch>
+      </Suspense>
     </BrowserRouter>
   );
 }
