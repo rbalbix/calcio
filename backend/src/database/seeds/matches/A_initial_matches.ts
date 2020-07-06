@@ -4,72 +4,72 @@ import { Champ, Team, Match } from '@models';
 
 async function seed() {
   try {
-    log.info('  Seeding B Matches ...');
+    log.info('  Seeding Initial A Matches ...');
     const champs = await Champ.find();
     const teams = await Team.find();
 
-    const matchesB = [
+    const matchesA = [
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 1,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
-        scoreHome: 1,
+        scoreHome: null,
         teamAway: teams.find((team) => team.longName === 'NAPOLI')!._id,
-        scoreAway: 3,
+        scoreAway: null,
         day: moment.utc(moment('2020-02-10')),
         week: 7,
         weekDay: 'SEG',
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 1,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'JUVENTUS')!._id,
-        scoreHome: 3,
+        scoreHome: null,
         teamAway: teams.find((team) => team.longName === 'SAMPDORIA')!._id,
-        scoreAway: 2,
+        scoreAway: null,
         day: moment.utc(moment('2020-02-11')),
         week: 7,
         weekDay: 'TER',
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 1,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SASSUOLO')!._id,
-        scoreHome: 3,
+        scoreHome: null,
         teamAway: teams.find((team) => team.longName === 'PARMA')!._id,
-        scoreAway: 1,
+        scoreAway: null,
         day: moment.utc(moment('2020-02-12')),
         week: 7,
         weekDay: 'QUA',
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 1,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'ROMA')!._id,
-        scoreHome: 2,
+        scoreHome: null,
         teamAway: teams.find((team) => team.longName === 'PALERMO')!._id,
-        scoreAway: 1,
+        scoreAway: null,
         day: moment.utc(moment('2020-02-13')),
         week: 7,
         weekDay: 'QUI',
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 1,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'MILAN')!._id,
-        scoreHome: 0,
+        scoreHome: null,
         teamAway: teams.find((team) => team.longName === 'FIORENTINA')!._id,
-        scoreAway: 0,
+        scoreAway: null,
         day: moment.utc(moment('2020-02-17')),
         week: 8,
         weekDay: 'SEG',
@@ -77,46 +77,46 @@ async function seed() {
       // ROUND 2
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 2,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'JUVENTUS')!._id,
-        scoreHome: 1,
+        scoreHome: null,
         teamAway: teams.find((team) => team.longName === 'PARMA')!._id,
-        scoreAway: 2,
+        scoreAway: null,
         day: moment.utc(moment('2020-02-18')),
         week: 8,
         weekDay: 'TER',
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 2,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
-        scoreHome: 1,
+        scoreHome: null,
         teamAway: teams.find((team) => team.longName === 'ROMA')!._id,
-        scoreAway: 1,
+        scoreAway: null,
         day: moment.utc(moment('2020-02-19')),
         week: 8,
         weekDay: 'QUA',
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 2,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'NAPOLI')!._id,
-        scoreHome: 2,
+        scoreHome: null,
         teamAway: teams.find((team) => team.longName === 'SASSUOLO')!._id,
-        scoreAway: 0,
+        scoreAway: null,
         day: moment.utc(moment('2020-02-20')),
         week: 8,
         weekDay: 'QUI',
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 2,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SAMPDORIA')!._id,
@@ -129,13 +129,13 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 2,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PALERMO')!._id,
-        scoreHome: 2,
+        scoreHome: null,
         teamAway: teams.find((team) => team.longName === 'FIORENTINA')!._id,
-        scoreAway: 2,
+        scoreAway: null,
         day: moment.utc(moment('2020-03-03')),
         week: 10,
         weekDay: 'TER',
@@ -143,65 +143,65 @@ async function seed() {
       // ROUND 3
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 3,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PARMA')!._id,
-        scoreHome: 3,
+        scoreHome: null,
         teamAway: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
-        scoreAway: 3,
+        scoreAway: null,
         day: moment.utc(moment('2020-03-04')),
         week: 10,
         weekDay: 'QUA',
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 3,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'ROMA')!._id,
-        scoreHome: 2,
+        scoreHome: null,
         teamAway: teams.find((team) => team.longName === 'SASSUOLO')!._id,
-        scoreAway: 5,
+        scoreAway: null,
         day: moment.utc(moment('2020-03-05')),
         week: 10,
         weekDay: 'QUI',
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 3,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PALERMO')!._id,
-        scoreHome: 2,
+        scoreHome: null,
         teamAway: teams.find((team) => team.longName === 'JUVENTUS')!._id,
-        scoreAway: 0,
+        scoreAway: null,
         day: moment.utc(moment('2020-03-09')),
         week: 11,
         weekDay: 'SEG',
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 3,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'MILAN')!._id,
-        scoreHome: 2,
+        scoreHome: null,
         teamAway: teams.find((team) => team.longName === 'NAPOLI')!._id,
-        scoreAway: 2,
+        scoreAway: null,
         day: moment.utc(moment('2020-03-10')),
         week: 11,
         weekDay: 'TER',
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 3,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'FIORENTINA')!._id,
-        scoreHome: 1,
+        scoreHome: null,
         teamAway: teams.find((team) => team.longName === 'SAMPDORIA')!._id,
-        scoreAway: 0,
+        scoreAway: null,
         day: moment.utc(moment('2020-03-11')),
         week: 11,
         weekDay: 'QUA',
@@ -209,20 +209,20 @@ async function seed() {
       // ROUND 4
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 4,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SASSUOLO')!._id,
-        scoreHome: 1,
+        scoreHome: null,
         teamAway: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
-        scoreAway: 1,
+        scoreAway: null,
         day: moment.utc(moment('2020-03-12')),
         week: 11,
         weekDay: 'QUI',
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 4,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PARMA')!._id,
@@ -235,7 +235,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 4,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SAMPDORIA')!._id,
@@ -248,7 +248,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 4,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'MILAN')!._id,
@@ -261,7 +261,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 4,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'FIORENTINA')!._id,
@@ -275,7 +275,7 @@ async function seed() {
       // ROUND 5
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 5,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
@@ -288,7 +288,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 5,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SASSUOLO')!._id,
@@ -301,7 +301,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 5,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'NAPOLI')!._id,
@@ -314,7 +314,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 5,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PARMA')!._id,
@@ -327,7 +327,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 5,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'ROMA')!._id,
@@ -341,7 +341,7 @@ async function seed() {
       // ROUND 6
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 6,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
@@ -354,7 +354,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 6,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SASSUOLO')!._id,
@@ -367,7 +367,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 6,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SAMPDORIA')!._id,
@@ -380,7 +380,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 6,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'NAPOLI')!._id,
@@ -393,7 +393,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 6,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'ROMA')!._id,
@@ -407,7 +407,7 @@ async function seed() {
       // ROUND 7
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 7,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'JUVENTUS')!._id,
@@ -420,7 +420,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 7,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
@@ -433,7 +433,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 7,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PALERMO')!._id,
@@ -446,7 +446,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 7,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'NAPOLI')!._id,
@@ -459,7 +459,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 7,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PARMA')!._id,
@@ -473,7 +473,7 @@ async function seed() {
       // ROUND 8
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 8,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'JUVENTUS')!._id,
@@ -486,7 +486,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 8,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'MILAN')!._id,
@@ -499,7 +499,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 8,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'FIORENTINA')!._id,
@@ -512,7 +512,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 8,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'NAPOLI')!._id,
@@ -525,7 +525,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 8,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PARMA')!._id,
@@ -539,7 +539,7 @@ async function seed() {
       // ROUND 9
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 9,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SASSUOLO')!._id,
@@ -552,7 +552,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 9,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PALERMO')!._id,
@@ -565,7 +565,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 9,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'FIORENTINA')!._id,
@@ -578,7 +578,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 9,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'ROMA')!._id,
@@ -591,7 +591,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 9,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SAMPDORIA')!._id,
@@ -604,7 +604,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 10,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'ROMA')!._id,
@@ -617,7 +617,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 10,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PALERMO')!._id,
@@ -630,7 +630,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 10,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'MILAN')!._id,
@@ -643,7 +643,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 10,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'FIORENTINA')!._id,
@@ -656,7 +656,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 10,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PARMA')!._id,
@@ -670,7 +670,7 @@ async function seed() {
       // ROUND 11
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 11,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PALERMO')!._id,
@@ -683,7 +683,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 11,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'NAPOLI')!._id,
@@ -696,7 +696,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 11,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'JUVENTUS')!._id,
@@ -709,7 +709,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 11,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
@@ -722,7 +722,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 11,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PARMA')!._id,
@@ -736,7 +736,7 @@ async function seed() {
       // ROUND 12
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 12,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'ROMA')!._id,
@@ -749,7 +749,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 12,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SASSUOLO')!._id,
@@ -762,7 +762,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 12,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'MILAN')!._id,
@@ -775,7 +775,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 12,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
@@ -788,7 +788,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 12,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'JUVENTUS')!._id,
@@ -802,7 +802,7 @@ async function seed() {
       // ROUND 13
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 13,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'MILAN')!._id,
@@ -815,7 +815,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 13,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'FIORENTINA')!._id,
@@ -828,7 +828,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 13,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SASSUOLO')!._id,
@@ -841,7 +841,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 13,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PARMA')!._id,
@@ -854,7 +854,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 13,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SAMPDORIA')!._id,
@@ -868,7 +868,7 @@ async function seed() {
       // ROUND 14
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 14,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SASSUOLO')!._id,
@@ -881,7 +881,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 14,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
@@ -894,7 +894,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 14,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'ROMA')!._id,
@@ -907,7 +907,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 14,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'NAPOLI')!._id,
@@ -920,7 +920,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 14,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SAMPDORIA')!._id,
@@ -934,7 +934,7 @@ async function seed() {
       // ROUND 15
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 15,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SASSUOLO')!._id,
@@ -947,7 +947,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 15,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'JUVENTUS')!._id,
@@ -960,7 +960,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 15,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PALERMO')!._id,
@@ -973,7 +973,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 15,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SAMPDORIA')!._id,
@@ -986,7 +986,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 15,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'FIORENTINA')!._id,
@@ -1000,7 +1000,7 @@ async function seed() {
       // ROUND 16
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 16,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SAMPDORIA')!._id,
@@ -1013,7 +1013,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 16,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'JUVENTUS')!._id,
@@ -1026,7 +1026,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 16,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
@@ -1039,7 +1039,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 16,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PALERMO')!._id,
@@ -1052,7 +1052,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 16,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'NAPOLI')!._id,
@@ -1066,7 +1066,7 @@ async function seed() {
       // ROUND 17
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 17,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
@@ -1079,7 +1079,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 17,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PARMA')!._id,
@@ -1092,7 +1092,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 17,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'ROMA')!._id,
@@ -1105,7 +1105,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 17,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SASSUOLO')!._id,
@@ -1118,7 +1118,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 17,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'JUVENTUS')!._id,
@@ -1132,7 +1132,7 @@ async function seed() {
       // ROUND 18
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 18,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'MILAN')!._id,
@@ -1145,7 +1145,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 18,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PARMA')!._id,
@@ -1158,7 +1158,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 18,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'JUVENTUS')!._id,
@@ -1171,7 +1171,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 18,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'FIORENTINA')!._id,
@@ -1184,7 +1184,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 18,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'NAPOLI')!._id,
@@ -1198,7 +1198,7 @@ async function seed() {
       // ROUND 19
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 19,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'ROMA')!._id,
@@ -1211,7 +1211,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 19,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'NAPOLI')!._id,
@@ -1224,7 +1224,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 19,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SASSUOLO')!._id,
@@ -1237,7 +1237,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 19,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SAMPDORIA')!._id,
@@ -1250,7 +1250,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 19,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
@@ -1264,7 +1264,7 @@ async function seed() {
       // ROUND 20
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 20,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SAMPDORIA')!._id,
@@ -1277,7 +1277,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 20,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'ROMA')!._id,
@@ -1290,7 +1290,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 20,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'FIORENTINA')!._id,
@@ -1303,7 +1303,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 20,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PALERMO')!._id,
@@ -1316,7 +1316,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 20,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SASSUOLO')!._id,
@@ -1330,7 +1330,7 @@ async function seed() {
       // ROUND 21
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 21,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PARMA')!._id,
@@ -1343,7 +1343,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 21,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'FIORENTINA')!._id,
@@ -1356,7 +1356,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 21,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SAMPDORIA')!._id,
@@ -1369,7 +1369,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 21,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'MILAN')!._id,
@@ -1382,7 +1382,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 21,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SASSUOLO')!._id,
@@ -1396,7 +1396,7 @@ async function seed() {
       // ROUND 22
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 22,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'ROMA')!._id,
@@ -1409,7 +1409,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 22,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
@@ -1422,7 +1422,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 22,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PARMA')!._id,
@@ -1435,7 +1435,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 22,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SASSUOLO')!._id,
@@ -1448,7 +1448,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 22,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'NAPOLI')!._id,
@@ -1462,7 +1462,7 @@ async function seed() {
       // ROUND 23
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 23,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
@@ -1475,7 +1475,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 23,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PARMA')!._id,
@@ -1488,7 +1488,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 23,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'JUVENTUS')!._id,
@@ -1501,7 +1501,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 23,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PALERMO')!._id,
@@ -1514,7 +1514,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 23,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'NAPOLI')!._id,
@@ -1528,7 +1528,7 @@ async function seed() {
       // ROUND 24
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 24,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PARMA')!._id,
@@ -1541,7 +1541,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 24,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'JUVENTUS')!._id,
@@ -1554,7 +1554,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 24,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'FIORENTINA')!._id,
@@ -1567,7 +1567,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 24,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'MILAN')!._id,
@@ -1580,7 +1580,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 24,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'NAPOLI')!._id,
@@ -1594,7 +1594,7 @@ async function seed() {
       // ROUND 25
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 25,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PALERMO')!._id,
@@ -1607,7 +1607,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 25,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'JUVENTUS')!._id,
@@ -1620,7 +1620,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 25,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
@@ -1633,7 +1633,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 25,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SAMPDORIA')!._id,
@@ -1646,7 +1646,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 25,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'NAPOLI')!._id,
@@ -1660,7 +1660,7 @@ async function seed() {
       // ROUND 26
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 26,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'ROMA')!._id,
@@ -1673,7 +1673,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 26,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PARMA')!._id,
@@ -1686,7 +1686,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 26,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'MILAN')!._id,
@@ -1699,7 +1699,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 26,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'FIORENTINA')!._id,
@@ -1712,7 +1712,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 26,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PALERMO')!._id,
@@ -1726,7 +1726,7 @@ async function seed() {
       // ROUND 27
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 27,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
@@ -1739,7 +1739,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 27,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SASSUOLO')!._id,
@@ -1752,7 +1752,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 27,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'MILAN')!._id,
@@ -1765,7 +1765,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 27,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'JUVENTUS')!._id,
@@ -1778,7 +1778,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
-        category: 'B',
+        category: 'A',
         round: 27,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'ROMA')!._id,
@@ -1796,65 +1796,65 @@ async function seed() {
        */
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 1,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
-        scoreHome: 1,
+        scoreHome: null,
         teamAway: teams.find((team) => team.longName === 'NAPOLI')!._id,
-        scoreAway: 3,
+        scoreAway: null,
         day: moment.utc(moment('2020-02-10')),
         week: 7,
         weekDay: 'SEG',
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 1,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'JUVENTUS')!._id,
-        scoreHome: 3,
+        scoreHome: null,
         teamAway: teams.find((team) => team.longName === 'SAMPDORIA')!._id,
-        scoreAway: 2,
+        scoreAway: null,
         day: moment.utc(moment('2020-02-11')),
         week: 7,
         weekDay: 'TER',
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 1,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SASSUOLO')!._id,
-        scoreHome: 3,
+        scoreHome: null,
         teamAway: teams.find((team) => team.longName === 'PARMA')!._id,
-        scoreAway: 1,
+        scoreAway: null,
         day: moment.utc(moment('2020-02-12')),
         week: 7,
         weekDay: 'QUA',
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 1,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'ROMA')!._id,
-        scoreHome: 2,
+        scoreHome: null,
         teamAway: teams.find((team) => team.longName === 'PALERMO')!._id,
-        scoreAway: 1,
+        scoreAway: null,
         day: moment.utc(moment('2020-02-13')),
         week: 7,
         weekDay: 'QUI',
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 1,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'MILAN')!._id,
-        scoreHome: 0,
+        scoreHome: null,
         teamAway: teams.find((team) => team.longName === 'FIORENTINA')!._id,
-        scoreAway: 0,
+        scoreAway: null,
         day: moment.utc(moment('2020-02-17')),
         week: 8,
         weekDay: 'SEG',
@@ -1862,46 +1862,46 @@ async function seed() {
       // ROUND 2
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 2,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'JUVENTUS')!._id,
-        scoreHome: 1,
+        scoreHome: null,
         teamAway: teams.find((team) => team.longName === 'PARMA')!._id,
-        scoreAway: 2,
+        scoreAway: null,
         day: moment.utc(moment('2020-02-18')),
         week: 8,
         weekDay: 'TER',
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 2,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
-        scoreHome: 1,
+        scoreHome: null,
         teamAway: teams.find((team) => team.longName === 'ROMA')!._id,
-        scoreAway: 1,
+        scoreAway: null,
         day: moment.utc(moment('2020-02-19')),
         week: 8,
         weekDay: 'QUA',
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 2,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'NAPOLI')!._id,
-        scoreHome: 2,
+        scoreHome: null,
         teamAway: teams.find((team) => team.longName === 'SASSUOLO')!._id,
-        scoreAway: 0,
+        scoreAway: null,
         day: moment.utc(moment('2020-02-20')),
         week: 8,
         weekDay: 'QUI',
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 2,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SAMPDORIA')!._id,
@@ -1914,13 +1914,13 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 2,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PALERMO')!._id,
-        scoreHome: 2,
+        scoreHome: null,
         teamAway: teams.find((team) => team.longName === 'FIORENTINA')!._id,
-        scoreAway: 2,
+        scoreAway: null,
         day: moment.utc(moment('2020-03-03')),
         week: 10,
         weekDay: 'TER',
@@ -1928,65 +1928,65 @@ async function seed() {
       // ROUND 3
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 3,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PARMA')!._id,
-        scoreHome: 3,
+        scoreHome: null,
         teamAway: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
-        scoreAway: 3,
+        scoreAway: null,
         day: moment.utc(moment('2020-03-04')),
         week: 10,
         weekDay: 'QUA',
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 3,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'ROMA')!._id,
-        scoreHome: 2,
+        scoreHome: null,
         teamAway: teams.find((team) => team.longName === 'SASSUOLO')!._id,
-        scoreAway: 5,
+        scoreAway: null,
         day: moment.utc(moment('2020-03-05')),
         week: 10,
         weekDay: 'QUI',
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 3,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PALERMO')!._id,
-        scoreHome: 2,
+        scoreHome: null,
         teamAway: teams.find((team) => team.longName === 'JUVENTUS')!._id,
-        scoreAway: 0,
+        scoreAway: null,
         day: moment.utc(moment('2020-03-09')),
         week: 11,
         weekDay: 'SEG',
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 3,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'MILAN')!._id,
-        scoreHome: 2,
+        scoreHome: null,
         teamAway: teams.find((team) => team.longName === 'NAPOLI')!._id,
-        scoreAway: 2,
+        scoreAway: null,
         day: moment.utc(moment('2020-03-10')),
         week: 11,
         weekDay: 'TER',
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 3,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'FIORENTINA')!._id,
-        scoreHome: 1,
+        scoreHome: null,
         teamAway: teams.find((team) => team.longName === 'SAMPDORIA')!._id,
-        scoreAway: 0,
+        scoreAway: null,
         day: moment.utc(moment('2020-03-11')),
         week: 11,
         weekDay: 'QUA',
@@ -1994,20 +1994,20 @@ async function seed() {
       // ROUND 4
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 4,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SASSUOLO')!._id,
-        scoreHome: 1,
+        scoreHome: null,
         teamAway: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
-        scoreAway: 1,
+        scoreAway: null,
         day: moment.utc(moment('2020-03-12')),
         week: 11,
         weekDay: 'QUI',
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 4,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PARMA')!._id,
@@ -2020,7 +2020,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 4,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SAMPDORIA')!._id,
@@ -2033,7 +2033,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 4,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'MILAN')!._id,
@@ -2046,7 +2046,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 4,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'FIORENTINA')!._id,
@@ -2060,7 +2060,7 @@ async function seed() {
       // ROUND 5
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 5,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
@@ -2073,7 +2073,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 5,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SASSUOLO')!._id,
@@ -2086,7 +2086,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 5,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'NAPOLI')!._id,
@@ -2099,7 +2099,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 5,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PARMA')!._id,
@@ -2112,7 +2112,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 5,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'ROMA')!._id,
@@ -2126,7 +2126,7 @@ async function seed() {
       // ROUND 6
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 6,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
@@ -2139,7 +2139,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 6,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SASSUOLO')!._id,
@@ -2152,7 +2152,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 6,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SAMPDORIA')!._id,
@@ -2165,7 +2165,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 6,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'NAPOLI')!._id,
@@ -2178,7 +2178,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 6,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'ROMA')!._id,
@@ -2192,7 +2192,7 @@ async function seed() {
       // ROUND 7
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 7,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'JUVENTUS')!._id,
@@ -2205,7 +2205,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 7,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
@@ -2218,7 +2218,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 7,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PALERMO')!._id,
@@ -2231,7 +2231,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 7,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'NAPOLI')!._id,
@@ -2244,7 +2244,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 7,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PARMA')!._id,
@@ -2258,7 +2258,7 @@ async function seed() {
       // ROUND 8
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 8,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'JUVENTUS')!._id,
@@ -2271,7 +2271,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 8,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'MILAN')!._id,
@@ -2284,7 +2284,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 8,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'FIORENTINA')!._id,
@@ -2297,7 +2297,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 8,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'NAPOLI')!._id,
@@ -2310,7 +2310,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 8,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PARMA')!._id,
@@ -2324,7 +2324,7 @@ async function seed() {
       // ROUND 9
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 9,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SASSUOLO')!._id,
@@ -2337,7 +2337,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 9,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PALERMO')!._id,
@@ -2350,7 +2350,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 9,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'FIORENTINA')!._id,
@@ -2363,7 +2363,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 9,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'ROMA')!._id,
@@ -2376,7 +2376,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 9,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SAMPDORIA')!._id,
@@ -2389,7 +2389,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 10,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'ROMA')!._id,
@@ -2402,7 +2402,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 10,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PALERMO')!._id,
@@ -2415,7 +2415,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 10,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'MILAN')!._id,
@@ -2428,7 +2428,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 10,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'FIORENTINA')!._id,
@@ -2441,7 +2441,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 10,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PARMA')!._id,
@@ -2455,7 +2455,7 @@ async function seed() {
       // ROUND 11
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 11,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PALERMO')!._id,
@@ -2468,7 +2468,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 11,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'NAPOLI')!._id,
@@ -2481,7 +2481,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 11,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'JUVENTUS')!._id,
@@ -2494,7 +2494,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 11,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
@@ -2507,7 +2507,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 11,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PARMA')!._id,
@@ -2521,7 +2521,7 @@ async function seed() {
       // ROUND 12
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 12,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'ROMA')!._id,
@@ -2534,7 +2534,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 12,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SASSUOLO')!._id,
@@ -2547,7 +2547,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 12,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'MILAN')!._id,
@@ -2560,7 +2560,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 12,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
@@ -2573,7 +2573,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 12,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'JUVENTUS')!._id,
@@ -2587,7 +2587,7 @@ async function seed() {
       // ROUND 13
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 13,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'MILAN')!._id,
@@ -2600,7 +2600,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 13,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'FIORENTINA')!._id,
@@ -2613,7 +2613,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 13,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SASSUOLO')!._id,
@@ -2626,7 +2626,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 13,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PARMA')!._id,
@@ -2639,7 +2639,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 13,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SAMPDORIA')!._id,
@@ -2653,7 +2653,7 @@ async function seed() {
       // ROUND 14
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 14,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SASSUOLO')!._id,
@@ -2666,7 +2666,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 14,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
@@ -2679,7 +2679,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 14,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'ROMA')!._id,
@@ -2692,7 +2692,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 14,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'NAPOLI')!._id,
@@ -2705,7 +2705,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 14,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SAMPDORIA')!._id,
@@ -2719,7 +2719,7 @@ async function seed() {
       // ROUND 15
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 15,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SASSUOLO')!._id,
@@ -2732,7 +2732,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 15,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'JUVENTUS')!._id,
@@ -2745,7 +2745,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 15,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PALERMO')!._id,
@@ -2758,7 +2758,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 15,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SAMPDORIA')!._id,
@@ -2771,7 +2771,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 15,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'FIORENTINA')!._id,
@@ -2785,7 +2785,7 @@ async function seed() {
       // ROUND 16
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 16,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SAMPDORIA')!._id,
@@ -2798,7 +2798,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 16,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'JUVENTUS')!._id,
@@ -2811,7 +2811,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 16,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
@@ -2824,7 +2824,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 16,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PALERMO')!._id,
@@ -2837,7 +2837,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 16,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'NAPOLI')!._id,
@@ -2851,7 +2851,7 @@ async function seed() {
       // ROUND 17
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 17,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
@@ -2864,7 +2864,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 17,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PARMA')!._id,
@@ -2877,7 +2877,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 17,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'ROMA')!._id,
@@ -2890,7 +2890,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 17,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SASSUOLO')!._id,
@@ -2903,7 +2903,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 17,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'JUVENTUS')!._id,
@@ -2917,7 +2917,7 @@ async function seed() {
       // ROUND 18
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 18,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'MILAN')!._id,
@@ -2930,7 +2930,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 18,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PARMA')!._id,
@@ -2943,7 +2943,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 18,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'JUVENTUS')!._id,
@@ -2956,7 +2956,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 18,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'FIORENTINA')!._id,
@@ -2969,7 +2969,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 18,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'NAPOLI')!._id,
@@ -2983,7 +2983,7 @@ async function seed() {
       // ROUND 19
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 19,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'ROMA')!._id,
@@ -2996,7 +2996,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 19,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'NAPOLI')!._id,
@@ -3009,7 +3009,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 19,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SASSUOLO')!._id,
@@ -3022,7 +3022,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 19,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SAMPDORIA')!._id,
@@ -3035,7 +3035,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 19,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
@@ -3049,7 +3049,7 @@ async function seed() {
       // ROUND 20
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 20,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SAMPDORIA')!._id,
@@ -3062,7 +3062,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 20,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'ROMA')!._id,
@@ -3075,7 +3075,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 20,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'FIORENTINA')!._id,
@@ -3088,7 +3088,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 20,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PALERMO')!._id,
@@ -3101,7 +3101,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 20,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SASSUOLO')!._id,
@@ -3115,7 +3115,7 @@ async function seed() {
       // ROUND 21
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 21,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PARMA')!._id,
@@ -3128,7 +3128,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 21,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'FIORENTINA')!._id,
@@ -3141,7 +3141,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 21,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SAMPDORIA')!._id,
@@ -3154,7 +3154,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 21,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'MILAN')!._id,
@@ -3167,7 +3167,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 21,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SASSUOLO')!._id,
@@ -3181,7 +3181,7 @@ async function seed() {
       // ROUND 22
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 22,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'ROMA')!._id,
@@ -3194,7 +3194,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 22,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
@@ -3207,7 +3207,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 22,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PARMA')!._id,
@@ -3220,7 +3220,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 22,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SASSUOLO')!._id,
@@ -3233,7 +3233,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 22,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'NAPOLI')!._id,
@@ -3247,7 +3247,7 @@ async function seed() {
       // ROUND 23
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 23,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
@@ -3260,7 +3260,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 23,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PARMA')!._id,
@@ -3273,7 +3273,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 23,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'JUVENTUS')!._id,
@@ -3286,7 +3286,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 23,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PALERMO')!._id,
@@ -3299,7 +3299,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 23,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'NAPOLI')!._id,
@@ -3313,7 +3313,7 @@ async function seed() {
       // ROUND 24
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 24,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PARMA')!._id,
@@ -3326,7 +3326,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 24,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'JUVENTUS')!._id,
@@ -3339,7 +3339,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 24,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'FIORENTINA')!._id,
@@ -3352,7 +3352,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 24,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'MILAN')!._id,
@@ -3365,7 +3365,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 24,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'NAPOLI')!._id,
@@ -3379,7 +3379,7 @@ async function seed() {
       // ROUND 25
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 25,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PALERMO')!._id,
@@ -3392,7 +3392,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 25,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'JUVENTUS')!._id,
@@ -3405,7 +3405,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 25,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
@@ -3418,7 +3418,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 25,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SAMPDORIA')!._id,
@@ -3431,7 +3431,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 25,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'NAPOLI')!._id,
@@ -3445,7 +3445,7 @@ async function seed() {
       // ROUND 26
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 26,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'ROMA')!._id,
@@ -3458,7 +3458,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 26,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PARMA')!._id,
@@ -3471,7 +3471,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 26,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'MILAN')!._id,
@@ -3484,7 +3484,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 26,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'FIORENTINA')!._id,
@@ -3497,7 +3497,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 26,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'PALERMO')!._id,
@@ -3511,7 +3511,7 @@ async function seed() {
       // ROUND 27
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 27,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'INTERNAZIONALE')!._id,
@@ -3524,7 +3524,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 27,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'SASSUOLO')!._id,
@@ -3537,7 +3537,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 27,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'MILAN')!._id,
@@ -3550,7 +3550,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 27,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'JUVENTUS')!._id,
@@ -3563,7 +3563,7 @@ async function seed() {
       },
       {
         champ: champs.find((champ) => champ.season === 2020)!._id,
-        category: 'B',
+        category: 'A',
         round: 27,
         roundName: 'REGULAR',
         teamHome: teams.find((team) => team.longName === 'ROMA')!._id,
@@ -3576,10 +3576,10 @@ async function seed() {
       },
     ];
 
-    await Match.insertMany(matchesB);
+    await Match.insertMany(matchesA);
   } catch (err) {
     log.error(err);
   }
 }
 
-export { seed as seedB };
+export { seed as seedInitialA };

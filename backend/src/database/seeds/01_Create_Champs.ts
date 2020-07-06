@@ -6,7 +6,7 @@ async function seed() {
     log.info('Seeding Champs ...');
     await Champ.deleteMany({});
 
-    await Champ.create([
+    await Champ.insertMany([
       {
         name: 'Campeonato 2019',
         season: 2019,

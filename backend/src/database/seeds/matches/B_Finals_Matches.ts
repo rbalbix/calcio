@@ -4,7 +4,7 @@ import { Champ, Team, Match } from '@models';
 
 async function seed() {
   try {
-    log.info('Seeding B Finals Matches ...');
+    log.info('  Seeding B Finals Matches ...');
     const champs = await Champ.find();
     const teams = await Team.find();
 
@@ -12,7 +12,7 @@ async function seed() {
      * Only for 2020 Champ
      */
 
-    const matchesAFinals = [
+    const matchesBFinals = [
       /**
        * QUARTAS
        *
@@ -253,7 +253,7 @@ async function seed() {
       },
     ];
 
-    await Match.create(matchesAFinals);
+    await Match.insertMany(matchesBFinals);
   } catch (err) {
     log.error(err);
   }

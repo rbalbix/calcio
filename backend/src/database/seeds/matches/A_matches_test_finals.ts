@@ -4,11 +4,11 @@ import { Champ, Team, Match } from '@models';
 
 async function seed() {
   try {
-    log.info('Seeding A TEST FINALS Matches ...');
+    log.info('  Seeding A TEST FINALS Matches ...');
     const champs = await Champ.find();
     const teams = await Team.find();
 
-    const matchesA = [
+    const matchesATestFinals = [
       {
         champ: champs.find((champ) => champ.season === 2019)!._id,
         category: 'A',
@@ -3576,7 +3576,7 @@ async function seed() {
       },
     ];
 
-    await Match.create(matchesA);
+    await Match.insertMany(matchesATestFinals);
   } catch (err) {
     log.error(err);
   }

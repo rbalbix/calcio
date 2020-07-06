@@ -11,15 +11,20 @@ type Round = { round: ParamsDictionary | number };
 
 export const index = async (req: Request, res: Response) => {
   try {
-    const calculatedLimit =
-      (await Match.find({ roundName: 'REGULAR' }).distinct('teamHome').lean())
-        .length / 2;
-
-    const { category, limit = calculatedLimit } = req.query as ParamsDictionary;
-    let { round } = req.query as Round;
-
     const champ = await getCurrentChamp();
     if (!champ) throw new Error('Championship does not exists.');
+
+    const { category } = req.query as ParamsDictionary;
+
+    const calculatedLimit =
+      (
+        await Match.find({ champ, category, roundName: 'REGULAR' })
+          .distinct('teamHome')
+          .lean()
+      ).length / 2;
+
+    const { limit = calculatedLimit } = req.query as ParamsDictionary;
+    let { round } = req.query as Round;
 
     if (round === 0) {
       moment.locale('pt-BR');

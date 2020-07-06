@@ -6,7 +6,7 @@ async function seed() {
     log.info('Seeding Teams ...');
     await Team.deleteMany({});
 
-    await Team.create([
+    await Team.insertMany([
       {
         longName: 'SAMPDORIA',
         shortName: 'SAM',
