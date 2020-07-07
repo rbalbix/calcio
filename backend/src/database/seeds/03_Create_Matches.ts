@@ -28,7 +28,7 @@ async function seed() {
     // await seedB();
     await seedBFinals();
   } catch (err) {
-    log.error(err);
+    throw new Error(err);
   }
 }
 

@@ -6,7 +6,7 @@ async function seed() {
     log.info('Seeding Rank if needed ...');
     await seedRankIfNeeded();
   } catch (err) {
-    log.error(err);
+    throw new Error(err);
   }
 }
 

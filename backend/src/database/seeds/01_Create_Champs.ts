@@ -17,7 +17,7 @@ async function seed() {
       },
     ]);
   } catch (err) {
-    log.error(err);
+    throw new Error(err);
   }
 }
 

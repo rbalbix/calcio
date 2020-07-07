@@ -3578,7 +3578,7 @@ async function seed() {
 
     await Match.insertMany(matchesA);
   } catch (err) {
-    log.error(err);
+    throw new Error(err);
   }
 }
 
