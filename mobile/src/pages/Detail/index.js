@@ -1,42 +1,14 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import {
-  View,
-  TouchableOpacity,
-  ActivityIndicator,
-  RefreshControl,
-} from 'react-native';
+import React, { useState, useEffect, useCallback, Suspense, lazy } from 'react';
+import { RefreshControl } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 
-import { MaterialIcons } from '@expo/vector-icons';
+import SuspenseLoading from '../../components/SuspenseLoading';
+const Rank = lazy(() => import('../../components/Rank'));
+const Matches = lazy(() => import('../../components/Matches'));
 
-import moment from 'moment';
 import api from '../../services/api';
 
-import {
-  Container,
-  Category,
-  CategoryTitle,
-  HeaderTable,
-  HeaderTableText,
-  TeamView,
-  Team,
-  TeamText,
-  PositionText,
-  TeamShield,
-  Score,
-  ScoreText,
-  RoundView,
-  RoundText,
-  Icon,
-  Loading,
-  DateView,
-  DateText,
-  MatchView,
-  MatchTeamText,
-  MatchPenaltyText,
-  MatchScoreText,
-  MatchTeamShield,
-} from './styles';
+import { Container } from './styles';
 
 export default function Detail() {
   const [round, setRound] = useState(0);
@@ -112,131 +84,17 @@ export default function Detail() {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
     >
-      <Category>
-        <CategoryTitle>TORNEIO {info.category} - TABELA</CategoryTitle>
-
-        <HeaderTable>
-          <HeaderTableText>P</HeaderTableText>
-          <HeaderTableText>J</HeaderTableText>
-          <HeaderTableText>V</HeaderTableText>
-          <HeaderTableText>E</HeaderTableText>
-          <HeaderTableText>D</HeaderTableText>
-          <HeaderTableText>GP</HeaderTableText>
-          <HeaderTableText>GC</HeaderTableText>
-          <HeaderTableText>SG</HeaderTableText>
-        </HeaderTable>
-
-        {loadingRank ? (
-          <TeamView>
-            <Loading>
-              <ActivityIndicator size='large' color='#1e7a0e' />
-            </Loading>
-          </TeamView>
-        ) : (
-          rank.map((item, index) => (
-            <TeamView key={item._id}>
-              <Team>
-                <PositionText>{index + 1}</PositionText>
-                <TeamShield
-                  source={{
-                    uri: item.team.thumbnail_url,
-                  }}
-                />
-                <TeamText>{item.team.shortName}</TeamText>
-              </Team>
-              <Score>
-                <ScoreText>{item.points}</ScoreText>
-                <ScoreText score>{item.played}</ScoreText>
-                <ScoreText score>{item.wons}</ScoreText>
-                <ScoreText score>{item.drawn}</ScoreText>
-                <ScoreText score>{item.lost}</ScoreText>
-                <ScoreText score>{item.goalsFor}</ScoreText>
-                <ScoreText score>{item.goalsAgainst}</ScoreText>
-                <ScoreText score>{item.goalDifference}</ScoreText>
-              </Score>
-            </TeamView>
-          ))
-        )}
-      </Category>
-
-      <Category>
-        <CategoryTitle>JOGOS</CategoryTitle>
-
-        {round !== 0 && (
-          <RoundView>
-            <TouchableOpacity onPress={loadPreviousMatches}>
-              <Icon name='navigate-before' />
-            </TouchableOpacity>
-            <RoundText>
-              {round === totalRegular + 1
-                ? 'QUARTAS (IDA)'
-                : round === totalRegular + 2
-                ? 'QUARTAS (VOLTA)'
-                : round === totalRegular + 3
-                ? 'SEMIFINAL'
-                : round === totalRegular + 4
-                ? 'FINAL'
-                : round === 0
-                ? ''
-                : `${round}ª RODADA`}
-            </RoundText>
-            <TouchableOpacity onPress={loadNextMatches}>
-              <Icon name='navigate-next' />
-            </TouchableOpacity>
-          </RoundView>
-        )}
-        {loadingMatches ? (
-          <Loading>
-            <ActivityIndicator size='large' color='#1e7a0e' />
-          </Loading>
-        ) : (
-          matches.map((match) => (
-            <View key={match._id}>
-              <DateView>
-                <DateText>{match.weekDay}</DateText>
-                <DateText margin>
-                  {moment(match.day).utc().format('DD/MM')}
-                </DateText>
-              </DateView>
-              <MatchView>
-                <MatchTeamText team align='right'>
-                  {match.teamHome.shortName}
-                </MatchTeamText>
-                <MatchTeamShield
-                  source={{
-                    uri: match.teamHome.thumbnail_url,
-                  }}
-                ></MatchTeamShield>
-                <>
-                  <MatchScoreText>{match.scoreHome}</MatchScoreText>
-                  {match.penaltyHome !== undefined && (
-                    <MatchPenaltyText>
-                      {`(${match.penaltyHome}`}
-                    </MatchPenaltyText>
-                  )}
-                </>
-                <MatchTeamText>X</MatchTeamText>
-                <>
-                  {match.penaltyAway !== undefined && (
-                    <MatchPenaltyText>
-                      {`${match.penaltyAway})`}
-                    </MatchPenaltyText>
-                  )}
-                  <MatchScoreText>{match.scoreAway}</MatchScoreText>
-                </>
-                <MatchTeamShield
-                  source={{
-                    uri: match.teamAway.thumbnail_url,
-                  }}
-                ></MatchTeamShield>
-                <MatchTeamText team align='left'>
-                  {match.teamAway.shortName}
-                </MatchTeamText>
-              </MatchView>
-            </View>
-          ))
-        )}
-      </Category>
+      <Suspense fallback={<SuspenseLoading />}>
+        <Rank info={info} loading={loadingRank} rank={rank} />
+        <Matches
+          round={round}
+          totalRegular={totalRegular}
+          loadPreviousMatches={loadPreviousMatches}
+          loadNextMatches={loadNextMatches}
+          loading={loadingMatches}
+          matches={matches}
+        />
+      </Suspense>
     </Container>
   );
 }

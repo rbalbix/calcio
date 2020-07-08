@@ -1,29 +1,13 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import {
-  TouchableOpacity,
-  ActivityIndicator,
-  RefreshControl,
-} from 'react-native';
+import React, { useState, useEffect, useCallback, Suspense, lazy } from 'react';
+import { ActivityIndicator, RefreshControl } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
+import SuspenseLoading from '../../components/SuspenseLoading';
+const Top4 = lazy(() => import('../../components/Top4'));
 
 import api from '../../services/api';
 
-import {
-  Container,
-  Category,
-  CategoryTitle,
-  HeaderTable,
-  HeaderTableText,
-  Loading,
-  TeamView,
-  Team,
-  PositionText,
-  TeamShield,
-  TeamText,
-  Score,
-  ScoreText,
-} from './styles';
+import { Container, Category, Loading, TeamView } from './styles';
 
 export default function Main() {
   const [ranks, setRanks] = useState([]);
@@ -65,45 +49,15 @@ export default function Main() {
       {loading ? (
         <TeamView>
           <Loading>
-            <ActivityIndicator size='large' color='#1e7a0e' />
+            <ActivityIndicator size="large" color="#1e7a0e" />
           </Loading>
         </TeamView>
       ) : (
         ranks.map((rank, index) => (
           <Category key={index}>
-            <TouchableOpacity
-              onPress={() => {
-                navigateToDetail({ category: `${rank[0].category}` });
-              }}
-            >
-              <CategoryTitle>TORNEIO {rank[0].category}</CategoryTitle>
-            </TouchableOpacity>
-
-            <HeaderTable>
-              <HeaderTableText>P</HeaderTableText>
-              <HeaderTableText>V</HeaderTableText>
-              <HeaderTableText>E</HeaderTableText>
-              <HeaderTableText>D</HeaderTableText>
-              <HeaderTableText>SG</HeaderTableText>
-            </HeaderTable>
-
-            {rank.map((item, index) => (
-              <TeamView key={item._id}>
-                <Team>
-                  <PositionText>{index + 1}</PositionText>
-                  <TeamShield source={{ uri: item.team.thumbnail_url }} />
-                  <TeamText>{item.team.longName}</TeamText>
-                </Team>
-
-                <Score>
-                  <ScoreText>{item.points}</ScoreText>
-                  <ScoreText score>{item.wons}</ScoreText>
-                  <ScoreText score>{item.drawn}</ScoreText>
-                  <ScoreText score>{item.lost}</ScoreText>
-                  <ScoreText score>{item.goalDifference}</ScoreText>
-                </Score>
-              </TeamView>
-            ))}
+            <Suspense fallback={<SuspenseLoading />}>
+              <Top4 rank={rank} navigateToDetail={navigateToDetail} />
+            </Suspense>
           </Category>
         ))
       )}

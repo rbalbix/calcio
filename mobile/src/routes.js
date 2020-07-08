@@ -4,6 +4,8 @@ import { Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import SuspenseLoading from './components/SuspenseLoading';
+
 const Main = lazy(() => import('./pages/Main'));
 const Detail = lazy(() => import('./pages/Detail'));
 const Rule = lazy(() => import('./pages/Rule'));
@@ -14,7 +16,7 @@ const Stack = createStackNavigator();
 export default function Routes() {
   return (
     <NavigationContainer>
-      <Suspense fallback={<Text>Carregando...</Text>}>
+      <Suspense fallback={<SuspenseLoading />}>
         <Stack.Navigator
           screenOptions={{
             title: 'Calcio',
