@@ -7,6 +7,7 @@ const Rank = lazy(() => import('../../components/Rank'));
 const Matches = lazy(() => import('../../components/Matches'));
 
 import api from '../../services/api';
+import { connect, disconnect } from '../../services/socket';
 
 import { Container } from './styles';
 
@@ -23,6 +24,12 @@ export default function Detail() {
   const route = useRoute();
   const info = route.params.info;
 
+  function setupWebSocket() {
+    disconnect();
+
+    connect();
+  }
+
   async function loadRank() {
     setLoadingRank(true);
 
@@ -32,6 +39,7 @@ export default function Detail() {
 
     setLoadingRank(false);
     setRank(response.data);
+    setupWebSocket();
   }
 
   async function loadMatches() {
