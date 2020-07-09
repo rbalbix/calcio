@@ -5,9 +5,9 @@ const socket = socketio(baseURL, {
   autoConnect: false,
 });
 
-// function subscribeToNewDevs(subscribeFunction) {
-//   socket.on('new-dev', subscribeFunction);
-// }
+function subscribeToNews(subscribeFunction) {
+  socket.on('matches-updated', subscribeFunction);
+}
 
 function connect() {
   socket.connect();
@@ -19,4 +19,4 @@ function disconnect() {
   }
 }
 
-export { connect, disconnect };
+export { connect, disconnect, subscribeToNews };

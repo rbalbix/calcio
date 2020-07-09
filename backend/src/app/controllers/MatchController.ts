@@ -6,6 +6,7 @@ import { getCurrentChamp } from './utils/getCurrentChamp';
 import { ParamsDictionary } from './utils/Interfaces';
 import { OK, BAD_REQUEST } from 'http-status-codes';
 import log from '@services/logger';
+import { sendMessage } from '@services/websocket';
 
 type Round = { round: ParamsDictionary | number };
 
@@ -37,7 +38,10 @@ export const index = async (req: Request, res: Response) => {
         result = await Match.find({
           champ,
           category,
-          week: Number(moment(Date.now()).format('ww')),
+          $or: [
+            { week: Number(moment(Date.now()).format('ww')) },
+            { week: Number(moment(Date.now()).add(1, 'week').format('ww')) },
+          ],
         });
       }
       round = result.length > 0 ? result[result.length - 1].round : 1;
@@ -122,6 +126,7 @@ export const update = async (req: Request, res: Response) => {
       });
     });
 
+    sendMessage('matches-updated', { round });
     return res.status(OK).json({ response: 'ok' });
   } catch (err) {
     log.error(err);

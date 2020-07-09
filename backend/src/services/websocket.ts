@@ -15,8 +15,6 @@ export const setupWebSocket = (server: httpServer) => {
   });
 };
 
-// exports.sendMessage = (to, message, data) => {
-//   to.forEach((connection) => {
-//     io.to(connection.id).emit(message, data);
-//   });
-// };
+export const sendMessage = (message: string, data: {}) => {
+  io.emit(message, data);
+};
