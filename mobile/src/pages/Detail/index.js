@@ -1,5 +1,12 @@
-import React, { useState, useEffect, useCallback, Suspense, lazy } from 'react';
-import { RefreshControl, Alert } from 'react-native';
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  Suspense,
+  lazy,
+} from 'react';
+import { RefreshControl } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 
 import SuspenseLoading from '../../components/SuspenseLoading';
@@ -11,8 +18,9 @@ import { connect, disconnect, subscribeToNews } from '../../services/socket';
 
 import { Container } from './styles';
 
-export default function Detail(props) {
+export default function Detail() {
   const [round, setRound] = useState(0);
+  const refRound = useRef(round);
   const [total, setTotal] = useState(0);
   const [totalRegular, setTotalRegular] = useState(0);
   const [loadingRank, setLoadingRank] = useState(true);
@@ -73,25 +81,29 @@ export default function Detail(props) {
   }, []);
 
   useEffect(() => {
+    refRound.current = round;
     loadMatches();
   }, [round]);
 
   useEffect(() => {
-    subscribeToNews((data) => loadNextMatches());
+    subscribeToNews((data) => loadNews(data));
   }, []);
 
   const loadNews = async (data) => {
-    const matches = await api.get('/match', {
-      params: { category: info.category, round },
-    });
     const rank = await api.get('/rank', {
       params: { category: info.category },
     });
-    // if (round === Number(matches.headers['x-round'])) {
-    // setMatches(matches.data);
-    setRound(Number(data.round));
-    // }
     setRank(rank.data);
+
+    if (refRound.current === Number(data.round)) {
+      const matches = await api.get('/match', {
+        params: {
+          category: info.category,
+          round: refRound.current,
+        },
+      });
+      setMatches(matches.data);
+    }
   };
 
   const onRefresh = useCallback(() => {
