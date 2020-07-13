@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
 
 import Top4 from '../../components/Top4';
+import SuspenseLoading from '../../components/SuspenseLoading';
 
-import api from '../../services/api';
+import useFetch from '../../hooks/useFetch';
 
 import {
   Container,
@@ -17,32 +18,19 @@ import {
 } from './styles';
 
 export default function Dashboard() {
-  const [categories, setCategories] = useState([]);
-  const [champ, setChamp] = useState('');
+  const { data: categories, error: catErr } = useFetch('/category/distinct');
+  const { data: champ, error: champErr } = useFetch('/champ/current');
 
-  useEffect(() => {
-    async function loadCategories() {
-      const response = await api.get('/category/distinct');
-      setCategories(response.data);
-    }
-    loadCategories();
-  }, []);
-
-  useEffect(() => {
-    async function loadCurrentChamp() {
-      const response = await api.get('/champ/current');
-      setChamp(response.data);
-    }
-
-    loadCurrentChamp();
-  }, []);
+  if ((!categories || !champ) && !catErr && !champErr) {
+    return <SuspenseLoading />;
+  }
 
   return (
     <Container>
       <DashboardTitle>Painel de Controle</DashboardTitle>
-      <ChampTitle>{champ.name}</ChampTitle>
+      <ChampTitle>{!catErr && !champErr && champ.name}</ChampTitle>
       <Cards>
-        {categories.length > 0 ? (
+        {!catErr && categories.length > 0 ? (
           categories.map((category) => (
             <Card key={category} draggable="true">
               <Link
