@@ -1,5 +1,14 @@
-import React from 'react';
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  forwardRef,
+  useImperativeHandle,
+} from 'react';
 import { ActivityIndicator } from 'react-native';
+
+import api from '../../services/api';
+import { subscribeToNews } from '../../services/socket';
 
 import {
   Category,
@@ -16,7 +25,37 @@ import {
   Loading,
 } from './styles';
 
-const Rank = ({ info, loading, rank }) => {
+const Rank = forwardRef(({ info }, ref) => {
+  const [rank, setRank] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const rankList = useCallback(async () => {
+    const response = await api.get('/rank', {
+      params: { category: info.category },
+    });
+    setRank(response.data);
+  }, [rank]);
+
+  function loadRank() {
+    setLoading(true);
+    rankList();
+    setLoading(false);
+  }
+
+  useImperativeHandle(ref, () => ({
+    rankListRef() {
+      rankList();
+    },
+  }));
+
+  useEffect(() => {
+    loadRank();
+  }, []);
+
+  useEffect(() => {
+    subscribeToNews((data) => rankList());
+  }, []);
+
   return (
     <Category>
       <CategoryTitle>TORNEIO {info.category} - TABELA</CategoryTitle>
@@ -65,6 +104,6 @@ const Rank = ({ info, loading, rank }) => {
       )}
     </Category>
   );
-};
+});
 
 export default Rank;

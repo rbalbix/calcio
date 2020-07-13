@@ -6,6 +6,7 @@ import SuspenseLoading from '../../components/SuspenseLoading';
 const Top4 = lazy(() => import('../../components/Top4'));
 
 import api from '../../services/api';
+import { connect, disconnect, subscribeToNews } from '../../services/socket';
 
 import { Container, Category, Loading, TeamView } from './styles';
 
@@ -19,24 +20,34 @@ export default function Main() {
     navigation.navigate('Category', { info });
   }
 
-  async function loadRanks() {
-    setLoading(true);
+  function setupWebSocket() {
+    disconnect();
+    connect();
+  }
 
+  const rankList = useCallback(async () => {
     const response = await api.get('/rank/top');
-
-    setLoading(false);
     setRanks([response.data.A, response.data.B]);
+  }, [ranks]);
+
+  function loadRanks() {
+    setLoading(true);
+    rankList();
+    setLoading(false);
   }
 
   useEffect(() => {
     loadRanks();
   }, []);
 
+  useEffect(() => {
+    setupWebSocket();
+    subscribeToNews(() => rankList());
+  }, []);
+
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-
-    loadRanks();
-
+    rankList();
     setRefreshing(false);
   }, [refreshing]);
 

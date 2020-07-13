@@ -1,6 +1,16 @@
-import React from 'react';
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  forwardRef,
+  useImperativeHandle,
+} from 'react';
 import { View, TouchableOpacity, ActivityIndicator } from 'react-native';
 import moment from 'moment';
+
+import api from '../../services/api';
+import { subscribeToNews } from '../../services/socket';
 
 import {
   Category,
@@ -18,14 +28,66 @@ import {
   MatchTeamShield,
 } from './styles';
 
-const Matches = ({
-  round,
-  totalRegular,
-  loadPreviousMatches,
-  loadNextMatches,
-  loading,
-  matches,
-}) => {
+const Matches = forwardRef(({ info }, ref) => {
+  const [round, setRound] = useState(0);
+  const refRound = useRef(round);
+  const [total, setTotal] = useState(0);
+  const [totalRegular, setTotalRegular] = useState(0);
+  const [loading, setLoading] = useState(true);
+
+  const [matches, setMatches] = useState([]);
+
+  const matchesList = useCallback(
+    async (roundParam) => {
+      const response = await api.get('/match', {
+        params: { category: info.category, round: roundParam },
+      });
+      setMatches(response.data);
+
+      setTotal(parseInt(response.headers['x-total-count']));
+      setTotalRegular(parseInt(response.headers['x-total-regular-count']));
+      if (round === 0) setRound(parseInt(response.headers['x-round']));
+    },
+    [round]
+  );
+
+  async function loadMatches() {
+    setLoading(true);
+    matchesList(round);
+    setLoading(false);
+  }
+
+  useImperativeHandle(ref, () => ({
+    matchListRef() {
+      matchesList(refRound.current);
+    },
+  }));
+
+  async function loadPreviousMatches() {
+    if (round - 1 <= 0) return;
+    setRound(round - 1);
+  }
+
+  async function loadNextMatches() {
+    if (round + 1 > total) return setRound(1);
+    setRound(round + 1);
+  }
+
+  useEffect(() => {
+    refRound.current = round;
+    loadMatches();
+  }, [round]);
+
+  useEffect(() => {
+    subscribeToNews((data) => loadNews(data));
+  }, []);
+
+  const loadNews = (data) => {
+    if (refRound.current === Number(data.round)) {
+      matchesList(refRound.current);
+    }
+  };
+
   return (
     <Category>
       <CategoryTitle>JOGOS</CategoryTitle>
@@ -102,6 +164,6 @@ const Matches = ({
       )}
     </Category>
   );
-};
+});
 
 export default Matches;
