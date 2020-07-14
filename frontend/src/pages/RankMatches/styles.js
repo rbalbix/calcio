@@ -22,11 +22,14 @@ export const CategoryTitleView = styled.div`
 
 export const IconArrowBack = styled(MdArrowBack)`
   font-size: 2.6rem;
-  color: var(--button-text-color);
+  /* color: var(--button-text-color); */
+  color: var(--primary-color);
 `;
 
 export const Back = styled.div`
-  background-color: var(--primary-color);
+  display: none;
+  /* background-color: var(--primary-color); */
+  background-color: --button-text-color;
 
   display: flex;
   justify-content: center;
@@ -38,14 +41,17 @@ export const Back = styled.div`
   margin-left: 0.5rem;
   margin-right: 1rem;
 
-  opacity: 0.8;
-  transition: opacity 0.2s;
-  color: var(--container-color-light);
+  /* opacity: 0.4; */
+  /* transition: opacity 0.2s; */
+  /* color: var(--container-color-light); */
 
   &:hover {
-    transform: translateY(-2px);
-    opacity: 1;
-    transition: opacity 0.2s;
+    background-color: var(--background-color);
+    transition: all 0.8s;
+    /* transform: translateY(-2px); */
+    /* opacity: 1; */
+    /* transition: opacity 0.2s; */
+
     cursor: pointer;
   }
 `;

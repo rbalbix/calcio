@@ -3,6 +3,7 @@ import React, {
   useImperativeHandle,
   useState,
   useEffect,
+  useCallback,
 } from 'react';
 
 import { CustomTooltip } from '../CustomTooltip';
@@ -35,13 +36,15 @@ const Rank = forwardRef((props, ref) => {
     },
   }));
 
-  async function loadRank() {
-    setLoadingRank(true);
-
-    const response = await api.get('/rank', {
+  const rankList = useCallback(async () => {
+    return await api.get('/rank', {
       params: { category },
     });
+  }, [rank]);
 
+  async function loadRank() {
+    setLoadingRank(true);
+    const response = await rankList();
     setLoadingRank(false);
     setRank(response.data);
   }

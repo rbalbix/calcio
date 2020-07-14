@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-
-import api from '../../services/api';
+import React from 'react';
+import useFetch from '../../hooks/useFetch';
+import SuspenseLoading from '../../components/SuspenseLoading';
 
 import {
   Top4Container,
@@ -18,18 +18,13 @@ import {
 } from './styles';
 
 export default function Top4({ category }) {
-  const [rank, setRank] = useState([]);
+  const { data, error } = useFetch('/rank/top');
 
-  async function loadRank() {
-    const response = await api.get('/rank/top');
+  if (error) return <div>{`Erro ao carregar: ${error}`}</div>;
 
-    setRank(response.data[category]);
+  if (!data) {
+    return <SuspenseLoading />;
   }
-
-  useEffect(() => {
-    loadRank();
-    // eslint-disable-next-line
-  }, []);
 
   return (
     <Top4Container>
@@ -44,7 +39,7 @@ export default function Top4({ category }) {
         </HeaderTable>
       </Header>
 
-      {rank.map((item, index) => (
+      {data[category].map((item, index) => (
         <TeamView key={item._id}>
           <Team>
             <PositionText>{index + 1}</PositionText>

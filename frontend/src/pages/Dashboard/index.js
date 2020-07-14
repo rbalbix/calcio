@@ -1,12 +1,8 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Link } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
-
-import Top4 from '../../components/Top4';
 import SuspenseLoading from '../../components/SuspenseLoading';
-
 import useFetch from '../../hooks/useFetch';
-
 import {
   Container,
   DashboardTitle,
@@ -16,6 +12,8 @@ import {
   CardHeader,
   CardBody,
 } from './styles';
+
+const Top4 = lazy(() => import('../../components/Top4'));
 
 export default function Dashboard() {
   const { data: categories, error: catErr } = useFetch('/category/distinct');
@@ -44,7 +42,9 @@ export default function Dashboard() {
               >
                 <CardHeader>TABELA E JOGOS</CardHeader>
                 <CardBody>
-                  <Top4 category={category} />
+                  <Suspense fallback={<SuspenseLoading />}>
+                    <Top4 category={category} />
+                  </Suspense>
                 </CardBody>
               </Link>
             </Card>

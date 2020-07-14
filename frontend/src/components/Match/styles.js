@@ -36,7 +36,7 @@ export const DateView = styled.div`
 
     &:focus,
     &:hover {
-      border: 0.15rem solid var(--primary-color-color);
+      border: 0.15rem solid var(--primary-color);
     }
 
     &:checked ~ label {
@@ -130,7 +130,7 @@ export const InputScore = styled.input`
 
   &:focus,
   &:hover {
-    border: 0.15rem solid var(--primary-color-color);
+    border: 0.15rem solid var(--primary-color);
   }
 `;
 
@@ -153,6 +153,6 @@ export const InputPenalty = styled.input`
 
   &:focus,
   &:hover {
-    border: 0.15rem solid var(--primary-color-color);
+    border: 0.15rem solid var(--primary-color);
   }
 `;

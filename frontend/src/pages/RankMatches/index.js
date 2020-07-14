@@ -1,9 +1,6 @@
-import React, { useRef } from 'react';
+import React, { Suspense, lazy, useRef } from 'react';
 import { Link } from 'react-router-dom';
-
-import Rank from '../../components/Rank';
-import Matches from '../../components/Matches';
-
+import SuspenseLoading from '../../components/SuspenseLoading';
 import {
   CategoryContainer,
   CategoryTitleView,
@@ -12,6 +9,9 @@ import {
   CategoryTitle,
   CategoryResult,
 } from './styles';
+
+const Rank = lazy(() => import('../../components/Rank'));
+const Matches = lazy(() => import('../../components/Matches'));
 
 export default function RankMatches({ location }) {
   const loadRankRef = useRef();
@@ -33,8 +33,10 @@ export default function RankMatches({ location }) {
         <CategoryTitle>TORNEIO {category}</CategoryTitle>
       </CategoryTitleView>
       <CategoryResult>
-        <Rank ref={loadRankRef} category={category} />
-        <Matches loadRank={loadRank} category={category} />
+        <Suspense fallback={<SuspenseLoading />}>
+          <Rank ref={loadRankRef} category={category} />
+          <Matches loadRank={loadRank} category={category} />
+        </Suspense>
       </CategoryResult>
     </CategoryContainer>
   );
