@@ -40,7 +40,7 @@ const Rank = forwardRef((props, ref) => {
     return await api.get('/rank', {
       params: { category },
     });
-  }, [rank]);
+  }, [category]);
 
   async function loadRank() {
     setLoadingRank(true);

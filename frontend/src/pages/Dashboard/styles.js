@@ -10,6 +10,10 @@ export const Container = styled.div`
   align-items: center;
 
   padding: 1rem;
+
+  @media (max-width: 820px) {
+    height: auto;
+  }
 `;
 Container.displayName = 'Container';
 
@@ -29,16 +33,20 @@ export const ChampTitle = styled.h2`
 export const Cards = styled.div`
   background-color: var(--container-color-light);
 
-  max-width: 800px;
+  max-width: 80vw;
 
   padding: 1.5rem;
   border-radius: 0.6rem;
 
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   justify-items: center;
   align-items: center;
   gap: 1.5rem;
+
+  @media (max-width: 880px) {
+    width: auto;
+  }
 `;
 
 export const Card = styled.div`
