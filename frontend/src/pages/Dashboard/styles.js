@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   background-color: var(--container-color-dark);
-  height: 100vh;
+  min-height: 100vh;
 
   display: flex;
   flex-direction: column;
@@ -10,10 +10,6 @@ export const Container = styled.div`
   align-items: center;
 
   padding: 1rem;
-
-  @media (max-width: 820px) {
-    height: auto;
-  }
 `;
 Container.displayName = 'Container';
 
@@ -43,10 +39,6 @@ export const Cards = styled.div`
   justify-items: center;
   align-items: center;
   gap: 1.5rem;
-
-  @media (max-width: 880px) {
-    width: auto;
-  }
 `;
 
 export const Card = styled.div`
