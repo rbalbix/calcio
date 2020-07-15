@@ -30,64 +30,24 @@ export default function Dashboard() {
       <Cards>
         {!catErr && categories.length > 0 ? (
           categories.map((category) => (
-            <>
-              <Card key={category} draggable="true">
-                <Link
-                  style={{ textDecoration: 'none' }}
-                  key={category}
-                  to={{
-                    pathname: '/rank',
-                    query: { category },
-                    state: { category },
-                  }}
-                >
-                  <CardHeader>TABELA E JOGOS</CardHeader>
-                  <CardBody>
-                    <Suspense fallback={<SuspenseLoading />}>
-                      <Top4 category={category} />
-                    </Suspense>
-                  </CardBody>
-                </Link>
-              </Card>
-
-              <Card key={category} draggable="true">
-                <Link
-                  style={{ textDecoration: 'none' }}
-                  key={category}
-                  to={{
-                    pathname: '/rank',
-                    query: { category },
-                    state: { category },
-                  }}
-                >
-                  <CardHeader>TABELA E JOGOS</CardHeader>
-                  <CardBody>
-                    <Suspense fallback={<SuspenseLoading />}>
-                      <Top4 category={category} />
-                    </Suspense>
-                  </CardBody>
-                </Link>
-              </Card>
-
-              <Card key={category} draggable="true">
-                <Link
-                  style={{ textDecoration: 'none' }}
-                  key={category}
-                  to={{
-                    pathname: '/rank',
-                    query: { category },
-                    state: { category },
-                  }}
-                >
-                  <CardHeader>TABELA E JOGOS</CardHeader>
-                  <CardBody>
-                    <Suspense fallback={<SuspenseLoading />}>
-                      <Top4 category={category} />
-                    </Suspense>
-                  </CardBody>
-                </Link>
-              </Card>
-            </>
+            <Card key={category} draggable="true">
+              <Link
+                style={{ textDecoration: 'none' }}
+                key={category}
+                to={{
+                  pathname: '/rank',
+                  query: { category },
+                  state: { category },
+                }}
+              >
+                <CardHeader>TABELA E JOGOS</CardHeader>
+                <CardBody>
+                  <Suspense fallback={<SuspenseLoading />}>
+                    <Top4 category={category} />
+                  </Suspense>
+                </CardBody>
+              </Link>
+            </Card>
           ))
         ) : (
           <Card>
