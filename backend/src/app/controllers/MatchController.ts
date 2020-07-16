@@ -137,7 +137,13 @@ export const update = async (req: Request, res: Response) => {
 async function updateScore(scoreFields: any) {
   scoreFields.map(async (score: ParamsDictionary) => {
     const { _id, scoreHome, scoreAway } = score;
-    if (_id && scoreHome !== null && scoreAway !== null) {
+    if (
+      _id &&
+      scoreHome !== null &&
+      scoreHome !== '' &&
+      scoreAway !== null &&
+      scoreAway !== ''
+    ) {
       const match = await Match.findById(_id);
       match!.scoreHome = Number(scoreHome);
       match!.scoreAway = Number(scoreAway);
@@ -151,7 +157,13 @@ async function updatePenalty(penaltyFields: any) {
   penaltyFields.map(async (item: ParamsDictionary) => {
     const { _id, penaltyHome, penaltyAway } = item;
 
-    if (_id && penaltyHome !== null && penaltyAway !== null) {
+    if (
+      _id &&
+      penaltyHome !== null &&
+      penaltyHome !== '' &&
+      penaltyAway !== null &&
+      penaltyAway !== ''
+    ) {
       await Match.findByIdAndUpdate(_id, {
         penaltyHome: Number(penaltyHome),
         penaltyAway: Number(penaltyAway),

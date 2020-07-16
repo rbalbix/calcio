@@ -186,6 +186,12 @@ const Matches = ({ category, loadRank }) => {
               'block';
             document.querySelector(`.penalty-away${_id}`).style.display =
               'block';
+            document
+              .querySelector(`.penalty-home${_id}`)
+              .setAttribute('required', '');
+            document
+              .querySelector(`.penalty-away${_id}`)
+              .setAttribute('required', '');
           } else {
             const penalties = [...penaltyFields];
             penalties[index].penaltyHome = '';
@@ -197,6 +203,12 @@ const Matches = ({ category, loadRank }) => {
               'none';
             document.querySelector(`.penalty-away${_id}`).style.display =
               'none';
+            document
+              .querySelector(`.penalty-home${_id}`)
+              .removeAttribute('required');
+            document
+              .querySelector(`.penalty-away${_id}`)
+              .removeAttribute('required');
           }
         }
       } catch (err) {

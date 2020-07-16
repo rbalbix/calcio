@@ -3576,7 +3576,7 @@ async function seed() {
       },
     ];
 
-    await Match.insertMany(matchesATestFinals);
+    await Match.create(matchesATestFinals);
   } catch (err) {
     throw new Error(err);
   }

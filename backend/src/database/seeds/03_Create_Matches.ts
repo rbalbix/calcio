@@ -18,14 +18,14 @@ async function seed() {
     await Rank.deleteMany({});
 
     /** SEED A */
-    await seedInitialA();
-    // await seedA();
-    // await seedATestFinals();
+    // await seedInitialA(); // cleaned championship
+    await seedA(); // current status
+    // await seedATestFinals(); // test for finals
     await seedAFinals();
 
     /** SEED B */
-    await seedInitialB();
-    // await seedB();
+    // await seedInitialB();
+    await seedB();
     await seedBFinals();
   } catch (err) {
     throw new Error(err);

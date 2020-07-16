@@ -253,7 +253,7 @@ async function seed() {
       },
     ];
 
-    await Match.insertMany(matchesBFinals);
+    await Match.create(matchesBFinals);
   } catch (err) {
     throw new Error(err);
   }
