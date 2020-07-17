@@ -10,9 +10,17 @@ import { seedChamp } from '../../src/database/seeds/01_Create_Champs';
 import { seedTeam } from '../../src/database/seeds/02_Create_Teams';
 import { seedA } from '../../src/database/seeds/matches/A_matches';
 
+import http from 'http';
+import { setupWebSocket } from '../../src/services/websocket';
+
 const app = new App().getApp();
+const server = http.createServer(app);
 
 describe('Match', () => {
+  beforeAll(() => {
+    setupWebSocket(server);
+  });
+
   beforeEach(async () => {
     connect();
     await truncate();
@@ -113,7 +121,7 @@ describe('Match', () => {
     );
   });
 
-  it('should update a match /match/update route', async () => {
+  it('should update a match [POST] /match route', async () => {
     await seedChamp();
     await seedTeam();
 
@@ -163,7 +171,6 @@ describe('Match', () => {
       dateFields,
       penaltyFields,
     });
-
     expect(response.status).toBe(OK);
   });
 

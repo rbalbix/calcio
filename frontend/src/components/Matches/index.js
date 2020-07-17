@@ -79,8 +79,16 @@ const Matches = ({ category, loadRank }) => {
           penaltyFields[i].penaltyHome !== '' &&
           penaltyFields[i].penaltyAway !== ''
         ) {
+          if (penaltyFields[i].penaltyHome === penaltyFields[i].penaltyAway) {
+            hasPenaltyFields = false;
+            return enqueueSnackbar(
+              'Falha ao atualizar, verifique o penalty !',
+              {
+                variant: 'error',
+              }
+            );
+          }
           hasPenaltyFields = true;
-          break;
         }
       }
 
@@ -93,13 +101,16 @@ const Matches = ({ category, loadRank }) => {
           category,
         });
 
-        loadRank();
-        await loadMatches();
-
         setScoreFields([...initialScoreFields]);
         setDateFields([...initialDateFields]);
         setDateFields([...initialPenaltyFields]);
 
+        loadRank();
+        await loadMatches();
+
+        document.querySelectorAll('input').forEach(function (el) {
+          el.value = '';
+        });
         document.querySelectorAll('input:checked').forEach(function (el) {
           el.checked = false;
         });
@@ -274,6 +285,19 @@ const Matches = ({ category, loadRank }) => {
 
   useEffect(() => {
     loadMatches();
+    // eslint-disable-next-line
+  }, [round]);
+
+  useEffect(() => {
+    if (round > totalRegular) {
+      setScoreFields([...initialScoreFields]);
+      setDateFields([...initialDateFields]);
+      setDateFields([...initialPenaltyFields]);
+
+      document.querySelectorAll('input').forEach(function (el) {
+        el.value = '';
+      });
+    }
     // eslint-disable-next-line
   }, [round]);
 

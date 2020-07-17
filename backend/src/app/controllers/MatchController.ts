@@ -111,20 +111,26 @@ export const update = async (req: Request, res: Response) => {
       { $project: { _id: 0, maxRound: 1 } },
     ]);
 
-    const max = await Match.aggregate([
-      { $group: { _id: null, maxRound: { $max: '$round' } } },
-      { $project: { _id: 0, maxRound: 1 } },
-    ]);
+    // updateDate(dateFields).then(() => {
+    //   updatePenalty(penaltyFields).then(() => {
+    //     updateScore(scoreFields).then(async () => {
+    //       await FinalMatchController.createFinalMatches(
+    //         round,
+    //         maxRegular[0].maxRound,
+    //         category
+    //       );
+    //     });
+    //   });
+    // });
 
-    updateScore(scoreFields).then(() => {
-      updateDate(dateFields).then(() => {
-        updatePenalty(penaltyFields).then(async () => {
-          if (round >= maxRegular[0].maxRound && round < max[0].maxRound) {
-            await FinalMatchController.createFinalMatches(round, category);
-          }
-        });
-      });
-    });
+    await updateDate(dateFields);
+    await updatePenalty(penaltyFields);
+    await updateScore(scoreFields);
+    await FinalMatchController.createFinalMatches(
+      round,
+      maxRegular[0].maxRound,
+      category
+    );
 
     sendMessage('matches-updated', { round });
     return res.status(OK).json({ response: 'ok' });
@@ -164,6 +170,9 @@ async function updatePenalty(penaltyFields: any) {
       penaltyAway !== null &&
       penaltyAway !== ''
     ) {
+      // if (penaltyHome === penaltyAway) {
+      //   throw new TypeError('Erro ao salvar o placar. Verifique o penalty.');
+      // }
       await Match.findByIdAndUpdate(_id, {
         penaltyHome: Number(penaltyHome),
         penaltyAway: Number(penaltyAway),

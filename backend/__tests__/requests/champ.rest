@@ -2,3 +2,8 @@ http://localhost:3333/champ/current
 
 ###
 http://localhost:3333/rank/top
+
+###
+// Categories
+http://localhost:3333/category/distinct
+

@@ -25,31 +25,27 @@ export const leg = async (req: Request, res: Response) => {
   }
 };
 
-export const createFinalMatches = async (round: number, category: string) => {
+export const createFinalMatches = async (
+  round: number,
+  maxRegular: number,
+  category: string
+) => {
   const champ = await getCurrentChamp();
   if (!champ) throw new Error('Championship does not exists.');
 
-  const maxRegular = await Match.aggregate([
-    { $match: { roundName: 'REGULAR' } },
-    { $group: { _id: null, maxRound: { $max: '$round' } } },
-    { $project: { _id: 0, maxRound: 1 } },
-  ]);
-
   switch (round) {
-    case maxRegular[0].maxRound + 3:
+    case maxRegular + 3:
       await createFinal(champ, category);
       break;
-    case maxRegular[0].maxRound + 2:
+    case maxRegular + 2:
       await createSemifinal(champ, category);
       break;
-    case maxRegular[0].maxRound:
-      await createQuarter(champ, category);
-      break;
     default:
+      await createQuarter(champ, category);
       return;
   }
   return;
-}
+};
 
 export const createQuarter = async (champ: IChamp, category: string) => {
   try {
@@ -105,7 +101,7 @@ export const createQuarter = async (champ: IChamp, category: string) => {
     log.error(err);
     throw new Error('Algo deu errado. Tente novamente.');
   }
-}
+};
 
 export const createSemifinal = async (champ: IChamp, category: string) => {
   try {
@@ -165,7 +161,7 @@ export const createSemifinal = async (champ: IChamp, category: string) => {
     log.error(err);
     throw new Error('Algo deu errado. Tente novamente.');
   }
-}
+};
 
 export const createFinal = async (champ: IChamp, category: string) => {
   try {
@@ -207,7 +203,7 @@ export const createFinal = async (champ: IChamp, category: string) => {
     log.error(err);
     throw new Error('Algo deu errado. Tente novamente.');
   }
-}
+};
 
 function getClassifiedTeam(game: IMatch[]): ITeam | null {
   let firstLeg, secondLeg;

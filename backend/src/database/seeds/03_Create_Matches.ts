@@ -19,8 +19,8 @@ async function seed() {
 
     /** SEED A */
     // await seedInitialA(); // cleaned championship
-    await seedA(); // current status
-    // await seedATestFinals(); // test for finals
+    // await seedA(); // current status
+    await seedATestFinals(); // test for finals
     await seedAFinals();
 
     /** SEED B */
