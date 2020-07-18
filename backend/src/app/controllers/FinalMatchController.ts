@@ -25,20 +25,27 @@ export const leg = async (req: Request, res: Response) => {
   }
 };
 
-export const createFinalMatches = async (
-  round: number,
-  maxRegular: number,
-  category: string
-) => {
+export const createFinalMatches = async (round: number, category: string) => {
   const champ = await getCurrentChamp();
-  if (!champ) throw new Error('Championship does not exists.');
+  if (!champ) throw new Error('Campeonato não existe.');
+
+  const max = await Match.aggregate([
+    { $match: { roundName: 'REGULAR' } },
+    { $group: { _id: null, maxRound: { $max: '$round' } } },
+    { $project: { _id: 0, maxRound: 1 } },
+  ]);
+  if (max.length === 0) throw new Error('Erro ao criar as finais.');
+
+  const maxRegular = max[0].maxRound;
 
   switch (round) {
-    case maxRegular + 3:
+    case maxRegular + 3: // Semi
       await createFinal(champ, category);
       break;
-    case maxRegular + 2:
+    case maxRegular + 2: // Quartas (volta)
       await createSemifinal(champ, category);
+      break;
+    case maxRegular + 1: // Quartas (ida)
       break;
     default:
       await createQuarter(champ, category);
@@ -56,7 +63,7 @@ export const createQuarter = async (champ: IChamp, category: string) => {
     });
 
     if (
-      matches.some((item) => item.scoreHome == null || item.scoreAway == null)
+      matches.some((item) => item.scoreHome === null || item.scoreAway === null)
     ) {
       return;
     }
@@ -112,7 +119,7 @@ export const createSemifinal = async (champ: IChamp, category: string) => {
     });
 
     if (
-      matches.some((item) => item.scoreHome == null || item.scoreAway == null)
+      matches.some((item) => item.scoreHome === null || item.scoreAway === null)
     ) {
       return;
     }
@@ -172,7 +179,7 @@ export const createFinal = async (champ: IChamp, category: string) => {
     });
 
     if (
-      matches.some((item) => item.scoreHome == null || item.scoreAway == null)
+      matches.some((item) => item.scoreHome === null || item.scoreAway === null)
     ) {
       return;
     }
@@ -206,7 +213,7 @@ export const createFinal = async (champ: IChamp, category: string) => {
 };
 
 function getClassifiedTeam(game: IMatch[]): ITeam | null {
-  let firstLeg, secondLeg;
+  let firstLeg: IMatch, secondLeg: IMatch;
   let classifiedTeam: ITeam | null = null;
 
   if (game[0].round === game[1].round) {

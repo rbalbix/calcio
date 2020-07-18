@@ -105,32 +105,13 @@ export const update = async (req: Request, res: Response) => {
       category,
     } = req.body;
 
-    const maxRegular = await Match.aggregate([
-      { $match: { roundName: 'REGULAR' } },
-      { $group: { _id: null, maxRound: { $max: '$round' } } },
-      { $project: { _id: 0, maxRound: 1 } },
-    ]);
-
-    // updateDate(dateFields).then(() => {
-    //   updatePenalty(penaltyFields).then(() => {
-    //     updateScore(scoreFields).then(async () => {
-    //       await FinalMatchController.createFinalMatches(
-    //         round,
-    //         maxRegular[0].maxRound,
-    //         category
-    //       );
-    //     });
-    //   });
-    // });
-
-    await updateDate(dateFields);
-    await updatePenalty(penaltyFields);
-    await updateScore(scoreFields);
-    await FinalMatchController.createFinalMatches(
-      round,
-      maxRegular[0].maxRound,
-      category
-    );
+    updateScore(scoreFields).then(() => {
+      updatePenalty(penaltyFields).then(() => {
+        updateDate(dateFields).then(async () => {
+          await FinalMatchController.createFinalMatches(round, category);
+        });
+      });
+    });
 
     sendMessage('matches-updated', { round });
     return res.status(OK).json({ response: 'ok' });
