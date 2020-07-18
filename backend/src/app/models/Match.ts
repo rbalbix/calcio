@@ -93,7 +93,20 @@ export const Match = model<IMatch>('Match', MatchSchema);
 
 async function updateRank(doc: IMatch) {
   try {
-    if (doc.round <= 27 && doc.scoreHome !== null && doc.scoreAway !== null) {
+    const max = await Match.aggregate([
+      { $match: { roundName: 'REGULAR' } },
+      { $group: { _id: null, maxRound: { $max: '$round' } } },
+      { $project: { _id: 0, maxRound: 1 } },
+    ]);
+    if (max.length === 0) throw new Error('Erro ao atualizar o Ranking.');
+
+    const maxRegular = max[0].maxRound;
+
+    if (
+      doc.round <= maxRegular &&
+      doc.scoreHome !== null &&
+      doc.scoreAway !== null
+    ) {
       const drawn = doc.scoreHome === doc.scoreAway;
       const homeWon = doc.scoreHome > doc.scoreAway;
 
