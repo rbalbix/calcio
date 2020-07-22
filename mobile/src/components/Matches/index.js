@@ -1,25 +1,20 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  Suspense,
+  lazy,
+} from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
-import moment from 'moment';
 
 import api from '../../services/api';
 import { subscribeToNews } from '../../services/socket';
 
-import {
-  Category,
-  CategoryTitle,
-  RoundView,
-  RoundText,
-  Icon,
-  DateView,
-  DateText,
-  MatchView,
-  MatchTeamText,
-  MatchPenaltyText,
-  MatchScoreText,
-  MatchTeamShield,
-} from './styles';
+const Match = lazy(() => import('../Match'));
+
+import { Category, CategoryTitle, RoundView, RoundText, Icon } from './styles';
 
 const Matches = ({ info }) => {
   const [matches, setMatches] = useState([]);
@@ -114,43 +109,9 @@ const Matches = ({ info }) => {
       )}
       {matches.map((match) => (
         <View key={match._id}>
-          <DateView>
-            <DateText>{match.weekDay}</DateText>
-            <DateText margin>
-              {moment(match.day).utc().format('DD/MM')}
-            </DateText>
-          </DateView>
-          <MatchView>
-            <MatchTeamText team align="right">
-              {match.teamHome.shortName}
-            </MatchTeamText>
-            <MatchTeamShield
-              source={{
-                uri: match.teamHome.thumbnail_url,
-              }}
-            ></MatchTeamShield>
-            <>
-              <MatchScoreText>{match.scoreHome}</MatchScoreText>
-              {match.penaltyHome !== undefined && (
-                <MatchPenaltyText>{`(${match.penaltyHome}`}</MatchPenaltyText>
-              )}
-            </>
-            <MatchTeamText>X</MatchTeamText>
-            <>
-              {match.penaltyAway !== undefined && (
-                <MatchPenaltyText>{`${match.penaltyAway})`}</MatchPenaltyText>
-              )}
-              <MatchScoreText>{match.scoreAway}</MatchScoreText>
-            </>
-            <MatchTeamShield
-              source={{
-                uri: match.teamAway.thumbnail_url,
-              }}
-            ></MatchTeamShield>
-            <MatchTeamText team align="left">
-              {match.teamAway.shortName}
-            </MatchTeamText>
-          </MatchView>
+          <Suspense fallback={<Text>...</Text>}>
+            <Match match={match} />
+          </Suspense>
         </View>
       ))}
     </Category>
