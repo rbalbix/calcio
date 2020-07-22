@@ -1,5 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
+import { useNavigation, useIsFocused } from '@react-navigation/native';
+
+import api from '../../services/api';
+import { connect, disconnect, subscribeToNews } from '../../services/socket';
 
 import {
   CategoryTitle,
@@ -14,15 +18,48 @@ import {
   ScoreText,
 } from './styles';
 
-export default function Top4({ rank, navigateToDetail }) {
+export default function Top4({ category }) {
+  const navigation = useNavigation();
+  const isFocused = useIsFocused();
+  const [rank, setRank] = useState([]);
+
+  function navigateToDetail() {
+    navigation.navigate('Category', { info: { category } });
+  }
+
+  function setupWebSocket() {
+    disconnect();
+    connect();
+  }
+
+  async function loadRank() {
+    if (isFocused) {
+      const response = await api.get('/rank/top');
+      setRank(response.data[category]);
+    }
+  }
+
+  useEffect(() => {
+    if (isFocused) {
+      setupWebSocket();
+    }
+    return () => {
+      disconnect();
+    };
+  }, [isFocused]);
+
+  useEffect(() => {
+    subscribeToNews(() => loadRank());
+  }, []);
+
+  useEffect(() => {
+    loadRank();
+  }, []);
+
   return (
     <>
-      <TouchableOpacity
-        onPress={() => {
-          navigateToDetail({ category: `${rank[0].category}` });
-        }}
-      >
-        <CategoryTitle>TORNEIO {rank[0].category}</CategoryTitle>
+      <TouchableOpacity onPress={() => navigateToDetail()}>
+        <CategoryTitle>TORNEIO {category}</CategoryTitle>
       </TouchableOpacity>
 
       <HeaderTable>

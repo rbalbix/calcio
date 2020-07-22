@@ -45,13 +45,6 @@ export const Icon = styled(MaterialIcons)`
   color: #1e7a0e;
 `;
 
-export const Loading = styled.View`
-  flex: 1;
-  height: ${hp('40%')}px;
-  justify-content: center;
-  align-items: center;
-`;
-
 export const DateView = styled.View`
   flex-direction: row;
   justify-content: center;

@@ -1,13 +1,5 @@
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  useCallback,
-  Suspense,
-  lazy,
-} from 'react';
-import { RefreshControl } from 'react-native';
-import { useRoute } from '@react-navigation/native';
+import React, { useEffect, Suspense, lazy } from 'react';
+import { useRoute, useIsFocused } from '@react-navigation/native';
 
 import SuspenseLoading from '../../components/SuspenseLoading';
 const Rank = lazy(() => import('../../components/Rank'));
@@ -18,11 +10,8 @@ import { connect, disconnect } from '../../services/socket';
 import { Container } from './styles';
 
 export default function Detail() {
-  const rankListRef = useRef();
-  const matchListRef = useRef();
-  const [refreshing, setRefreshing] = useState(false);
-
   const route = useRoute();
+  const isFocused = useIsFocused();
   const info = route.params.info;
 
   function setupWebSocket() {
@@ -31,27 +20,19 @@ export default function Detail() {
   }
 
   useEffect(() => {
-    setupWebSocket();
-  }, []);
-
-  const onRefresh = useCallback(() => {
-    setRefreshing(true);
-
-    rankListRef.current.rankListRef();
-    matchListRef.current.matchListRef();
-
-    setRefreshing(false);
-  }, [refreshing]);
+    if (isFocused) {
+      setupWebSocket();
+    }
+    return () => {
+      disconnect();
+    };
+  }, [isFocused]);
 
   return (
-    <Container
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-      }
-    >
+    <Container>
       <Suspense fallback={<SuspenseLoading />}>
-        <Rank info={info} ref={rankListRef} />
-        <Matches info={info} ref={matchListRef} />
+        <Rank info={info} isFocused={isFocused} />
+        <Matches info={info} />
       </Suspense>
     </Container>
   );

@@ -7,7 +7,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpileOnly --ignore-watch node_modules --no-notify src/server.ts",
+    "dev": "ts-node-dev --respawn -r tsconfig-paths/register --ignore-watch node_modules --no-notify src/server.ts",
     "start:ts": "ts-node src/server.ts",
     "build": "rm -rf dist && babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored && rm -rf dist/node_modules dist/__tests__",
     "uploads": "cp -r ./uploads/ ./dist/uploads/",
@@ -46,7 +46,7 @@
     "@types/supertest": "^2.0.9",
     "babel-plugin-module-resolver": "^4.0.0",
     "cross-env": "^7.0.2",
-    "eslint": "^6.8.0",
+    "eslint": "^7.5.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-node": "^11.1.0",

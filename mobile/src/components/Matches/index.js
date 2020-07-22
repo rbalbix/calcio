@@ -1,12 +1,6 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback,
-  useRef,
-  forwardRef,
-  useImperativeHandle,
-} from 'react';
-import { View, TouchableOpacity, ActivityIndicator } from 'react-native';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { View, TouchableOpacity } from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
 import moment from 'moment';
 
 import api from '../../services/api';
@@ -18,7 +12,6 @@ import {
   RoundView,
   RoundText,
   Icon,
-  Loading,
   DateView,
   DateText,
   MatchView,
@@ -28,40 +21,34 @@ import {
   MatchTeamShield,
 } from './styles';
 
-const Matches = forwardRef(({ info }, ref) => {
+const Matches = ({ info }) => {
+  const [matches, setMatches] = useState([]);
   const [round, setRound] = useState(0);
-  const refRound = useRef(round);
   const [total, setTotal] = useState(0);
   const [totalRegular, setTotalRegular] = useState(0);
-  const [loading, setLoading] = useState(true);
 
-  const [matches, setMatches] = useState([]);
+  const isFocused = useIsFocused();
+  const mounted = useRef();
+
+  const refRound = useRef(round);
 
   const matchesList = useCallback(
     async (roundParam) => {
-      const response = await api.get('/match', {
-        params: { category: info.category, round: roundParam },
-      });
-      setMatches(response.data);
+      if (mounted.current) {
+        const response = await api.get('/match', {
+          params: { category: info.category, round: roundParam },
+        });
+        setMatches(response.data);
 
-      setTotal(parseInt(response.headers['x-total-count']));
-      setTotalRegular(parseInt(response.headers['x-total-regular-count']));
-      if (round === 0) setRound(parseInt(response.headers['x-round']));
+        if (round === 0) {
+          setRound(parseInt(response.headers['x-round']));
+          setTotal(parseInt(response.headers['x-total-count']));
+          setTotalRegular(parseInt(response.headers['x-total-regular-count']));
+        }
+      }
     },
     [round]
   );
-
-  async function loadMatches() {
-    setLoading(true);
-    matchesList(round);
-    setLoading(false);
-  }
-
-  useImperativeHandle(ref, () => ({
-    matchListRef() {
-      matchesList(refRound.current);
-    },
-  }));
 
   async function loadPreviousMatches() {
     if (round - 1 <= 0) return;
@@ -74,8 +61,18 @@ const Matches = forwardRef(({ info }, ref) => {
   }
 
   useEffect(() => {
+    if (isFocused) {
+      mounted.current = true;
+    }
+
+    return () => {
+      mounted.current = false;
+    };
+  }, [isFocused]);
+
+  useEffect(() => {
     refRound.current = round;
-    loadMatches();
+    matchesList(round);
   }, [round]);
 
   useEffect(() => {
@@ -115,55 +112,49 @@ const Matches = forwardRef(({ info }, ref) => {
           </TouchableOpacity>
         </RoundView>
       )}
-      {loading ? (
-        <Loading>
-          <ActivityIndicator size="large" color="#1e7a0e" />
-        </Loading>
-      ) : (
-        matches.map((match) => (
-          <View key={match._id}>
-            <DateView>
-              <DateText>{match.weekDay}</DateText>
-              <DateText margin>
-                {moment(match.day).utc().format('DD/MM')}
-              </DateText>
-            </DateView>
-            <MatchView>
-              <MatchTeamText team align="right">
-                {match.teamHome.shortName}
-              </MatchTeamText>
-              <MatchTeamShield
-                source={{
-                  uri: match.teamHome.thumbnail_url,
-                }}
-              ></MatchTeamShield>
-              <>
-                <MatchScoreText>{match.scoreHome}</MatchScoreText>
-                {match.penaltyHome !== undefined && (
-                  <MatchPenaltyText>{`(${match.penaltyHome}`}</MatchPenaltyText>
-                )}
-              </>
-              <MatchTeamText>X</MatchTeamText>
-              <>
-                {match.penaltyAway !== undefined && (
-                  <MatchPenaltyText>{`${match.penaltyAway})`}</MatchPenaltyText>
-                )}
-                <MatchScoreText>{match.scoreAway}</MatchScoreText>
-              </>
-              <MatchTeamShield
-                source={{
-                  uri: match.teamAway.thumbnail_url,
-                }}
-              ></MatchTeamShield>
-              <MatchTeamText team align="left">
-                {match.teamAway.shortName}
-              </MatchTeamText>
-            </MatchView>
-          </View>
-        ))
-      )}
+      {matches.map((match) => (
+        <View key={match._id}>
+          <DateView>
+            <DateText>{match.weekDay}</DateText>
+            <DateText margin>
+              {moment(match.day).utc().format('DD/MM')}
+            </DateText>
+          </DateView>
+          <MatchView>
+            <MatchTeamText team align="right">
+              {match.teamHome.shortName}
+            </MatchTeamText>
+            <MatchTeamShield
+              source={{
+                uri: match.teamHome.thumbnail_url,
+              }}
+            ></MatchTeamShield>
+            <>
+              <MatchScoreText>{match.scoreHome}</MatchScoreText>
+              {match.penaltyHome !== undefined && (
+                <MatchPenaltyText>{`(${match.penaltyHome}`}</MatchPenaltyText>
+              )}
+            </>
+            <MatchTeamText>X</MatchTeamText>
+            <>
+              {match.penaltyAway !== undefined && (
+                <MatchPenaltyText>{`${match.penaltyAway})`}</MatchPenaltyText>
+              )}
+              <MatchScoreText>{match.scoreAway}</MatchScoreText>
+            </>
+            <MatchTeamShield
+              source={{
+                uri: match.teamAway.thumbnail_url,
+              }}
+            ></MatchTeamShield>
+            <MatchTeamText team align="left">
+              {match.teamAway.shortName}
+            </MatchTeamText>
+          </MatchView>
+        </View>
+      ))}
     </Category>
   );
-});
+};
 
 export default Matches;

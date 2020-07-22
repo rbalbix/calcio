@@ -3,8 +3,6 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import styled from 'styled-components/native';
-import Constants from 'expo-constants';
-import { MaterialIcons } from '@expo/vector-icons';
 
 export const Category = styled.View`
   background-color: #fff;
@@ -85,11 +83,4 @@ export const ScoreText = styled.Text`
   color: #999;
   width: ${wp('7.2%')}px;
   margin-left: ${(props) => (props.score ? wp('0.2%') : wp('0%'))}px;
-`;
-
-export const Loading = styled.View`
-  flex: 1;
-  height: ${hp('40%')}px;
-  justify-content: center;
-  align-items: center;
 `;

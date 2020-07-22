@@ -1,8 +1,10 @@
 import React from 'react';
 import { TouchableOpacity, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+
 import api from '../../services/api';
 import * as Linking from 'expo-linking';
+
 import { MaterialIcons } from '@expo/vector-icons';
 
 export default function RuleIcon() {
