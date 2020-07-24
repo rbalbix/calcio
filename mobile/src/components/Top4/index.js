@@ -34,8 +34,10 @@ export default function Top4({ category }) {
 
   async function loadRank() {
     if (isFocused) {
-      const response = await api.get('/rank/top');
-      setRank(response.data[category]);
+      const response = await api.get('/rank/top', {
+        params: { category },
+      });
+      setRank(response.data);
     }
   }
 

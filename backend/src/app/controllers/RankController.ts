@@ -1,59 +1,23 @@
 import { Request, Response } from 'express';
-import { Rank, IRank } from '@models';
+import { Rank } from '@models';
 import { getCurrentChamp } from './utils/getCurrentChamp';
 import { ParamsDictionary } from './utils/Interfaces';
 import { OK, BAD_REQUEST } from 'http-status-codes';
 import log from '@services/logger';
 
-function rank(a: IRank, b: IRank) {
-  if (a.points > b.points) return -1;
-  if (a.points < b.points) return 1;
-  if (a.points === b.points) {
-    if (a.wons > b.wons) return -1;
-    if (a.wons < b.wons) return 1;
-    if (a.wons === b.wons) {
-      if (a.goalDifference > b.goalDifference) return -1;
-      if (a.goalDifference < b.goalDifference) return 1;
-      if (a.goalDifference === b.goalDifference) {
-        if (a.goalsFor > b.goalsFor) return -1;
-        if (a.goalsFor < b.goalsFor) return 1;
-        if (a.goalsFor === b.goalsFor) {
-          if (a.goalsAgainst > b.goalsAgainst) return -1;
-          if (a.goalsAgainst < b.goalsAgainst) return 1;
-        }
-      }
-    }
-  }
-  return 0;
-}
-
 export const top = async (req: Request, res: Response) => {
   try {
-    const top = 4;
-
+    const { category, limit = 4 } = req.query as ParamsDictionary;
     const champ = await getCurrentChamp();
     if (!champ) throw new Error('Championship does not exists.');
 
-    const ranks = await Rank.find({ champ })
+    const response = await Rank.find({ champ, category })
       .select(
-        'category thumbnail team points wons drawn lost goalsFor goalsAgainst goalDifference'
+        'category thumbnail team points played wons drawn lost goalsFor goalsAgainst goalDifference'
       )
-      .populate({
-        path: 'team',
-        select: 'shortName longName thumbnail thumbnail_url',
-      });
-
-    const response = {
-      A: ranks
-        .filter((rank) => rank.category === 'A')
-        .sort((a, b) => rank(a, b))
-        .slice(0, top),
-
-      B: ranks
-        .filter((rank) => rank.category === 'B')
-        .sort((a, b) => rank(a, b))
-        .slice(0, top),
-    };
+      .sort('-points -wons -goalDifference -goalsFor -goalsAgainst')
+      .populate('team')
+      .limit(Number(limit));
 
     return res.status(OK).json(response);
   } catch (err) {

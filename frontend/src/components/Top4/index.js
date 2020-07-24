@@ -1,5 +1,5 @@
 import React from 'react';
-import useFetch from '../../hooks/useFetch';
+import { useFetchToRankTop } from '../../hooks/useFetch';
 import SuspenseLoading from '../../components/SuspenseLoading';
 
 import {
@@ -18,7 +18,7 @@ import {
 } from './styles';
 
 export default function Top4({ category }) {
-  const { data, error } = useFetch('/rank/top');
+  const { data, error } = useFetchToRankTop('/rank/top', category);
 
   if (error) return <div>{`Erro ao carregar: ${error}`}</div>;
 
@@ -39,7 +39,7 @@ export default function Top4({ category }) {
         </HeaderTable>
       </Header>
 
-      {data[category].map((item, index) => (
+      {data.map((item, index) => (
         <TeamView key={item._id}>
           <Team>
             <PositionText>{index + 1}</PositionText>

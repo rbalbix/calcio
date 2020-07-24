@@ -11,15 +11,12 @@ export default function useFetch(url) {
   return { data, error };
 }
 
-export function useFetchWithMatches(url, category, round) {
-  const { data, error } = useSWR(
-    [url, category, round],
-    async (url, category, round) => {
-      const response = await api.get(url, { params: { category, round } });
+export function useFetchToRankTop(url, category) {
+  const { data, error } = useSWR([url, category], async (url, category) => {
+    const response = await api.get(url, { params: { category } });
 
-      return [response.data, response.headers];
-    }
-  );
+    return response.data;
+  });
 
   return { data, error };
 }

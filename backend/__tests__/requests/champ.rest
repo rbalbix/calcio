@@ -1,7 +1,11 @@
 http://localhost:3333/champ/current
 
 ###
-http://localhost:3333/rank/top
+// Rank
+http://localhost:3333/rank/top?category=A
+
+###
+http://localhost:3333/rank?category=A
 
 ###
 // Categories
