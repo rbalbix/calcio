@@ -24,7 +24,7 @@
     "helmet": "^3.23.0",
     "http-status-codes": "^1.4.0",
     "log4js": "^6.2.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "mongoose": "^5.9.9",
     "morgan": "^1.10.0",
     "socket.io": "^2.3.0"
